@@ -1,0 +1,973 @@
+{% extends "layout.html" %}
+
+{% block title %}Clubs and Organizations{% endblock %}
+
+{% block head %}
+
+<style>
+    /*NOTE- These are the STEAM colors that we are using for the org bcgs:
+(Green)- Science: #8ac926
+(Blue)- Technology: #1982c4
+(Purple)- Engineering: #6a4c93
+(Orange)- Art: #ffca3a
+(Red)- Math: #ff595e2
+*/
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+  }
+  html, body{
+    scroll-behavior: smooth;
+    overflow-x:hidden;
+    max-width:100%;
+  }
+  .bodyContent {
+    margin-left:7%;
+    margin-right:7%;
+  }
+  .center {
+    text-align: center;
+  }
+  .card.main {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border: 0;
+  }
+  .card.main img.seamless {
+    width: 100%;
+    display: block;
+  }
+  .card.main .body .page-top {
+    text-align: center;
+  }
+  .card.main .body .page-top img {
+    width: 100px;
+  }
+  .card.main .body .search-bar {
+    margin-bottom: 20px;
+  }
+  #club-social-icons {
+    font-size: 24pt;
+  }
+  #club-notice {
+    height:400px;
+    width:auto;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+  .footer {
+    font-size: 10pt;
+  }
+  .modClubLinks {
+      list-style-type:none;
+      margin:0;
+      padding:0;
+  }
+  .modClubLinks li a {
+    color:#037dff;
+    text-decoration:none;
+    padding-left:25px;
+  }
+  .modClubLinks li a:hover{
+    color:#004a99;
+    text-decoration:underline;
+  }
+  .clubDisplay ul {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+  }
+  .gridC{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    padding:6px 0px 6px 6px;
+    border-radius:4px;
+    border-left:4px solid #cc3300;
+    border-bottom:0.25px solid #e6e6e6;
+    border-top:0.25px solid #e6e6e6;
+    border-right:0.25px solid #e6e6e6;
+    margin-bottom:8px;
+  }
+  .gridC:hover {
+    background-color:#e6e6e6;
+    cursor:pointer;
+  }
+  .titleT {
+    font-weight:bold;
+    font-size:18px;
+  }
+  .hzLine {
+    height:1.5px !important;
+    border-width:0;
+    color:black;
+    background-color:black;
+  }
+  .linkItemA { 
+    color:#037dff;
+    text-decoration:none;
+  }
+  .linkItemA:hover {
+    cursor:pointer;
+    color:#004a99;
+    text-decoration:underline;
+  }
+  .gridC div a { 
+    color:#037dff;
+    text-decoration:none;
+  }
+  .gridC div a:hover {
+    color:#004a99;
+    text-decoration:underline;
+  }
+  #returnToList {
+    color:#037dff;
+  }
+  #returnToList:hover {
+    cursor:pointer;
+    color:#004a99;
+    text-decoration:underline;
+  }
+  /*start of CSS for search bar*/
+  #outputC {
+    position:absolute;
+    z-index:99;
+    bottom:-20px;
+  }
+  .search {
+    position:relative;
+    width: 60%;
+    min-width:350px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+  }
+  .search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+  }
+  .search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3585fd;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+  }
+  .search-icon:hover {
+      color: #fff !important;
+      cursor:pointer;
+      text-decoration:none;
+  }
+  .searchResultDepts {
+      display:none;
+  }
+  .btn-outline-primary {
+    display:block;
+    width:260px;
+    margin-top: 20px;
+    margin-right:auto;
+    margin-left:auto;
+  }
+  @media (max-width:466px){
+  .search {
+    min-width:350px;
+  }
+  .search-input {
+    overflow:hidden;
+  }
+  .search-input::placeholder {
+    text-overflow:ellipsis;
+  }
+}
+@media (max-width:376px){
+  .search {
+    min-width:100%;
+  }
+}
+  /*end of CSS for search bar*/
+  .footerC {
+    font-weight:normal;
+  }
+  </style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<br>
+      <div class="container mt-2">
+        <div class="topContainer">
+        <div style="height:6px;"></div>
+        <h1>Clubs and Organizations</h1>
+        <hr style="height:2px;">
+        <div style="height:18px;"></div>
+        <p>There are various clubs and organizations at Allen ISD and more specifically- the STEAM Center. With currently over 
+          <span class="clubCount">40</span> <span class="steamTxtToggle">STEAM-related </span>clubs and organizations to-date, it can oftentimes be hard to find information 
+        regarding club meeting times, who they are sponsored by, where they meet, and other important details. To conquer this issue, this tool 
+        provides you with all of the information that you may need when participating in a club (based on the information that the 
+        current club members have provided us with)! Please use the search bar below or scroll/ click on each of the clubs in the club list
+        to attain more information.</p>
+        <p>To add or modify any of the clubs below, please use these links: </p>
+        <ul class="modClubLinks">
+            <li><a href="https://forms.gle/iPyTLsXRp4KpK89u8" target="_blank" rel="noreferrer noopener">Add a Club/ Organization</a></li>
+            <li><a href="https://forms.gle/335apjRc6f8BazVU6" target="_blank" rel="noreferrer noopener">Edit a Club/ Organization</a></li>
+        </ul>
+        <br>
+        <a class="btn btn-outline-primary active STEAMBtn" role="button"><span class="toggleSTEAMBtn">Show All AHS Clubs</span></a>
+        <div class="d-flex searchC">
+          <div class="search"> 
+            <input type="text" id="search" class="search-input" placeholder="Search for a club..." onkeyup="searchResults()"> 
+            <a class="search-icon" style="text-decoration:none;"> <i class="fa fa-search"></i> </a> 
+            <div id="outputC">
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="container">
+        <div class="card main">
+          <div id="club-select">
+            <div class="gridC" style="background-color:white;padding:0px;border-radius:0px;border:none;cursor:default;"><div class="titleT">Name</div><div class="titleT">Type</div></div>
+            <hr class="hzLine">
+            <div class="clubDisplay">
+              <ul class="subClubDisplay"></ul>
+            </div>
+            </div>
+          <!--Club display-->
+          <div class="card-body body" id="club-body" style="display:none;">
+            <div class="alert alert-secondary" id="club-notice"></div>
+            <a id="returnToList">Go Back</a>
+            <h4 id="club-name">National Computer Science Honor Society (NCSHS)</h4>
+            <p><span id="club-type">Academic - Computer Science</span></p>
+            <hr>
+            <p id="club-desc"></p>
+            <p id="club-website">
+              <strong>Website: </strong><a id="club-website-url"></a>
+            </p>
+            <p id="club-sponsor">
+              <strong>Sponsored by: </strong><span id="club-sponsor-name"></span>
+            </p>
+            <p id="club-leader">
+              <strong>Leader: </strong><span id="club-leader-name"></span>
+            </p>
+            <p id="club-members">
+              <strong>Members: </strong><span id="club-members-qty"></span>
+            </p>
+            <p id="club-meeting">
+              <strong>Meets: </strong><span id="club-meeting-time"></span>
+            </p>
+            <div id="club-campus">
+              <p>
+                <strong>Campus: </strong><span id="club-campus-name"></span>
+              </p>
+              <p>
+                <strong>Location/Room: </strong><span id="club-campus-room"></span>
+              </p>
+            </div>
+            <p id="club-social-icons">
+              <a target="_blank" rel="noreferrer noopener" id="club-social-twitter"><i class="fab fa-twitter"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-facebook"><i class="fab fa-facebook"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-instagram"><i class="fab fa-instagram"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-github"><i class="fab fa-github"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-discord"><i class="fab fa-discord"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-snapchat"><i class="fab fa-snapchat"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-youtube"><i class="fab fa-youtube"></i></a>
+              <a target="_blank" rel="noreferrer noopener" id="club-social-remind"><i class="fas fa-bullhorn"></i></a>
+            </p>
+          </div>
+          <!--End of club-body-->
+        </div>
+        </div>
+       </div>
+{% include "components/footer.html" %}
+
+<script>
+          var subClubDisplay = document.querySelector(".subClubDisplay");
+          var dataArr;
+          var scrollID = "";
+          var mainArray = [];
+          var steamArray = [];
+          var steamOnlyOn = true;
+          var numOfClubs = 0; 
+          var numOfSTEAMClubs = 0;
+          var clubListing = document.querySelector(".subClubDisplay");
+          function updateClubListing() {
+            mainArray = [];
+            steamArray = [];
+            numOfSTEAMClubs = 0;
+            for (var index = 0; index < dataArr.length; index++) {
+              //this creates a new element
+              var listItem = document.createElement("LI");
+              listItem.id = `item${index+1}`;
+              listItem.classList.add("linkItem");
+              subClubDisplay.appendChild(listItem);
+              var listItemS = document.createElement("div");
+              listItemS.classList.add("gridC");
+              if (dataArr[index].dept != "other") {
+                mainArray.push(dataArr[index].name);
+                steamArray.push(dataArr[index].name);
+                numOfSTEAMClubs++;
+                switch (dataArr[index].dept) {
+                  case "s":
+                    listItemS.style.borderLeft = "4px solid #8ac926";
+                    break;
+                  case "t":
+                    listItemS.style.borderLeft = "4px solid #1982c4";
+                    break;
+                  case "e":
+                    listItemS.style.borderLeft = "4px solid #6a4c93";
+                    break;
+                  case "a":
+                    listItemS.style.borderLeft = "4px solid #ffca3a";
+                    break;
+                  case "m":
+                    listItemS.style.borderLeft = "4px solid #ff595e";
+                    break;
+                  case "steam":
+                    listItemS.style.borderLeft = "4px solid #669999";
+                    break;
+                }
+              }
+              else {
+                if (steamOnlyOn) {listItem.style.display = "none";}
+                else {listItem.style.display = "block";}
+                mainArray.push(dataArr[index].name);
+                listItemS.style.borderLeft = "4px solid #cc3300";
+              }
+              listItem.appendChild(listItemS); //this finishes the li with .gridC class div
+              //now the .gridC class div has to be added on to
+              var listItemSS1 = document.createElement("div");
+              var listItemSS2 = document.createElement("div");//has text for type of club
+              listItemS.appendChild(listItemSS1);listItemS.appendChild(listItemSS2);
+              var listItemSS1A = document.createElement("a");//has text/link for name of club
+              listItemSS1A.classList.add("linkItemA");
+              //listItemSS1A.href = "";
+              listItemSS1.appendChild(listItemSS1A);
+              //now only the text has to be created for these elements
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index].name}`);
+              listItemSS1A.appendChild(listItemSS1ATxt);
+              var listItemSS2Txt;
+              if (dataArr[index].subtype) {
+                switch (dataArr[index].type) {
+                  case 1:
+                    listItemSS2Txt = document.createTextNode(`Academic - ${dataArr[index].subtype}`);
+                    break;
+                  case 2:
+                    listItemSS2Txt = document.createTextNode(`Community Service Club - ${dataArr[index].subtype}`);
+                    break;
+                  case 3:
+                    listItemSS2Txt = document.createTextNode(`Religious Organization - ${dataArr[index].subtype}`);
+                    break;
+                  case 4:
+                    listItemSS2Txt = document.createTextNode(`Social Club - ${dataArr[index].subtype}`);
+                    break;
+                  case 5:
+                    listItemSS2Txt = document.createTextNode(`Athletic Team - ${dataArr[index].subtype}`);
+                    break;
+                  case 6:
+                    listItemSS2Txt = document.createTextNode(`Misc. - ${dataArr[index].subtype}`);
+                    break;
+                  case 7:
+                    listItemSS2Txt = document.createTextNode(`School Organization - ${dataArr[index].subtype}`);
+                    break;
+                  case 8:
+                    listItemSS2Txt = document.createTextNode(`Extracurricular - ${dataArr[index].subtype}`);
+                    break;
+                  case 9:
+                    listItemSS2Txt = document.createTextNode(`Communication - ${dataArr[index].subtype}`);
+                    break;
+                }
+              }
+              else if (dataArr[index].type) {
+                switch (dataArr[index].type) {
+                  case 1:
+                    listItemSS2Txt = document.createTextNode("Academic");
+                    break;
+                  case 2:
+                    listItemSS2Txt = document.createTextNode("Community Service Club");
+                    break;
+                  case 3:
+                    listItemSS2Txt = document.createTextNode("Religious Organization");
+                    break;
+                  case 4:
+                    listItemSS2Txt = document.createTextNode("Social Club");
+                    break;
+                  case 5:
+                    listItemSS2Txt = document.createTextNode("Athletic Team");
+                    break;
+                  case 6:
+                    listItemSS2Txt = document.createTextNode("Misc.");
+                    break;
+                  case 7:
+                    listItemSS2Txt = document.createTextNode("School Organization");
+                    break;
+                  case 8:
+                    listItemSS2Txt = document.createTextNode("Extracurricular");
+                    break;
+                  case 9:
+                    listItemSS2Txt = document.createTextNode("Communication");
+                    break;
+                }
+              } //end of else if statement
+              else if (!dataArr[index].type) {
+                listItemSS2Txt = document.createTextNode("Other");
+              }
+              listItemSS2.appendChild(listItemSS2Txt);
+            }
+          }
+          function updateClubInListing(index17) {
+              //this creates a new element
+              var listItem = document.createElement("LI");
+              listItem.id = `item${index17+1}`;
+              listItem.classList.add("linkItem");
+              subClubDisplay.appendChild(listItem);
+              var listItemS = document.createElement("div");
+              listItemS.classList.add("gridC");
+              if (dataArr[index17].dept != "other") {
+                switch (dataArr[index17].dept) {
+                  case "s":
+                    listItemS.style.borderLeft = "4px solid #8ac926";
+                    break;
+                  case "t":
+                    listItemS.style.borderLeft = "4px solid #1982c4";
+                    break;
+                  case "e":
+                    listItemS.style.borderLeft = "4px solid #6a4c93";
+                    break;
+                  case "a":
+                    listItemS.style.borderLeft = "4px solid #ffca3a";
+                    break;
+                  case "m":
+                    listItemS.style.borderLeft = "4px solid #ff595e";
+                    break;
+                  case "steam":
+                    listItemS.style.borderLeft = "4px solid #669999";
+                    break;
+                }
+              }
+              else {
+                if (steamOnlyOn) {listItem.style.display = "none";}
+                else {listItem.style.display = "block";}
+                listItemS.style.borderLeft = "4px solid #cc3300";
+              }
+              listItem.appendChild(listItemS); //this finishes the li with .gridC class div
+              //now the .gridC class div has to be added on to
+              var listItemSS1 = document.createElement("div");
+              var listItemSS2 = document.createElement("div");//has text for type of club
+              listItemS.appendChild(listItemSS1);listItemS.appendChild(listItemSS2);
+              var listItemSS1A = document.createElement("a");//has text/link for name of club
+              listItemSS1A.classList.add("linkItemA");
+              listItemSS1.appendChild(listItemSS1A);
+              //now only the text has to be created for these elements
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index17].name}`);
+              listItemSS1A.appendChild(listItemSS1ATxt);
+              var listItemSS2Txt;
+              if (dataArr[index17].subtype) {
+                switch (dataArr[index17].type) {
+                  case 1:
+                    listItemSS2Txt = document.createTextNode(`Academic - ${dataArr[index17].subtype}`);
+                    break;
+                  case 2:
+                    listItemSS2Txt = document.createTextNode(`Community Service Club - ${dataArr[index17].subtype}`);
+                    break;
+                  case 3:
+                    listItemSS2Txt = document.createTextNode(`Religious Organization - ${dataArr[index17].subtype}`);
+                    break;
+                  case 4:
+                    listItemSS2Txt = document.createTextNode(`Social Club - ${dataArr[index17].subtype}`);
+                    break;
+                  case 5:
+                    listItemSS2Txt = document.createTextNode(`Athletic Team - ${dataArr[index17].subtype}`);
+                    break;
+                  case 6:
+                    listItemSS2Txt = document.createTextNode(`Misc. - ${dataArr[index17].subtype}`);
+                    break;
+                  case 7:
+                    listItemSS2Txt = document.createTextNode(`School Organization - ${dataArr[index17].subtype}`);
+                    break;
+                  case 8:
+                    listItemSS2Txt = document.createTextNode(`Extracurricular - ${dataArr[index17].subtype}`);
+                    break;
+                  case 9:
+                    listItemSS2Txt = document.createTextNode(`Communication - ${dataArr[index17].subtype}`);
+                    break;
+                }
+              }
+              else if (dataArr[index17].type) {
+                switch (dataArr[index17].type) {
+                  case 1:
+                    listItemSS2Txt = document.createTextNode("Academic");
+                    break;
+                  case 2:
+                    listItemSS2Txt = document.createTextNode("Community Service Club");
+                    break;
+                  case 3:
+                    listItemSS2Txt = document.createTextNode("Religious Organization");
+                    break;
+                  case 4:
+                    listItemSS2Txt = document.createTextNode("Social Club");
+                    break;
+                  case 5:
+                    listItemSS2Txt = document.createTextNode("Athletic Team");
+                    break;
+                  case 6:
+                    listItemSS2Txt = document.createTextNode("Misc.");
+                    break;
+                  case 7:
+                    listItemSS2Txt = document.createTextNode("School Organization");
+                    break;
+                  case 8:
+                    listItemSS2Txt = document.createTextNode("Extracurricular");
+                    break;
+                  case 9:
+                    listItemSS2Txt = document.createTextNode("Communication");
+                    break;
+                }
+              } //end of else if statement
+              else if (!dataArr[index17].type) {
+                listItemSS2Txt = document.createTextNode("Other");
+              }
+              listItemSS2.appendChild(listItemSS2Txt);
+          }
+          function clearClubListing(clubListing) {
+            while(clubListing.firstChild) {
+              clubListing.removeChild(clubListing.firstChild);
+            }
+          }
+          function displayClub(clubID) {
+            //this sets the user's current page scroll position
+            scrollID = clubID;
+            //this switches the view from the list to more information
+            $("#club-select").css("display","none");
+            $("#club-body").css("display","block");
+            //this automatically scrolls to the bottom of the page
+            var clubBody = document.querySelector("#club-body");
+            //window.scrollTo(0, clubBody.offsetTop);
+            window.scrollTo(0,clubBody.scrollHeight-50);
+            //this gets the index of the current selected object based on its id
+            var index = parseInt(clubID.replace( /^\D+/g, ''))-1;
+            var currentObj = dataArr[index];
+            $("#club-notice").css("background-color", "rgba(0,0,0,0.0)");
+            $("#club-notice").css("background-image", "none");
+            if (currentObj.banner_image) {$("#club-notice").css("height", "400px");$("#club-notice").css("background-image", `url("${currentObj.banner_image}")`);}
+            else { 
+              $("#club-notice").css("background-image", "none");
+              $("#club-notice").css("height", "250px");
+              if (currentObj.dept != "other") {
+                switch (currentObj.dept) {
+                  case "s":
+                    $("#club-notice").css("background-color", "#8ac926");
+                    break;
+                  case "t":
+                    $("#club-notice").css("background-color", "#1982c4");
+                    break;
+                  case "e":
+                    $("#club-notice").css("background-color", "#6a4c93");
+                    break;
+                  case "a":
+                    $("#club-notice").css("background-color", "#ffca3a");
+                    break;
+                  case "m":
+                    $("#club-notice").css("background-color", "#ff595e");
+                    break;
+                  case "steam":
+                    $("#club-notice").css("background-color", "#669999");
+                    break;
+                }
+              }
+              else {
+                $("#club-notice").css("background-color", "#cc3300");
+              }
+            }
+            $("#club-name").text(currentObj.name);
+            var clubTypeStr = "";
+            if (dataArr[index].subtype) {
+                switch (dataArr[index].type) {
+                  case 1:
+                    clubTypeStr = `Academic - ${dataArr[index].subtype}`;
+                    break;
+                  case 2:
+                    clubTypeStr = `Community Service Club - ${dataArr[index].subtype}`;
+                    break;
+                  case 3:
+                    clubTypeStr = `Religious Organization - ${dataArr[index].subtype}`;
+                    break;
+                  case 4:
+                    clubTypeStr = `Social Club - ${dataArr[index].subtype}`;
+                    break;
+                  case 5:
+                    clubTypeStr = `Athletic Team - ${dataArr[index].subtype}`;
+                    break;
+                  case 6:
+                    clubTypeStr = `Misc. - ${dataArr[index].subtype}`;
+                    break;
+                  case 7:
+                    clubTypeStr = `School Organization - ${dataArr[index].subtype}`;
+                    break;
+                  case 8:
+                    clubTypeStr = `Extracurricular - ${dataArr[index].subtype}`;
+                    break;
+                  case 9:
+                    clubTypeStr = `Communication - ${dataArr[index].subtype}`;
+                    break;
+                }
+              }
+              else if (dataArr[index].type) {
+                switch (dataArr[index].type) {
+                  case 1:
+                    clubTypeStr = "Academic";
+                    break;
+                  case 2:
+                    clubTypeStr = "Community Service Club";
+                    break;
+                  case 3:
+                    clubTypeStr = "Religious Organization";
+                    break;
+                  case 4:
+                    clubTypeStr = "Social Club";
+                    break;
+                  case 5:
+                    clubTypeStr = "Athletic Team";
+                    break;
+                  case 6:
+                    clubTypeStr = "Misc.";
+                    break;
+                  case 7:
+                    clubTypeStr = "School Organization";
+                    break;
+                  case 8:
+                    clubTypeStr = "Extracurricular";
+                    break;
+                  case 9:
+                    clubTypeStr = "Communication";
+                    break;
+                }
+              }
+              $("#club-type").text(clubTypeStr);
+              $("#club-desc").css("display", "none");
+              if (currentObj.description) { $("#club-desc").text(currentObj.description);$("#club-desc").css("display", "block"); }
+              $("#club-website").css("display", "none");
+              if (currentObj.website) { $("#club-website").find("a").attr("href", currentObj.website);$("#club-website").find("a").attr("target", "_blank");$("#club-website").find("a").text(currentObj.website);$("#club-website").css("display", "block"); }
+              $("#club-sponsor").css("display", "none");
+              if (currentObj.sponsor) { $("#club-sponsor").find("span").text(currentObj.sponsor);$("#club-sponsor").css("display", "block"); }
+              else if (currentObj.sponsors) { 
+                var tempSList = "";
+                $("#club-sponsor").css("display", "block");
+                for (var index4 = 0; index4 < currentObj.sponsors.length; index4++) {
+                  tempSList += currentObj.sponsors[index4];
+                  if (index4 < (currentObj.sponsors.length-1)) { tempSList += ", "; }
+                }
+                $("#club-sponsor").find("span").text(tempSList);
+              }
+              $("#club-leader").css("display", "none");
+              if (currentObj.leader) { $("#club-leader").find("span").text(currentObj.leader);$("#club-leader").css("display", "block"); }
+              $("#club-members").css("display", "none");
+              if (currentObj.members) { $("#club-members").find("span").text(currentObj.members);$("#club-members").css("display", "block"); }
+              $("#club-meeting").css("display", "none");
+              if (currentObj.meeting) { $("#club-meeting").find("span").text(currentObj.meeting);$("#club-meeting").css("display", "block"); }
+              $("#club-campus").css("display", "none");
+              if (currentObj.location) {
+                $("#club-campus").find("span:last").text(currentObj.location.room);
+                if (currentObj.location.campus == null) { $("#club-campus").find("span:first").text("N/A"); }
+                else { $("#club-campus").find("span:first").text(currentObj.location.campus); }
+                $("#club-campus").css("display", "block"); 
+              }
+              //this code is to manage all of the social media icons/ links
+              $("#club-social-icons").find("a").attr("href", "");$("#club-social-icons").find("a").css("display", "none");
+              if (currentObj.social) {
+                if (currentObj.social.twitter) { $("#club-social-twitter").attr("href", currentObj.social.twitter);$("#club-social-twitter").css("display", "inline"); }
+                if (currentObj.social.facebook) { $("#club-social-facebook").attr("href", currentObj.social.facebook);$("#club-social-facebook").css("display", "inline"); }
+                if (currentObj.social.instagram) { $("#club-social-instagram").attr("href", currentObj.social.instagram);$("#club-social-instagram").css("display", "inline"); }
+                if (currentObj.social.github) { $("#club-social-github").attr("href", currentObj.social.github);$("#club-social-github").css("display", "inline"); }
+                if (currentObj.social.discord) { $("#club-social-discord").attr("href", currentObj.social.discord);$("#club-social-discord").css("display", "inline"); }
+                if (currentObj.social.snapchat) { $("#club-social-snapchat").attr("href", currentObj.social.snapchat);$("#club-social-snapchat").css("display", "inline"); }
+                if (currentObj.social.youtube) { $("#club-social-youtube").attr("href", currentObj.social.youtube);$("#club-social-youtube").css("display", "inline"); }
+                if (currentObj.social.remind) { $("#club-social-remind").attr("href", currentObj.social.remind);$("#club-social-remind").css("display", "inline"); }
+              }
+          }
+          fetch('/static/clubsMod2.json', {mode:'cors'}).then(function(resp) {
+            return resp.json();
+          }).then(function(data) {
+            mainArray = [];
+            steamArray = [];
+            dataArr = data.clubs;
+            numOfClubs = dataArr.length;
+            updateClubListing();
+            $(".clubCount").text(`${numOfSTEAMClubs}`);
+          });
+          $(".STEAMBtn").on('click', function() {
+            steamOnlyOn = !steamOnlyOn;
+            if (steamOnlyOn) {
+              $(".toggleSTEAMBtn").text("Show All AHS Clubs");
+              $(".steamTxtToggle").text("STEAM-related ");
+              $(".clubCount").text(`${numOfSTEAMClubs}`);
+              $(".STEAMBtn").addClass("active");
+              clearClubListing(clubListing);
+              updateClubListing();
+            }
+            else {
+              $(".toggleSTEAMBtn").text("Only Show STEAM Clubs");
+              $(".steamTxtToggle").text("");
+              $(".clubCount").text(`${numOfClubs}`);
+              $(".STEAMBtn").removeClass("active");
+              clearClubListing(clubListing);
+              updateClubListing();
+            }
+          });
+          $(".subClubDisplay").on('click', '.linkItem', function() {
+            var thisClubID = $(this).attr("id");
+            $(".topContainer").css("display","none");
+            displayClub(thisClubID);
+            //this is used to fix the footer positioning
+            var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+            var elementOffset = $('.footerC').offset().top;
+            var distance = (elementOffset)+$('.footerC').outerHeight();
+            if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+            else { $('.footerC').css("position", "relative"); }
+          });
+          $("#returnToList").on('click', function() {
+            $(".topContainer").css("display","block");
+            $("#club-select").css("display","block");
+            $("#club-body").css("display","none");
+            $('.footerC').css("position", "relative");
+    //this is used to fix the footer positioning
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset)+$('.footerC').outerHeight();
+    if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+    else { $('.footerC').css("position", "relative"); }
+            var scrollIDElem = document.getElementById(`${scrollID}`);
+            window.scrollTo(0, scrollIDElem.offsetTop);
+          });
+          /*start of JavaScript for the search bar*/
+var array = [];
+var maxResults = 1000000000000; //This is the maximum number of results that will pop up in the keyword search. Set to any valid number.
+var obj = {};
+var tempString = "";
+var selectedDept = ""; //this is to help open the correct info for searching
+var selectedCourse = "";
+var stopOffset2 = false;
+
+function stylePS(psElement) {
+  psElement.style.marginBottom = "0px";
+}
+function hoverStyleP(pElement) {
+//This is used to change the color of search results background when hovered over
+  pElement.style.backgroundColor = "#0248b1";
+}
+function styleP(pElement) {//This is used to style each of the search results, change for better results
+  pElement.style.width = "200px";
+  pElement.style.height = "auto";
+  pElement.style.color = "white";
+  pElement.style.backgroundColor = "#3585fd";
+  pElement.style.fontSize = "15px";
+  pElement.style.padding = "0.5vmin";
+  pElement.style.margin = "0vmin";
+  //pElement.style.textAlign = "center";
+}
+function styleA(aElement) {//This is used to style the anchor tags, change for better results
+  aElement.style.color="white";
+  aElement.style.textDecoration= "none";
+  aElement.style.cursor="pointer";
+}
+function appendDiv(temp, txtOptDiv) {
+  if (stopOffset2) { $("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`); }
+  else { $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 50}px`); }
+  selectedCourse = temp;
+  var pElement = document.createElement("div");
+  var pTxt = document.createElement("P"); //this creates a new <p> element
+  pTxt.classList.add("searchResult");
+  var aElement = document.createElement("A"); //this creates a new <a> element
+  aElement.style.textDecoration = "none";
+  var txt = document.createTextNode(temp); //this puts the search result into a text field
+  //var link = "#";
+  var counter = 0;
+  stylePS(pTxt);
+  styleA(aElement);
+  aElement.appendChild(pElement);
+  pElement.appendChild(pTxt);
+  pTxt.appendChild(txt); //this places the text inside of the new element
+  pElement.onmouseover=function() {hoverStyleP(pElement)};
+  pElement.onmouseout=function() {styleP(pElement)};
+  styleP(pElement);
+  txtOptDiv.appendChild(aElement); //this appends the new element to the content div
+  //aElement.href=link;
+}
+function clearDiv(txtOptDiv) {
+  while(txtOptDiv.firstChild) {
+    txtOptDiv.removeChild(txtOptDiv.firstChild);
+  }
+}
+function searchResults() {
+  if (steamOnlyOn) { array = steamArray; }
+  else { array = mainArray; }
+  $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 50}px`);
+  obj = {};
+  var highestCount = -1;
+  stopOffset2 = false;
+  var cont = true;
+  var cont2 = true;
+  var cont3 = true;
+  var txtIpt = document.getElementById("search").value;
+  var txtIptL = (txtIpt.toLowerCase()).replace(/[\/\\]/g,'');
+  var txtOptDiv = document.getElementById("outputC");
+  if (txtIptL == "" || txtIptL == " ") {
+    clearClubListing(clubListing);
+    updateClubListing();
+    $('.footerC').css("position", "relative");
+  }
+  else {
+    $('.footerC').css("position", "relative");
+    //this is used to fix the footer positioning
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset)+$('.footerC').outerHeight();
+    if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+    else { $('.footerC').css("position", "relative"); }
+    clearClubListing(clubListing);
+  }
+  clearDiv(txtOptDiv); //this is used to make sure that the search results are cleared after each use
+  if (!txtIptL[1]) {
+    $("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`);
+    stopOffset2 = true;
+  }
+  for (var index=0; index<array.length; index++) {
+    temp = array[index];
+    tempL = (array[index].toLowerCase()).replace(/[\/\\]/g,' ');
+    if ((tempL == txtIptL) || (txtIptL == "acdc electronics" && tempL == "ac dc electronics")) { //eliminate all other results on a perfect match
+      //$("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`);
+      stopOffset2 = true;
+      cont2 = false;
+      //appendDiv(temp, txtOptDiv); //temp here is used to assign a link to the correct search result
+      var foundIndex;
+      for (var index17 = 0; index17 < mainArray.length; index17++) {
+        if (mainArray[index17] == temp) {
+          foundIndex = index17;
+          break;
+        }
+      }
+      updateClubInListing(foundIndex);
+      break;
+    }
+  }
+  if (cont2) { //if a perfect match was not already found
+  for (var index=0; index<array.length; index++) { //this searches the entire list
+    cont=true;
+    var temp = array[index];
+    var tempL = (temp.toLowerCase()).replace(/[\/\\]/g,' ');
+    var count = 0;
+    for (var i=0; i<tempL.length; i++) { //this searches each character inside of string for each element of the array
+      for(var i2=0; i2<txtIptL.length; i2++) { //this searches each character inside of the input string separately
+        if (tempL[i] == txtIptL[i2]) {
+          cont=false;
+          count++;
+          break;
+        }
+      }
+    }
+    if (count > highestCount) {
+      highestCount = count; //this updates the highest counted number (most accurate search result)
+    }
+    //this checks to see if the first word of the career is similar to the first part of the first word that the user types in the search
+    var checkerIndx = tempL.indexOf(txtIptL);
+    if (checkerIndx != -1) {
+      //success! in this case, it found the user input lowercase string to be part of the lowercase array results
+    highestCount+=40; //a really high value so that it takes priority
+    count = highestCount;
+    }
+    obj[temp] = count; //this updates the count for each item
+  }
+  var objectLength = Object.keys("obj").length; //this returns the object's length, not needed right now
+  //this is used to make sure that the search results appear in the highest order first
+  var resultCounter = 0;
+  for (var index=highestCount; index>0; index--) {
+    for (var index2=0; index2<array.length; index2++) {
+      var temp3 = array[index2];
+      var temp4 = obj[temp3];
+      if (resultCounter == maxResults) {
+        cont3=false;
+        break;
+      }
+      if (temp4 == index) {
+        resultCounter++;
+        //appendDiv(temp3, txtOptDiv); //this takes care of updating the search results
+        var foundIndex;
+      for (var index17 = 0; index17 < mainArray.length; index17++) {
+        if (mainArray[index17] == temp3) {
+          foundIndex = index17;
+          break;
+        }
+      }
+      updateClubInListing(foundIndex);
+      }
+    }
+    if (!cont3) { //same thing as cont3 == false
+      break;
+    }
+  }
+  }
+  if (txtIptL == "" || txtIptL == " ") {
+    clearClubListing(clubListing);
+    updateClubListing();
+    $('.footerC').css("position", "relative");
+  }
+  else {
+    $('.footerC').css("position", "relative");
+    //this is used to fix the footer positioning
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset)+$('.footerC').outerHeight();
+    if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+    else { $('.footerC').css("position", "relative"); }
+  }
+}
+//this pulls up the course information and scrolls to the section where its dept's courses list is
+$("#outputC").on('click', ".searchResult", function() {
+  var searchResTxt = $(this).text();
+  var elem4ID = $(`.subClubDisplay li:contains(${searchResTxt})`).attr("id");
+  var curElement = document.getElementById(`${elem4ID}`);
+  //this scrolls to the actual search result
+  window.scrollTo(0, curElement.offsetTop);
+  //this takes care of opening the information of the club or organization automatically
+  var thisClubID = elem4ID
+  displayClub(thisClubID);
+});
+$(".search-icon").on('click', function(){}, function() {
+  var txtOptDiv = document.getElementById("outputC");
+  clearDiv(txtOptDiv);
+});
+/*End of JavaScript for the search bar*/
+</script>
+
+{% endblock %}

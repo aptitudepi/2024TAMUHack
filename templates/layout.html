@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %} - STEAM Site</title>
+<link rel="stylesheet" href="/static/modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/modules/@fortawesome/fontawesome-free/css/all.min.css">
+<script src="/static/modules/jquery/dist/jquery.min.js"></script>
+<script src="/static/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='footerPage.css') }}">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+<style>
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
+
+{% block head %}{% endblock %}
+
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
+</html>
