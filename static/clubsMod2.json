@@ -15,6 +15,30 @@
         "leader": "Nick Cernicky"
       },
       {
+        "id": 15,
+        "name": "African Students Organization",
+        "short_name": "ASO",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4105",
+        "sponsors": [
+          "Lee Ferguson",
+          "Binta Thomaspaul",
+          "William Willis"
+        ],
+        "meeting": "Alternating Wednesdays at 4:15 PM",
+        "leader": "Princesse Muteba",
+        "location": {
+          "campus": "AHS",
+          "room": "A206"
+        },
+        "social": {
+          "instagram": "https://www.instagram.com/asoallenhs/",
+          "twitter": "https://twitter.com/ASO_AHS"
+        }
+      },
+      {
         "id": 14,
         "name": "AHS Ambassadors",
         "type": 7,
@@ -24,20 +48,13 @@
       },
       {
         "id": 15,
-        "name": "African Students Organization",
-        "short_name": "ASO",
+        "name": "AHS Composer's Guild",
         "type": 4,
         "dept": "other",
         "description": "",
-        "website": "https://www.allenisd.org/Domain/4105",
-        "meeting": "Alternating Wednesdays at 4:15 PM",
-        "location": {
-          "campus": "AHS",
-          "room": "A206"
-        },
-        "social": {
-          "twitter": "https://twitter.com/ASO_AHS"
-        }
+        "website": "https://www.allenisd.org/Domain/6073",
+        "sponsor": "George Cornelius",
+        "leader": "Darshan Rao"
       },
       {
         "id": 8,
@@ -57,6 +74,19 @@
           "twitter": "https://twitter.com/AllenBand",
           "facebook": "http://facebook.com/OfficialAllenBandBoosterAssociation",
           "instagram": "https://www.instagram.com/abba_allen.eagle.escadrille/"
+        }
+      },
+      {
+        "id": 8,
+        "name": "Allen Eagle Men's Volleyball",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Volleyball",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3698",
+        "sponsor": "Stevie Mayberry",
+        "social": {
+          "twitter": "https://twitter.com/AemvbS"
         }
       },
       {
