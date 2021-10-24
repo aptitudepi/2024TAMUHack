@@ -90,6 +90,37 @@
         }
       },
       {
+        "id": 15,
+        "name": "Allen High School South Asian Cultural Association",
+        "short_name": "SACA",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://ahs-saca.org/",
+        "sponsor": "Syama Deshpande",
+        "leader": "Ganesh Somashekhar"
+      },
+      {
+        "id": 15,
+        "name": "Allen Jersey Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/6076",
+        "sponsor": "Michelle Gibson",
+        "leader": "Emerson Bishop, Mya Milikin"
+      },
+      {
+        "id": 15,
+        "name": "Allen4Awareness",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5770",
+        "sponsor": "Miriam Fowler",
+        "leader": "Katie Ahn"
+      },
+      {
         "id": 16,
         "name": "American Sign Language Club",
         "short_name": "ASL Club",
@@ -98,14 +129,19 @@
         "subtype": "ASL",
         "description": "",
         "website": "https://www.allenisd.org/Domain/2669",
+        "banner_image": "https://www.allenisd.org/cms/lib/TX01001197/Centricity/Domain/2639/Animation%20Club%20Danielle%20and%20Joshua.jpg",
         "sponsors": [
           "Amanda Magruder",
           "Cindy Bell"
         ],
-        "meeting": "Alternating Thursdays, 4:20-4:50 PM",
+        "leader": "Evyn Gadd",
+        "meeting": "Alternating Mondays, 4:20-5:00 PM",
         "location": {
           "campus": "AHS",
-          "room": "G128"
+          "room": "G142"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AllenASLClub"
         }
       },
       {
@@ -116,11 +152,17 @@
         "subtype": "Animation",
         "description": "It’s a great place to come together and appreciate art and animation! We have loads of fun by building up our art skills! We also have snacks! At the end of the month, we watch an animated film! Come learn some great tips on animation and just basic drawing! Bring your friends!",
         "website": "https://www.allenisd.org/Domain/2639",
-        "meeting": "1st and 3rd Thursdays, 4:10-5:10 PM",
-        "leader": "Brooke Aftomis",
+        "meeting": "1st Tuesday of Every Month, 4:20-5:30 PM",
+        "sponsor": "Karen Adams",
+        "leader": "Joshua Higgs",
         "location": {
           "campus": "AHS",
           "room": "K126"
+        },
+        "social": {
+          "instagram": "https://www.instagram.com/asoallenhs/",
+          "remind": "https://www.remind.com/join/ahsac2021",
+          "twitter": "https://twitter.com/ASO_AHS"
         }
       },
       {
@@ -130,6 +172,16 @@
         "dept": "other",
         "description": "",
         "website": "https://www.allenisd.org/Domain/5481"
+      },
+      {
+        "id": 15,
+        "name": "Arab Student Organization",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/6077",
+        "sponsor": "Megan Teel",
+        "leader": "Susan Eltell"
       },
       {
         "id": 11,
