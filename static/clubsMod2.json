@@ -193,18 +193,22 @@
         "website": "https://www.allenisd.org/Domain/2354",
         "sponsors": [
           "Jason Anderson",
-          "Juntunen"
+          "Kyle Juntunen"
         ],
-        "meeting": "Mondays and Wednesdays, 3:10-4:45 PM and Tuesdays and Thursdays, 7:30-8:30 AM"
+        "meeting": "Tuesdays and Thursdays, 7:30-8:30 AM",
+        "location": {
+          "campus": "LFC"
+        }
       },
       {
         "id": 18,
-        "name": "Art Club",
+        "name": "Asian Art Club",
         "type": 8,
         "dept": "a",
         "subtype": "Art",
         "description": "",
-        "website": "https://www.allenisd.org/Domain/5497"
+        "sponsor": "Kristy Thurman",
+        "leader": "Jinqi Chu"
       },
       {
         "id": 19,
