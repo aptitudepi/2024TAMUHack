@@ -20,16 +20,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
-.navbar-toggler {
-  background-image:url("{{ url_for('static', filename='cog.svg') }}");
-  background-repeat:no-repeat;
-  background-position:center;
-  filter: brightness(1000%);
-  transition: transform 1.5s;
-}
-.navbar-toggler-icon {
-  visibility:hidden;
-}
 </style>
 
 {% block head %}{% endblock %}
@@ -38,12 +28,4 @@ body {
 <body>
 {% block body %}{% endblock %}
 </body>
-<script>
-  var degree = 90;
-  $(".navbar-toggler").on("click", function() {
-    $(".navbar-toggler").css("transform", `rotate(${degree}deg)`);
-    if (degree==90) {degree=0;}
-    else {degree=90;}
-  });
-</script>
 </html>

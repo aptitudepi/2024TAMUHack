@@ -15,6 +15,30 @@
         "leader": "Nick Cernicky"
       },
       {
+        "id": 15,
+        "name": "African Students Organization",
+        "short_name": "ASO",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4105",
+        "sponsors": [
+          "Lee Ferguson",
+          "Binta Thomaspaul",
+          "William Willis"
+        ],
+        "meeting": "Alternating Wednesdays at 4:15 PM",
+        "leader": "Princesse Muteba",
+        "location": {
+          "campus": "AHS",
+          "room": "A206"
+        },
+        "social": {
+          "instagram": "https://www.instagram.com/asoallenhs/",
+          "twitter": "https://twitter.com/ASO_AHS"
+        }
+      },
+      {
         "id": 14,
         "name": "AHS Ambassadors",
         "type": 7,
@@ -24,20 +48,13 @@
       },
       {
         "id": 15,
-        "name": "African Students Organization",
-        "short_name": "ASO",
+        "name": "AHS Composer's Guild",
         "type": 4,
         "dept": "other",
         "description": "",
-        "website": "https://www.allenisd.org/Domain/4105",
-        "meeting": "Alternating Wednesdays at 4:15 PM",
-        "location": {
-          "campus": "AHS",
-          "room": "A206"
-        },
-        "social": {
-          "twitter": "https://twitter.com/ASO_AHS"
-        }
+        "website": "https://www.allenisd.org/Domain/6073",
+        "sponsor": "George Cornelius",
+        "leader": "Darshan Rao"
       },
       {
         "id": 8,
@@ -60,6 +77,50 @@
         }
       },
       {
+        "id": 8,
+        "name": "Allen Eagle Men's Volleyball",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Volleyball",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3698",
+        "sponsor": "Stevie Mayberry",
+        "social": {
+          "twitter": "https://twitter.com/AemvbS"
+        }
+      },
+      {
+        "id": 15,
+        "name": "Allen High School South Asian Cultural Association",
+        "short_name": "SACA",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://ahs-saca.org/",
+        "sponsor": "Syama Deshpande",
+        "leader": "Ganesh Somashekhar"
+      },
+      {
+        "id": 15,
+        "name": "Allen Jersey Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/6076",
+        "sponsor": "Michelle Gibson",
+        "leader": "Emerson Bishop, Mya Milikin"
+      },
+      {
+        "id": 15,
+        "name": "Allen4Awareness",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5770",
+        "sponsor": "Miriam Fowler",
+        "leader": "Katie Ahn"
+      },
+      {
         "id": 16,
         "name": "American Sign Language Club",
         "short_name": "ASL Club",
@@ -68,14 +129,19 @@
         "subtype": "ASL",
         "description": "",
         "website": "https://www.allenisd.org/Domain/2669",
+        "banner_image": "https://www.allenisd.org/cms/lib/TX01001197/Centricity/Domain/2639/Animation%20Club%20Danielle%20and%20Joshua.jpg",
         "sponsors": [
           "Amanda Magruder",
           "Cindy Bell"
         ],
-        "meeting": "Alternating Thursdays, 4:20-4:50 PM",
+        "leader": "Evyn Gadd",
+        "meeting": "Alternating Mondays, 4:20-5:00 PM",
         "location": {
           "campus": "AHS",
-          "room": "G128"
+          "room": "G142"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AllenASLClub"
         }
       },
       {
@@ -86,11 +152,17 @@
         "subtype": "Animation",
         "description": "It’s a great place to come together and appreciate art and animation! We have loads of fun by building up our art skills! We also have snacks! At the end of the month, we watch an animated film! Come learn some great tips on animation and just basic drawing! Bring your friends!",
         "website": "https://www.allenisd.org/Domain/2639",
-        "meeting": "1st and 3rd Thursdays, 4:10-5:10 PM",
-        "leader": "Brooke Aftomis",
+        "meeting": "1st Tuesday of Every Month, 4:20-5:30 PM",
+        "sponsor": "Karen Adams",
+        "leader": "Joshua Higgs",
         "location": {
           "campus": "AHS",
           "room": "K126"
+        },
+        "social": {
+          "instagram": "https://www.instagram.com/asoallenhs/",
+          "remind": "https://www.remind.com/join/ahsac2021",
+          "twitter": "https://twitter.com/ASO_AHS"
         }
       },
       {
@@ -102,6 +174,16 @@
         "website": "https://www.allenisd.org/Domain/5481"
       },
       {
+        "id": 15,
+        "name": "Arab Student Organization",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/6077",
+        "sponsor": "Megan Teel",
+        "leader": "Susan Eltell"
+      },
+      {
         "id": 11,
         "name": "Archery Team",
         "type": 5,
@@ -111,18 +193,22 @@
         "website": "https://www.allenisd.org/Domain/2354",
         "sponsors": [
           "Jason Anderson",
-          "Juntunen"
+          "Kyle Juntunen"
         ],
-        "meeting": "Mondays and Wednesdays, 3:10-4:45 PM and Tuesdays and Thursdays, 7:30-8:30 AM"
+        "meeting": "Tuesdays and Thursdays, 7:30-8:30 AM",
+        "location": {
+          "campus": "LFC"
+        }
       },
       {
         "id": 18,
-        "name": "Art Club",
+        "name": "Asian Art Club",
         "type": 8,
         "dept": "a",
         "subtype": "Art",
         "description": "",
-        "website": "https://www.allenisd.org/Domain/5497"
+        "sponsor": "Kristy Thurman",
+        "leader": "Jinqi Chu"
       },
       {
         "id": 19,
