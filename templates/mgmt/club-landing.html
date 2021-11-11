@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ club.name }}{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-3"></div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="card mt-5">
+        <div class="card-body">
+          <h3 class="text-center">{{ club.name }}</h3>
+        </div>
+        <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action flex-column align-items-start" href="/management/club/{{ club.id }}/edit">
+            <p class="mb-0">Edit club information</p>
+          </a>
+
+          <a class="list-group-item list-group-item-action flex-column align-items-start" href="/management/club/{{ club.id }}/new-event">
+            <p class="mb-0">Create an event</p>
+          </a>
+
+          <a class="list-group-item list-group-item-action flex-column align-items-start" href="/clubs/{{ club.id }}">
+            <p class="mb-0">View public club page</p>
+          </a>
+        </div>
+      </div>
+      <p class="text-center text-muted mt-3"><a href="/">Home</a> | <a href="/logout">Log Out</a></p>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-3"></div>
+  </div>
+</div>
+
+{% endblock %}

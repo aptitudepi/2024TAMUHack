@@ -1,0 +1,4 @@
+mysql-connector==2.2.9
+mysql-connector-python==8.0.23
+google-auth==1.27.0
+Flask==1.1.2

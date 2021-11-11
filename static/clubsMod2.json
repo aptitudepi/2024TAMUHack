@@ -1,0 +1,1416 @@
+{
+    "clubs": [
+      {
+        "id": 101,
+        "name": "A-Crew",
+        "type": 7,
+        "dept": "other",
+        "description": "A-Crew is the combined groups, the Screamin’ Eagles (SE) and the Eagle Bell Guard (BG), with the sole purpose to create and promote school spirit, encourage quality performance and high academic standards.  This is, not limited to development of spirit, leadership, cooperation, self-discipline, and sportsmanship in each individual member, through the student body and their community through support in the promotion of athletic events and activities which will inspire the athletes to perform to the best of their ability.",
+        "website": "https://www.allenisd.org/Domain/3301",
+        "sponsors": [
+          "Stevie Mayberry",
+          "Katie Loftus",
+          "Stephanie Lehew"
+        ],
+        "leader": "Nick Cernicky"
+      },
+      {
+        "id": 14,
+        "name": "AHS Ambassadors",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5503"
+      },
+      {
+        "id": 15,
+        "name": "African Students Organization",
+        "short_name": "ASO",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4105",
+        "meeting": "Alternating Wednesdays at 4:15 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "A206"
+        },
+        "social": {
+          "twitter": "https://twitter.com/ASO_AHS"
+        }
+      },
+      {
+        "id": 8,
+        "name": "Allen Eagle Escadrille",
+        "short_name": "Band",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenband.com/",
+        "banner_image": "https://mariocmflys.tk/stuff/club-directory/band-banner.webp",
+        "meeting": "7:00 AM",
+        "location": {
+          "campus": null,
+          "room": "Allen High School Track and Field Stadium"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AllenBand",
+          "facebook": "http://facebook.com/OfficialAllenBandBoosterAssociation",
+          "instagram": "https://www.instagram.com/abba_allen.eagle.escadrille/"
+        }
+      },
+      {
+        "id": 16,
+        "name": "American Sign Language Club",
+        "short_name": "ASL Club",
+        "type": 9,
+        "dept": "other",
+        "subtype": "ASL",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2669",
+        "sponsors": [
+          "Amanda Magruder",
+          "Cindy Bell"
+        ],
+        "meeting": "Alternating Thursdays, 4:20-4:50 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "G128"
+        }
+      },
+      {
+        "id": 17,
+        "name": "Animation Club",
+        "type": 8,
+        "dept": "a",
+        "subtype": "Animation",
+        "description": "It’s a great place to come together and appreciate art and animation! We have loads of fun by building up our art skills! We also have snacks! At the end of the month, we watch an animated film! Come learn some great tips on animation and just basic drawing! Bring your friends!",
+        "website": "https://www.allenisd.org/Domain/2639",
+        "meeting": "1st and 3rd Thursdays, 4:10-5:10 PM",
+        "leader": "Brooke Aftomis",
+        "location": {
+          "campus": "AHS",
+          "room": "K126"
+        }
+      },
+      {
+        "id": 5,
+        "name": "Anime Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5481"
+      },
+      {
+        "id": 11,
+        "name": "Archery Team",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Archery",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2354",
+        "sponsors": [
+          "Jason Anderson",
+          "Juntunen"
+        ],
+        "meeting": "Mondays and Wednesdays, 3:10-4:45 PM and Tuesdays and Thursdays, 7:30-8:30 AM"
+      },
+      {
+        "id": 18,
+        "name": "Art Club",
+        "type": 8,
+        "dept": "a",
+        "subtype": "Art",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5497"
+      },
+      {
+        "id": 19,
+        "name": "Astronomy Club",
+        "type": 1,
+        "dept": "s",
+        "subtype": "Astronomy",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5475"
+      },
+      {
+        "id": 20,
+        "name": "Best Buddies",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3402",
+        "sponsors": [
+          "Tia McVey",
+          "Amanda Maxwell"
+        ]
+      },
+      {
+        "id": 21,
+        "name": "Bible Club",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Christian",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2658",
+        "meeting": "Weekdays, 7:45 AM",
+        "sponsor": "Virginia Browne",
+        "location": {
+          "campus": "AHS",
+          "room": "G248"
+        }
+      },
+      {
+        "id": 22,
+        "name": "Blanket Buddies Club",
+        "type": 2,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4583",
+        "meeting": "2nd Tuesday of the month, 4:15-5:00 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "A106"
+        }
+      },
+      {
+        "id": 23,
+        "name": "Cartoon Club",
+        "type": 4,
+        "dept": "a",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5494"
+      },
+      {
+        "id": 24,
+        "name": "Ceramics Club",
+        "type": 8,
+        "dept": "a",
+        "subtype": "Pottery",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3955",
+        "meeting": "Tuesdays, 3:45-4:30 PM",
+        "sponsors": [
+          "Emily Atkins",
+          "Tom Selleck"
+        ],
+        "location": {
+          "campus": "AHS",
+          "room": "A252"
+        }
+      },
+      {
+        "id": 25,
+        "name": "Cheerleading",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2420",
+        "social": {
+          "twitter": "https://twitter.com/AllenEagleCheer"
+        }
+      },
+      {
+        "id": 107,
+        "name": "Lowery Chess Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5465",
+        "meeting": "Thursdays, 4:10 PM",
+        "location": {
+          "campus": "LFC",
+          "room": "Library"
+        }
+      },
+      {
+        "id": 26,
+        "name": "AHS Chess Club",
+        "type": 4,
+        "dept": "other",
+        "description": "We welcome all high school students to drop by and join us for friendly games of chess!",
+        "website": "https://www.allenisd.org/Domain/3326",
+        "meeting": "2nd and 4th Thursdays, 3:35-4:25 PM",
+        "sponsor": "Beau Wells",
+        "location": {
+          "campus": "STEAM",
+          "room": "B127"
+        }
+      },
+      {
+        "id": 27,
+        "name": "Choir",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "http://ahseaglechoir.org/"
+      },
+      {
+        "id": 28,
+        "name": "Cinema Appreciation Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3335",
+        "sponsor": "Kyle Juntunen",
+        "meeting": "2nd and 4th Wednesdays, 3:45 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "K100"
+        },
+        "social": {
+          "twitter": "https://twitter.com/CinemaClubAHS"
+        }
+      },
+      {
+        "id": 29,
+        "name": "Allen Eagles Bowling Team",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Bowling",
+        "description": "",
+        "website": "https://sites.google.com/view/alleneaglesbowling/home",
+        "social": {
+          "twitter": "https://twitter.com/bowling_allen"
+        }
+      },
+      {
+        "id": 30,
+        "name": "Allen Eagles Ice Hockey Club",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Hockey",
+        "description": "",
+        "website": "https://www.alleneagleshockey.com/"
+      },
+      {
+        "id": 31,
+        "name": "Allen Eagles Lacrosse Club",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Lacrosse",
+        "description": "",
+        "website": "https://www.allenlacrosse.com/"
+      },
+      {
+        "id": 32,
+        "name": "Allen Eagle Rugby Club",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Rugby",
+        "description": "",
+        "website": "http://www.alleneaglerugby.com/"
+      },
+      {
+        "id": 33,
+        "name": "Colorguard",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenband.com/"
+      },
+      {
+        "id": 34,
+        "name": "Community of International Baccalaureate Scholars",
+        "short_name": "CIBS",
+        "type": 1,
+        "dept": "other",
+        "description": "CIBS is an organization that brings together all AHS IB Full Diploma candidates for fellowship, support and encouragement. Our goal is to create interaction that will encourage each student's success in academics and beyond. Each CIBS meeting is designed around an activity that can be used as a CAS experience.",
+        "website": "https://www.allenisd.org/Domain/3016"
+      },
+      {
+        "id": 35,
+        "name": "Compassion to Action",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5501"
+      },
+      {
+        "id": 36,
+        "name": "Composer's Guild",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5495"
+      },
+      {
+        "id": 106,
+        "name": "Creative Writing Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5091",
+        "sponsor": "Joseph VanWagner",
+        "meeting": "Thursdays after school",
+        "location": {
+          "campus": "LFC",
+          "room": "D209"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Cyber Security Club",
+        "type": 8,
+        "dept": "t",
+        "subtype": "Cybersecurity",
+        "description": "Allen High School's Cyber Security Club's aim is to build interest in the cyber security field. By participating in various competitions such as CTFs and the AFA's CyberPatriot competition, the club motivates students to see the world from different perspectives as they find, exploit, and patch vulnerabilities. The Allen High School Cyber Security Club was founded by Mark Amirkan, Akshat Shah, and Reese Hoffart during their sophomore year at Allen High School (2019-2020 school year). They started by recruiting over 25 interested students from their school to participate in the Air Force Association's CyberPatriot program, the United States' largest cyber defense competition.",
+        "website": "https://ahscyber.club/",
+        "sponsor": "David Ben-Yaakov",
+        "meeting": "Thursdays, 4:35-6:00 PM",
+        "location": {
+          "campus": "STEAM",
+          "room": "B202"
+        },
+        "social": {
+          "github": "https://github.com/ahscyber"
+        }
+      },
+      {
+        "id": 12,
+        "name": "Daughters of Our Living Lord & Saviour",
+        "short_name": "DOLLS",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Christian",
+        "description": "D.O.L.L.S. is a club created to reach out to teenagers during those awkward middle school and high school years and introduce them to the abundant life God promises his children.  Our goal is to teach students that they are, in fact, \"true royalty\" because they are children of the King.  For this reason, D.O.L.L.S. is an acronym that stands for \"Daughters of Our Living Lord & Savior.\" ",
+        "website": "https://www.allenisd.org/Domain/1676",
+        "meeting": "Tuesdays, 3:45-4:45 PM",
+        "sponsor": "Annette Terry",
+        "location": {
+          "campus": "AHS",
+          "room": "G150"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AHSDOLLS"
+        }
+      },
+      {
+        "id": 37,
+        "name": "D&D Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5498"
+      },
+      {
+        "id": 9,
+        "name": "DECA",
+        "type": 8,
+        "dept": "other",
+        "subtype": "Business",
+        "description": "Allen DECA is a business, marketing, and hospitality and management organization designed for emerging leaders and entrepreneurs. Our goal is to guide or students to success through district, state, and international competitions based on their performance in DECA exams and presentations! Here at deca, We believe that all of our members are capable of success!",
+        "banner_image": "https://static.wixstatic.com/media/424014_467ee5be2ee944f1967ec67051980132~mv2_d_4032_3024_s_4_2.jpeg/v1/fill/w_1060,h_795,al_c,q_90,usm_0.66_1.00_0.01/424014_467ee5be2ee944f1967ec67051980132~mv2_d_4032_3024_s_4_2.webp",
+        "website": "https://alleneaglesdeca.wixsite.com/allendeca",
+        "sponsors": ["Heath Duncan", "Susan Rowley", "Rhonda Vollmer"],
+        "leader": "Arjun Rao",
+        "meeting": "First Thursdays of the month, 2:45-3:30 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "B205"
+        },
+        "social": {
+          "twitter": "https://twitter.com/alleneagledeca",
+          "instagram": "https://instagram.com/alleneagledeca19",
+          "remind": "https://www.remind.com/join/19ahsde"
+        }
+      },
+      {
+        "id": 38,
+        "name": "Destination Imagination",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5483"
+      },
+      {
+        "id": 201,
+        "name": "Digital Media Club",
+        "type": 8,
+        "subtype": "Digital Art",
+        "dept": "a",
+        "description": "Digital Media Club is designated for people who like to create content using digital mediums. For example, creating digital art, videography, and graphic design.",
+        "website": "https://www.allenisd.org/Page/59907",
+        "sponsor": "Mrs. Brown",
+        "leader": "Haniyya Surayya, Afreeda Hossain, Angela Suresh",
+        "location": {
+          "campus": null,
+          "room": "Through Zoom"
+        },
+        "social": {
+          "discord": "https://discord.gg/2sQhH6A",
+          "remind": "https://www.remind.com/join/allendmc",
+          "instagram": "https://www.instagram.com/ahs.digitalmedia/?hl=en"
+        }
+      },
+      {
+        "id": 113,
+        "name": "Eagle Edge",
+        "type": 7,
+        "dept": "other",
+        "description": "Student owned and operated spirit store",
+        "social": {
+          "twitter": "https://twitter.com/EagleEdge_AHS"
+        }
+      },
+      {
+        "id": 39,
+        "name": "Eagle Tutors",
+        "type": 1,
+        "dept": "other",
+        "description": "Eagle Tutors is a student-run organization specializing in group and individual tutoring here at AHS! Our tutors are recommended by teachers at Allen High School for their academic accomplishments, outgoing nature, and friendly attitudes. If you need academic help, please reach out to us!",
+        "website": "https://www.allenisd.org/Domain/1678",
+        "sponsor": "Kathy Vondracek"
+      },
+      {
+        "id": 40,
+        "name": "Allen Eagles Men's Volleyball",
+        "short_name": "AEMVB",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Volleyball",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3698",
+        "meeting": "Thursdays, 6:00-8:30 PM",
+        "sponsors": [
+          "Matt Seale",
+          "Gregg Naranjo",
+          "Stevie Mayberry"
+        ],
+        "location": {
+          "campus": "AHS",
+          "room": "Auxiliary Gym"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AemvbS"
+        }
+      },
+      {
+        "id": 41,
+        "name": "Empowering Women Through Education Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4591",
+        "meeting": "First Thursday of the month",
+        "location": {
+          "campus": "AHS",
+          "room": "K213"
+        }
+      },
+      {
+        "id": 202,
+        "name": "Environmental Club",
+        "type": 8,
+        "subtype": "Awareness",
+        "dept": "s",
+        "description": "Environmental Club's mission is to raise awareness among students and educate the community on the importance of sustainability, instill a sense of responsibility for the environment and a personal commitment to protect and preserve the environment, and educate/ cultivate an appreciation and interest in the environment. As a member of the club, the environmental ambassadors lead the environmental activities and events in school, identify and implement values based environmental programs within their school and community, and form part of the network to share and communicate their environmental activities and ideas. ",
+        "website": "https://www.allenisd.org/Page/18419",
+        "banner_image": "https://roboticsdev1584.github.io/STEAM-Center-App/environ_club_logo.png",
+        "meeting": "On Zoom",
+        "sponsor": "Savannah Hollis",
+        "leader": "Avery Van Scoy",
+        "social": {
+          "instagram": "https://www.instagram.com/ahs.environmental/",
+          "remind": "https://www.remind.com/join/theenviron"
+        }
+      },
+      {
+        "id": 6,
+        "name": "eSports Club",
+        "type": 4,
+        "dept": "t",
+        "description": "The Allen High School eSports Club provides students a chance to compete in their favorite games. Students can join or create teams to build vital skills needed outside of school. Individual competition allows students to perform under pressure. Many eSports are represented by 60+ members and tournaments are constantly scheduled to allow consistent competition. ",
+        "website": "https://www.allenisd.org/Domain/5082",
+        "banner_image": "https://www.allenisd.org/cms/lib/TX01001197/Centricity/ModuleInstance/67868/large/IMG_0626.JPG",
+        "meeting": "1st and 3rd Wednesdays, after school",
+        "sponsors": [
+          "Daniel Malooly",
+          "Corey Taylor"
+        ],
+        "leader": "Priscilla Diaz",
+        "location": {
+          "campus": "AHS",
+          "room": "Library"
+        },
+        "social": {
+          "discord": "https://tinyurl.com/ahsesports"
+        }
+      },
+      {
+        "id": 42,
+        "name": "Farmers For America",
+        "short_name": "FFA",
+        "type": 8,
+        "dept": "other",
+        "subtype": "Agriculture",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1684",
+        "sponsors": [
+          "Stacy Schertz",
+          "Kari Wells",
+          "Grant Brill"
+        ],
+        "social": {
+          "twitter": "https://twitter.com/AllenFFA"
+        }
+      },
+      {
+        "id": 7,
+        "name": "Fellowship of Christian Atheletes",
+        "short_name": "FCA",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Christian",
+        "description": "The Fellowship of Christian Athletes is touching millions of lives... one heart at a time. Since 1954, the Fellowship of Christian Athletes has been challenging coaches and athletes on the professional, college, high school, junior high and youth levels to use the powerful medium of athletics to impact the world for Jesus Christ. FCA is the largest interdenominational, school-based, Christian sports organization in America. FCA focuses on serving local communities by equipping, empowering and encouraging people to make a difference for Christ",
+        "website": "https://www.allenisd.org/Domain/1681",
+        "meeting": "Thursdays, 4:20-5:20 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "Auxiliary Gym"
+        },
+        "social": {
+          "twitter": "https://twitter.com/FCA_Allen",
+          "instagram": "https://www.instagram.com/fca.allen"
+        }
+      },
+      {
+        "id": 43,
+        "name": "Figure Drawing Club",
+        "type": 0,
+        "dept": "a",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5493"
+      },
+      {
+        "id": 44,
+        "name": "Fishing Club",
+        "type": 5,
+        "dept": "other",
+        "subtype": "Fishing",
+        "description": "",
+        "website": "https://www.allenisd.org/Page/33844",
+        "sponsor": "Jason Anderson"
+      },
+      {
+        "id": 111,
+        "name": "Lowery French Club",
+        "type": 9,
+        "dept": "other",
+        "subtype": "French",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4047",
+        "sponsors": [
+          "Rebecca Attar",
+          "Louise Tessier"
+        ],
+        "location": {
+          "campus": "LFC",
+          "room": "E124"
+        }
+      },
+      {
+        "id": 45,
+        "name": "Friends Learning Together",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5510"
+      },
+      {
+        "id": 46,
+        "name": "GALS",
+        "type": 0,
+        "dept": "e",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5479"
+      },
+      {
+        "id": 47,
+        "name": "Gay-Straight Alliance",
+        "short_name": "GSA",
+        "type": 4,
+        "dept": "other",
+        "description": "\"Our goal is to make our school community safe and welcoming to all students regardless of sexual orientation or gender identity.\" You can make a difference! Join GSA and speak out against discrimination, intervene to help someone, or lend emotional support to others.",
+        "website": "https://www.allenisd.org/Domain/1685",
+        "sponsor": "Debbie Richmond",
+        "meeting": "1st and 3rd Tuesdays, 4:25-5:30 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "F117"
+        }
+      },
+      {
+        "id": 48,
+        "name": "Geography Club",
+        "type": 1,
+        "dept": "s",
+        "subtype": "Geography",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5508"
+      },
+      {
+        "id": 49,
+        "name": "German Club",
+        "type": 9,
+        "dept": "other",
+        "subtype": "German",
+        "description": "",
+        "website": "https://sites.google.com/allenisd.org/germanclub/home",
+        "sponsor": "Shelby Cleveland"
+      },
+      {
+        "id": 99,
+        "name": "Girls Who Code",
+        "type": 8,
+        "dept": "t",
+        "subtype": "Computer Science",
+        "description": "",
+        "website": "https://allencs.org"
+      },
+      {
+        "id": 50,
+        "name": "Grand Concours Preparation Club",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4646",
+        "meeting": "Wednesdays, after 8th period"
+      },
+      {
+        "id": 51,
+        "name": "Guitar Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5485"
+      },
+      {
+        "id": 52,
+        "name": "Harry Potter Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5072",
+        "meeting": "Alternating Mondays, after 8th period",
+        "location": {
+          "campus": "AHS",
+          "room": "A116"
+        }
+      },
+      {
+        "id": 53,
+        "name": "Health Occupational Students of America",
+        "short_name": "HOSA",
+        "type": 8,
+        "dept": "s",
+        "subtype": "Health",
+        "description": "HOSA is a national student organization endorsed by the U.S. Department of Education and the Health Science Education Division of ACTE. HOSA's two-fold mission is to promote career opportunities in the health care industry and to enhance the delivery of quality health care to all people.",
+        "website": "https://www.allenisd.org/Domain/1688",
+        "sponsors": [
+          "Mary Frashier",
+          "Stacey Pierce"
+        ],
+        "meeting": "4th Wendesday of the month, 4:15 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "H120"
+        }
+      },
+      {
+        "id": 54,
+        "name": "Hispanic Heritage Awareness Club",
+        "short_name": "HHAC",
+        "type": 4,
+        "dept": "other",
+        "description": "Bring awareness to students who are not Hispanic, teach them about the culture and show them how special it is.",
+        "website": "https://www.allenisd.org/Page/57843",
+        "meeting": "3rd Thursday of the month, 4:15-5:15 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "F105 Collaboration Room"
+        }
+      },
+      {
+        "id": 55,
+        "name": "Interact Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1689"
+      },
+      {
+        "id": 56,
+        "name": "Invision Dance Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5460"
+      },
+      {
+        "id": 57,
+        "name": "Jewish Student Union",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Jewish",
+        "description": "Everyone interested in learning about Jewish Culture is invited. We’ll discuss and explore Jewish traditions and holidays, and meet and get to know our Jewish peers.",
+        "website": "https://www.allenisd.org/Domain/5460",
+        "location": {
+          "campus": "AHS",
+          "room": "F117"
+        }
+      },
+      {
+        "id": 58,
+        "name": "Junior Reserve Officer Training Corps",
+        "short_name": "JROTC",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2735"
+      },
+      {
+        "id": 59,
+        "name": "Junior World Affairs Council",
+        "short_name": "JWAC",
+        "type": 4,
+        "dept": "other",
+        "description": "JWAC/MUN students participate in Model United Nations simulations and learn about world crises, while at the same time honing their problem solving, public speaking, and negotiation skills. In the Junior World Affairs Council, students will attend various educational events featuring speakers knowledgeable in diplomatic matters. This club will give high-achieving and ambitious students many opportunities to change their world, from spreading awareness about world affairs to meeting other outstanding individuals.",
+        "website": "https://www.allenisd.org/Domain/2678",
+        "sponsor": "Amber Perry",
+        "meeting": "Wednesdays 3:40-4:15 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "A106"
+        }
+      },
+      {
+        "id": 60,
+        "name": "Key Club",
+        "type": 2,
+        "dept": "other",
+        "description": "A volunteer organization dedicated to serving our home, school, and community.",
+        "website": "http://allenkeyclub.weebly.com/",
+        "sponsors": [
+          "Nancy Hodson",
+          "Corey Taylor"
+        ],
+        "leader": "ReAnn Padlan"
+      },
+      {
+        "id": 61,
+        "name": "Korean Pop Dancing",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5486"
+      },
+      {
+        "id": 62,
+        "name": "Love and Art Club",
+        "type": 2,
+        "dept": "a",
+        "description": "Love and Art is a service organization dedicated to brightening up lives in the city of Allen through art. We visit nursing homes and organize events to give people a chance to express themselves creatively through art projects. There are many service clubs in Allen High School where the main purpose is to collect hours, but Love and Art focuses on the act of volunteering rather than the hours gained from it",
+        "website": "https://www.allenisd.org/Domain/4647"
+      },
+      {
+        "id": 63,
+        "name": "Math Honor Society",
+        "type": 1,
+        "dept": "m",
+        "subtype": "Mathematics",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3618",
+        "sponsor": "Jennifer Ellis",
+        "meeting": "1st Monday of the month"
+      },
+      {
+        "id": 64,
+        "name": "Mindfulness Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5487"
+      },
+      {
+        "id": 102,
+        "name": "Muslim Student Association",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Muslim",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5467",
+        "meeting": "1st Friday of the month, 4:05 PM",
+        "location": {
+          "campus": "LFC",
+          "room": "B115"
+        }
+      },
+      {
+        "id": 65,
+        "name": "National Arts Honor Society",
+        "short_name": "NAHS",
+        "type": 8,
+        "dept": "a",
+        "description": "The National Art Honor Society is an honorary group. Students must be invited to join NAHS. Qualifying students are invited based on a teacher recommendation through scholarship, attitude and attendance. The induction ceremony only happens once a year in December. Late applicants or transfer students have the opportunity to join the following year, should they meet the requirements. See any art teacher for more information on the NAHS!",
+        "website": "https://www.allenisd.org/Domain/2645",
+        "sponsor": "Stephanie Richards",
+        "meeting": "2nd or last Tuesday of the month, 4:15 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "B200"
+        }
+      },
+      {
+        "id": 1,
+        "name": "National Computer Science Honor Society",
+        "short_name": "NCSHS",
+        "type": 8,
+        "dept": "t",
+        "subtype": "Computer Science",
+        "description": "Club for programmers and people who are interested in technology",
+        "website": "https://allencs.org",
+        "banner_image": "https://mariocmflys.tk/stuff/club-directory/steam-banner2.png",
+        "sponsor": "David Ben-Yaakov",
+        "leader": "Haadi Gill",
+        "members": "20-30",
+        "meeting": "Every Tuesday at 4:10 PM",
+        "location": {
+          "campus": "STEAM",
+          "room": "B202"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AllenCompSci",
+          "github": "https://github.com/AllenNCSHS",
+          "discord": "https://discord.gg/dvjK6gR",
+          "youtube": "https://www.youtube.com/channel/UCg-m6h6gGfq-3DC3uZa6X5Q",
+          "remind": "https://www.remind.com/join/csallen"
+        },
+        "verified": true
+      },
+      {
+        "id": 66,
+        "name": "National Honor Society",
+        "short_name": "NHS",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1700",
+        "leader": "Mark Ayiah",
+        "social": {
+          "remind": "https://www.remind.com/join/21nh"
+        }
+      },
+      {
+        "id": 100,
+        "name": "National Junior Honor Society",
+        "short_name": "NJHS",
+        "type": 7,
+        "dept": "other",
+        "description": "Freshman and Middle School version of National Honor Society",
+        "website": "https://www.allenisd.org/Domain/4027",
+        "social": {
+          "remind": "https://www.remind.com/join/njhslfc"
+        }
+      },
+      {
+        "id": 110,
+        "name": "Nintendo Club",
+        "type": 4,
+        "dept": "t",
+        "description": "A club where students may come together to bond over their favorite Nintendo games & create a sort of friendly community",
+        "website": "https://www.allenisd.org/Domain/5468",
+        "meeting": "Mondays, 4:05-4:55 PM",
+        "location": {
+          "campus": "LFC",
+          "room": "Library"
+        }
+      },
+      {
+        "id": 67,
+        "name": "The Eagle Angle",
+        "short_name": "Newspaper",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.theeagleangle.com/",
+        "social": {
+          "facebook": "https://www.facebook.com/allenisd",
+          "twitter": "https://twitter.com/theeagleangle",
+          "instagram": "http://instagram.com/theeagleangle",
+          "youtube": "https://www.youtube.com/channel/UCTpPEYK1JY-LzAJd7FU4i5Q"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Open Computer Coding Competition",
+        "short_name": "OC3",
+        "type": 8,
+        "dept": "t",
+        "subtype": "Computer Science",
+        "description": "The OC3 is an opportunity for enthusiastic coders of any level to meet every other week for fun and excitement in a friendly competition with your peers. Everyone is invited; you do not need to be enrolled in any Computer Science course.",
+        "website": "https://allencs.org",
+        "sponsor": "David Ben-Yaakov"
+      },
+      {
+        "id": 68,
+        "name": "Allen Orchestra",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://allenorchestra.org/",
+        "banner_image": "https://allenorchestra.org/wp-content/uploads/2014/07/8076967184_ca9a76e74d.jpg",
+        "sponsors": [
+          "David DeVoto",
+          "Matt Cross"
+        ],
+        "location": {
+          "campus": "AHS",
+          "room": "H136"
+        }
+      },
+      {
+        "id": 4,
+        "name": "Peer Assistance and Leadership",
+        "short_name": "PALS",
+        "type": 7,
+        "dept": "other",
+        "description": "Peer Assistance and Leadership (PAL) is a program in which 11th & 12th grade students develop leadership, communication and principle-based decision making skills, and set personal and professional goals.  PALs mentor individual students in K-9th grades, plan and participate in campus events and community service projects, welcome new AHS students, give campus tours to visitors, interview teacher/staff applicants.  PAL student-leaders undergo extensive peer-mentor training; learning to build trusting relationships with their PALees and understanding the guidelines of confidentiality. ",
+        "website": "https://www.allenisd.org/Page/9686",
+        "social": {
+          "twitter": "https://twitter.com/AHSPALs",
+          "instagram": "https://instagram.com/AHSPALs"
+        }
+      },
+      {
+        "id": 69,
+        "name": "Physics Club",
+        "type": 1,
+        "dept": "s",
+        "subtype": "Physics",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3295",
+        "sponsor": "Beau Wells",
+        "meeting": "1st and 3rd Wednesdays, 3:35-4:25 PM",
+        "location": {
+          "campus": "STEAM",
+          "room": "B127"
+        }
+      },
+      {
+        "id": 70,
+        "name": "Police Explorer Post 1511",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5484",
+        "social": {
+          "twitter": "https://twitter.com/AHS_Post1511"
+        }
+      },
+      {
+        "id": 103,
+        "name": "Parent-Teacher-Student Association",
+        "short_name": "PTSA",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "http://www.allenhsptsa.my-ptsa.org/"
+      },
+      {
+        "id": 71,
+        "name": "Quill & Scroll National Honor Society",
+        "type": 8,
+        "dept": "other",
+        "subtype": "Journalism",
+        "description": "Allen High School's chapter of Quill and Scroll, the International Honorary Society of High School Journalists, continues as an active and vital part of Allen's journalism program. The Society, as a whole, has always taken an active part in raising journalistic standards and in directing the course of high school journalism. The purpose of the organization is to encourage and reward individual achievement in journalism and related fields.",
+        "website": "https://www.allenisd.org/Domain/2659",
+        "sponsor": "Juntunen"
+      },
+      {
+        "id": 72,
+        "name": "Quiz Bowl",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5499"
+      },
+      {
+        "id": 73,
+        "name": "Red Cross Eagles",
+        "type": 7,
+        "dept": "s",
+        "description": "Red Cross Eagles serves the AHS community by promoting health & safety, emergency preparedness and disease prevention. To the world, we make a difference by reducing human suffering and saving lives through volunteering, fundraising and blood services with the Red Cross of North Texas.",
+        "website": "https://www.allenisd.org/Domain/3308",
+        "sponsors": [
+          "Laura Reams",
+          "Christina Lau"
+        ]
+      },
+      {
+        "id": 104,
+        "name": "Lowery Robotics Club",
+        "type": 8,
+        "dept": "e",
+        "subtype": "Robotics",
+        "description": "",
+        "website": "https://www.allenisd.org/Page/54773",
+        "sponsor": "Julie Kiel",
+        "meeting": "Tuesdays and Thursdays",
+        "location": {
+          "campus": "LFC",
+          "room": "B108"
+        }
+      },
+      {
+        "id": 74,
+        "name": "AHS Robotics",
+        "type": 8,
+        "dept": "e",
+        "subtype": "Robotics",
+        "description": "",
+        "website": "http://team5417.wixsite.com/home",
+        "sponsors": [
+          "Greg Burnham",
+          "Charles Logston"
+        ],
+        "social": {
+          "twitter": "https://twitter.com/AllenRobotics"
+        }
+      },
+      {
+        "id": 75,
+        "name": "Rubik's Cube Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5502"
+      },
+      {
+        "id": 76,
+        "name": "Science Club",
+        "type": 1,
+        "dept": "s",
+        "subtype": "Science",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1708",
+        "sponsor": "Sandy Kulkarni",
+        "location": {
+          "campus": "AHS",
+          "room": "G141"
+        },
+        "social": {
+          "twitter": "https://twitter.com/AHS_ScienceClub"
+        }
+      },
+      {
+        "id": 77,
+        "name": "Science Honor Society",
+        "short_name": "SHS",
+        "type": 1,
+        "dept": "s",
+        "subtype": "Science",
+        "description": "Our goal is to encourage and honor high school students who have a passion and aptitude for the sciences, and promote the application of science to help better our community. This society is available to juniors, seniors, and sophomores. To be eligible, all members must be currently enrolled in a science class. Juniors must have been enrolled in one honors science class before or in eleventh grade. Seniors must have been enrolled in two honors classes before or in twelfth grade. For a sophomore to be eligible, they must be enrolled in one AP level science class in 10th grade. All members must maintain a 3.00/4.00 GPA across all their classes, and a 3.00/4.00 across each science course. All members must attend at  least four general chapter meetings annually. All members must also participate in at least one of the chapter’s projects and complete at least five hours of science related service per semester. Members are to contribute to the organization’s purpose of spreading/implementing scientific awareness and thought through active discussions and science related service.",
+        "website": "https://www.allenisd.org/Domain/4607",
+        "location": {
+          "campus": "AHS",
+          "room": "A215"
+        }
+      },
+      {
+        "id": 108,
+        "name": "Scuba Club",
+        "type": 4,
+        "dept": "other",
+        "description": "Scuba Club is where students that love the ocean meet to become SCUBA Certified, continue their diving education with Advanced, Nitrox, and additional Certifications.  Scuba Club plans annual summer trips for our students and parents.",
+        "website": "https://www.allenisd.org/Domain/1710",
+        "sponsor": "Tim Smith",
+        "meeting": "1st and 3rd Wednesday of the month, 3:45-4:45 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "A212"
+        },
+        "social": {
+          "facebook": "http://www.facebook.com/groups/184957408192774/#!/groups/160366323977664/"
+        }
+      },
+      {
+        "id": 78,
+        "name": "Société Honoraire de Français",
+        "short_name": "French Club",
+        "type": 9,
+        "dept": "other",
+        "subtype": "French",
+        "description": "The French Club is a group of students who meet together on a cultural and social basis in order to provide an enriching extra-curricular student activity. Each meeting has a theme which can be based on holidays, events, and other culture hallmarks. Past meetings include Mardi Gras, Movie Night, Fashion Week, and Cirque du Soleil.",
+        "website": "https://www.allenisd.org/Page/9657",
+        "sponsors": [
+          "Harita Deshpande",
+          "Stacia Pollock"
+        ]
+      },
+      {
+        "id": 79,
+        "name": "Spanish Club",
+        "type": 9,
+        "dept": "other",
+        "subtype": "Spanish",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5492"
+      },
+      {
+        "id": 80,
+        "name": "Spanish Honor Society",
+        "type": 9,
+        "dept": "other",
+        "subtype": "Spanish",
+        "description": "En la Sociedad Honoraria Hispánica, puedes mejorar tus habilidades de español e interactuar con otros estudiantes que comparten tu pasión por el idioma. Además, puedes practicar el idioma utilizando los tres modos comunicacionales (interpretativa, interpersonal y presentacional) y aprender más acerca de la cultura de los países hispanohablantes. ¡Únete al club para tener una experiencia única y divertida!",
+        "website": "https://www.allenisd.org/Domain/5488",
+        "sponsors": [
+          "Jose Salas-Baranao",
+          "Eloisa Anderson"
+        ],
+        "leader": "Lauren Tompkins"
+      },
+      {
+        "id": 13,
+        "name": "STEAM Ambassadors",
+        "type": 7,
+        "dept": "steam",
+        "banner_image": "https://roboticsdev1584.github.io/STEAM-Center-App/STEAM-icon-04.svg",
+        "description": "Allen STEAM Ambassadors are 10th-12th grade students developing the communication, collaborative, and leadership skills necessary for future success in STEM/STEAM academic and professional endeavors. Ambassadors serve as STEAM advocates on campus and throughout the community as they assist in the continued development of programs offered at or through the Allen ISD STEAM Center.",
+        "website": "https://www.allenisd.org/Page/57758"
+      },
+      {
+        "id": 112,
+        "name": "STEAM Makerspace",
+        "type": 8,
+        "dept": "steam",
+        "banner_image": "https://roboticsdev1584.github.io/STEAM-Center-App/STEAM-icon-04.svg",
+        "description": "Tutorials and resources for the STEAM Center Makerspace (CURRENTLY CLOSED)",
+        "website": "https://canvas.allenisd.org/enroll/CTF9FY",
+        "sponsor": "Gormon"
+      },
+      {
+        "id": 81,
+        "name": "STEAM Student Leadership",
+        "type": 7,
+        "dept": "steam",
+        "banner_image": "https://roboticsdev1584.github.io/STEAM-Center-App/STEAM-icon-04.svg",
+        "description": "Allen STEAM Ambassadors are 10th-12th grade students developing the communication, collaborative, and leadership skills necessary for future success in STEM/STEAM academic and professional endeavors. Ambassadors serve as STEAM advocates on campus and throughout the community as they assist in the continued development of programs offered at or through the Allen ISD STEAM Center. STEAM Leadership takes STEAM Ambassadors to the next level, and serves as the 'core group' of this broader organization.",
+        "website": "https://www.allenisd.org/Page/57758"
+      },
+      {
+        "id": 82,
+        "name": "Student Council",
+        "short_name": "STUCO",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1712",
+        "leader": "Rachel Suk",
+        "social": {
+          "twitter": "https://twitter.com/AStuco18"
+        }
+      },
+      {
+        "id": 83,
+        "name": "WINGS",
+        "type": 7,
+        "dept": "other",
+        "description": "W.I.N.G.S. is a program in which 10-12th grade students develop leadership, communication and principle-based decision making skills, and set personal and professional goals.  W.I.N.G.S. will plan and participate in campus-based service projects (Spirit Weeks, Charity Fundraisers, Red Ribbon Week, Be the One, Teacher Appreciation, etc), the Freshman Mentoring Program, welcome  new AHS students, mentor English Language Learners, and various community service projects.",
+        "website": "https://www.allenisd.org/Page/52732",
+        "social": {
+          "twitter": "https://twitter.com/AHS_WINGS",
+          "instagram": "https://instagram.com/AHS_WINGS"
+        }
+      },
+      {
+        "id": 84,
+        "name": "Tallenettes",
+        "short_name": "Drill Team",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allendrillteam.com/",
+        "sponsors": [
+          "Sara Pilukaitis",
+          "Natalie Kirkpatrick"
+        ],
+        "leader": "Kaitlyn Springate"
+      },
+      {
+        "id": 85,
+        "name": "Texas Association of Future Educators",
+        "short_name": "TAFE",
+        "type": 8,
+        "dept": "other",
+        "subtype": "Education",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4507"
+      },
+      {
+        "id": 86,
+        "name": "Texas Youth & Government",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5051"
+      },
+      {
+        "id": 105,
+        "name": "Lowery Theater",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5476",
+        "sponsors": [
+          "Janet Flynn",
+          "Meg Thompson"
+        ]
+      },
+      {
+        "id": 87,
+        "name": "AHS Theatre",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/2404",
+        "banner_image": "https://www.allenisd.org/cms/lib/TX01001197/Centricity/ModuleInstance/52563/large/ursula.jpg",
+        "sponsor": "Renee Harris",
+        "social": {
+          "twitter": "https://twitter.com/AHS3105",
+          "instagram": "https://instagram.com/alleneagletheatre"
+        }
+      },
+      {
+        "id": 88,
+        "name": "Tri-M Music Honor Society",
+        "type": 8,
+        "dept": "other",
+        "subtype": "Music",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4648"
+      },
+      {
+        "id": 89,
+        "name": "TuffyTalks",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5505"
+      },
+      {
+        "id": 90,
+        "name": "Tunes for Thought",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5506"
+      },
+      {
+        "id": 109,
+        "name": "Lowery UIL",
+        "type": 1,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4039",
+        "sponsor": "Dawn Geshwender",
+        "location": {
+          "campus": "LFC",
+          "room": "D118"
+        }
+      },
+      {
+        "id": 91,
+        "name": "AHS UIL Academics",
+        "type": 1,
+        "dept": "other",
+        "description": " If you have a skill in test taking and enjoy competition, UIL has a perfect contest just for you.  Contest information is subject-related and coaches are ready to help you prepare.  See Coaches List and Subject information.",
+        "website": "https://www.allenisd.org/Domain/1715",
+        "location": {
+          "campus": "AHS",
+          "room": "K119"
+        }
+      },
+      {
+        "id": 92,
+        "name": "Ultimate Frisbee Organization",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/3041",
+        "sponsor": "Wayne Jones",
+        "meeting": "Mondays and Thursdays, 4:15-6:00 PM",
+        "location": {
+          "campus": null,
+          "room": "Men's Lacrosse – Allen HS Practice Field"
+        }
+      },
+      {
+        "id": 93,
+        "name": "UNICEF",
+        "type": 0,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/4160"
+      },
+      {
+        "id": 94,
+        "name": "Unified Robotics",
+        "type": 8,
+        "dept": "e",
+        "subtype": "Robotics",
+        "description": "",
+        "website": "https://www.allenisd.org/Page/48207"
+      },
+      {
+        "id": 95,
+        "name": "United Nations Girl Up",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5066"
+      },
+      {
+        "id": 10,
+        "name": "Yearbook",
+        "type": 7,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/1717"
+      },
+      {
+        "id": 96,
+        "name": "Young Asian Leaders of America",
+        "type": 4,
+        "dept": "other",
+        "description": "Young Asian Leaders of America is a nationally-based, non-profit organization, founded by and for youth, to cultivate the next generation of Asian American leaders, advocates, and allies in media, politics, and society.",
+        "website": "https://www.allenisd.org/Domain/4608",
+        "sponsor": "Sun",
+        "meeting": "Last Friday of the month, 4:00-5:00 PM",
+        "location": {
+          "campus": "AHS",
+          "room": "F208"
+        }
+      },
+      {
+        "id": 97,
+        "name": "Young Life",
+        "type": 3,
+        "dept": "other",
+        "subtype": "Christian",
+        "description": "Young Life is a world-class organization for adolescents. Our staff and volunteers enter the world of kids, focusing on what matters to them — fun, adventure, friendship and a sense of significance. In doing so, we earn the privilege of talking to them about something that we think matters most of all — the truth about God and His love for them.",
+        "website": "http://www.allenareayl.younglife.org/",
+        "sponsor": "Jordan Kauffman",
+        "meeting": "Mondays, 7:29-8:29 PM"
+      },
+      {
+        "id": 98,
+        "name": "YoYo Club",
+        "type": 4,
+        "dept": "other",
+        "description": "",
+        "website": "https://www.allenisd.org/Domain/5541"
+      }
+    ]
+  }

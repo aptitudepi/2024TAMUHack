@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}Explore{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='map3.css') }}"> <!--This is to import all of the css for the page-->
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<br>
+  <div class="container mt-2">
+  <div class="mainContent">
+  <div style="height:6px;"></div>
+  <h1 style="user-select:text;">Navigation Map</h1>
+  <hr style="height:2px;">
+  <div style="height:18px;"></div>
+  <p style="user-select:text;">The STEAM Center is a quite a large building, but do you ever feel as though you get lost in it? Here to help is the interactive map provided below. This map can be accessed using any device (mobile or laptop), and has the ability to zoom in so that you can navigate the STEAM Center easier in case you get lost. Below the interactive map is a list of room numbers in addition to the teachers and clubs/ organizations associated with them, so that you always know where to find your classes.</p>
+  <br>
+    <nav aria-label="..." style="margin-top:9px;" id="floorNavMobile">
+      <ul class="pagination justify-content-center">
+        <li class="page-item active nav1C"><a class="page-link nav1">Floor 1</a></li>
+        <li class="page-item nav2C"><a class="page-link nav2">Floor 2</a></li>
+        <li class="page-item nav3C"><a class="page-link nav3">Scroll disable <span class="scrollToggle">off</span></a></li>
+      </ul>
+      </nav>
+    <div class="zoomImgC">
+    	<img loading="lazy" class="zoomImg" src="" alt="map picture">
+    </div>
+    <div class="close">X</div>
+    <!--This is for the normal map images-->
+    <div class="imgC" id="imgC">
+    <div class="imgC3">
+      <img id="zoomIn" loading="lazy" src="{{ url_for('static', filename='zoomInFixed.png') }}" />
+    </div>
+    <div class="imgC4">
+      <img id="zoomOut" loading="lazy" src="{{ url_for('static', filename='zoomOutFixed.png') }}" />
+    </div>
+    <div class="legendC">
+      <div class="topBar"><div class="topText">LEGEND</div><div class="closeInfo">X</div></div>
+      <ul>
+        <li class="admR">Administration</li>
+        <li class="comR">Common Areas</li>
+        <li class="gphR">Graphics and Design Rooms</li>
+        <li class="intR">Innovation/ Tech Rooms</li>
+        <li class="matR">Math/ Experiential Rooms</li>
+        <li class="sciR">Science Labs</li>
+      </ul>
+    </div>
+    <div class="imgC6">
+      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" />
+    </div>
+    <div class="imgC6Mobile">
+      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" />
+    </div>
+    <!--Note- imgC7 is just a container in this instance, doesn't do anything special-->
+    <div class="imgC7">
+      <div class="roomToggle" id="A001">Digital Media Lab</div><div class="roomToggle" id="A002">Architecture</div><div class="roomToggle" id="A003">Science Lab</div><div id="A004"></div><div id="A005"></div><div class="roomToggle" id="A006">Science Lab</div><div id="A007"></div><div id="A008"></div><div class="roomToggle" id="A009">Science Lab</div><div id="A010"></div><div id="A011"></div><div id="A012"></div><div class="roomToggle" id="A013">Science Lab</div><div id="A014"></div>
+      <div class="roomToggle" id="A015">Administration</div><div class="roomToggle" id="A016">Cafe</div><div class="roomToggle" id="A017">Learning Studio/ Presentation Hall</div><div class="roomToggle" id="A018">Flight</div><div class="roomToggle" id="A019">Innovation Hub</div><div id="A020"></div><div class="roomToggle" id="A021">Robotics & Engineering</div><div id="A022"></div><div class="roomToggle" id="A023">Ellipse Theater</div>
+    </div>
+    <!--Note- this is for floor 2 of the map-->
+    <div class="imgC8">
+      <div class="roomToggle" id="B001">Computer Lab</div><div id="B002"></div><div class="roomToggle" id="B003">Electronics</div><div id="B004"></div><div class="roomToggle" id="B005">Math & Statistics</div><div id="B006"></div><div class="roomToggle" id="B007">Math & Statistics</div><div id="B008"></div><div id="B009"></div><div class="roomToggle" id="B010">STEAM Studios</div><div id="B011"></div>
+      <div id="B012"></div><div id="B013"></div><div id="B014"></div><div class="roomToggle" id="B015">STEAM Studios</div><div id="B016"></div><div id="B017"></div><div class="roomToggle" id="B018">Ellipse Theater</div>
+    </div>
+    <div class="imgC9">
+      <h2>STEAM CENTER | FLOOR <span class="floorNum">1</span></h2>
+    </div>
+    <img id="iMap" loading="lazy" src="{{ url_for('static', filename='STEAM-map-01.svg') }}" />
+    </div>
+    <div class="legendCMobile">
+      <div class="topBar"><div class="topText" style="padding-left:10px;">LEGEND</div><div class="closeInfoMobile">X</div></div>
+      <ul>
+        <li class="admR">Administration</li>
+        <li class="comR">Common Areas</li>
+        <li class="gphR">Graphics and Design Rooms</li>
+        <li class="intR">Innovation/ Tech Rooms</li>
+        <li class="matR">Math/ Experiential Rooms</li>
+        <li class="sciR">Science Labs</li>
+      </ul>
+    </div>
+    
+  <nav aria-label="..." style="margin-top:9px;" id="floorNav">
+  <ul class="pagination justify-content-center">
+    <li class="page-item active nav1C"><a class="page-link nav1">Floor 1</a></li>
+    <li class="page-item nav2C"><a class="page-link nav2">Floor 2</a></li>
+  </ul>
+  </nav>
+  </div>
+  <!--This is taken from the club listing page-->
+  <div class="container">
+  <div class="card main">
+    <div class="d-flex searchC">
+      <div class="search"> 
+        <input type="text" id="search" class="search-input" placeholder="Search for a teacher's name..." onkeyup="searchResults()"> 
+        <a class="search-icon" style="text-decoration:none;"> <i class="fa fa-search"></i> </a> 
+        <div id="outputC">
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div id="club-select">
+      <div class="gridC" style="background-color:white;padding:0px;border-radius:0px;border:none;cursor:default;"><div class="titleT">Teacher Name/ Course</div><div class="titleT">Room #</div></div>
+      <hr class="hzLine">
+      <div class="clubDisplay">
+        <ul class="subClubDisplay"></ul>
+      </div>
+      </div>
+    <!--Club display-->
+    <div class="card-body body" id="club-body" style="display:none;user-select:text;">
+      <div class="alert alert-secondary" id="club-notice"></div>
+      <a id="returnToList">Go Back</a>
+      <h4 id="course-name">Course Name</h4>
+      <p><span id="course-teacher">Teacher Name</span></p>
+      <hr>
+      <p id="course-roomC">
+        <strong>Room: </strong><span id="course-room"></span>
+      </p>
+      <p id="course-clubsC">
+        <strong>Clubs/ Organizations: </strong><span id="course-clubs"></span>
+      </p>
+    </div>
+    <!--End of club-body-->
+  </div>
+  </div>
+  </div> <!--End of bodyContent div-->
+
+{% include "components/footer.html" %}
+
+<script src="{{ url_for('static', filename='map3.js') }}"></script> <!--This is to import all of the JS for the page-->
+
+{% endblock %}

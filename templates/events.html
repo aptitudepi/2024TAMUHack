@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}Event Calendar{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="/static/modules/fullcalendar/main.min.css">
+<script src="/static/modules/fullcalendar/main.min.js"></script>
+<style>
+html {
+	width:100%;
+}
+h1 {
+	margin-top:12px;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+@media (max-width:820px) {
+  .card-body p {
+  	text-align:center;
+  }
+  hr {
+  	display:block;
+  }
+}
+</style>
+{% endblock %}
+
+{% block body %}
+{% include "components/nav.html" %}
+
+<div class="container mb-5">
+  <div style="height:6px;"></div>
+  <h1 style="user-select:text;">Events</h1>
+  <hr style="height:2px;">
+  <div style="height:18px;"></div>
+  <p>Stay up to date with what’s going on in the STEAM Center!</p>
+  
+  <hr style="height:2px;background-color:black;width:50%;display:none;">
+  <p id="calStatus">Loading calendar...</p>
+  <div id="calendarContainer">
+    <!-- this will be auto-populated by fullcalendar library -->
+  </div>
+  <script>
+    $(document).ready(function(){
+      currentTime = new Date().getTime();
+
+      fetch('/events/json').then(resp => resp.json()).then(data => {
+        events = [];
+        // Go through each item from the server and create an event
+        for(i = 0; i < data.length; i++) {
+          item = data[i];
+          console.log(item);
+          e = {
+            groupId: "club-" + item["club"], // if it is null, it will be a generic group
+            title: item["name"],
+            start: new Date(item["startTime"] * 1000),
+            end: new Date(item["endTime"] * 1000),
+            url: "/events/" + item["id"],
+            color: "#AAAAAA"
+          };
+          events.push(e);
+        }
+
+        document.querySelector("#calStatus").innerText = "";
+
+        console.log(events);
+
+        // Initialize the calendar using the events list
+        calElement = document.querySelector("#calendarContainer");
+        cal = new FullCalendar.Calendar(calElement, {
+          initialView: 'dayGridMonth',
+          events: events // use events list
+        });
+        cal.render();
+      }).catch(error => {
+        console.error(error);
+        document.querySelector("#calStatus").innerText = "Failed to load calendar, please try again later";
+      });
+    });
+  </script>
+</div>
+
+{% include "components/footer.html" %}
+
+{% endblock %}
+

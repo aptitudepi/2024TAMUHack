@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+  <h3 class="mt-3">Event created successfully</h3>
+  <p class="text-muted">If you would like to keep track of member attendance, you can send attendees <a href="/si/{{ code }}" target="_blank">this sign in form</a>:</p>
+  <input class="form-control" readonly value="{{ host }}/si/{{ code }}">
+
+  <p>Here is a QR code of this link you can also use:</p>
+
+  <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl={{ host }}/si/{{ code }}&choe=UTF-8">
+
+  <p>Right click the QR code -> Copy Image to copy it into your clipboard</p>
+
+  <p>If you don't need to use attendance for this event, you can ignore this message.</p>
+
+  <p><a href="/management/club/{{ club.id }}">Click here to go back to the club management page</a></p>
+
+  <p class="text-center text-muted mt-3"><a href="/">Home</a> | <a href="/logout">Log Out</a></p>
+  </div>
+</div>
+
+{% endblock %}
