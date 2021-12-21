@@ -1,0 +1,561 @@
+{% extends "layout.html" %}
+
+{% block title %}Service{% endblock %}
+
+{% block head %}
+
+<style>
+    /*NOTE- These are the STEAM colors that we are using for the org bcgs:
+(Green)- Science: #8ac926
+(Blue)- Technology: #1982c4
+(Purple)- Engineering: #6a4c93
+(Orange)- Art: #ffca3a
+(Red)- Math: #ff595e2
+*/
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+  }
+  html, body{
+    scroll-behavior: smooth;
+    overflow-x:hidden;
+    max-width:100%;
+  }
+  .bodyContent {
+    margin-left:7%;
+    margin-right:7%;
+  }
+  .center {
+    text-align: center;
+  }
+  .card.main {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border: 0;
+  }
+  .card.main img.seamless {
+    width: 100%;
+    display: block;
+  }
+  .card.main .body .page-top {
+    text-align: center;
+  }
+  .card.main .body .page-top img {
+    width: 100px;
+  }
+  .card.main .body .search-bar {
+    margin-bottom: 20px;
+  }
+  .footer {
+    font-size: 10pt;
+  }
+  .gridC{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    padding:6px 0px 6px 6px;
+    border-radius:4px;
+    border-left:4px solid #cc3300;
+    border-bottom:0.25px solid #e6e6e6;
+    border-top:0.25px solid #e6e6e6;
+    border-right:0.25px solid #e6e6e6;
+    margin-bottom:8px;
+  }
+  .gridC:hover {
+    background-color:#e6e6e6;
+    cursor:pointer;
+  }
+  .titleT {
+    font-weight:bold;
+    font-size:18px;
+  }
+  .hzLine {
+    height:1.5px !important;
+    border-width:0;
+    color:black;
+    background-color:black;
+  }
+  .linkItemA { 
+    color:#037dff;
+    text-decoration:none;
+  }
+  .linkItemA:hover {
+    cursor:pointer;
+    color:#004a99;
+    text-decoration:underline;
+  }
+  .gridC div a { 
+    color:#037dff;
+    text-decoration:none;
+  }
+  .gridC div a:hover {
+    color:#004a99;
+    text-decoration:underline;
+  }
+  #returnToList {
+    color:#037dff;
+  }
+  #returnToList:hover {
+    cursor:pointer;
+    color:#004a99;
+    text-decoration:underline;
+  }
+  /*start of CSS for search bar*/
+  #outputC {
+    position:absolute;
+    z-index:99;
+    bottom:-20px;
+  }
+  .search {
+    position:relative;
+    width: 60%;
+    min-width:350px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+  }
+  .search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+  }
+  .search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3585fd;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+  }
+  .search-icon:hover {
+      color: #fff !important;
+      cursor:pointer;
+      text-decoration:none;
+  }
+  .searchResultDepts {
+      display:none;
+  }
+  .btn-outline-primary {
+    display:block;
+    width:260px;
+    margin-top: 20px;
+    margin-right:auto;
+    margin-left:auto;
+  }
+  .subServiceDisplay {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    align-items:flex-start;
+    background-color:lightgrey;
+  }
+  .subServiceDisplay div {
+    background-color:darkgrey;
+    border-radius:16px;
+    padding:8px;
+    max-width:300px;
+  }
+  .subServiceDisplay div:hover {
+    cursor:pointer;
+    background-color:orange;
+  }
+  @media (max-width:466px){
+  .search {
+    min-width:350px;
+  }
+  .search-input {
+    overflow:hidden;
+  }
+  .search-input::placeholder {
+    text-overflow:ellipsis;
+  }
+}
+@media (max-width:376px){
+  .search {
+    min-width:100%;
+  }
+}
+  /*end of CSS for search bar*/
+  .footerC {
+    font-weight:normal;
+  }
+  </style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<br>
+      <div class="container mt-2">
+        <div class="topContainer">
+        <div style="height:6px;"></div>
+        <h1>Service Opportunities</h1>
+        <hr style="height:2px;">
+        <div style="height:18px;"></div>
+        <p>There are currently <span class="serviceCount"></span> STEAM-related service opportunities offered at the STEAM Center and the clubs that inhabit it. Please use the search bar below or scroll/ click on the service hour opportunities for more information.</p>
+        <br>
+        <div class="d-flex searchC">
+          <div class="search"> 
+            <input type="text" id="search" class="search-input" placeholder="Search for opportunities..." onkeyup="searchResults()"> 
+            <a class="search-icon" style="text-decoration:none;"> <i class="fa fa-search"></i> </a> 
+            <div id="outputC">
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="container">
+        <div class="card main">
+          <div id="club-select">
+            <div class="seviceDisplay">
+              <div class="subServiceDisplay"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+       </div>
+{% include "components/footer.html" %}
+
+<script>
+          var subServiceDisplay = document.querySelector(".subServiceDisplay");
+          var dataArr;
+          var scrollID = "";
+          var numOfServices;
+          var serviceListing = document.querySelector(".serviceDisplay");
+          var serviceNames = [];
+          function updateServiceListing() {
+            for (var index = 0; index < dataArr.length; index++) {
+              //this creates a new list item element
+              var listItem = document.createElement("div");
+              listItem.id = `item${index+1}`;
+              listItem.classList.add("linkItem");
+              listItem.link = dataArr[index].link;
+              subServiceDisplay.appendChild(listItem);
+              //Creating the name div
+              var listItemName = document.createElement("div");
+              var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+              listItemName.appendChild(listItemNameTxt);
+              listItem.appendChild(listItemName);
+              serviceNames[index] = dataArr[index].name;
+              //Creating the creator div
+              var listItemCreator = document.createElement("div");
+              var listItemCreatorTxt = document.createTextNode(`${dataArr[index].creator}`);
+              listItemCreator.appendChild(listItemCreatorTxt);
+              listItem.appendChild(listItemCreator);
+              //Creating the date div
+              var listItemDate = document.createElement("div");
+              var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+              listItemDate.appendChild(listItemDateTxt);
+              listItem.appendChild(listItemDate);
+              //Creating the description div
+              var listItemDescription = document.createElement("div");
+              var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+              listItemDescription.appendChild(listItemDescriptionTxt);
+              listItem.appendChild(listItemDescription);
+              //Creating the hours div
+              var listItemHours = document.createElement("div");
+              var listItemHoursTxt = document.createTextNode(`${dataArr[index].hours}`);
+              listItemHours.appendChild(listItemHoursTxt);
+              listItem.appendChild(listItemHours);
+              //Creating the sign up link div
+              var listItemLink = document.createElement("div");
+              var listItemLinkA = document.createElement("a");
+              listItemLinkA.target = "_blank";
+              listItemLinkA.classList.add("linkItemA");
+              listItemLinkA.href = dataArr[index].link;
+              var listItemLinkATxt = document.createTextNode("Signup Link");
+              listItemLinkA.appendChild(listItemLinkATxt);
+              listItemLink.appendChild(listItemLinkA);
+              listItem.appendChild(listItemLink);
+            }
+          }
+          function updateServiceInListing(index) {
+              //this creates a new list item element
+              var listItem = document.createElement("div");
+              listItem.id = `item${index+1}`;
+              listItem.classList.add("linkItem");
+              listItem.link = dataArr[index].link;
+              subServiceDisplay.appendChild(listItem);
+              //Creating the name div
+              var listItemName = document.createElement("div");
+              var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+              listItemName.appendChild(listItemNameTxt);
+              listItem.appendChild(listItemName);
+              serviceNames[index] = dataArr[index].name;
+              //Creating the creator div
+              var listItemCreator = document.createElement("div");
+              var listItemCreatorTxt = document.createTextNode(`${dataArr[index].creator}`);
+              listItemCreator.appendChild(listItemCreatorTxt);
+              listItem.appendChild(listItemCreator);
+              //Creating the date div
+              var listItemDate = document.createElement("div");
+              var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+              listItemDate.appendChild(listItemDateTxt);
+              listItem.appendChild(listItemDate);
+              //Creating the description div
+              var listItemDescription = document.createElement("div");
+              var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+              listItemDescription.appendChild(listItemDescriptionTxt);
+              listItem.appendChild(listItemDescription);
+              //Creating the hours div
+              var listItemHours = document.createElement("div");
+              var listItemHoursTxt = document.createTextNode(`${dataArr[index].hours}`);
+              listItemHours.appendChild(listItemHoursTxt);
+              listItem.appendChild(listItemHours);
+              //Creating the sign up link div
+              var listItemLink = document.createElement("div");
+              var listItemLinkA = document.createElement("a");
+              listItemLinkA.target = "_blank";
+              listItemLinkA.classList.add("linkItemA");
+              listItemLinkA.href = dataArr[index].link;
+              var listItemLinkATxt = document.createTextNode("Signup Link");
+              listItemLinkA.appendChild(listItemLinkATxt);
+              listItemLink.appendChild(listItemLinkA);
+              listItem.appendChild(listItemLink);
+          }
+          function clearServiceListing(serviceListing) {
+            while(serviceListing.firstChild) {
+              serviceListing.removeChild(serviceListing.firstChild);
+            }
+          }
+          function repositionFooter() {
+            $('.footerC').css("position", "relative");
+            var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+            var elementOffset = $('.footerC').offset().top;
+            var distance = (elementOffset)+$('.footerC').outerHeight();
+            if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+            else { $('.footerC').css("position", "relative"); }
+          }
+          fetch('/static/service.json', {mode:'cors'}).then(function(resp) {
+            return resp.json();
+          }).then(function(data) {
+            dataArr = data.service;
+            numOfServices = dataArr.length;
+            updateServiceListing();
+            repositionFooter();
+            $(".serviceCount").text(`${numOfServices}`);
+          });
+          $(".subServiceDisplay").on('click', '.linkItem', function() {
+            var thisServiceLink = this.link;
+            window.open(thisServiceLink, "_blank");
+          });
+          /*start of JavaScript for the search bar*/
+var array = [];
+var maxResults = 1000000000000; //This is the maximum number of results that will pop up in the keyword search. Set to any valid number.
+var obj = {};
+var tempString = "";
+var selectedDept = ""; //this is to help open the correct info for searching
+var selectedCourse = "";
+var stopOffset2 = false;
+
+function stylePS(psElement) {
+  psElement.style.marginBottom = "0px";
+}
+function hoverStyleP(pElement) {
+//This is used to change the color of search results background when hovered over
+  pElement.style.backgroundColor = "#0248b1";
+}
+function styleP(pElement) {//This is used to style each of the search results, change for better results
+  pElement.style.width = "200px";
+  pElement.style.height = "auto";
+  pElement.style.color = "white";
+  pElement.style.backgroundColor = "#3585fd";
+  pElement.style.fontSize = "15px";
+  pElement.style.padding = "0.5vmin";
+  pElement.style.margin = "0vmin";
+  //pElement.style.textAlign = "center";
+}
+function styleA(aElement) {//This is used to style the anchor tags, change for better results
+  aElement.style.color="white";
+  aElement.style.textDecoration= "none";
+  aElement.style.cursor="pointer";
+}
+function appendDiv(temp, txtOptDiv) {
+  if (stopOffset2) { $("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`); }
+  else { $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 50}px`); }
+  selectedCourse = temp;
+  var pElement = document.createElement("div");
+  var pTxt = document.createElement("P"); //this creates a new <p> element
+  pTxt.classList.add("searchResult");
+  var aElement = document.createElement("A"); //this creates a new <a> element
+  aElement.style.textDecoration = "none";
+  var txt = document.createTextNode(temp); //this puts the search result into a text field
+  //var link = "#";
+  var counter = 0;
+  stylePS(pTxt);
+  styleA(aElement);
+  aElement.appendChild(pElement);
+  pElement.appendChild(pTxt);
+  pTxt.appendChild(txt); //this places the text inside of the new element
+  pElement.onmouseover=function() {hoverStyleP(pElement)};
+  pElement.onmouseout=function() {styleP(pElement)};
+  styleP(pElement);
+  txtOptDiv.appendChild(aElement); //this appends the new element to the content div
+  //aElement.href=link;
+}
+function clearDiv(txtOptDiv) {
+  while(txtOptDiv.firstChild) {
+    txtOptDiv.removeChild(txtOptDiv.firstChild);
+  }
+}
+function searchResults() {
+  array=serviceNames;
+  $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 50}px`);
+  obj = {};
+  var highestCount = -1;
+  stopOffset2 = false;
+  var cont = true;
+  var cont2 = true;
+  var cont3 = true;
+  var txtIpt = document.getElementById("search").value;
+  var txtIptL = (txtIpt.toLowerCase()).replace(/[\/\\]/g,'');
+  var txtOptDiv = document.getElementById("outputC");
+  if (txtIptL == "" || txtIptL == " ") {
+    clearServiceListing(subServiceDisplay);
+    updateServiceListing();
+  }
+  else {
+    clearServiceListing(subServiceDisplay);
+  }
+  clearDiv(txtOptDiv); //this is used to make sure that the search results are cleared after each use
+  //need to make sure that this activates even when nothing is currently in the search box
+  repositionFooter(); 
+  if (!txtIptL[1]) {
+    $("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`);
+    stopOffset2 = true;
+  }
+  for (var index=0; index<array.length; index++) {
+    temp = array[index];
+    tempL = (array[index].toLowerCase()).replace(/[\/\\]/g,' ');
+    if ((tempL == txtIptL) || (txtIptL == "acdc electronics" && tempL == "ac dc electronics")) { //eliminate all other results on a perfect match
+      //$("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`);
+      stopOffset2 = true;
+      cont2 = false;
+      //appendDiv(temp, txtOptDiv); //temp here is used to assign a link to the correct search result
+      var foundIndex;
+      for (var index17 = 0; index17 < array.length; index17++) {
+        if (array[index17] == temp) {
+          foundIndex = index17;
+          break;
+        }
+      }
+      updateServiceInListing(foundIndex);
+      break;
+    }
+  }
+  if (cont2) { //if a perfect match was not already found
+  for (var index=0; index<array.length; index++) { //this searches the entire list
+    cont=true;
+    var temp = array[index];
+    var tempL = (temp.toLowerCase()).replace(/[\/\\]/g,' ');
+    var count = 0;
+    for (var i=0; i<tempL.length; i++) { //this searches each character inside of string for each element of the array
+      for(var i2=0; i2<txtIptL.length; i2++) { //this searches each character inside of the input string separately
+        if (tempL[i] == txtIptL[i2]) {
+          cont=false;
+          count++;
+          break;
+        }
+      }
+    }
+    if (count > highestCount) {
+      highestCount = count; //this updates the highest counted number (most accurate search result)
+    }
+    //this checks to see if the first word of the career is similar to the first part of the first word that the user types in the search
+    var checkerIndx = tempL.indexOf(txtIptL);
+    if (checkerIndx != -1) {
+      //success! in this case, it found the user input lowercase string to be part of the lowercase array results
+    highestCount+=40; //a really high value so that it takes priority
+    count = highestCount;
+    }
+    obj[temp] = count; //this updates the count for each item
+  }
+  var objectLength = Object.keys("obj").length; //this returns the object's length, not needed right now
+  //this is used to make sure that the search results appear in the highest order first
+  var resultCounter = 0;
+  for (var index=highestCount; index>0; index--) {
+    for (var index2=0; index2<array.length; index2++) {
+      var temp3 = array[index2];
+      var temp4 = obj[temp3];
+      if (resultCounter == maxResults) {
+        cont3=false;
+        break;
+      }
+      if (temp4 == index) {
+        resultCounter++;
+        //appendDiv(temp3, txtOptDiv); //this takes care of updating the search results
+        var foundIndex;
+      for (var index17 = 0; index17 < array.length; index17++) {
+        if (array[index17] == temp3) {
+          foundIndex = index17;
+          break;
+        }
+      }
+      updateServiceInListing(foundIndex);
+      }
+    }
+    if (!cont3) { //same thing as cont3 == false
+      break;
+    }
+  }
+  }
+  if (txtIptL == "" || txtIptL == " ") {
+    clearServiceListing(subServiceDisplay);
+    updateServiceListing();
+    $('.footerC').css("position", "relative");
+  }
+  else {
+    $('.footerC').css("position", "relative");
+    //this is used to fix the footer positioning
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset)+$('.footerC').outerHeight();
+    if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
+    else { $('.footerC').css("position", "relative"); }
+  }
+}
+//this pulls up the course information and scrolls to the section where its dept's courses list is
+$("#outputC").on('click', ".searchResult", function() {
+  var searchResTxt = $(this).text();
+  var elem4ID = $(`.subServiceDisplay div:contains(${searchResTxt})`).attr("id");
+  var curElement = document.getElementById(`${elem4ID}`);
+  //this scrolls to the actual search result
+  window.scrollTo(0, curElement.offsetTop);
+  //this takes care of opening the information of the service automatically
+  var thisServiceID = elem4ID
+});
+$(".search-icon").on('click', function(){}, function() {
+  var txtOptDiv = document.getElementById("outputC");
+  clearDiv(txtOptDiv);
+});
+/*End of JavaScript for the search bar*/
+</script>
+
+{% endblock %}
