@@ -173,15 +173,18 @@
     align-items:flex-start;
     background-color:lightgrey;
   }
-  .subServiceDisplay div {
+  .linkItem {
     background-color:darkgrey;
     border-radius:16px;
     padding:8px;
     max-width:300px;
   }
-  .subServiceDisplay div:hover {
+  .linkItem:hover {
     cursor:pointer;
     background-color:orange;
+  }
+  .subServiceDisplay div:nth-child(4){
+    margin:6px 0px;
   }
   @media (max-width:466px){
   .search {
@@ -233,7 +236,9 @@
         <div class="card main">
           <div id="club-select">
             <div class="seviceDisplay">
-              <div class="subServiceDisplay"></div>
+              <div class="subServiceDisplay">
+                <div class="linkItem" style="display:none"></div>
+              </div>
             </div>
             </div>
         </div>
@@ -248,52 +253,7 @@
           var numOfServices;
           var serviceListing = document.querySelector(".serviceDisplay");
           var serviceNames = [];
-          function updateServiceListing() {
-            for (var index = 0; index < dataArr.length; index++) {
-              //this creates a new list item element
-              var listItem = document.createElement("div");
-              listItem.id = `item${index+1}`;
-              listItem.classList.add("linkItem");
-              listItem.link = dataArr[index].link;
-              subServiceDisplay.appendChild(listItem);
-              //Creating the name div
-              var listItemName = document.createElement("div");
-              var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
-              listItemName.appendChild(listItemNameTxt);
-              listItem.appendChild(listItemName);
-              serviceNames[index] = dataArr[index].name;
-              //Creating the creator div
-              var listItemCreator = document.createElement("div");
-              var listItemCreatorTxt = document.createTextNode(`${dataArr[index].creator}`);
-              listItemCreator.appendChild(listItemCreatorTxt);
-              listItem.appendChild(listItemCreator);
-              //Creating the date div
-              var listItemDate = document.createElement("div");
-              var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
-              listItemDate.appendChild(listItemDateTxt);
-              listItem.appendChild(listItemDate);
-              //Creating the description div
-              var listItemDescription = document.createElement("div");
-              var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
-              listItemDescription.appendChild(listItemDescriptionTxt);
-              listItem.appendChild(listItemDescription);
-              //Creating the hours div
-              var listItemHours = document.createElement("div");
-              var listItemHoursTxt = document.createTextNode(`${dataArr[index].hours}`);
-              listItemHours.appendChild(listItemHoursTxt);
-              listItem.appendChild(listItemHours);
-              //Creating the sign up link div
-              var listItemLink = document.createElement("div");
-              var listItemLinkA = document.createElement("a");
-              listItemLinkA.target = "_blank";
-              listItemLinkA.classList.add("linkItemA");
-              listItemLinkA.href = dataArr[index].link;
-              var listItemLinkATxt = document.createTextNode("Signup Link");
-              listItemLinkA.appendChild(listItemLinkATxt);
-              listItemLink.appendChild(listItemLinkA);
-              listItem.appendChild(listItemLink);
-            }
-          }
+          var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
           function updateServiceInListing(index) {
               //this creates a new list item element
               var listItem = document.createElement("div");
@@ -303,6 +263,8 @@
               subServiceDisplay.appendChild(listItem);
               //Creating the name div
               var listItemName = document.createElement("div");
+              listItemName.style.fontSize = "18px";
+              listItemName.style.fontWeight = "bold";
               var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
               listItemName.appendChild(listItemNameTxt);
               listItem.appendChild(listItemName);
@@ -312,9 +274,9 @@
               var listItemCreatorTxt = document.createTextNode(`${dataArr[index].creator}`);
               listItemCreator.appendChild(listItemCreatorTxt);
               listItem.appendChild(listItemCreator);
-              //Creating the date div
+              //Creating the date/ hours div
               var listItemDate = document.createElement("div");
-              var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+              var listItemDateTxt = document.createTextNode(`${dataArr[index].date} - ${dataArr[index].hours} hours`);
               listItemDate.appendChild(listItemDateTxt);
               listItem.appendChild(listItemDate);
               //Creating the description div
@@ -322,11 +284,6 @@
               var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
               listItemDescription.appendChild(listItemDescriptionTxt);
               listItem.appendChild(listItemDescription);
-              //Creating the hours div
-              var listItemHours = document.createElement("div");
-              var listItemHoursTxt = document.createTextNode(`${dataArr[index].hours}`);
-              listItemHours.appendChild(listItemHoursTxt);
-              listItem.appendChild(listItemHours);
               //Creating the sign up link div
               var listItemLink = document.createElement("div");
               var listItemLinkA = document.createElement("a");
@@ -337,6 +294,11 @@
               listItemLinkA.appendChild(listItemLinkATxt);
               listItemLink.appendChild(listItemLinkA);
               listItem.appendChild(listItemLink);
+          }
+          function updateServiceListing() {
+            for (var index = 0; index < dataArr.length; index++) {
+              updateServiceInListing(index);
+            }
           }
           function clearServiceListing(serviceListing) {
             while(serviceListing.firstChild) {
@@ -352,10 +314,74 @@
             if ((vh-distance)>=0) { $('.footerC').css("position", "absolute");$('.footerC').css("bottom", "0px"); } 
             else { $('.footerC').css("position", "relative"); }
           }
+          function leapYear(year) {
+            if (parseInt(year) % 4 == 0) {return true;}
+            return false;
+          }
+          function leapChange(year) { //updates the days in a month array depending on leap year status
+            if (leapYear(year)) { daysInMonths[1]=29; } 
+            else { daysInMonths[1]=28; }
+          }
+          //returns the number of days that have passed since 1/1/21
+          function dateToNum(date) {
+            var dateNum = 0;
+            var splitDate = date.split('/');
+            const today = new Date();
+            var currentYear = parseInt(today.getFullYear().toString()[2]+today.getFullYear().toString()[3]);
+            if (parseInt(splitDate[2]) >= currentYear) {
+            leapChange(splitDate[2]);
+            //this adds the days from the months that have passed
+            for (var i=0; i<parseInt(splitDate[0])-1; i++) { dateNum += daysInMonths[i]; }
+            //this adds the days from the first day of the month
+            dateNum += splitDate[1];
+            //this adds the days from the years that have passed since 2021
+            for (var i=21; i<parseInt(splitDate[2]); i++) { 
+              if (leapYear(i)) { dateNum += 366; }
+              else { dateNum += 365; }
+            }
+            }
+            return dateNum;
+          }
+          function sortArray(array) {
+            const date = new Date();
+            var today = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear().toString()[2]+date.getFullYear().toString()[3]}`;
+            var todayNum = dateToNum(today);
+            var lowestVal;
+            var sortedArray = [];
+            for (var index = 0; index < array.length; index++) {
+              lowestVal = 100000000000;
+              for (var index2 = index; index2 < array.length; index2++) {
+                var currentVal = dateToNum(array[index2].date);
+                if (currentVal < todayNum) { //this only renders upcoming service opportunities
+                  array.splice(index2,1);
+                  index2--;
+                }
+                else {
+                if (currentVal < lowestVal) {
+                  lowestVal = currentVal;
+                  var oldObj = sortedArray[index];
+                  //this places the earliest date first
+                  sortedArray[index] = array[index2];
+                  array[index2] = oldObj;
+                }
+                else if (currentVal == lowestVal) {
+                  var tempObj = sortedArray[index];
+                  //reverse the two objects if they are not alphabetically sorted when same date
+                  if (array[index2].name < tempObj.name) {
+                    sortedArray[index+1] = tempObj;
+                    sortedArray[index] = array[index2];
+                    array[index2] = tempObj;
+                  }
+                }
+              }
+              }
+            }
+            return sortedArray;
+          }
           fetch('/static/service.json', {mode:'cors'}).then(function(resp) {
             return resp.json();
           }).then(function(data) {
-            dataArr = data.service;
+            dataArr = sortArray(data.service);
             numOfServices = dataArr.length;
             updateServiceListing();
             repositionFooter();
