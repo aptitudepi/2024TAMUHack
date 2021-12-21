@@ -1,11 +1,27 @@
 {
     "service": [
         {
+            "name":"Outdated Event",
+            "creator":"Mr. Antiquated",
+            "date":"12/21/02",
+            "description":"This event has already passed so it should not appear.",
+            "hours":"0.5",
+            "link":"https://google.com"
+        },
+        {
+            "name":"Science Tutoring",
+            "creator":"Bob",
+            "date":"12/22/21",
+            "description":"Make sure to scroll to the end of the page when viewing this slide.",
+            "hours":"2",
+            "link":"https://google.com"
+        },
+        {
             "name":"Math Tutoring",
             "creator":"Bob",
-            "date":"12/20/21",
+            "date":"12/22/21",
             "description":"Make sure to scroll to the end of the page when viewing this slide.",
-            "hours":"2 hours",
+            "hours":"2",
             "link":"https://google.com"
         },
         {
@@ -13,7 +29,23 @@
             "creator":"Mr. Intelligent",
             "date":"12/29/21",
             "description":"This is forty words in segments of ten done inefficiently. This is forty words in segments of ten done inefficiently. ",
-            "hours":"2 hours",
+            "hours":"2",
+            "link":"https://drive.google.com"
+        },
+        {
+            "name":"Soldering Station Repair",
+            "creator":"Mr. Intelligent",
+            "date":"12/24/21",
+            "description":"This is forty words in segments of ten done inefficiently. This is forty words in segments of ten done inefficiently. ",
+            "hours":"12",
+            "link":"https://drive.google.com"
+        },
+        {
+            "name":"Mill Repair",
+            "creator":"Mr. Intelligent",
+            "date":"12/23/21",
+            "description":"This is forty words in segments of ten done inefficiently. This is forty words in segments of ten done inefficiently. ",
+            "hours":"4",
             "link":"https://drive.google.com"
         }
     ]
