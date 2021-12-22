@@ -6,283 +6,446 @@
 <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
 
 <style>
-      body {
-        width: 100%;
-        font-family: 'Montserrat', sans-serif;
-      }
-      html, body{
-        scroll-behavior: smooth;
-        overflow-x:hidden;
-        max-width:100%;
-      }
-      .title-text{
-        font-family: 'Asap';
-        font-weight: bold; 
-        font-size: 4vh;
-        line-height: 40px;
-      }
-      .body-text{
-        margin-top: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2vh;
-      }
-    .semi-rounded{ border-radius: 50px; }
-    .rounded { border-radius:5% !important; }
-    .rounded-circle { max-width:700px !important; }
-    .title-text { font-size:36px !important; }
-    .body-text { font-size:20px !important; }
-    .contentSpacer { height: 20vh; }
-    .mobileTxt { display:none; }
-    .pageLink {
-      color:#037dff;
-      font-weight:bold;
-      text-decoration:none;
+  body {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+  }
+  html,body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  .title-text {
+    font-family: 'Asap';
+    font-weight: bold;
+    line-height: 40px;
+  }
+  .timelineT {
+    margin-top:14px;
+  }
+  .underlineT {
+    height:2px;
+    width:200px;
+    margin-left:0px;
+  }
+  .body-text {
+    margin-top: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .semi-rounded {
+    border-radius: 50px;
+  }
+  .rounded {
+    border-radius: 5% !important;
+  }
+  .rounded-circle {
+    max-width: 700px !important;
+  }
+  .body-text {
+    font-size: 18px !important;
+  }
+  .contentSpacer {
+    height: 20vh;
+  }
+  .mobileTxt {
+    display: none;
+  }
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .pageLink:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+  .navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  .bcgMainIcon {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transform: scale(11.0);
+    filter: opacity(65%);
+  }
+  .mainTxt {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    color: black;
+  }
+  .subTimelineD {
+    display: grid;
+    grid-template-columns: 300px 10px 300px;
+    justify-content: center;
+    align-content: start;
+    width: 100%;
+  }
+  .linkItem {
+    user-select: none;
+    background-color: #eeeeee;
+    border-radius: 16px;
+    padding: 8px;
+    width: 300px;
+    margin: 6px 6px 6px 0px;
+  }
+  .rightItem {
+    background-color:#cde1fe;
+  }
+  .linkItem:hover {
+    cursor: pointer;
+    background-color:#b4d1fd;
+  }
+  .subTimelineDisplay div:nth-child(4) {
+    margin: 6px 0px;
+  }
+  @media (min-width: 992px) {
+    .navbar-expand-lg {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
     }
-    .pageLink:hover {
-      color:#004a99;
-      text-decoration:underline;
+  }
+  @media (max-width:1300px) {
+    .contentSpacer {
+      height: 10vh;
     }
-    .navbar {
-      position: relative;
-      display: flex;
-      /*flex-wrap: wrap;*/
-      align-items: center;
-      /*justify-content: space-between;*/
-      padding-top: .5rem;
-      padding-bottom: .5rem;
+  }
+  @media (max-width:991px) {
+    .contentSpacer {
+      height: 10vh;
     }
-    .bcgMainIcon {
-      position:absolute;
-      left:0px;
-      bottom:0px;
-      z-index:-1;
-      width:100%;
-      height:100%;
-      transform: scale(11.0);
-      filter: opacity(65%);
+    .mobileTxt {
+      display: block;
     }
-    .mainTxt {
-      display:grid;
-      grid-template-columns:auto;
-      align-items:center;
-      color:black;
+    .normalTxt {
+      display: none;
     }
-    @media (min-width: 992px) {
-      .navbar-expand-lg {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-      }
-    }
-    @media (max-width:1300px) {
-      .contentSpacer {
-        height: 10vh;
-      }
-    }
-    @media (max-width:991px) {
-      .contentSpacer {
-        height: 10vh;
-      }
-      .mobileTxt { display:block; }
-      .normalTxt { display:none; }
-    }
-  </style>
+  }
+</style>
 
 {% endblock %}
 
 {% block body %}
 
 {% include "components/nav.html" %}
+<div class="jumbotron" style="background-color:white">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">About Us</h1>
+          <p class="body-text">Body text.</p>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <img src="{{ url_for('static', filename='steam-life-full.svg') }}" loading="lazy" style="width:100%"
+            alt="Responsive image">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron" style="background-color:#1982c4">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text" style="color:white;">Mission Statement</h1>
+          <p class="body-text" style="color:white;">The STEAM Center App project is committed to developing an
+            application that allows students to explore and use the STEAM Center to their fullest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron" style="background-color:white">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">Phase 1 Members</h1>
+          <p class="body-text">Body text. Member bios will go below this.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron" style="background-color:#8ac926">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text" style="color:white;">Phase 2 Members</h1>
+          <p class="body-text" style="color:white;">Body text. Member bios will go below this.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron" style="background-color:white">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">Timeline</h1>
+          <p class="body-text">Body text regarding our timeline.</p>
+        </div>
+      </div>
+      <div class="timelineDisplay">
+        <h2 class="title-text timelineT">Early Stages</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+        <h2 class="title-text timelineT">Phase 1</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay2 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+        <h2 class="title-text timelineT">Phase 2</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay3 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
 
-
-<div class="container-fluid mainContainer" style="text-align:center; margin-top: 100px">
-    <div class="row justify-content-around align-items-center">
-        <div class="col-lg-4 mb-2">
-          <div class="mainTxt">
-            <div>
-              <img class="bcgMainIcon" loading="lazy" src="{{ url_for('static', filename='steam-life-icon.svg') }}" />
-          <span style="font-family: 'Asap'; font-weight: bold; font-size: 5.5vh;">
-              About Us <br>
-          </span>
-          </div>
-          </div>
-        </div>
-      <div id="carouselExampleIndicators" class="carousel slide col-lg-6" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active"><!--{{ url_for('static', filename='map3.css') }}-->
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel1.jpg') }}" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel2.jpg') }}" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel3.jpg') }}" alt="Third slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel4.jpg') }}" alt="Fourth slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel5.jpg') }}" alt="Fifth slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel7.jpg') }}" alt="Sixth slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel8.jpg') }}" alt="Seventh slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel9.jpg') }}" alt="Eighth slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
     </div>
+  </div>
 </div>
-<div class="contentSpacer"></div>
-<div class="jumbotron" style="background-color: #1982c4">
-  <div class="container-fluid my-container" style="text-align:center;">
-      <div class="row justify-content-around align-items-center">
-          <div class="col-lg-4 mb-2">
-              <div class="title-text" style="color: white">
-                Introducing the STEAM Center!
-              </div>
-              <div class="body-text" style="color: white">
-                The Allen ISD STEAM Center is a one-of-a-kind facility dedicated to science, technology, engineering, arts, and mathematics. The STEAM Center offers a foundational learning system for students of all ages, fostering interest, developing future-ready talents, and training Allen ISD students for success in STEAM related fields.
-              </div>
-          </div>
-          <div class = "col-lg-4">
-            <img src="{{ url_for('static', filename='homepage1.png') }}" class="rounded-circle" style="width:100%" alt="Responsive image">
-          </div>
+<div class="jumbotron" style="background-color:#1982c4">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text" style="color:white;">Mobile App</h1>
+          <p class="body-text" style="color:white;">Body text regarding the mobile app here.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color: transparent;">
-  <div class="container-fluid my-container" style="text-align:center;">
-      <div class="row justify-content-around align-items-center">
-            <div class="col-lg-4 mt-2 mobileTxt">
-          <div class="title-text">
-            What the STEAM Center Has to Offer
-          </div>
-          <div class="body-text">
-            The STEAM Center has purposefully designed spaces that provide an innovative learning environment both inside the building and outdoors. In addition to the 111,000 square-foot facility, the STEAM Center property includes a pond, nature trails, and outdoor learning spaces to be used by all grade levels.
-          </div>
-          </div>
-          <div class = "col-lg-4">
-            <img src="{{ url_for('static', filename='homepage2.png') }}" class="rounded-circle" style="width:100%"  alt="Responsive image">
-          </div>
-          <div class="col-lg-4 mt-2 normalTxt">
-              <div class="title-text">
-                What the STEAM Center Has to Offer
-              </div>
-              <div class="body-text">
-                The STEAM Center has purposefully designed spaces that provide an innovative learning environment both inside the building and outdoors. In addition to the 111,000 square-foot facility, the STEAM Center property includes a pond, nature trails and outdoor learning spaces to be used by all grade levels.
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<div class="jumbotron" style="background-color: #6a4c93">
+<div class="jumbotron" style="background-color:white">
   <div class="container-fluid my-container">
-      <div class="row justify-content-around align-items-center" style="text-align:center;">
-          <div class="col-lg-4 mb-2">
-              <div class="title-text" style="color: white">
-                Navigate the STEAM Center!
-              </div>
-              <div class="body-text" style="color: white">
-                This STEAM Center website includes an easy to use <a href="explore" class="pageLink" style="color: white">map</a> to help you navigate to your classes at the STEAM Center and provides accurate and detailed information about each portion of the building!
-              </div>
-          </div>
-          <div class = "col-lg-4">
-            <a href="explore" class="pageLink"><img src="{{ url_for('static', filename='homepage3.png') }}" class="rounded-circle" style="width:100%"  alt="Responsive image"></a>
-          </div>
-      </div>
-  </div>
-</div>
-<div class="jumbotron" style="background-color: transparent;">
-  <div class="container-fluid my-container">
-    <div class="row justify-content-around align-items-center" style="text-align:center;">
-      <div class = "col-lg-4 mt-2 mobileTxt">
-        <div class="title-text">
-            Learn more about STEAM Center courses
-          </div>
-          <div class="body-text">
-            Using an interactive interface, you can search through a full <a href="courses" class="pageLink">list</a> of courses offered at the STEAM Center to find the course of your dreams!
-          </div>
-      </div>
-        <div class = "col-lg-4">
-          <a href="courses" class="pageLink"><img src="{{ url_for('static', filename='homepage4.jpg') }}" class="rounded-circle" style="width:100%"  alt="Responsive image"></a>
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">Feedback</h1>
+          <p class="body-text">Body text regarding user feedback/ app testing.</p>
+          <p class="body-text"><a href="https://forms.gle/mbDhwNqLvpznhbKH8" class="pageLink" target="_blank">Feedback
+              Link</a></p>
         </div>
-        <div class = "col-lg-4 mt-2 normalTxt">
-          <div class="title-text">
-            Find more information on courses at the STEAM Center!
-            </div>
-            <div class="body-text">
-              Using an interactive interface, you can search through a full <a href="courses" class="pageLink">list</a> of courses offered at the STEAM Center to find the course of your dreams!
-            </div>
-        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color: #1982c4">
+<div class="jumbotron" style="background-color:#8ac926;margin-bottom:0px;">
   <div class="container-fluid my-container">
-    <div class="row justify-content-around align-items-center" style="text-align:center;">
-        <div class="col-lg-4 mb-2">
-            <div class="title-text" style="color: white">
-              Discover STEAM-related clubs!
-            </div>
-            <div class="body-text" style="color: white">
-              Trying to join a club but don't have enough information? Use our detailed <a href="clubs" class="pageLink" style="color: white">club listing</a> to find out more!
-            </div>
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text" style="color:white;">Join Us!</h1>
+          <p class="body-text" style="color:white;">Body text regarding joining the STEAM Center App project dev team.
+          </p>
+          <p class="body-text"><a href="https://forms.gle/3H6h9v4SVd8yGeMe9" class="pageLink"
+              target="_blank">Application Link</a></p>
+          <p class="body-text"><a href="https://forms.gle/XhnqyW43DFwjotpE7" class="pageLink" target="_blank">App Tester
+              Link</a></p>
         </div>
-        <div class = "col-lg-4">
-          <a href="clubs" class="pageLink"><img src="{{ url_for('static', filename='homepage5.jpg') }}" class="rounded-circle" style="width:100%"  alt="Responsive image"></a>
-        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color: transparent;">
-  <div class="container-fluid my-container">
-      <div class="row justify-content-around align-items-center" style="text-align:center;">
-        <div class = "col-lg-4 mt-2 mobileTxt">
-          <div class="title-text">
-              Never miss an event at the STEAM Center!
-            </div>
-            <div class="body-text">
-              With an easy to read <a href="events" class="pageLink">calendar</a> containing upcoming events from STEAM-sponsored clubs and related activities, you can keep track of opportunities to volunteer or participate in STEAM events!
-            </div>
-        </div>
-          <div class = "col-lg-4">
-            <a href="events" class="pageLink"><img src="{{ url_for('static', filename='homepage6.png') }}" class="rounded-circle" style="width:100%"  alt="Responsive image"></a>
-          </div>
-          <div class = "col-lg-4 mt-2 normalTxt">
-            <div class="title-text">
-                Never miss any more events at the STEAM Center!
-              </div>
-              <div class="body-text">
-                With an easy to read <a href="events" class="pageLink">calendar</a> containing upcoming events from STEAM-sponsored clubs and related activities, you can keep track of opportunities to volunteer or participate in STEAM events!
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
+<script>
+  var subTimelineDisplay = document.querySelector(".subTimelineDisplay");
+  var subTimelineDisplay2 = document.querySelector(".subTimelineDisplay2");
+  var subTimelineDisplay3 = document.querySelector(".subTimelineDisplay3");
+  var dataArr;
+  var scrollID = "";
+  var eventListing = document.querySelector(".timelineDisplay");
+  var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var endPoints = [];
+  function eventInTimeline(index, display, bitFlag, start, end) {
+    //this creates a new list item element
+    var listItem = document.createElement("div");
+    listItem.id = `item${index + 1}`;
+    listItem.classList.add("linkItem");
+    display.appendChild(listItem);
+    //creating the name div
+    var listItemName = document.createElement("div");
+    listItemName.style.fontSize = "18px";
+    listItemName.style.fontWeight = "bold";
+    var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+    listItemName.appendChild(listItemNameTxt);
+    listItem.appendChild(listItemName);
+    //creating the date div
+    var listItemDate = document.createElement("div");
+    var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+    listItemDate.appendChild(listItemDateTxt);
+    listItem.appendChild(listItemDate);
+    //creating the description div
+    var listItemDescription = document.createElement("div");
+    var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+    listItemDescription.appendChild(listItemDescriptionTxt);
+    listItem.appendChild(listItemDescription);
+    //creating the timeline divider
+    var divider = document.createElement("div");
+    divider.style.backgroundColor = "#737373";
+    divider.style.width = "100%;";
+    if (start) { divider.style.borderRadius = "16px 16px 0px 0px"; }
+    else if (end) { divider.style.borderRadius = "0px 0px 16px 16px"; }
+    display.appendChild(divider);
+    //creating a spacer for the correct grid layout
+    var spacer = document.createElement("div");
+    spacer.classList.add("linkItem");
+    {
+      //creating the name div
+      var listItemName = document.createElement("div");
+      listItemName.style.fontSize = "18px";
+      listItemName.style.fontWeight = "bold";
+      var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+      listItemName.appendChild(listItemNameTxt);
+      spacer.appendChild(listItemName);
+      //creating the date div
+      var listItemDate = document.createElement("div");
+      var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+      listItemDate.appendChild(listItemDateTxt);
+      spacer.appendChild(listItemDate);
+      //creating the description div
+      var listItemDescription = document.createElement("div");
+      var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+      listItemDescription.appendChild(listItemDescriptionTxt);
+      spacer.appendChild(listItemDescription);
+    }
+    display.appendChild(spacer);
+    listItem.style.gridColumn = "1 / 2";
+    divider.style.gridColumn = "2 / 3";
+    spacer.style.gridColumn = "3 / 4";
+    if (bitFlag) { spacer.style.visibility = "hidden"; }
+    else { listItem.style.visibility = "hidden";spacer.classList.add("rightItem"); }
+  }
+  function updateSubTimeline(display, startPoint, endPoint) {
+    var bitFlag = true;
+    var start;
+    var end;
+    for (var index = startPoint; index < endPoint; index++) {
+      if ( index == startPoint ) {start = true}
+      else {start=false;}
+      if ( index == (endPoint-1) ) {end=true;}
+      else {end=false;}
+      eventInTimeline(index, display, bitFlag, start, end);
+      bitFlag = !bitFlag;
+    }
+  }
+  function leapYear(year) {
+    if (parseInt(year) % 4 == 0) { return true; }
+    return false;
+  }
+  function leapChange(year) { //updates the days in a month array depending on leap year status
+    if (leapYear(year)) { daysInMonths[1] = 29; }
+    else { daysInMonths[1] = 28; }
+  }
+  //returns the number of days that have passed since 1/1/21
+  function dateToNum(date) {
+    var dateNum = 0;
+    var splitDate = date.split('/');
+    const today = new Date();
+    var currentYear = parseInt(today.getFullYear().toString()[2] + today.getFullYear().toString()[3]);
+    if (parseInt(splitDate[2]) >= currentYear) {
+      leapChange(splitDate[2]);
+      //this adds the days from the months that have passed
+      for (var i = 0; i < parseInt(splitDate[0]) - 1; i++) { dateNum += daysInMonths[i]; }
+      //this adds the days from the first day of the month
+      dateNum += parseInt(splitDate[1]);
+      //this adds the days from the years that have passed since 2021
+      for (var i = 19; i < parseInt(splitDate[2]); i++) {
+        if (leapYear(i)) { dateNum += 366; }
+        else { dateNum += 365; }
+      }
+    }
+    return dateNum;
+  }
+  function findEndPoints() {
+    const startPoint = dateToNum("11/5/20");
+    var startCount = 0;
+    const startPoint2 = dateToNum("3/15/21");
+    var startCount2 = 0;
+    const startPoint3 = dateToNum("9/9/21");
+    //don't need a counter to calculate the 3rd endpoint since this will always be dataArr.length
+    for (var index=0; index < dataArr.length; index++) {
+      var tempVal = dateToNum(dataArr[index].date);
+      if (tempVal >= startPoint && tempVal < startPoint2) {
+        startCount++;
+      }
+      else if (tempVal >= startPoint2 && tempVal < startPoint3) {
+        startCount2++;
+      }
+    }
+    endPoints[0] = startCount;
+    endPoints[1] = startCount + startCount2;
+  }
+  function updateTimeline() {
+    findEndPoints();
+    //this adds the information for the early stages sub-timeline
+    updateSubTimeline(subTimelineDisplay, 0, endPoints[0]);
+    //this adds the information for the phase 1 sub-timeline
+    updateSubTimeline(subTimelineDisplay2, endPoints[0], endPoints[1]);
+    //this adds the information for the phase 2 sub-timeline
+    updateSubTimeline(subTimelineDisplay3, endPoints[1], dataArr.length);
+  }
+  function repositionFooter() {
+    $('.footerC').css("position", "relative");
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset) + $('.footerC').outerHeight();
+    if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+    else { $('.footerC').css("position", "relative"); }
+  }
+  function sortArray(array) {
+    const date = new Date();
+    var today = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString()[2] + date.getFullYear().toString()[3]}`;
+    var todayNum = dateToNum(today);
+    var lowestVal;
+    var sortedArray = [];
+    for (var index = 0; index < array.length; index++) {
+      lowestVal = 100000000000;
+      for (var index2 = index; index2 < array.length; index2++) {
+        var currentVal = dateToNum(array[index2].date);
+        if (currentVal < lowestVal) {
+          lowestVal = currentVal;
+          var oldObj = sortedArray[index];
+          //this places the earliest date first
+          sortedArray[index] = array[index2];
+          array[index2] = oldObj;
+        }
+        else if (currentVal == lowestVal) {
+          var tempObj = sortedArray[index];
+          //reverse the two objects if they are not alphabetically sorted when same date
+          if (array[index2].name < tempObj.name) {
+            sortedArray[index + 1] = tempObj;
+            sortedArray[index] = array[index2];
+            array[index2] = tempObj;
+          }
+        }
+      }
+    }
+    return sortedArray;
+  }
+  fetch('/static/timeline.json', { mode: 'cors' }).then(function (resp) {
+    return resp.json();
+  }).then(function (data) {
+    dataArr = sortArray(data.timeline);
+    updateTimeline();
+    repositionFooter();
+  });
+</script>
 {% include "components/footer.html" %}
 
 {% endblock %}
-
