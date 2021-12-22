@@ -171,20 +171,55 @@
     flex-wrap:wrap;
     justify-content:space-around;
     align-items:flex-start;
-    background-color:lightgrey;
   }
   .linkItem {
-    background-color:darkgrey;
+    user-select:none;
+    background-color:#eeeeee;
     border-radius:16px;
     padding:8px;
-    max-width:300px;
+    width:300px;
+    margin:6px;
   }
   .linkItem:hover {
     cursor:pointer;
-    background-color:orange;
+    background-color:#cde1fe;
   }
   .subServiceDisplay div:nth-child(4){
     margin:6px 0px;
+  }
+  .colorGrid {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    width:100%;
+  }
+  .colorC {
+    display:grid;
+    grid-template-columns:26px auto;
+    align-content:center;
+    margin:0px 6px;
+  }
+  .bubble {
+    border-radius:20px;
+    width:20px;
+    height:20px;
+    background-color:#669999;
+  }
+  .pageBtns {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+  }
+  .pageBtn {
+    font-size:18px;
+    width:170px;
+  }
+  .pageBtn:active {
+    background-color:#0d6efd !important;
+    color:white !important;
   }
   @media (max-width:466px){
   .search {
@@ -222,11 +257,19 @@
         <hr style="height:2px;">
         <div style="height:18px;"></div>
         <p>There are currently <span class="serviceCount"></span> STEAM-related service opportunities offered at the STEAM Center and the clubs that inhabit it. Please use the search bar below or scroll/ click on the service hour opportunities for more information.</p>
+        <div class="colorGrid">
+          <div class="colorC"><div class="bubble" style="background-color:#8ac926;"></div><div class="colorName">Science</div></div>
+          <div class="colorC"><div class="bubble" style="background-color:#1982c4;"></div><div class="colorName">Technology</div></div>
+          <div class="colorC"><div class="bubble" style="background-color:#b4a7d6;"></div><div class="colorName">Engineering</div></div>
+          <div class="colorC"><div class="bubble" style="background-color:#f6b26b;"></div><div class="colorName">Arts</div></div>
+          <div class="colorC"><div class="bubble" style="background-color:#e06666;"></div><div class="colorName">Mathematics</div></div>
+          <div class="colorC"><div class="bubble"></div><div class="colorName">Other</div></div>
+        </div>
         <br>
         <div class="d-flex searchC">
           <div class="search"> 
             <input type="text" id="search" class="search-input" placeholder="Search for opportunities..." onkeyup="searchResults()"> 
-            <a class="search-icon" style="text-decoration:none;"> <i class="fa fa-search"></i> </a> 
+            <a class="search-icon" style="text-decoration:none;color:white;"> <i class="fa fa-search"></i> </a> 
             <div id="outputC">
             </div>
           </div>
@@ -239,6 +282,10 @@
               <div class="subServiceDisplay">
                 <div class="linkItem" style="display:none"></div>
               </div>
+            </div>
+            <div class="pageBtns">
+              <div><button type="button" class="btn btn-outline-primary pageBtn previousBtn">Previous</button></div>
+              <div><button type="button" class="btn btn-outline-primary pageBtn nextBtn">Next</button></div>
             </div>
             </div>
         </div>
@@ -254,6 +301,7 @@
           var serviceListing = document.querySelector(".serviceDisplay");
           var serviceNames = [];
           var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+          var page = 0;
           function updateServiceInListing(index) {
               //this creates a new list item element
               var listItem = document.createElement("div");
@@ -261,14 +309,47 @@
               listItem.classList.add("linkItem");
               listItem.link = dataArr[index].link;
               subServiceDisplay.appendChild(listItem);
-              //Creating the name div
+              //Creating the title div
+              var listItemTitle = document.createElement("div");
+              listItemTitle.style.display="grid";
+              listItemTitle.style.gridTemplateColumns="265px 20px";
+              listItem.appendChild(listItemTitle);
+              serviceNames[index] = dataArr[index].name;
+                //creating the name div
               var listItemName = document.createElement("div");
               listItemName.style.fontSize = "18px";
               listItemName.style.fontWeight = "bold";
               var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
               listItemName.appendChild(listItemNameTxt);
-              listItem.appendChild(listItemName);
-              serviceNames[index] = dataArr[index].name;
+              listItemTitle.appendChild(listItemName);
+                //creating the type bubble div
+              var listItemType = document.createElement("div");
+              var typeColor = "";
+              switch (dataArr[index].type) {
+                case "S":
+                  typeColor="#8ac926";
+                  break;
+                case "T":
+                  typeColor="#1982c4";
+                  break;
+                case "E":
+                  typeColor="#b4a7d6";
+                  break;
+                case "A":
+                  typeColor="#f6b26b";
+                  break;
+                case "M":
+                  typeColor="#e06666";
+                  break;
+                default: 
+                  typeColor="#669999";
+                  break;
+              }
+              listItemType.style.backgroundColor = typeColor;
+              listItemType.style.borderRadius = "20px";
+              listItemType.style.height = "20px";
+              listItemType.style.width = "20px";
+              listItemTitle.appendChild(listItemType);
               //Creating the creator div
               var listItemCreator = document.createElement("div");
               var listItemCreatorTxt = document.createTextNode(`${dataArr[index].creator}`);
@@ -296,7 +377,9 @@
               listItem.appendChild(listItemLink);
           }
           function updateServiceListing() {
-            for (var index = 0; index < dataArr.length; index++) {
+            var endPoint = (page+1)*6;
+            if (endPoint > dataArr.length) { endPoint = dataArr.length; }
+            for (var index = (page*6); index < endPoint; index++) {
               updateServiceInListing(index);
             }
           }
@@ -333,7 +416,7 @@
             //this adds the days from the months that have passed
             for (var i=0; i<parseInt(splitDate[0])-1; i++) { dateNum += daysInMonths[i]; }
             //this adds the days from the first day of the month
-            dateNum += splitDate[1];
+            dateNum += parseInt(splitDate[1]);
             //this adds the days from the years that have passed since 2021
             for (var i=21; i<parseInt(splitDate[2]); i++) { 
               if (leapYear(i)) { dateNum += 366; }
@@ -390,6 +473,16 @@
           $(".subServiceDisplay").on('click', '.linkItem', function() {
             var thisServiceLink = this.link;
             window.open(thisServiceLink, "_blank");
+          });
+          $(".previousBtn").on('click', function() {
+            if (page != 0) { page -=1; }
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
+          });
+          $(".nextBtn").on('click', function() {
+            if ((page+1)*6 < dataArr.length) { page +=1; }
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
           });
           /*start of JavaScript for the search bar*/
 var array = [];
