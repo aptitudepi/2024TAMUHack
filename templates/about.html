@@ -22,6 +22,7 @@
   }
   .timelineT {
     margin-top:14px;
+    font-family: 'Montserrat', sans-serif;
   }
   .underlineT {
     height:2px;
@@ -107,6 +108,68 @@
   .subTimelineDisplay div:nth-child(4) {
     margin: 6px 0px;
   }
+  .biosC {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    width:100%;
+    justify-content:space-around;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .bioC {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width:260px;
+    margin:14px;
+  }
+  .bioTitle {
+    background-color:#1778b5;
+    color:white;
+  }
+  .bioTitle h3 {
+    padding:2px 8px;
+    margin:0;
+  }
+  .bioTitle h5 {
+    padding:2px 8px;
+    margin:0;
+  }
+  .picChange {
+    width:100%;
+    position:relative;
+    overflow:hidden;
+  }
+  .coverImg {
+    width:100%;
+    margin-right:auto;
+    margin-left:auto;
+  }
+  .bioTxt {
+    position:absolute;
+    top:0;
+    opacity:0;
+    background-color:#1d96e2;
+    color:white;
+    text-align:justify;
+    padding:14px;
+    height:278px;
+    font-family: 'Montserrat', sans-serif;
+    transition:opacity 1s ease 0.25s;
+  }
+  .bioTxt:hover {
+    cursor:pointer;
+    opacity:1;
+  }
+  .underlineB {
+    height:2px;
+    width:210px;
+    margin:0px 0px 0px 4px;
+  }
+  .phase2 {
+    background-color:#73e600;
+  }
+  .phase2Dark {
+    background-color:#59b300;
+  }
   @media (min-width: 992px) {
     .navbar-expand-lg {
       flex-wrap: nowrap;
@@ -174,6 +237,52 @@
           <p class="body-text">Body text. Member bios will go below this.</p>
         </div>
       </div>
+      <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -184,6 +293,52 @@
         <div class="col-lg-4 col-md-8">
           <h1 class="title-text" style="color:white;">Phase 2 Members</h1>
           <p class="body-text" style="color:white;">Body text. Member bios will go below this.</p>
+        </div>
+      </div>
+      <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Hello! My name is first last and I was in Department...</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>First Last</h3>
+            <hr class="underlineB">
+            <h5>Department</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Hello! My name is first last and I was in Department...</div>
+          </div>
         </div>
       </div>
     </div>
@@ -263,6 +418,7 @@
   </div>
 </div>
 <script>
+  var pageWidth = $(document).width();
   var subTimelineDisplay = document.querySelector(".subTimelineDisplay");
   var subTimelineDisplay2 = document.querySelector(".subTimelineDisplay2");
   var subTimelineDisplay3 = document.querySelector(".subTimelineDisplay3");
@@ -327,8 +483,16 @@
     listItem.style.gridColumn = "1 / 2";
     divider.style.gridColumn = "2 / 3";
     spacer.style.gridColumn = "3 / 4";
-    if (bitFlag) { spacer.style.visibility = "hidden"; }
-    else { listItem.style.visibility = "hidden";spacer.classList.add("rightItem"); }
+    if (pageWidth < 650) { //for small screens
+      spacer.remove();
+      $(".subTimelineD").css("grid-template-columns", "auto 10px");
+      $(".subTimelineD").css("justify-content", "end");
+      listItem.style.width="100%";
+    }
+    else { //for normal conditions
+      if (bitFlag) { spacer.style.visibility = "hidden"; }
+      else { listItem.style.visibility = "hidden";spacer.classList.add("rightItem"); }
+    }
   }
   function updateSubTimeline(display, startPoint, endPoint) {
     var bitFlag = true;
@@ -438,12 +602,19 @@
     }
     return sortedArray;
   }
+  function fixBioStyling() {
+    /*var coverImg = document.querySelector('.coverImg');
+    var bioTxt = document.querySelector('.bioTxt');
+    var currentIHeight = coverImg.offsetHeight;
+    bioTxt.style.height = `${currentIHeight}px`;*/
+  }
   fetch('/static/timeline.json', { mode: 'cors' }).then(function (resp) {
     return resp.json();
   }).then(function (data) {
     dataArr = sortArray(data.timeline);
     updateTimeline();
     repositionFooter();
+    fixBioStyling();
   });
 </script>
 {% include "components/footer.html" %}
