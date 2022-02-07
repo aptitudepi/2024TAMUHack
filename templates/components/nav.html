@@ -1,17 +1,20 @@
 <!--Navbar-->
   <div class="navbar navbar-expand-lg navbar-dark" style="font-weight:500; background-color: #0d6efd;">
     <div class="container">
-      <a class="navbar-brand" href="/"><img style="width:50px;height:50px;filter:brightness(10000%);" src="{{ url_for('static', filename='STEAM-icon-04.svg') }}">STEAM Life</a><!-- TODO insert logo here-->
+      <a class="navbar-brand" href="/"><img style="width:50px;height:50px;filter:brightness(10000%);" src="{{ url_for('static', filename='STEAM-icon-04.svg') }}">STEAM Center</a><!-- TODO insert logo here-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
       <div class="collapse navbar-collapse" id="navCollapse">
         <ul class="navbar-nav" style="margin-right: auto;">
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="/explore">Explore</a></li>
           <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-          <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
           <li class="nav-item"><a class="nav-link" href="/clubs">Clubs</a></li>
+          <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="/service">Service</a></li>
           <li class="nav-item"><a class="nav-link" href="https://forms.gle/gd7vYT3f4PCQ2vCa6" rel="noreferrer noopener" target="_blank">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
         </ul>
         <ul class="navbar-nav searchNav">
           <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
