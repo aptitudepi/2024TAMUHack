@@ -215,12 +215,19 @@
   }
   .pageBtn {
     font-size:18px;
-    width:170px;
+  }
+  .paginationC {
+    margin-top:34px;
   }
   .pageBtn:active {
     background-color:#0d6efd !important;
     color:white !important;
   }
+  @media (max-width:768px){
+  .paginationC {
+    display:none;
+  }
+}
   @media (max-width:466px){
   .search {
     min-width:350px;
@@ -240,6 +247,13 @@
   /*end of CSS for search bar*/
   .footerC {
     font-weight:normal;
+  }
+  .pageLink {
+    color: #037dff;
+    text-decoration: none;
+  }
+  .pageLink:hover {
+    cursor:pointer;
   }
   </style>
 
@@ -285,6 +299,15 @@
             </div>
             <div class="pageBtns">
               <div><button type="button" class="btn btn-outline-primary pageBtn previousBtn">Previous</button></div>
+              <div><nav>
+                <ul class="pagination paginationC">
+                  <li class="page-item pageBtn pageLink" id="page1"><a class="page-link">1</a></li>
+                  <li class="page-item pageBtn pageLink" id="page2"><a class="page-link">2</a></li>
+                  <li class="page-item pageBtn pageLink" id="page3"><a class="page-link">3</a></li>
+                  <li class="page-item pageBtn pageLink" id="page4"><a class="page-link">4</a></li>
+                  <li class="page-item pageBtn pageLink" id="page5"><a class="page-link">5</a></li>
+                </ul>
+              </div></nav>
               <div><button type="button" class="btn btn-outline-primary pageBtn nextBtn">Next</button></div>
             </div>
             </div>
@@ -302,6 +325,7 @@
           var serviceNames = [];
           var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
           var page = 0;
+          var numOfPages = 0;
           function updateServiceInListing(index) {
               //this creates a new list item element
               var listItem = document.createElement("div");
@@ -469,18 +493,41 @@
             updateServiceListing();
             repositionFooter();
             $(".serviceCount").text(`${numOfServices}`);
+            numOfPages = Math.ceil(dataArr.length / 6);
+            for (var counter = 5 - numOfPages; counter > 0; counter--) {
+              $(".pagination li:last-child").remove();
+            }
+            $(".pagination li:first-child").addClass("active");
+            $(".previousBtn").addClass("disabled");
           });
           $(".subServiceDisplay").on('click', '.linkItem', function() {
             var thisServiceLink = this.link;
             window.open(thisServiceLink, "_blank");
           });
           $(".previousBtn").on('click', function() {
-            if (page != 0) { page -=1; }
-            clearServiceListing(subServiceDisplay);
-            updateServiceListing();
+            if (page != 0) { 
+              page -=1;
+              $(".previousBtn").removeClass("disabled");
+              $(".nextBtn").removeClass("disabled");
+              clearServiceListing(subServiceDisplay);
+              updateServiceListing();
+            }
+            if (page == 0) { $(".previousBtn").addClass("disabled"); }
           });
           $(".nextBtn").on('click', function() {
-            if ((page+1)*6 < dataArr.length) { page +=1; }
+            if ((page+1)*6 < dataArr.length) { 
+              page +=1;
+              $(".nextBtn").removeClass("disabled");
+              $(".previousBtn").removeClass("disabled");
+              clearServiceListing(subServiceDisplay);
+              updateServiceListing();
+            }
+            if (page + 1 == numOfPages) { $(".nextBtn").addClass("disabled"); }
+          });
+          $(".pagination li").on('click', function() {
+            page = parseInt($(this).attr("id")[4]) - 1;
+            $(".pagination li").removeClass("active");
+            $(this).addClass("active");
             clearServiceListing(subServiceDisplay);
             updateServiceListing();
           });
