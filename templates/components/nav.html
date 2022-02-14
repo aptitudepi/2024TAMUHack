@@ -7,14 +7,38 @@
     </button>
       <div class="collapse navbar-collapse" id="navCollapse">
         <ul class="navbar-nav" style="margin-right: auto;">
-          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="/explore">Explore</a></li>
-          <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-          <li class="nav-item"><a class="nav-link" href="/clubs">Clubs</a></li>
-          <li class="nav-item"><a class="nav-link" href="/events">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="/service">Service</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://forms.gle/gd7vYT3f4PCQ2vCa6" rel="noreferrer noopener" target="_blank">Feedback</a></li>
-          <li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
+          <div class="dropdown">
+            <!--<a class="nav-link" href="/about"> -->
+            <button type="button" class="btn btn-primary" data-toggle="dropdown"> About
+            </button>
+            <!--</a>-->
+          </div>
+          
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Explore
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/explore">Map</a>
+              <a class="dropdown-item" href="/courses">Courses</a>
+              <a class="dropdown-item" href="/clubs">Clubs</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Services
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/events">Events</a>
+              <a class="dropdown-item" href="/services">Service</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Help
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://forms.gle/gd7vYT3f4PCQ2vCa6">Feedback</a>
+              <a class="dropdown-item" href="/help">FAQ</a>
+            </div>
+          </div>
         </ul>
         <ul class="navbar-nav searchNav">
           <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
