@@ -8,10 +8,8 @@
       <div class="collapse navbar-collapse" id="navCollapse">
         <ul class="navbar-nav" style="margin-right: auto;">
           <div class="dropdown">
-            <!--<a class="nav-link" href="/about"> -->
-            <button type="button" class="btn btn-primary" data-toggle="dropdown"> About
+            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="aboutBtn"> About
             </button>
-            <!--</a>-->
           </div>
           
           <div class="dropdown">
@@ -41,8 +39,10 @@
           </div>
         </ul>
         <ul class="navbar-nav searchNav">
-          <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
-          <!-- TODO replace "Search" text with icon later -->
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="logInBtn"> Log In
+            </button>
+          </div>
         </ul>
       </div>
   </div>
