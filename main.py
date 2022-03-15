@@ -149,6 +149,14 @@ def route_help():
 def route_events():
   return render_template("events.html")
 
+@app.route("/gallery")
+def route_gallery():
+  return render_template("gallery.html")
+
+@app.route("/archive")
+def route_archive():
+  return render_template("archive.html")
+
 @app.route("/events/json")
 def route_events_data():
   events = list()
