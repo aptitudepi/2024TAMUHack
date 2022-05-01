@@ -1,50 +1,58 @@
 <!--Navbar-->
   <div class="navbar navbar-expand-lg navbar-dark" style="font-weight:500; background-color: #0d6efd;">
     <div class="container">
-      <a class="navbar-brand" href="/"><img style="width:50px;height:50px;filter:brightness(10000%);" src="{{ url_for('static', filename='STEAM-icon-04.svg') }}">STEAM Center</a><!-- TODO insert logo here-->
+      <a class="navbar-brand" href="/"><img style="width:50px;height:50px;filter:brightness(10000%);" src="{{ url_for('static', filename='STEAM-icon-04.svg') }}" alt="Home page">STEAM Center</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
       <div class="collapse navbar-collapse" id="navCollapse">
         <ul class="navbar-nav" style="margin-right: auto;">
           <div class="dropdown">
-            <button type="button" class="btn btn-primary" id="aboutBtn"> About
+            <button type="button" class="btn btn-primary" id="aboutBtn" alt="About page"> About
             </button>
           </div>
           
           <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Explore
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" alt="Explore dropdown"> Explore
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/explore">Map</a>
-              <a class="dropdown-item" href="/courses">Courses</a>
-              <a class="dropdown-item" href="/clubs">Clubs</a>
+              <a class="dropdown-item" href="/explore" alt="Map page">Map</a>
+              <a class="dropdown-item" href="/courses" alt="Courses page">Courses</a>
+              <a class="dropdown-item" href="/clubs" alt="Clubs page">Clubs</a>
             </div>
           </div>
           <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Services
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/events">Events</a>
-              <a class="dropdown-item" href="/services">Service</a>
+              <a class="dropdown-item" href="/events" alt="Events page">Events</a>
+              <a class="dropdown-item" href="/service" alt="Service page">Service</a>
             </div>
           </div>
           <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Gallery
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" alt="Gallery dropdown"> Gallery
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/gallery"> Gallery </a>
-              <a class="dropdown-item" href="/archive">Archive</a>
+              <a class="dropdown-item" href="/gallery" alt="Gallery page"> Gallery </a>
+              <a class="dropdown-item" href="/archive" alt="Archive page">Archive</a>
             </div>
           </div>
           <div class="dropdown">
-            <button type="button" class="btn btn-primary" id="faqBtn"> FAQ
+            <button type="button" class="btn btn-primary" id="faqBtn" alt="FAQ page"> FAQ
             </button>
+          </div>
+        </ul>
+        <ul class="navbar-nav contrastNav">
+          <div class="dropdown contrastC">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input contrastCheckbox" id="customSwitch1" alt="High contrast button">
+              <label class="custom-control-label" for="customSwitch1" style="color:white;">High Contrast</label>
+            </div>
           </div>
         </ul>
         <ul class="navbar-nav searchNav">
           <div class="dropdown">
-            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="logInBtn"> Log In
+            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="logInBtn" alt="Log in page"> Log In
             </button>
           </div>
         </ul>

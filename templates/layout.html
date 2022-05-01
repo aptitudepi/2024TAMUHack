@@ -22,10 +22,23 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
-
 .btn-primary {
   background:transparent;
   border:none;
+}
+.contrastC {
+  user-select:none;
+}
+.contrastCheckbox:checked + .custom-control-label::before {
+  background-color:darkgrey;
+}
+.contrastCheckbox:checked + .custom-control-label::after {
+  background-color:white;
+}
+@media (max-width:991px){
+  .contrastC {
+    margin-left:8px;
+  }
 }
 </style>
 
@@ -36,6 +49,7 @@ body {
 {% block body %}{% endblock %}
 </body>
 <script>
+  var checked = false;
   $("#aboutBtn").on("click", function() {
     window.location.href="/about";
   });
@@ -45,5 +59,15 @@ body {
   $("#logInBtn").on("click", function() {
     window.location.href="/login";
   });
+  $(".contrastCheckbox").on("click", function() {
+    checked = !checked;
+    if (checked) {
+      //enable high-contrast UI
+    }
+    else {
+      //disable high-contrast UI
+    }
+  });
+  
 </script>
 </html>

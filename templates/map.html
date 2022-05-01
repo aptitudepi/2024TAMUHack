@@ -29,14 +29,14 @@
     <div class="zoomImgC">
     	<img loading="lazy" class="zoomImg" src="" alt="map picture">
     </div>
-    <div class="close">X</div>
+    <div class="close" alt="Close legend button">X</div>
     <!--This is for the normal map images-->
     <div class="imgC" id="imgC">
     <div class="imgC3">
-      <img id="zoomIn" loading="lazy" src="{{ url_for('static', filename='zoomInFixed.png') }}" />
+      <img id="zoomIn" loading="lazy" src="{{ url_for('static', filename='zoomInFixed.png') }}" alt="Zoom in button"/>
     </div>
     <div class="imgC4">
-      <img id="zoomOut" loading="lazy" src="{{ url_for('static', filename='zoomOutFixed.png') }}" />
+      <img id="zoomOut" loading="lazy" src="{{ url_for('static', filename='zoomOutFixed.png') }}" alt="Zoom out button"/>
     </div>
     <div class="legendC">
       <div class="topBar"><div class="topText">LEGEND</div><div class="closeInfo">X</div></div>
@@ -50,10 +50,10 @@
       </ul>
     </div>
     <div class="imgC6">
-      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" />
+      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" alt="Expand legend button"/>
     </div>
     <div class="imgC6Mobile">
-      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" />
+      <img id="moreInfo" loading="lazy" src="{{ url_for('static', filename='more.png') }}" alt="Expand legend button"/>
     </div>
     <!--Note- imgC7 is just a container in this instance, doesn't do anything special-->
     <div class="imgC7">
@@ -84,8 +84,8 @@
     
   <nav aria-label="..." style="margin-top:9px;" id="floorNav">
   <ul class="pagination justify-content-center">
-    <li class="page-item active nav1C"><a class="page-link nav1">Floor 1</a></li>
-    <li class="page-item nav2C"><a class="page-link nav2">Floor 2</a></li>
+    <li class="page-item active nav1C" alt="floor1Button"><a class="page-link nav1">Floor 1</a></li>
+    <li class="page-item nav2C" alt="floor2Button"><a class="page-link nav2">Floor 2</a></li>
   </ul>
   </nav>
   </div>
@@ -94,7 +94,7 @@
   <div class="card main">
     <div class="d-flex searchC">
       <div class="search"> 
-        <input type="text" id="search" class="search-input" placeholder="Search for a teacher's name..." onkeyup="searchResults()"> 
+        <input type="text" id="search" class="search-input" placeholder="Search for a teacher's name..." onkeyup="searchResults()" alt="Search for a teacher's name"> 
         <a class="search-icon" style="text-decoration:none;"> <i class="fa fa-search"></i> </a> 
         <div id="outputC">
         </div>
@@ -108,9 +108,9 @@
         <ul class="subClubDisplay"></ul>
       </div>
       </div>
-    <!--Club display-->
+    <!--Teacher body-->
     <div class="card-body body" id="club-body" style="display:none;user-select:text;">
-      <div class="alert alert-secondary" id="club-notice"></div>
+      <div class="alert alert-secondary" id="club-notice" alt="STEAM Center logo"></div>
       <a id="returnToList">Go Back</a>
       <h4 id="course-name">Course Name</h4>
       <p><span id="course-teacher">Teacher Name</span></p>
@@ -122,7 +122,7 @@
         <strong>Clubs/ Organizations: </strong><span id="course-clubs"></span>
       </p>
     </div>
-    <!--End of club-body-->
+    <!--End of teacher-body-->
   </div>
   </div>
   </div> <!--End of bodyContent div-->

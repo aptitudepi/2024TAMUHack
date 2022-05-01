@@ -71,6 +71,33 @@
             "hours":"1",
             "type":"O",
             "link":"https://drive.google.com"
+        },
+        {
+            "name":"Earth Fest",
+            "creator":"Mrs. Hollis",
+            "date":"6/23/22",
+            "description":"Set up tables and make sure that all booths have what they need at Earth Fest, an event to commemorate Earth Day.",
+            "hours":"4",
+            "type":"S",
+            "link":"https://drive.google.com"
+        },
+        {
+            "name":"Fall Fest",
+            "creator":"Mrs. Hollis",
+            "date":"6/31/22",
+            "description":"Set up tables and make sure that all booths have what they need at Fall Fest, an event to commemorate Fall.",
+            "hours":"4",
+            "type":"S",
+            "link":"https://drive.google.com"
+        },
+        {
+            "name":"FRC Texas Cup",
+            "creator":"FIRST in Texas",
+            "date":"7/22/22",
+            "description":"Support local FRC robotics teams in Texas by volunteering at the Texas Cup competition! Use the link below to sign up.",
+            "hours":"6",
+            "type":"T",
+            "link":"https://drive.google.com"
         }
     ]
 }
