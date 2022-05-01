@@ -11,14 +11,54 @@
             "description":"The first application form to develop an app for the STEAM Center was sent out to STEAM Ambassadors and Computer Science club."
         },
         {
+            "name":"First General Meeting",
+            "date":"3/13/21",
+            "description":"The first meeting was held through Zoom, all selected applicants meeting for the first time and laying the foundation for the STEAM Center App — then unnamed."
+        },
+        {
             "name":"Begin Phase 1",
             "date":"3/15/21",
             "description":"Phase 1 of the STEAM Center App project began with our first meeting via Zoom."
         },
         {
+            "name":"Website Design",
+            "date":"3/21/21",
+            "description":"The process of designing and branding the STEAM Center App website started."
+        },
+        {
+            "name":"End of Phase 1",
+            "date":"5/1/21",
+            "description":"The last meeting, via Zoom, of the school year hammering out all the details in preparation of Phase 2 next year."
+        },
+        {
+            "name":"Presentation",
+            "date":"4/20/21",
+            "description":"We held a presentation with Mr. Labue, the principal of the STEAM Center, and some administration members, introducing Phase 1 of our project."
+        },
+        {
+            "name":"Site Going Live",
+            "date":"5/9/21",
+            "description":"The STEAM Life Website went live!"
+        },
+        {
             "name":"Begin Phase 2",
             "date":"9/9/21",
             "description":"Phase 2 began with our first meeting in the STEAM Center MPR."
+        },
+        {
+            "name":"STEAM Center Fall Festival",
+            "date":"10/30/21",
+            "description":"The STEAM Life team hosted a booth at the Fall Festival."
+        },
+        {
+            "name":"Logos",
+            "date":"11/1/21",
+            "description":"Official logos for STEAM Life were approved and decided upon."
+        },
+        {
+            "name":"Meeting With Admin",
+            "date":"12/6/21",
+            "description":"Another presentation was held about the viability of a STEAM Life App and our progress thus far."
         }
     ]
 }

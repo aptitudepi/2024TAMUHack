@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% endblock %} - STEAM Site</title>
+<title>{% block title %}{% endblock %} - STEAM Life</title>
+<link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/x-icon">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,16 +22,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
-.navbar-toggler {
-  background-image:url("cog.svg");
-  background-repeat:no-repeat;
-  background-position:center;
-  filter: brightness(1000%);
-  transition: transform 1.5s;
-}
-.navbar-toggler-icon {
-  visibility:hidden;
-}
 
 .btn-primary {
   background:transparent;
@@ -45,14 +36,11 @@ body {
 {% block body %}{% endblock %}
 </body>
 <script>
-  var degree = 90;
-  $(".navbar-toggler").on("click", function() {
-    $(".navbar-toggler").css("transform", `rotate(${degree}deg)`);
-    if (degree==90) {degree=0;}
-    else {degree=90;}
-  });
   $("#aboutBtn").on("click", function() {
     window.location.href="/about";
+  });
+  $("#faqBtn").on("click", function() {
+    window.location.href="/help";
   });
   $("#logInBtn").on("click", function() {
     window.location.href="/login";
