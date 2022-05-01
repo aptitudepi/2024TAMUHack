@@ -50,6 +50,156 @@ body {
 </body>
 <script>
   var checked = false;
+  function highContrast() {
+    //this returns the current page starting at index 0
+    var currentPage = parseInt($("section").first().attr("id").split("page").pop());
+    //non-page-specific styling
+    if (checked) {
+      $(".dropdown button").css("background-color", "#242424");
+      $(".navbar").css("background-color", "#242424");
+      $("img").css("filter", "grayscale(100%)");
+      $(".navbar-brand img").css("filter", "brightness(10000%)");
+      $(".dropdown button").hover(function() {
+        $(this).css("background-color", "#4B4B4B");
+      },
+      function () {
+          $(this).css("background-color", "#242424");
+        });
+      try {
+        $(".pageLink").css("color", "#4B4B4B");
+        $(".pageLink").hover(function () {
+          $(this).css("color", "black");
+        },
+          function () {
+            $(this).css("color", "#4B4B4B");
+          });
+      } catch (error) { }
+    }
+    else {
+      $(".dropdown button").css("background-color", "#0d6efd");
+      $(".navbar").css("background-color", "#0d6efd");
+      $("img").css("filter", "none");
+      $(".navbar-brand img").css("filter", "brightness(10000%)");
+      $(".dropdown button").hover(function() {
+        $(this).css("background-color", "#0067d6");
+      },
+      function() {
+        $(this).css("background-color", "#0d6efd");
+      });
+      try {
+        $(".pageLink").css("color", "#037dff");
+        $(".pageLink").hover(function () {
+          $(this).css("color", "#004a99");
+        },
+          function () {
+            $(this).css("color", "#037dff");
+          });
+      } catch (error) { }
+    }
+    //page-specific styling
+    switch (currentPage) {
+      case 1:
+        if (checked) {
+          $(".hc1").css("background-color", "#8B8B8B");
+          $(".hc2").css("background-color", "#6B6A6A");
+        }
+        else {
+          $(".bcgMainIcon").css("filter", "opacity(65%)");
+          $(".hc1").css("background-color", "#1982c4");
+          $(".hc2").css("background-color", "#6a4c93");
+        }
+      case 2:
+        if (checked) {
+          $(".hc1").css("background-color", "#8B8B8B");
+          $(".hc2").css("background-color", "#6B6A6A");
+          $(".bioTitle").css("background-color", "#828282");
+          $(".phase2Dark").css("background-color", "#828282");
+          $(".bioTxt").css("background-color", "#ADADAD");
+          $(".phase2").css("background-color", "#ADADAD");
+          $(".linkItem").css("background-color", "#eeeeee");
+        }
+        else {
+          $(".hc1").css("background-color", "#1982c4");
+          $(".hc2").css("background-color", "#8ac926");
+          $(".bioTitle").css("background-color", "#1778b5");
+          $(".phase2Dark").css("background-color", "#59b300");
+          $(".bioTxt").css("background-color", "#1d96e2");
+          $(".phase2").css("background-color", "#73e600");
+          $(".linkItem").css("background-color", "#eeeeee");
+          $(".rightItem").css("background-color", "#cde1fe");
+          $(".linkItem").hover(function () {
+            $(this).css("background-color", "#b4d1fd");
+          },
+            function () {
+              $(this).css("background-color", "#eeeeee");
+              if ($(this).hasClass("rightItem")) { $(this).css("background-color", "#cde1fe"); }
+            });
+        }
+      case 3:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 4:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 5:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 6:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 7:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 8:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 9:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 10:
+        if (checked) {
+
+        }
+        else {
+
+        }
+      case 11:
+        if (checked) {
+
+        }
+        else {
+
+        }
+    }
+  }
   $("#aboutBtn").on("click", function() {
     window.location.href="/about";
   });
@@ -61,12 +211,8 @@ body {
   });
   $(".contrastCheckbox").on("click", function() {
     checked = !checked;
-    if (checked) {
-      //enable high-contrast UI
-    }
-    else {
-      //disable high-contrast UI
-    }
+    //change page styling every time the toggle is pressed
+    highContrast();
   });
   
 </script>
