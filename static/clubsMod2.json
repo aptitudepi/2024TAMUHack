@@ -5,7 +5,7 @@
         "name": "A-Crew",
         "type": 7,
         "dept": "other",
-        "description": "A-Crew is the combined groups, the Screamin’ Eagles (SE) and the Eagle Bell Guard (BG), with the sole purpose to create and promote school spirit, encourage quality performance and high academic standards.  This is, not limited to development of spirit, leadership, cooperation, self-discipline, and sportsmanship in each individual member, through the student body and their community through support in the promotion of athletic events and activities which will inspire the athletes to perform to the best of their ability.",
+        "description": "A-Crew is the combined groups, the Screamin' Eagles (SE) and the Eagle Bell Guard (BG), with the sole purpose to create and promote school spirit, encourage quality performance and high academic standards.  This is, not limited to development of spirit, leadership, cooperation, self-discipline, and sportsmanship in each individual member, through the student body and their community through support in the promotion of athletic events and activities which will inspire the athletes to perform to the best of their ability.",
         "website": "https://www.allenisd.org/Domain/3301",
         "sponsors": [
           "Stevie Mayberry",
@@ -64,7 +64,6 @@
         "dept": "other",
         "description": "",
         "website": "https://www.allenband.com/",
-        "banner_image": "https://mariocmflys.tk/stuff/club-directory/band-banner.webp",
         "meeting": "7:00 AM",
         "location": {
           "campus": null,
@@ -956,7 +955,6 @@
         "subtype": "Computer Science",
         "description": "Club for programmers and people who are interested in technology",
         "website": "https://allencs.org",
-        "banner_image": "https://mariocmflys.tk/stuff/club-directory/steam-banner2.png",
         "sponsor": "David Ben-Yaakov",
         "leader": "Haadi Gill",
         "members": "20-30",

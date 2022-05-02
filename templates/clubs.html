@@ -194,6 +194,15 @@
     margin-right:auto;
     margin-left:auto;
   }
+  .pageLink {
+      color:#037dff;
+      font-weight:bold;
+      text-decoration:none;
+    }
+    .pageLink:hover {
+      color:#004a99;
+      text-decoration:underline;
+    }
   @media (max-width:466px){
   .search {
     min-width:350px;
@@ -238,8 +247,8 @@
         to attain more information.</p>
         <p>To add or modify any of the clubs below, please use these links: </p>
         <ul class="modClubLinks">
-            <li><a href="https://forms.gle/iPyTLsXRp4KpK89u8" target="_blank" rel="noreferrer noopener" alt="Add a club button">Add a Club/ Organization</a></li>
-            <li><a href="https://forms.gle/335apjRc6f8BazVU6" target="_blank" rel="noreferrer noopener" alt="Edit a club button">Edit a Club/ Organization</a></li>
+            <li><a class="pageLink" href="https://forms.gle/iPyTLsXRp4KpK89u8" target="_blank" rel="noreferrer noopener" alt="Add a club button">Add a Club/ Organization</a></li>
+            <li><a class="pageLink" href="https://forms.gle/335apjRc6f8BazVU6" target="_blank" rel="noreferrer noopener" alt="Edit a club button">Edit a Club/ Organization</a></li>
         </ul>
         <br>
         <a class="btn btn-outline-primary active STEAMBtn" role="button" alt="Show all clubs button"><span class="toggleSTEAMBtn">Show All AHS Clubs</span></a>
@@ -270,7 +279,7 @@
             <hr>
             <p id="club-desc"></p>
             <p id="club-website">
-              <strong>Website: </strong><a id="club-website-url"></a>
+              <strong>Website: </strong><a class="pageLink" id="club-website-url"></a>
             </p>
             <p id="club-sponsor">
               <strong>Sponsored by: </strong><span id="club-sponsor-name"></span>
@@ -293,14 +302,14 @@
               </p>
             </div>
             <p id="club-social-icons">
-              <a target="_blank" rel="noreferrer noopener" id="club-social-twitter"><i class="fab fa-twitter" alt="Club twitter link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-facebook"><i class="fab fa-facebook" alt="Club facebook link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-instagram"><i class="fab fa-instagram" alt="Club instagram link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-github"><i class="fab fa-github" alt="Club github link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-discord"><i class="fab fa-discord" alt="Club discord link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-snapchat"><i class="fab fa-snapchat" alt="Club snapchat link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-youtube"><i class="fab fa-youtube" alt="Club youtube link"></i></a>
-              <a target="_blank" rel="noreferrer noopener" id="club-social-remind"><i class="fas fa-bullhorn" alt="Club bullhorn link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-twitter"><i class="fab fa-twitter" alt="Club twitter link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-facebook"><i class="fab fa-facebook" alt="Club facebook link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-instagram"><i class="fab fa-instagram" alt="Club instagram link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-github"><i class="fab fa-github" alt="Club github link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-discord"><i class="fab fa-discord" alt="Club discord link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-snapchat"><i class="fab fa-snapchat" alt="Club snapchat link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-youtube"><i class="fab fa-youtube" alt="Club youtube link"></i></a>
+              <a class="pageLink" target="_blank" rel="noreferrer noopener" id="club-social-remind"><i class="fas fa-bullhorn" alt="Club bullhorn link"></i></a>
             </p>
           </div>
           <!--End of club-body-->
@@ -578,8 +587,9 @@
             $("#club-notice").css("background-color", "rgba(0,0,0,0.0)");
             $("#club-notice").css("background-image", "none");
             if (currentObj.banner_image) {$("#club-notice").css("height", "400px");$("#club-notice").css("background-image", `url("${currentObj.banner_image}")`);}
+            else if (checked) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
             else { 
-              $("#club-notice").css("background-image", "none");
+              $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`)
               $("#club-notice").css("height", "250px");
               if (currentObj.dept != "other") {
                 switch (currentObj.dept) {
@@ -607,6 +617,7 @@
                 $("#club-notice").css("background-color", "#cc3300");
               }
             }
+            if (checked) { $("#club-notice").css("background-color", "#8B8B8B"); }
             $("#club-name").text(currentObj.name);
             var clubTypeStr = "";
             if (dataArr[index].subtype) {

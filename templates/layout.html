@@ -79,6 +79,11 @@ body {
           function () {
             $(this).css("color", "#4B4B4B");
           });
+          $(".search-icon").css("background-color", "#242424");
+          $(".fa-search").css("color", "white");
+          $(".roomToggle").css("background-color", "#242424");
+          $(".gridC").css("border-left", "4px solid #8B8B8B");
+          $(".gridC").first().css("border-left", "none");
       } catch (error) { }
     }
     else {
@@ -100,6 +105,10 @@ body {
           function () {
             $(this).css("color", "#037dff");
           });
+          $(".search-icon").css("background-color", "#0d6efd");
+          $(".fa-search").css("color", "black");
+          clearClubListing(clubListing);
+          updateClubListing();
       } catch (error) { }
     }
     //page-specific styling
@@ -150,12 +159,8 @@ body {
           $(".imgC6, .imgC6Mobile, .legendC, .legendCMobile").css("display", "none");
           nav1CColor = $(".nav1C").css("background-color");
           nav2CColor = $(".nav2C").css("background-color");
-          $(".roomToggle, .nav1, .nav2").css("background-color", "#242424");
+          $(".nav1, .nav2").css("background-color", "#242424");
           $(".nav1, .nav2").css("color", "white");
-          $(".search-icon").css("background-color", "#242424");
-          $(".fa-search").css("color", "white");
-          $(".gridC").css("border-left", "4px solid #8B8B8B");
-          $(".gridC").first().css("border-left", "none");
         }
         else {
           $(".imgC6").css("display", c6State);
@@ -166,24 +171,33 @@ body {
           $(".nav1, .nav2").css("background-color", "#0d6efd");
           $(".nav1C").css("background-color", nav1CColor);
           $(".nav2C").css("background-color", nav2CColor);
-          $(".search-icon").css("background-color", "#0d6efd");
-          $(".fa-search").css("color", "black");
-          clearClubListing(clubListing);
-          updateClubListing();
         }
       case 4:
         if (checked) {
-
+          $("#circle1, #circle2, #circle3, #circle4, #circle5").css("border", "12px solid #242424");
+          $(".science-descriptions, .technology-descriptions, .engineering-descriptions, .art-descriptions, .math-descriptions").css("background-color", "#242424");
+          $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
         }
         else {
-
+          $("#circle1").css("border", "12px solid #63a11b");
+          $("#circle2").css("border", "12px solid #1982c4");
+          $("#circle3").css("border", "12px solid #6a4c93");
+          $("#circle4").css("border", "12px solid #DCA000");
+          $("#circle5").css("border", "12px solid #E22739");
+          $(".science-descriptions").css("background-color", "#63a11b");
+          $(".technology-descriptions").css("background-color", "#1982c4");
+          $(".engineering-descriptions").css("background-color", "#6a4c93");
+          $(".art-descriptions").css("background-color", "#DCA000");
+          $(".math-descriptions").css("background-color", "#E22739");
+          $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
         }
       case 5:
         if (checked) {
-
+          $(".btn-outline-primary").css("background-color", "#242424");
+          $(".btn-outline-primary").css("color", "white");
         }
         else {
-
+          $(".btn-outline-primary").css("background-color", "#0d6efd");
         }
       case 6:
         if (checked) {
@@ -215,10 +229,12 @@ body {
         }
       case 10:
         if (checked) {
-
+          $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
+          $(".faq-descriptions").css("background-color", "#242424");
         }
         else {
-
+          $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
+          $(".faq-descriptions").css("background-color", "#63a11b");
         }
       case 11:
         if (checked) {
