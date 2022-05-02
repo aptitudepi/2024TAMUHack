@@ -112,7 +112,8 @@ body {
       } catch (error) { }
     }
     //page-specific styling
-    switch (currentPage) {
+    try {
+      switch (currentPage) {
       case 1:
         if (checked) {
           $(".hc1").css("background-color", "#8B8B8B");
@@ -124,6 +125,8 @@ body {
           $(".hc2").css("background-color", "#6a4c93");
         }
       case 2:
+        clearTimeline();
+        updateTimeline();
         if (checked) {
           $(".hc1").css("background-color", "#8B8B8B");
           $(".hc2").css("background-color", "#6B6A6A");
@@ -131,7 +134,6 @@ body {
           $(".phase2Dark").css("background-color", "#828282");
           $(".bioTxt").css("background-color", "#ADADAD");
           $(".phase2").css("background-color", "#ADADAD");
-          $(".linkItem").css("background-color", "#eeeeee");
         }
         else {
           $(".hc1").css("background-color", "#1982c4");
@@ -140,15 +142,6 @@ body {
           $(".phase2Dark").css("background-color", "#59b300");
           $(".bioTxt").css("background-color", "#1d96e2");
           $(".phase2").css("background-color", "#73e600");
-          $(".linkItem").css("background-color", "#eeeeee");
-          $(".rightItem").css("background-color", "#cde1fe");
-          $(".linkItem").hover(function () {
-            $(this).css("background-color", "#b4d1fd");
-          },
-            function () {
-              $(this).css("background-color", "#eeeeee");
-              if ($(this).hasClass("rightItem")) { $(this).css("background-color", "#cde1fe"); }
-            });
         }
       case 3:
         if (checked) {
@@ -199,33 +192,21 @@ body {
         else {
           $(".btn-outline-primary").css("background-color", "#0d6efd");
         }
-      case 6:
+      case 7: //service page
         if (checked) {
-
+          $(".btn-outline-primary, .pageBtn a").css("background-color", "#242424");
+          $(".btn-outline-primary, .pageBtn a").css("color", "white");
+          $(".colorGrid").css("display", "none");
+          clearServiceListing(subServiceDisplay);
+          updateServiceListing();
+          showSelectedPage(page);
         }
         else {
-
-        }
-      case 7:
-        if (checked) {
-
-        }
-        else {
-
-        }
-      case 8:
-        if (checked) {
-
-        }
-        else {
-
-        }
-      case 9:
-        if (checked) {
-
-        }
-        else {
-
+          $(".btn-outline-primary, .pageBtn a").css("background-color", "#0d6efd");
+          $(".colorGrid").css("display", "flex");
+          clearServiceListing(subServiceDisplay);
+          updateServiceListing();
+          showSelectedPage(page);
         }
       case 10:
         if (checked) {
@@ -244,6 +225,7 @@ body {
 
         }
     }
+  } catch (error) { }
   }
   $("#aboutBtn").on("click", function() {
     window.location.href="/about";

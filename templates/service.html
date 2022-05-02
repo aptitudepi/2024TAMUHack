@@ -83,6 +83,15 @@
     color:#004a99;
     text-decoration:underline;
   }
+  .hcA { 
+    color:#4B4B4B;
+    text-decoration:none;
+  }
+  .hcA:hover {
+    cursor:pointer;
+    color:black;
+    text-decoration:underline;
+  }
   .gridC div a { 
     color:#037dff;
     text-decoration:none;
@@ -184,6 +193,12 @@
     cursor:pointer;
     background-color:#cde1fe;
   }
+  .hcLinkItem {
+    background-color:#eeeeee;
+  }
+  .hcLinkItem:hover {
+    background-color:#eeeeee;
+  }
   .subServiceDisplay div:nth-child(4){
     margin:6px 0px;
   }
@@ -249,12 +264,14 @@
     font-weight:normal;
   }
   .pageLink {
-    color: #037dff;
-    text-decoration: none;
-  }
-  .pageLink:hover {
-    cursor:pointer;
-  }
+      color:#037dff;
+      font-weight:bold;
+      text-decoration:none;
+    }
+    .pageLink:hover {
+      color:#004a99;
+      text-decoration:underline;
+    }
   </style>
 
 {% endblock %}
@@ -340,6 +357,7 @@
               var listItem = document.createElement("div");
               listItem.id = `item${index+1}`;
               listItem.classList.add("linkItem");
+              if (checked) { listItem.classList.add("hcLinkItem"); }
               listItem.link = dataArr[index].link;
               subServiceDisplay.appendChild(listItem);
               //Creating the title div
@@ -382,6 +400,9 @@
               listItemType.style.borderRadius = "20px";
               listItemType.style.height = "20px";
               listItemType.style.width = "20px";
+              if (checked) {
+                listItemType.style.display = "none";
+              }
               listItemTitle.appendChild(listItemType);
               //Creating the creator div
               var listItemCreator = document.createElement("div");
@@ -403,6 +424,7 @@
               var listItemLinkA = document.createElement("a");
               listItemLinkA.target = "_blank";
               listItemLinkA.classList.add("linkItemA");
+              if (checked) { listItemLinkA.classList.add("hcA"); }
               listItemLinkA.href = dataArr[index].link;
               listItemLinkA.alt = "Signup link";
               var listItemLinkATxt = document.createTextNode("Signup Link");

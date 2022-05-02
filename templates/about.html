@@ -106,6 +106,12 @@
   .linkItem:hover {
     background-color:#b4d1fd;
   }
+  .hcLinkItem {
+    background-color:#eeeeee !important;
+  }
+  .hcLinkItem:hover {
+    background-color:#eeeeee !important;
+  }
   .subTimelineDisplay div:nth-child(4) {
     margin: 6px 0px;
   }
@@ -452,6 +458,7 @@
     var listItem = document.createElement("div");
     listItem.id = `item${index + 1}`;
     listItem.classList.add("linkItem");
+    if (checked) { listItem.classList.add("hcLinkItem"); }
     display.appendChild(listItem);
     //creating the name div
     var listItemName = document.createElement("div");
@@ -511,7 +518,13 @@
     }
     else { //for normal conditions
       if (bitFlag) { spacer.style.visibility = "hidden"; }
-      else { listItem.style.visibility = "hidden";spacer.classList.add("rightItem"); }
+      else { 
+        listItem.style.visibility = "hidden";
+        spacer.classList.add("rightItem");
+        if (checked) {
+          spacer.classList.add("hcLinkItem");
+        } 
+      }
     }
   }
   function updateSubTimeline(display, startPoint, endPoint) {
@@ -584,6 +597,17 @@
     //this adds the information for the phase 2 sub-timeline
     updateSubTimeline(subTimelineDisplay3, endPoints[1], dataArr.length);
   }
+  function clearTimeline() {
+      while (subTimelineDisplay.firstChild) {
+        subTimelineDisplay.removeChild(subTimelineDisplay.firstChild);
+      }
+      while (subTimelineDisplay2.firstChild) {
+        subTimelineDisplay2.removeChild(subTimelineDisplay2.firstChild);
+      }
+      while (subTimelineDisplay3.firstChild) {
+        subTimelineDisplay3.removeChild(subTimelineDisplay3.firstChild);
+      }
+    }
   function repositionFooter() {
     $('.footerC').css("position", "relative");
     var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
