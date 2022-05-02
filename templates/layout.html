@@ -50,6 +50,12 @@ body {
 </body>
 <script>
   var checked = false;
+  var c6State = "";
+  var c6MobileState = "";
+  var legendState = "";
+  var legendMobileState = "";
+  var nav1CColor = "";
+  var nav2CColor = "";
   function highContrast() {
     //this returns the current page starting at index 0
     var currentPage = parseInt($("section").first().attr("id").split("page").pop());
@@ -66,8 +72,8 @@ body {
           $(this).css("background-color", "#242424");
         });
       try {
-        $(".pageLink").css("color", "#4B4B4B");
-        $(".pageLink").hover(function () {
+        $(".pageLink, #returnToList").css("color", "#4B4B4B");
+        $(".pageLink, #returnToList").hover(function () {
           $(this).css("color", "black");
         },
           function () {
@@ -87,8 +93,8 @@ body {
         $(this).css("background-color", "#0d6efd");
       });
       try {
-        $(".pageLink").css("color", "#037dff");
-        $(".pageLink").hover(function () {
+        $(".pageLink, #returnToList").css("color", "#037dff");
+        $(".pageLink, #returnToList").hover(function () {
           $(this).css("color", "#004a99");
         },
           function () {
@@ -137,10 +143,33 @@ body {
         }
       case 3:
         if (checked) {
-
+          c6State = $(".imgC6").css("display");
+          c6MobileState = $(".imgC6Mobile").css("display");
+          legendState = $(".legendC").css("display");
+          legendMobileState = $(".legendCMobile").css("display");
+          $(".imgC6, .imgC6Mobile, .legendC, .legendCMobile").css("display", "none");
+          nav1CColor = $(".nav1C").css("background-color");
+          nav2CColor = $(".nav2C").css("background-color");
+          $(".roomToggle, .nav1, .nav2").css("background-color", "#242424");
+          $(".nav1, .nav2").css("color", "white");
+          $(".search-icon").css("background-color", "#242424");
+          $(".fa-search").css("color", "white");
+          $(".gridC").css("border-left", "4px solid #8B8B8B");
+          $(".gridC").first().css("border-left", "none");
         }
         else {
-
+          $(".imgC6").css("display", c6State);
+          $(".imgC6Mobile").css("display", c6MobileState);
+          $(".legendC").css("display", legendState);
+          $(".legendCMobile").css("display", legendMobileState);
+          $(".roomToggle").css("background-color", "#34a1e5");
+          $(".nav1, .nav2").css("background-color", "#0d6efd");
+          $(".nav1C").css("background-color", nav1CColor);
+          $(".nav2C").css("background-color", nav2CColor);
+          $(".search-icon").css("background-color", "#0d6efd");
+          $(".fa-search").css("color", "black");
+          clearClubListing(clubListing);
+          updateClubListing();
         }
       case 4:
         if (checked) {

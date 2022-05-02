@@ -647,6 +647,7 @@ $(".imgC4").on('click', function(event) { //zoom out
     var index = parseInt(clubID.replace( /^\D+/g, ''))-1;
     var currentObj = roomListArr[index];
     if (currentObj.banner_image) {$("#club-notice").css("background-image", `url("${currentObj.banner_image}")`)}
+    else if (checked) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
     else { $("#club-notice").css("background-image", `url("/static/STEAM-icon-04.svg")`) }
     var tempStrInsert = "";
       if (currentObj.course) { tempStrInsert=currentObj.course; }
