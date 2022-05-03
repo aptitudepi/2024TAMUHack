@@ -26,6 +26,12 @@ body {
   background:transparent;
   border:none;
 }
+.loginBtn {
+  background-color:#0d6efd;
+}
+.hcLoginBtn {
+  background-color:#242424 !important;
+}
 .contrastC {
   user-select:none;
 }
@@ -224,10 +230,10 @@ body {
         }
       case 11:
         if (checked) {
-
+          $(".loginBtn").addClass("hcLoginBtn");
         }
         else {
-
+          $(".loginBtn").removeClass("hcLoginBtn");
         }
     }
   } catch (error) { }
