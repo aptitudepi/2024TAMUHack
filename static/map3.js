@@ -603,6 +603,7 @@ $(".imgC4").on('click', function(event) { //zoom out
             break;
         }
       }
+      if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
       listItem.appendChild(listItemS); //this finishes the li with .gridC class div
       //now the .gridC class div has to be added on to
       var listItemSS1 = document.createElement("div");
