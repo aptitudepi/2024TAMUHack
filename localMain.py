@@ -1,6 +1,6 @@
-#\!/usr/bin/python3
+#!/usr/bin/python3
 from flask import Flask, render_template, request, Response
-import mysql.connector
+#import mysql.connector
 import json
 import secrets
 import binascii
@@ -9,21 +9,21 @@ import time
 from datetime import datetime, timezone, timedelta
 
 # Google authentication libraries
-from google.oauth2 import id_token as gid_token
-from google.auth.transport import requests as grequests
+#from google.oauth2 import id_token as gid_token
+#from google.auth.transport import requests as grequests
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.config.from_envvar('CONFIG')
 
 # Connect to SQL Database
-db = mysql.connector.connect(
-  user=app.config.get("MYSQL_USER"),
-  password=app.config.get("MYSQL_PASSWORD"),
-  host=app.config.get("MYSQL_ADDR"),
-  database=app.config.get("MYSQL_DB"),
-  use_pure=True)
+#db = mysql.connector.connect(
+#  user=app.config.get("MYSQL_USER"),
+#  password=app.config.get("MYSQL_PASSWORD"),
+#  host=app.config.get("MYSQL_ADDR"),
+#  database=app.config.get("MYSQL_DB"),
+#  use_pure=True)
 
-googleClientId = app.config.get("GOOGLE_CLIENT_ID")
+#googleClientId = app.config.get("GOOGLE_CLIENT_ID")
 
 hostprefix = app.config.get("PERMALINK_PREFIX")
 
@@ -72,50 +72,50 @@ class User:
 
 # This function is a safety function that ensures the connection to the
 # database server is still alive before trying to use it.
-def sqlSetup():
-    if db.is_connected() != True:
-        db.reconnect(attempts=1, delay=0)
+#def sqlSetup():
+#    if db.is_connected() != True:
+#        db.reconnect(attempts=1, delay=0)
 
 # Checks if the user is logged in
 # If they are, then this returns the user
 # if not, this returns None
-def checkLoggedIn():
-  token = request.cookies.get("session")
-  if token == None: return None
+#def checkLoggedIn():
+#  token = request.cookies.get("session")
+#  if token == None: return None
   
-  sqlSetup()
-  cur = db.cursor(prepared=True)
-  cur.execute("SELECT `Expiration`, `UserID` FROM `sessions` WHERE `Token`=%s LIMIT 1;", (token,))
-  item = cur.fetchone()
-  if item == None:
-    cur.close()
-    db.commit()
-    return None
+#  sqlSetup()
+#  cur = db.cursor(prepared=True)
+#  cur.execute("SELECT `Expiration`, `UserID` FROM `sessions` WHERE `Token`=%s LIMIT 1;", (token,))
+#  item = cur.fetchone()
+#  if item == None:
+#    cur.close()
+#    db.commit()
+#    return None
   
-  exp = item[0]
-  uid = item[1]
+#  exp = item[0]
+#  uid = item[1]
 
-  cur.close()
+#  cur.close()
 
-  if exp <= time.time():
-    db.commit()
-    return None
+#  if exp <= time.time():
+#    db.commit()
+#    return None
 
-  cur = db.cursor(prepared=True)
-  cur.execute("SELECT `EmailAddress`, `DisplayName`, `Clubs` FROM `users` WHERE `ID`=%s LIMIT 1;", (uid,))
+#  cur = db.cursor(prepared=True)
+#  cur.execute("SELECT `EmailAddress`, `DisplayName`, `Clubs` FROM `users` WHERE `ID`=%s LIMIT 1;", (uid,))
 
-  item = cur.fetchone()
-  if item == None:
-    cur.close()
-    db.commit()
-    return None
+#  item = cur.fetchone()
+#  if item == None:
+#    cur.close()
+#    db.commit()
+#    return None
 
-  u = User(uid, item[0], item[1], json.loads(item[2]))
+#  u = User(uid, item[0], item[1], json.loads(item[2]))
 
-  cur.close()
-  db.commit()
+#  cur.close()
+#  db.commit()
 
-  return u
+#  return u
 
 @app.route("/")
 def landing():
@@ -160,38 +160,38 @@ def route_archive():
 @app.route("/events/json")
 def route_events_data():
   events = list()
-  sqlSetup()
-  cur = db.cursor()
-  cur.execute("SELECT `ID`,`Name`,`ClubID`,`StartTime`,`EndTime`,`Description`,`MaxAttendees` FROM `events`;")
-  row = cur.fetchone()
-  while row != None:
-    # Add item to list of events
-    item = dict()
-    item["id"] = row[0]
-    item["name"] = row[1].decode("utf-8")
-    item["description"] = row[5].decode("utf-8")
-    item["club"] = row[2]
-    item["startTime"] = row[3]
-    item["endTime"] = row[4]
-    item["maxAttendees"] = row[6]
-    events.append(item)
+  #sqlSetup()
+  #cur = db.cursor()
+  #cur.execute("SELECT `ID`,`Name`,`ClubID`,`StartTime`,`EndTime`,`Description`,`MaxAttendees` FROM `events`;")
+  #row = cur.fetchone()
+  #while row != None:
+  #  # Add item to list of events
+  #  item = dict()
+  #  item["id"] = row[0]
+  #  item["name"] = row[1].decode("utf-8")
+  #  item["description"] = row[5].decode("utf-8")
+  #  item["club"] = row[2]
+  #  item["startTime"] = row[3]
+  #  item["endTime"] = row[4]
+  #  item["maxAttendees"] = row[6]
+  #  events.append(item)
 
-    row = cur.fetchone()
+  #  row = cur.fetchone()
 
-  cur.close()
-  db.commit() # Workaround to prevent an unusual problem
+  #cur.close()
+  #db.commit() # Workaround to prevent an unusual problem
 
   return Response(json.dumps(events), mimetype="application/json")
 
 
-@app.route("/login")
-def route_login():
-  if checkLoggedIn() != None:
-    resp = Response("Already logged in")
-    resp.headers["Location"] = "/management"
-    return resp, 302
-  return render_template("login.html", google_client_id=googleClientId)
-
+#@app.route("/login")
+#def route_login():
+#  if checkLoggedIn() != None:
+#    resp = Response("Already logged in")
+#    resp.headers["Location"] = "/management"
+#    return resp, 302
+#  return render_template("login.html", google_client_id=googleClientId)
+'''
 @app.route("/login/google", methods=["POST"])
 def route_login_google():
   # Process login here
@@ -406,6 +406,7 @@ def route_mgmt_club_create_event(cid):
   else:
     return render_template("mgmt/event-create.html", club=club)
 
-
+'''
 if __name__ == "__main__":
   app.run(debug=True)
+
