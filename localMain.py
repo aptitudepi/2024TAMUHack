@@ -13,7 +13,7 @@ from datetime import datetime, timezone, timedelta
 #from google.auth.transport import requests as grequests
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
-app.config.from_envvar('CONFIG')
+#app.config.from_envvar('CONFIG')
 
 
 #googleClientId = app.config.get("GOOGLE_CLIENT_ID")
