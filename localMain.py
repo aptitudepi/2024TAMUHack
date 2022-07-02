@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, request, Response
-#import mysql.connector
+from flask import Flask, render_template, request, Response, jsonify
+import awsController
 import json
 import secrets
 import binascii
@@ -15,13 +15,6 @@ from datetime import datetime, timezone, timedelta
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.config.from_envvar('CONFIG')
 
-# Connect to SQL Database
-#db = mysql.connector.connect(
-#  user=app.config.get("MYSQL_USER"),
-#  password=app.config.get("MYSQL_PASSWORD"),
-#  host=app.config.get("MYSQL_ADDR"),
-#  database=app.config.get("MYSQL_DB"),
-#  use_pure=True)
 
 #googleClientId = app.config.get("GOOGLE_CLIENT_ID")
 
@@ -70,53 +63,6 @@ class User:
     self.displayName = name
     self.clubs = clubs
 
-# This function is a safety function that ensures the connection to the
-# database server is still alive before trying to use it.
-#def sqlSetup():
-#    if db.is_connected() != True:
-#        db.reconnect(attempts=1, delay=0)
-
-# Checks if the user is logged in
-# If they are, then this returns the user
-# if not, this returns None
-#def checkLoggedIn():
-#  token = request.cookies.get("session")
-#  if token == None: return None
-  
-#  sqlSetup()
-#  cur = db.cursor(prepared=True)
-#  cur.execute("SELECT `Expiration`, `UserID` FROM `sessions` WHERE `Token`=%s LIMIT 1;", (token,))
-#  item = cur.fetchone()
-#  if item == None:
-#    cur.close()
-#    db.commit()
-#    return None
-  
-#  exp = item[0]
-#  uid = item[1]
-
-#  cur.close()
-
-#  if exp <= time.time():
-#    db.commit()
-#    return None
-
-#  cur = db.cursor(prepared=True)
-#  cur.execute("SELECT `EmailAddress`, `DisplayName`, `Clubs` FROM `users` WHERE `ID`=%s LIMIT 1;", (uid,))
-
-#  item = cur.fetchone()
-#  if item == None:
-#    cur.close()
-#    db.commit()
-#    return None
-
-#  u = User(uid, item[0], item[1], json.loads(item[2]))
-
-#  cur.close()
-#  db.commit()
-
-#  return u
-
 @app.route("/")
 def landing():
   return render_template("home.html")
@@ -137,6 +83,10 @@ def route_map():
 def route_clubs_list():
   return render_template("clubs.html")
 
+@app.route("/clubs/json")
+def route_clubs_data():
+  return jsonify(awsController.get_club_items())
+
 @app.route("/service")
 def route_service():
   return render_template("service.html")
@@ -149,6 +99,10 @@ def route_help():
 def route_events():
   return render_template("events.html")
 
+@app.route("/events/json")
+def route_events_data():
+  return jsonify(awsController.get_calendar_items())
+
 @app.route("/gallery")
 def route_gallery():
   return render_template("gallery.html")
@@ -156,33 +110,6 @@ def route_gallery():
 @app.route("/archive")
 def route_archive():
   return render_template("archive.html")
-
-@app.route("/events/json")
-def route_events_data():
-  events = list()
-  #sqlSetup()
-  #cur = db.cursor()
-  #cur.execute("SELECT `ID`,`Name`,`ClubID`,`StartTime`,`EndTime`,`Description`,`MaxAttendees` FROM `events`;")
-  #row = cur.fetchone()
-  #while row != None:
-  #  # Add item to list of events
-  #  item = dict()
-  #  item["id"] = row[0]
-  #  item["name"] = row[1].decode("utf-8")
-  #  item["description"] = row[5].decode("utf-8")
-  #  item["club"] = row[2]
-  #  item["startTime"] = row[3]
-  #  item["endTime"] = row[4]
-  #  item["maxAttendees"] = row[6]
-  #  events.append(item)
-
-  #  row = cur.fetchone()
-
-  #cur.close()
-  #db.commit() # Workaround to prevent an unusual problem
-
-  return Response(json.dumps(events), mimetype="application/json")
-
 
 #@app.route("/login")
 #def route_login():

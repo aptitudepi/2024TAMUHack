@@ -4,8 +4,8 @@
 
 {% block head %}
 
-<link rel="stylesheet" href="/static/modules/fullcalendar/main.min.css">
-<script src="/static/modules/fullcalendar/main.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
 <style>
 html {
 	width:100%;
@@ -48,25 +48,31 @@ body {
       currentTime = new Date().getTime();
 
       fetch('/events/json').then(resp => resp.json()).then(data => {
+        data = data.Items;
         events = [];
         // Go through each item from the server and create an event
         for(i = 0; i < data.length; i++) {
           item = data[i];
-          console.log(item);
+          //get the start and end attributes and convert them into dates
+          var sDateSplit = item["Start-Date"]["S"].split("/");
+          var sTimeSplit = item["Start-Time"]["S"].split(":");
+          var eDateSplit = item["End-Date"]["S"].split("/");
+          var eTimeSplit = item["End-Time"]["S"].split(":");
+          const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+          const endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+
           e = {
-            groupId: "club-" + item["club"], // if it is null, it will be a generic group
-            title: item["name"],
-            start: new Date(item["startTime"] * 1000),
-            end: new Date(item["endTime"] * 1000),
-            url: "/events/" + item["id"],
+            groupId: "club-" + item["Club"]["N"], // if it is null, it will be a generic group
+            title: item["Event-Name"]["S"],
+            start: startDate,
+            end: endDate,
+            url: "/events/" + item["ID"]["S"],
             color: "#AAAAAA"
           };
           events.push(e);
         }
 
         document.querySelector("#calStatus").innerText = "";
-
-        console.log(events);
 
         // Initialize the calendar using the events list
         calElement = document.querySelector("#calendarContainer");
@@ -76,7 +82,6 @@ body {
         });
         cal.render();
       }).catch(error => {
-        console.error(error);
         document.querySelector("#calStatus").innerText = "Failed to load calendar, please try again later";
       });
     });
