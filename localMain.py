@@ -18,9 +18,9 @@ app = Flask(__name__, static_url_path="/static", static_folder="static")
 
 #googleClientId = app.config.get("GOOGLE_CLIENT_ID")
 
-hostprefix = app.config.get("PERMALINK_PREFIX")
+#hostprefix = app.config.get("PERMALINK_PREFIX")
 
-timeshift = app.config.get("TIMEZONE_SHIFT")
+#timeshift = app.config.get("TIMEZONE_SHIFT")
 
 class Club:
   def __init__(self, cid, name, sname, ctype, subtype, desc, site,
