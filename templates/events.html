@@ -54,19 +54,19 @@ body {
         for(i = 0; i < data.length; i++) {
           item = data[i];
           //get the start and end attributes and convert them into dates
-          var sDateSplit = item["Start-Date"]["S"].split("/");
-          var sTimeSplit = item["Start-Time"]["S"].split(":");
-          var eDateSplit = item["End-Date"]["S"].split("/");
-          var eTimeSplit = item["End-Time"]["S"].split(":");
+          var sDateSplit = item["Start-Date"].split("/");
+          var sTimeSplit = item["Start-Time"].split(":");
+          var eDateSplit = item["End-Date"].split("/");
+          var eTimeSplit = item["End-Time"].split(":");
           const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
           const endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
 
           e = {
-            groupId: "club-" + item["Club"]["N"], // if it is null, it will be a generic group
-            title: item["Event-Name"]["S"],
+            groupId: "club-" + item["Club"], // if it is null, it will be a generic group
+            title: item["Event-Name"],
             start: startDate,
             end: endDate,
-            url: "/events/" + item["ID"]["S"],
+            url: "/events/" + item["ID"],
             color: "#AAAAAA"
           };
           events.push(e);

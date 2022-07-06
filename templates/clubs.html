@@ -340,11 +340,11 @@
               subClubDisplay.appendChild(listItem);
               var listItemS = document.createElement("div");
               listItemS.classList.add("gridC");
-              if (dataArr[index].Dept["S"] != "other") {
-                mainArray.push(dataArr[index]["Clubs-Partition-Key"]["S"]);
-                steamArray.push(dataArr[index]["Clubs-Partition-Key"]["S"]);
+              if (dataArr[index]["Dept"] != "other") {
+                mainArray.push(dataArr[index]["Clubs-Partition-Key"]);
+                steamArray.push(dataArr[index]["Clubs-Partition-Key"]);
                 numOfSTEAMClubs++;
-                switch (dataArr[index].Dept["S"]) {
+                switch (dataArr[index]["Dept"]) {
                   case "s":
                     listItemS.style.borderLeft = "4px solid #8ac926";
                     break;
@@ -368,7 +368,7 @@
               else {
                 if (steamOnlyOn) {listItem.style.display = "none";}
                 else {listItem.style.display = "block";}
-                mainArray.push(dataArr[index]["Clubs-Partition-Key"]["S"]);
+                mainArray.push(dataArr[index]["Clubs-Partition-Key"]);
                 listItemS.style.borderLeft = "4px solid #cc3300";
               }
               if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
@@ -382,42 +382,42 @@
               //listItemSS1A.href = "";
               listItemSS1.appendChild(listItemSS1A);
               //now only the text has to be created for these elements
-              var listItemSS1ATxt = document.createTextNode(`${dataArr[index]["Clubs-Partition-Key"]["S"]}`);
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index]["Clubs-Partition-Key"]}`);
               listItemSS1A.appendChild(listItemSS1ATxt);
               var listItemSS2Txt;
-              if (dataArr[index].Subtype["S"]) {
-                switch (parseInt(dataArr[index].Type["N"])) {
+              if (dataArr[index]["Subtype"]) {
+                switch (parseInt(dataArr[index]["Type"])) {
                   case 1:
-                    listItemSS2Txt = document.createTextNode(`Academic - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Academic - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 2:
-                    listItemSS2Txt = document.createTextNode(`Community Service Club - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Community Service Club - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 3:
-                    listItemSS2Txt = document.createTextNode(`Religious Organization - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Religious Organization - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 4:
-                    listItemSS2Txt = document.createTextNode(`Social Club - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Social Club - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 5:
-                    listItemSS2Txt = document.createTextNode(`Athletic Team - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Athletic Team - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 6:
-                    listItemSS2Txt = document.createTextNode(`Misc. - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Misc. - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 7:
-                    listItemSS2Txt = document.createTextNode(`School Organization - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`School Organization - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 8:
-                    listItemSS2Txt = document.createTextNode(`Extracurricular - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Extracurricular - ${dataArr[index]["Subtype"]}`);
                     break;
                   case 9:
-                    listItemSS2Txt = document.createTextNode(`Communication - ${dataArr[index].Subtype["S"]}`);
+                    listItemSS2Txt = document.createTextNode(`Communication - ${dataArr[index]["Subtype"]}`);
                     break;
                 }
               }
-              else if (parseInt(dataArr[index].Type["N"])) {
-                switch (parseInt(dataArr[index].Type["N"])) {
+              else if (parseInt(dataArr[index]["Type"])) {
+                switch (parseInt(dataArr[index]["Type"])) {
                   case 1:
                     listItemSS2Txt = document.createTextNode("Academic");
                     break;
@@ -447,7 +447,7 @@
                     break;
                 }
               } //end of else if statement
-              else if (!parseInt(dataArr[index].Type["N"])) {
+              else if (!parseInt(dataArr[index]["Type"])) {
                 listItemSS2Txt = document.createTextNode("Other");
               }
               listItemSS2.appendChild(listItemSS2Txt);
@@ -461,8 +461,8 @@
               subClubDisplay.appendChild(listItem);
               var listItemS = document.createElement("div");
               listItemS.classList.add("gridC");
-              if (dataArr[index17].Dept["S"] != "other") {
-                switch (dataArr[index17].Dept["S"]) {
+              if (dataArr[index17]["Dept"] != "other") {
+                switch (dataArr[index17]["Dept"]) {
                   case "s":
                     listItemS.style.borderLeft = "4px solid #8ac926";
                     break;
@@ -497,12 +497,12 @@
               listItemSS1A.classList.add("linkItemA");
               listItemSS1.appendChild(listItemSS1A);
               //now only the text has to be created for these elements
-              var listItemSS1ATxt = document.createTextNode(`${dataArr[index17]["Clubs-Partition-Key"]["S"]}`);
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index17]["Clubs-Partition-Key"]}`);
               listItemSS1A.appendChild(listItemSS1ATxt);
               var listItemSS2Txt;
-              if (dataArr[index17].Subtype["S"]) {
-                var itemSubtype = dataArr[index17].Subtype["S"];
-                switch (parseInt(dataArr[index17].Type["N"])) {
+              if (dataArr[index17]["Subtype"]) {
+                var itemSubtype = dataArr[index17]["Subtype"];
+                switch (parseInt(dataArr[index17]["Type"])) {
                   case 1:
                     listItemSS2Txt = document.createTextNode(`Academic - ${itemSubtype}`);
                     break;
@@ -532,8 +532,8 @@
                     break;
                 }
               }
-              else if (parseInt(dataArr[index17].Type["N"])) {
-                var itemType = parseInt(dataArr[index17].Type["N"]);
+              else if (parseInt(dataArr[index17]["Type"])) {
+                var itemType = parseInt(dataArr[index17]["Type"]);
                 switch (itemType) {
                   case 1:
                     listItemSS2Txt = document.createTextNode("Academic");
@@ -564,7 +564,7 @@
                     break;
                 }
               } //end of else if statement
-              else if (!parseInt(dataArr[index17].Type["N"])) {
+              else if (!parseInt(dataArr[index17]["Type"])) {
                 listItemSS2Txt = document.createTextNode("Other");
               }
               listItemSS2.appendChild(listItemSS2Txt);
@@ -589,13 +589,13 @@
             var currentObj = dataArr[index];
             $("#club-notice").css("background-color", "rgba(0,0,0,0.0)");
             $("#club-notice").css("background-image", "none");
-            if (currentObj.Banner_Image) {$("#club-notice").css("height", "400px");$("#club-notice").css("background-image", `url("${currentObj.Banner_Image}")`);}
+            if (currentObj["Banner-Image"]) {$("#club-notice").css("height", "400px");$("#club-notice").css("background-image", `url("${currentObj["Banner-Image"]}")`);}
             else if (checked) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
             else { 
               $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`)
               $("#club-notice").css("height", "250px");
-              if (currentObj.Dept["S"] != "other") {
-                switch (currentObj.Dept["S"]) {
+              if (currentObj["Dept"] != "other") {
+                switch (currentObj["Dept"]) {
                   case "s":
                     $("#club-notice").css("background-color", "#8ac926");
                     break;
@@ -621,41 +621,41 @@
               }
             }
             if (checked) { $("#club-notice").css("background-color", "#8B8B8B"); }
-            $("#club-name").text(currentObj["Clubs-Partition-Key"]["S"]);
+            $("#club-name").text(currentObj["Clubs-Partition-Key"]);
             var clubTypeStr = "";
-            if (dataArr[index].Subtype["S"]) {
-                switch (parseInt(dataArr[index].Type["N"])) {
+            if (dataArr[index]["Subtype"]) {
+                switch (parseInt(dataArr[index]["Type"])) {
                   case 1:
-                    clubTypeStr = `Academic - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Academic - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 2:
-                    clubTypeStr = `Community Service Club - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Community Service Club - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 3:
-                    clubTypeStr = `Religious Organization - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Religious Organization - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 4:
-                    clubTypeStr = `Social Club - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Social Club - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 5:
-                    clubTypeStr = `Athletic Team - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Athletic Team - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 6:
-                    clubTypeStr = `Misc. - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Misc. - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 7:
-                    clubTypeStr = `School Organization - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `School Organization - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 8:
-                    clubTypeStr = `Extracurricular - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Extracurricular - ${dataArr[index]["Subtype"]}`;
                     break;
                   case 9:
-                    clubTypeStr = `Communication - ${dataArr[index].Subtype["S"]}`;
+                    clubTypeStr = `Communication - ${dataArr[index]["Subtype"]}`;
                     break;
                 }
               }
-              else if (parseInt(dataArr[index].Type["N"])) {
-                switch (parseInt(dataArr[index].Type["N"])) {
+              else if (parseInt(dataArr[index]["Type"])) {
+                switch (parseInt(dataArr[index]["Type"])) {
                   case 1:
                     clubTypeStr = "Academic";
                     break;
@@ -688,26 +688,26 @@
               $("#club-type").text(clubTypeStr);
               $("#club-desc").css("display", "none");
               try {
-              if (currentObj.Description["S"] != null) { if (currentObj.Description["S"] != "") { $("#club-desc").text(currentObj.Description["S"]);$("#club-desc").css("display", "block"); } }
+              if (currentObj["Description"] != null) { if (currentObj["Description"] != "") { $("#club-desc").text(currentObj["Description"]);$("#club-desc").css("display", "block"); } }
               }
               catch (error) {}
               $("#club-website").css("display", "none");
               try {
-              if (currentObj.Website["S"] != null) { if (currentObj.Website["S"] != "") { $("#club-website").find("a").attr("href", currentObj.Website["S"]);$("#club-website").find("a").attr("target", "_blank");$("#club-website").find("a").text(currentObj.Website["S"]);$("#club-website").css("display", "block"); } }
+              if (currentObj["Website"] != null) { if (currentObj["Website"] != "") { $("#club-website").find("a").attr("href", currentObj["Website"]);$("#club-website").find("a").attr("target", "_blank");$("#club-website").find("a").text(currentObj["Website"]);$("#club-website").css("display", "block"); } }
               }
               catch (error) {}
               $("#club-sponsor").css("display", "none");
               try {
-              if (currentObj.Sponsor["S"] != null) { if (currentObj.Sponsor["S"] != "") { $("#club-sponsor").find("span").text(currentObj.Sponsor["S"]);$("#club-sponsor").css("display", "block"); } }
+              if (currentObj["Sponsor"] != null) { if (currentObj["Sponsor"] != "") { $("#club-sponsor").find("span").text(currentObj["Sponsor"]);$("#club-sponsor").css("display", "block"); } }
               }
               catch (error) {}
               try {
-              if (currentObj.Sponsors["SS"] != null) { 
+              if (currentObj["Sponsors"] != null) { 
                 var tempSList = "";
                 $("#club-sponsor").css("display", "block");
-                for (var index4 = 0; index4 < currentObj.Sponsors["SS"].length; index4++) {
-                  tempSList += currentObj.Sponsors["SS"][index4];
-                  if (index4 < (currentObj.Sponsors["SS"].length-1)) { tempSList += ", "; }
+                for (var index4 = 0; index4 < currentObj["Sponsors"].length; index4++) {
+                  tempSList += currentObj["Sponsors"][index4];
+                  if (index4 < (currentObj["Sponsors"].length-1)) { tempSList += ", "; }
                 }
                 $("#club-sponsor").find("span").text(tempSList);
               }
@@ -715,25 +715,25 @@
               catch (error) {}
               $("#club-leader").css("display", "none");
               try {
-              if (currentObj.Leader["S"] != null) { if (currentObj.Leader["S"] != "") { $("#club-leader").find("span").text(currentObj.Leader["S"]);$("#club-leader").css("display", "block"); } }
+              if (currentObj["Leader"] != null) { if (currentObj["Leader"] != "") { $("#club-leader").find("span").text(currentObj["Leader"]);$("#club-leader").css("display", "block"); } }
               }
               catch (error) {}
               $("#club-members").css("display", "none");
               try {
-              if (currentObj.Members["SS"] != null) { $("#club-members").find("span").text(currentObj.Members.SS);$("#club-members").css("display", "block"); }
+              if (currentObj["Members"] != null) { $("#club-members").find("span").text(currentObj["Members"]);$("#club-members").css("display", "block"); }
               }
               catch (error) {}
               $("#club-meeting").css("display", "none");
               try {
-              if (currentObj.Meeting["S"] != null) { if (currentObj.Meeting["S"] != "") { $("#club-meeting").find("span").text(currentObj.Meeting["S"]);$("#club-meeting").css("display", "block"); } }
+              if (currentObj["Meeting"] != null) { if (currentObj["Meeting"] != "") { $("#club-meeting").find("span").text(currentObj["Meeting"]);$("#club-meeting").css("display", "block"); } }
               }
               catch (error) {}
               $("#club-campus").css("display", "none");
               try {
-              if (currentObj.Location["SS"] != null) {
-                $("#club-campus").find("span:last").text(currentObj.Location["SS"][1]);
-                if (currentObj.Location["SS"][0] == "") { $("#club-campus").find("span:first").text("N/A"); }
-                else { $("#club-campus").find("span:first").text(currentObj.Location["SS"][0]); }
+              if (currentObj["Location"] != null) {
+                $("#club-campus").find("span:last").text(currentObj["Location"][1]);
+                if (currentObj["Location"][0] == "") { $("#club-campus").find("span:first").text("N/A"); }
+                else { $("#club-campus").find("span:first").text(currentObj["Location"][0]); }
                 $("#club-campus").css("display", "block"); 
               }
               }
@@ -741,38 +741,44 @@
               //this code is to manage all of the social media icons/ links
               $("#club-social-icons").find("a").attr("href", "");$("#club-social-icons").find("a").css("display", "none");
               try {
-              if (currentObj.Social["M"]) {
-                var itemSocials = currentObj.Social["M"];
+              if (currentObj["Social"]) {
+                var itemSocials = currentObj["Social"];
+                var socialNetworks = []
+                var socialLinks = []
+                for (var index = 0; index < itemSocials.length; index++) {
+                  socialNetworks.push(itemSocials[index][1]);
+                  socialLinks.push(itemSocials[index][0]);
+                }
                 try {
-                if (itemSocials.Twitter["SS"]) { $("#club-social-twitter").attr("href", itemSocials.Twitter["SS"]);$("#club-social-twitter").css("display", "inline"); }
+                if (socialNetworks.includes("Twitter")) { var temp=socialNetworks.indexOf("Twitter");$("#club-social-twitter").attr("href", socialLinks[temp]);$("#club-social-twitter").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Facebook["SS"]) { $("#club-social-facebook").attr("href", itemSocials.Facebook["SS"]);$("#club-social-facebook").css("display", "inline"); }
+                if (socialNetworks.includes("Facebook")) { var temp=socialNetworks.indexOf("Facebook");$("#club-social-facebook").attr("href", socialLinks[temp]);$("#club-social-facebook").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Instagram["SS"]) { $("#club-social-instagram").attr("href", itemSocials.Instagram["SS"]);$("#club-social-instagram").css("display", "inline"); }
+                if (socialNetworks.includes("Instagram")) { var temp=socialNetworks.indexOf("Instagram");$("#club-social-instagram").attr("href", socialLinks[temp]);$("#club-social-instagram").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Github["SS"]) { $("#club-social-github").attr("href", itemSocials.Github["SS"]);$("#club-social-github").css("display", "inline"); }
+                if (socialNetworks.includes("Github")) { var temp=socialNetworks.indexOf("Github");$("#club-social-github").attr("href", socialLinks[temp]);$("#club-social-github").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Discord["SS"]) { $("#club-social-discord").attr("href", itemSocials.Discord["SS"]);$("#club-social-discord").css("display", "inline"); }
+                if (socialNetworks.includes("Discord")) { var temp=socialNetworks.indexOf("Discord");$("#club-social-discord").attr("href", socialLinks[temp]);$("#club-social-discord").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Snapchat["SS"]) { $("#club-social-snapchat").attr("href", itemSocials.Snapchat["SS"]);$("#club-social-snapchat").css("display", "inline"); }
+                if (socialNetworks.includes("Snapchat")) { var temp=socialNetworks.indexOf("Snapchat");$("#club-social-snapchat").attr("href", socialLinks[temp]);$("#club-social-snapchat").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Youtube["SS"]) { $("#club-social-youtube").attr("href", itemSocials.Youtube["SS"]);$("#club-social-youtube").css("display", "inline"); }
+                if (socialNetworks.includes("Youtube")) { var temp=socialNetworks.indexOf("Youtube");$("#club-social-youtube").attr("href", socialLinks[temp]);$("#club-social-youtube").css("display", "inline"); }
                 }
                 catch (error) {}
                 try {
-                if (itemSocials.Remind["SS"]) { $("#club-social-remind").attr("href", itemSocials.Remind["SS"]);$("#club-social-remind").css("display", "inline"); }
+                if (socialNetworks.includes("Remind")) { var temp=socialNetworks.indexOf("Remind");$("#club-social-remind").attr("href", socialLinks[temp]);$("#club-social-remind").css("display", "inline"); }
                 }
                 catch (error) {}
               }

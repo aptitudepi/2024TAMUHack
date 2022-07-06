@@ -85,7 +85,7 @@ def route_clubs_list():
 
 @app.route("/clubs/json")
 def route_clubs_data():
-  return jsonify(awsController.get_club_items())
+  return jsonify(Items=awsController.get_club_items())
 
 @app.route("/service")
 def route_service():
@@ -101,7 +101,7 @@ def route_events():
 
 @app.route("/events/json")
 def route_events_data():
-  return jsonify(awsController.get_calendar_items())
+  return jsonify(Items=awsController.get_calendar_items())
 
 @app.route("/gallery")
 def route_gallery():
