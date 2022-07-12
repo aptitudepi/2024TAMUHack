@@ -1,12 +1,14 @@
-#import boto.dynamodb2
-#from boto.dynamodb2.fields import HashKey, RangeKey, KeysOnlyIndex, GlobalAllIndex
+import boto.ses
 import boto.dynamodb2
 from boto.dynamodb2.table import Table
-import json
-#from boto.dynamodb2.types import NUMBER
 
 #establish a connection and get aws key and secret data from boto.config
-conn = boto.dynamodb2.connect_to_region('us-east-2')
+#conn = boto.dynamodb2.connect_to_region('us-east-2')
+conn = boto.dynamodb2.connect_to_region(
+        'us-east-2',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_ACCESS_SECRET_KEY
+    )
 
 calendarTable = Table('STEAM-APP-Calendar', connection=conn)
 clubsTable = Table('STEAM-APP-Clubs', connection=conn)
@@ -22,15 +24,15 @@ def get_club_items():
         socialList = []
         #create the item dictionary
         try:
-            itemDictionary.update({"Clubs-Partition-Key" : item["Clubs-Partition-Key"]})
+            itemDictionary.update({"Club-Name" : item["Club-Name"]})
         except:
             print("none of this type for object")
         try:
-            itemDictionary.update({"Clubs-Sort-Key" : item["Clubs-Sort-Key"]})
+            itemDictionary.update({"ID" : item["ID"]})
         except:
             print("none of this type for object")
         try:
-            itemDictionary.update({"Dept" : item["Dept"]})
+            itemDictionary.update({"Dept" : item["Department"]})
         except:
             print("none of this type for object")
         try: 
@@ -124,34 +126,3 @@ def get_calendar_items():
             print("none of this type for object")
         itemsList.append(itemDictionary)
     return itemsList
-
-#print(get_club_items())
-#print(json.dumps(get_club_items()))
-#dump = json.dumps(stranger)
-#print(dump)
-'''
-conn = boto.dynamodb2.connect_to_region(
-    'us-east-2',
-    aws_access_key_id='AKIA3ERVQF7MYOCHAMP2',
-    aws_secret_access_key='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')'''
-
-#users = Table('STEAM-APP-Clubs')
-
-#all_users = users.scan()
-
-#print(all_users)
-
-'''from sh import bash
-
-dynamo_client = sh.bash.bake("aws dynamodb")
-
-print(dynamo_client)'''
-#from boto.dynamodb2.table import Table
-#from flask import jsonify
-'''
-users = Table('STEAM-App-Clubs')
-
-data = users.scan()
-print(jsonify(data))
-'''
-#dynamo_client = boto.client('dynamodb')

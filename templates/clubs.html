@@ -341,8 +341,8 @@
               var listItemS = document.createElement("div");
               listItemS.classList.add("gridC");
               if (dataArr[index]["Dept"] != "other") {
-                mainArray.push(dataArr[index]["Clubs-Partition-Key"]);
-                steamArray.push(dataArr[index]["Clubs-Partition-Key"]);
+                mainArray.push(dataArr[index]["Club-Name"]);
+                steamArray.push(dataArr[index]["Club-Name"]);
                 numOfSTEAMClubs++;
                 switch (dataArr[index]["Dept"]) {
                   case "s":
@@ -368,7 +368,7 @@
               else {
                 if (steamOnlyOn) {listItem.style.display = "none";}
                 else {listItem.style.display = "block";}
-                mainArray.push(dataArr[index]["Clubs-Partition-Key"]);
+                mainArray.push(dataArr[index]["Club-Name"]);
                 listItemS.style.borderLeft = "4px solid #cc3300";
               }
               if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
@@ -382,7 +382,7 @@
               //listItemSS1A.href = "";
               listItemSS1.appendChild(listItemSS1A);
               //now only the text has to be created for these elements
-              var listItemSS1ATxt = document.createTextNode(`${dataArr[index]["Clubs-Partition-Key"]}`);
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index]["Club-Name"]}`);
               listItemSS1A.appendChild(listItemSS1ATxt);
               var listItemSS2Txt;
               if (dataArr[index]["Subtype"]) {
@@ -497,7 +497,7 @@
               listItemSS1A.classList.add("linkItemA");
               listItemSS1.appendChild(listItemSS1A);
               //now only the text has to be created for these elements
-              var listItemSS1ATxt = document.createTextNode(`${dataArr[index17]["Clubs-Partition-Key"]}`);
+              var listItemSS1ATxt = document.createTextNode(`${dataArr[index17]["Club-Name"]}`);
               listItemSS1A.appendChild(listItemSS1ATxt);
               var listItemSS2Txt;
               if (dataArr[index17]["Subtype"]) {
@@ -621,7 +621,7 @@
               }
             }
             if (checked) { $("#club-notice").css("background-color", "#8B8B8B"); }
-            $("#club-name").text(currentObj["Clubs-Partition-Key"]);
+            $("#club-name").text(currentObj["Club-Name"]);
             var clubTypeStr = "";
             if (dataArr[index]["Subtype"]) {
                 switch (parseInt(dataArr[index]["Type"])) {
