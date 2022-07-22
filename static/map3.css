@@ -383,6 +383,12 @@ img {
 #floorNavMobile {
   display:none;
 }
+.nav1, .nav2 {
+  color:white !important;
+}
+.nav1:hover, .nav2:hover {
+  color:white !important;
+}
 #iMap:hover {cursor: -webkit-grab; cursor: grab;}
 #iMap:active {cursor: -webkit-grabbing; cursor: grabbing;}
 .courseNm {

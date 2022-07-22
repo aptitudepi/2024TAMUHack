@@ -7,23 +7,73 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
 <style>
-html {
-	width:100%;
-}
-h1 {
-	margin-top:12px;
-}
-body {
-  font-family: 'Montserrat', sans-serif;
-}
-@media (max-width:820px) {
-  .card-body p {
-  	text-align:center;
+  html {
+    width: 100%;
   }
-  hr {
-  	display:block;
+
+  h1 {
+    margin-top: 12px;
   }
-}
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .eventPopup {
+    display: none;
+    width: 400px;
+    background-color: #eeeeee;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 99;
+  }
+
+  .eventNameC {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    width: 100%;
+    padding: 10px;
+    padding-left: 14px;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  .closeDetails {
+    padding: 0px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .closeDetails:hover {
+    cursor: pointer;
+  }
+
+  .eventName,
+  .eventPopup p {
+    margin: 0px;
+    padding: 2px;
+    padding-left: 14px;
+  }
+
+  .eventName {
+    padding: 0px;
+  }
+
+  @media (max-width:820px) {
+    .card-body p {
+      text-align: center;
+    }
+
+    hr {
+      display: block;
+    }
+  }
 </style>
 {% endblock %}
 
@@ -37,53 +87,376 @@ body {
   <hr style="height:2px;">
   <div style="height:18px;"></div>
   <p>Stay up to date with what's going on in the STEAM Center!</p>
-  
+
   <hr style="height:2px;background-color:black;width:50%;display:none;">
   <p id="calStatus">Loading calendar...</p>
+  <div class="eventPopup">
+    <div class="eventNameC">
+      <div>
+        <h4 class="eventName">Event</h4>
+      </div>
+      <div class="closeDetails">X</div>
+    </div>
+    <p class="eventClub">Club</p>
+    <p class="eventTiming">Timing</p>
+    <p class="eventAttend">Max Attendees</p>
+    <p class="eventDescription">Description</p>
+  </div>
   <div id="calendarContainer">
     <!-- this will be auto-populated by fullcalendar library -->
   </div>
+  <br>
+  <h3 class="upcomingTxt">My Upcoming Events</h3>
+  <h6 class="noEventTxt">No events to display.</h6>
+  <div class="row">
+    <div class="col-6">
+      <div class="list-group" id="list-tab" role="tablist"></div>
+    </div>
+    <div class="col-6">
+      <div class="tab-content" id="nav-tabContent"></div>
+    </div>
+  </div>
+  <div class="userEmail">{{ email }}</div>
   <script>
-    $(document).ready(function(){
-      currentTime = new Date().getTime();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    var eventsArr;
+    var clubArr;
+    var userArr;
+    var userClubs = [];
+    var upcomingEvents = [];
 
-      fetch('/events/json').then(resp => resp.json()).then(data => {
-        data = data.Items;
-        events = [];
-        // Go through each item from the server and create an event
-        for(i = 0; i < data.length; i++) {
-          item = data[i];
-          //get the start and end attributes and convert them into dates
-          var sDateSplit = item["Start-Date"].split("/");
-          var sTimeSplit = item["Start-Time"].split(":");
-          var eDateSplit = item["End-Date"].split("/");
-          var eTimeSplit = item["End-Time"].split(":");
-          const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
-          const endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
-
-          e = {
-            groupId: "club-" + item["Club"], // if it is null, it will be a generic group
-            title: item["Event-Name"],
-            start: startDate,
-            end: endDate,
-            url: "/events/" + item["ID"],
-            color: "#AAAAAA"
-          };
-          events.push(e);
+    function findClubName(clubId) {
+      for (var index = 0; index < clubArr.length; index++) {
+        if (clubArr[index]["ID"] == clubId) {
+          return clubArr[index]["Club-Name"];
         }
+      }
+      return "";
+    }
+    function getTimeText(startDate, endDate, startTime, endTime) {
+      var startTimeArr = startTime.split(":");
+      var startHours = parseInt(startTimeArr[0]);
+      const startMinutes = parseInt(startTimeArr[1]);
+      var extraZero = "";
+      if (startMinutes < 10) { extraZero = "0"; }
+      var ampm = "am";
+      if (startHours >= 12) {
+        startHours -= 12;
+        ampm = "pm";
+      }
+      const combStartStr = startHours + ':' + startMinutes + extraZero + ' ' + ampm;
+      var combEndStr = "";
+      extraZero = "";
+      try {
+        var endTimeArr = endTime.split(":");
+        var endHours = parseInt(endTimeArr[0]);
+        const endMinutes = parseInt(endTimeArr[1]);
+        if (endMinutes < 10) { extraZero = "0"; }
+        ampm = "am";
+        if (endHours >= 12) {
+          endHours -= 12;
+          ampm = "pm";
+        }
+        combEndStr = endHours + ':' + endMinutes + extraZero + ' ' + ampm;
+      } catch (error) { }
+      var listItemDateTxt = `${startDate} @ ${combStartStr} - ${endDate} @ ${combEndStr}`;
+      if ((startDate == endDate) || (endDate == "")) {
+        if (combEndStr == "") {
+          listItemDateTxt = `${startDate} @ ${combStartStr}`;
+        }
+        listItemDateTxt = `${startDate} from ${combStartStr} to ${combEndStr}`;
+      }
+      return listItemDateTxt;
+    }
+    function changePopupInfo(eventId) {
+      for (var index = 0; index < eventsArr.length; index++) {
+        var currentEvent = eventsArr[index];
+        if (currentEvent["ID"] == eventId) {
+          $(".eventName").text(`${currentEvent["Event-Name"]}`);
+          $(".eventClub").text(`${findClubName(currentEvent["Club"])}`);
+          var eStartDate = currentEvent["Start-Date"];
+          var eStartDateArr = eStartDate.split("/");
+          eStartDate = eStartDateArr[0] + "/" + eStartDateArr[1] + "/" + eStartDateArr[2][2] + eStartDateArr[2][3];
 
-        document.querySelector("#calStatus").innerText = "";
+          var eEndDate = currentEvent["End-Date"];
+          var eEndDateArr = eEndDate.split("/");
+          eEndDate = eEndDateArr[0] + "/" + eEndDateArr[1] + "/" + eEndDateArr[2][2] + eEndDateArr[2][3];
+          var eventTime = getTimeText(eStartDate, eEndDate, currentEvent["Start-Time"], currentEvent["End-Time"]);
+          $(".eventTiming").text(`${eventTime}`);
+          $(".eventAttend").text(`Max attendees: ${currentEvent["Max-Attendees"]}`);
+          $(".eventDescription").text(`${currentEvent["Description"]}`);
+        }
+      }
+    }
+    function populateCalendar() {
+      events = [];
+      // Go through each item from the server and create an event
+      for (i = 0; i < eventsArr.length; i++) {
+        var item = eventsArr[i];
+        //get the start and end attributes and convert them into dates
+        var sDateSplit = item["Start-Date"].split("/");
+        var sTimeSplit = item["Start-Time"].split(":");
+        var eDateSplit = item["End-Date"].split("/");
+        var eTimeSplit = item["End-Time"].split(":");
+        const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+        const endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+        const club = item["Club"];
+        var clubColor = "#669999";
+        for (var index = 0; index < clubArr.length; index++) {
+          if (clubArr[index]["ID"] == club) {
+            try {
+              const clubDept = clubArr[index]["Dept"];
+              switch (clubDept) {
+                case "s":
+                  clubColor = "#8ac926";
+                  break;
+                case "t":
+                  clubColor = "#1982c4";
+                  break;
+                case "e":
+                  clubColor = "#b4a7d6";
+                  break;
+                case "a":
+                  clubColor = "#f6b26b";
+                  break;
+                case "m":
+                  clubColor = "#e06666";
+                  break;
+                default:
+                  clubColor = "#669999";
+                  break;
+              }
+            }
+            catch (error) { }
+          }
+        }
+        if (checked) {
+          clubColor = "#242424";
+        }
+        e = {
+          groupId: "club-" + club, // if it is null, it will be a generic group
+          title: item["Event-Name"],
+          start: startDate,
+          end: endDate,
+          url: "#event" + item["ID"],
+          color: clubColor
+        };
+        events.push(e);
+      }
 
-        // Initialize the calendar using the events list
-        calElement = document.querySelector("#calendarContainer");
-        cal = new FullCalendar.Calendar(calElement, {
-          initialView: 'dayGridMonth',
-          events: events // use events list
+      document.querySelector("#calStatus").innerText = "";
+
+      // Initialize the calendar using the events list
+      calElement = document.querySelector("#calendarContainer");
+      cal = new FullCalendar.Calendar(calElement, {
+        initialView: 'dayGridMonth',
+        events: events // use events list
+      });
+      cal.render();
+    }
+    function createEventEntry(dateRange, eventName, eventId) {
+      var eventEntry = document.createElement("a");
+      eventEntry.classList.add("list-group-item", "list-group-item-action");
+      eventEntry.dataset.toggle = "list";
+      eventEntry.href = `#list-${eventId}`;
+      var eventEntryTxt = document.createTextNode(`${dateRange} ${eventName}`);
+      eventEntry.appendChild(eventEntryTxt);
+      return eventEntry;
+    }
+    function getTimeTextNode(startDate, endDate, startTime, endTime) {
+      var startTimeArr = startTime.split(":");
+      var startHours = parseInt(startTimeArr[0]);
+      const startMinutes = parseInt(startTimeArr[1]);
+      var extraZero = "";
+      if (startMinutes < 10) { extraZero = "0"; }
+      var ampm = "am";
+      if (startHours >= 12) {
+        startHours -= 12;
+        ampm = "pm";
+      }
+      const combStartStr = startHours + ':' + startMinutes + extraZero + ' ' + ampm;
+      var combEndStr = "";
+      extraZero = "";
+      try {
+        var endTimeArr = endTime.split(":");
+        var endHours = parseInt(endTimeArr[0]);
+        const endMinutes = parseInt(endTimeArr[1]);
+        if (endMinutes < 10) { extraZero = "0"; }
+        ampm = "am";
+        if (endHours >= 12) {
+          endHours -= 12;
+          ampm = "pm";
+        }
+        combEndStr = endHours + ':' + endMinutes + extraZero + ' ' + ampm;
+      } catch (error) { }
+      var listItemDateTxt = document.createTextNode(`${startDate} @ ${combStartStr} - ${endDate} @ ${combEndStr}`);
+      if ((startDate == endDate) || (endDate == "")) {
+        if (combEndStr == "") {
+          listItemDateTxt = document.createTextNode(`${startDate} @ ${combStartStr}`);
+        }
+        listItemDateTxt = document.createTextNode(`${startDate} from ${combStartStr} to ${combEndStr}`);
+      }
+      return listItemDateTxt;
+    }
+    function createEventDescription(name, description, startDate, endDate, startTime, endTime, maxAttendees, eventId, club) {
+      var eventDescription = document.createElement("div");
+      eventDescription.classList.add("tab-pane", "fade");
+      eventDescription.id = `list-${eventId}`;
+      var eventTitle = document.createElement("h4");
+      var eventTitleTxt = document.createTextNode(`${name}`);
+      eventTitle.appendChild(eventTitleTxt);
+      eventDescription.appendChild(eventTitle);
+      var eventClub = document.createElement("h5");
+      var eventClubTxt = document.createTextNode(`${findClubName(club)}`);
+      eventClub.appendChild(eventClubTxt);
+      eventDescription.appendChild(eventClub);
+      var eventTiming = document.createElement("P");
+      var eventTimingTxt = getTimeTextNode(startDate, endDate, startTime, endTime);
+      eventTiming.appendChild(eventTimingTxt);
+      eventDescription.appendChild(eventTiming);
+      if (maxAttendees != "") {
+        var eventAttend = document.createElement("P");
+        var eventAttendTxt = document.createTextNode(`Max attendees: ${maxAttendees}`);
+        eventAttend.appendChild(eventAttendTxt);
+        eventDescription.appendChild(eventAttend);
+      }
+      var eventDes = document.createElement("P");
+      var eventDesTxt = document.createTextNode(`${description}`);
+      eventDescription.appendChild(eventDes);
+      eventDes.appendChild(eventDesTxt);
+      return eventDescription;
+    }
+    function getUserClubs() {
+      var userEmailTxt = "";
+      try {
+        userEmailTxt = document.querySelector(".userEmail").textContent;
+      }
+      catch (error) { }
+      if (userEmailTxt != "") {
+        for (var index = 0; index < userArr.length; index++) {
+          if (userArr[index]["User-Email"] == userEmailTxt) {
+            userClubs = userArr[index]["Clubs-Joined"];
+            break;
+          }
+        }
+      }
+    }
+    function getUpcomingEvents() {
+      upcomingEvents = [];
+      if ((userClubs[0] != "All") && (userClubs[0] != null)) {
+        for (var index = 0; index < userClubs.length; index++) {
+          for (var index2 = 0; index2 < eventsArr.length; index2++) {
+            var currentEvent = eventsArr[index2];
+            if (currentEvent["Club"] == userClubs[index]) {
+              var sDateSplit = currentEvent["Start-Date"].split("/");
+              var sTimeSplit = currentEvent["Start-Time"].split(":");
+              const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+              var endDate = startDate;
+              try {
+                var eDateSplit = currentEvent["End-Date"].split("/");
+                var eTimeSplit = currentEvent["End-Time"].split(":");
+                endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+              } catch (error) { }
+              var today = new Date();
+              //make sure only recent events are pushed
+              if (endDate >= today) {
+                upcomingEvents.push(currentEvent);
+              }
+            }
+          }
+        }
+      } else {
+        for (var index2 = 0; index2 < eventsArr.length; index2++) {
+          var currentEvent = eventsArr[index2];
+          var sDateSplit = currentEvent["Start-Date"].split("/");
+          var sTimeSplit = currentEvent["Start-Time"].split(":");
+          const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+          var endDate = startDate;
+          try {
+            var eDateSplit = currentEvent["End-Date"].split("/");
+            var eTimeSplit = currentEvent["End-Time"].split(":");
+            endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+          } catch (error) { }
+          var today = new Date();
+          //make sure only recent events are pushed
+          if (endDate >= today) {
+            upcomingEvents.push(currentEvent);
+          }
+        }
+      }
+    }
+
+    $(document).ready(function () {
+      $(".userEmail").css("display", "none");
+      currentTime = new Date().getTime();
+      const fetch1 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+      const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+      const fetch3 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+      Promise.all([fetch1, fetch2, fetch3]).then(function (JsonData) {
+        eventsArr = JsonData[0]["Items"];
+        clubArr = JsonData[1]["Items"];
+        userArr = JsonData[2]["Items"];
+        populateCalendar();
+        //update upcoming events
+        var eventListC = document.querySelector(".list-group");
+        var descriptionListC = document.querySelector(".tab-content");
+        $(".noEventTxt").css("display", "block");
+        getUserClubs();
+        getUpcomingEvents();
+        try {
+          for (var index = 0; index < upcomingEvents.length; index++) {
+            var currentEvent = upcomingEvents[index];
+            $(".noEventTxt").css("display", "none");
+            var dateRange = "";
+            const startDate = currentEvent["Start-Date"];
+            var cleanedSDate = startDate.split("/");
+            cleanedSDate = cleanedSDate[0] + "/" + cleanedSDate[1] + "/" + cleanedSDate[2][2] + cleanedSDate[2][3];
+            const endDate = currentEvent["End-Date"];
+            var cleanedEDate = "";
+            if ((startDate == endDate) || (endDate == "")) {
+              dateRange = cleanedSDate;
+            } else {
+              cleanedEDate = endDate.split("/");
+              cleanedEDate = cleanedEDate[0] + "/" + cleanedEDate[1] + "/" + cleanedEDate[2][2] + cleanedEDate[2][3];
+              dateRange = cleanedSDate + " - " + cleanedEDate;
+            }
+            eventListC.appendChild(createEventEntry(dateRange, currentEvent["Event-Name"], currentEvent["ID"]));
+            descriptionListC.appendChild(createEventDescription(currentEvent["Event-Name"], currentEvent["Description"], cleanedSDate, cleanedEDate, currentEvent["Start-Time"], currentEvent["End-Time"], currentEvent["Max-Attendees"], currentEvent["ID"], currentEvent["Club"]));
+          }
+        }
+        catch (error) { }
+        $(".list-group-item").on("click", function () {
+          $(".list-group-item").removeClass("active");
+        $(".list-group-item").css("background-color","white");
+        $(this).addClass("active");
+        $(".tab-pane").removeClass("show");
+        $(".tab-pane").removeClass("active");
+        var thisEventId = $(this).prop("href").split("#list-")[1];
+        $(`#list-${thisEventId}`).addClass("show");
+        $(`#list-${thisEventId}`).addClass("active");
+        if (checked) {
+          $(".list-group-item.active").css("background-color", "#242424");
+        } else {
+          $(".list-group-item.active").css("background-color", "#007bff");
+        }
         });
-        cal.render();
       }).catch(error => {
         document.querySelector("#calStatus").innerText = "Failed to load calendar, please try again later";
       });
+      window.addEventListener('hashchange', function () {
+        var eventId = window.location.hash.replace("#event", "");
+        changePopupInfo(eventId);
+        $(".eventPopup").css("display", "block");
+        window.location.hash = "#";
+        //disable scrolling
+        window.onscroll = function () { window.scrollTo(scrollLeft, scrollTop); };
+      });
+    });
+    $(".closeDetails").on("click", function () {
+      $(".eventPopup").css("display", "none");
+      //disable scrolling
+      window.onscroll = function () { };
     });
   </script>
 </div>
@@ -91,4 +464,3 @@ body {
 {% include "components/footer.html" %}
 
 {% endblock %}
-

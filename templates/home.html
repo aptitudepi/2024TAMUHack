@@ -42,6 +42,12 @@
       color:#004a99;
       text-decoration:underline;
     }
+    .specialPageLink {
+      color:white !important;
+    }
+    .specialPageLink:hover {
+      color:white !important;
+    }
     .navbar {
       position: relative;
       display: flex;
@@ -121,7 +127,7 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item active"><!--{{ url_for('static', filename='map3.css') }}-->
+          <div class="carousel-item active">
             <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel1.jpg') }}" alt="STEAM Center picture 1">
           </div>
           <div class="carousel-item">
@@ -250,7 +256,7 @@
               Discover STEAM-related clubs!
             </div>
             <div class="body-text" style="color: white">
-              Trying to join a club but don't have enough information? Use our detailed <a href="clubs" class="pageLink" style="color: white" alt="Clubs page link">club listing</a> to find out more!
+              Trying to join a club but don't have enough information? Use our detailed <a href="clubs" class="pageLink specialPageLink" alt="Clubs page link">club listing</a> to find out more!
             </div>
         </div>
         <div class = "col-lg-4">
@@ -284,7 +290,7 @@
       </div>
   </div>
 </div>
-
+<div class="userEmail">{{ email }}</div>
 {% include "components/footer.html" %}
 
 {% endblock %}

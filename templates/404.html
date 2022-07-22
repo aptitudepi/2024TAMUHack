@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}404{% endblock %}
+
+{% block head %}
+  <style>
+    body {
+        width: 100%;
+    }
+    html, body{
+      scroll-behavior: smooth;
+      overflow-x:hidden;
+      max-width:100%;
+    }
+    .background-image{
+      background-image: url("{{ url_for('static', filename='RealCoursesPic.jpg') }}");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      width: 100%;
+      height: 50vh;
+      position: relative;
+    }
+    .title-text{
+      z-index: 1;
+      text-align: center;
+      color: white;
+      /*padding-top: 7%;*/
+      font-family: 'Asap';
+      font-weight: bold;
+      /*font-size: 500%;*/
+      font-size:11vmin;
+      line-height: 1.1;
+    }
+    .title-textC {
+      height:100%;
+      background-color:rgba(0,0,0,0.65);
+    }
+  @media (max-height: 820px){
+  .title-text{
+    font-size:11vmin;
+  }
+}
+@media (max-width: 575px){
+  .title-textC{
+    padding-top:15vw;
+  }
+}
+@media (max-height: 550px){
+  .title-textC{
+    font-size:11vmin;
+    padding-top:10vh;
+  }
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page10"></section>
+<div class="row">
+  <div class = "col-lg-12">
+    <div class="background-image">
+      <div class="title-textC jumbotron">
+      <div class="title-text">
+        Page not found. Try another!
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="userEmail">{{ email }}</div>
+{% include "components/footer.html" %}
+
+<script>
+
+</script>
+
+{% endblock %}

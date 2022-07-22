@@ -1,24 +1,23 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, request, Response, jsonify
+from flask import Flask, render_template, request, Response, jsonify, abort, request_started, session, redirect
 import awsController
 import json
 import secrets
 import binascii
 import math
 import time
+import os
 from datetime import datetime, timezone, timedelta
+from google_auth_oauthlib.flow import Flow
+from google.oauth2 import id_token
+import google.auth.transport.requests
+import requests
+import cachecontrol
+import pathlib
 
-# Google authentication libraries
-#from google.oauth2 import id_token as gid_token
-#from google.auth.transport import requests as grequests
 
-app = Flask(__name__, static_url_path="/static", static_folder="static")
+
 #app.config.from_envvar('CONFIG')
-
-
-#googleClientId = app.config.get("GOOGLE_CLIENT_ID")
-
-#hostprefix = app.config.get("PERMALINK_PREFIX")
 
 #timeshift = app.config.get("TIMEZONE_SHIFT")
 
@@ -63,41 +62,93 @@ class User:
     self.displayName = name
     self.clubs = clubs
 
+#make sure user is logged in for certain pages
+def dashboard_login_is_required(function):
+  def wrapper(*args, **kwargs):
+    if "google_id" not in session:
+      return abort(403) # forbidden
+    else:
+      return function()
+  return wrapper
+def management_login_is_required(function):
+  def wrapperm(*args, **kwargs):
+    if "google_id" not in session:
+      return abort(403) # forbidden
+    else:
+      return function()
+  return wrapperm
+def map_login_is_required(function):
+  def wrappers(*args, **kwargs):
+    if "google_id" not in session:
+      return abort(403) # forbidden
+    else:
+      return function()
+  return wrappers
+
+def get_user_email():
+  userEmail = ""
+  try: 
+    userEmail = session["email"]
+  except:
+    print("Could not get email")
+  return userEmail
+  
+def get_user_name():
+  userName = ""
+  try: 
+    userName = session["name"]
+  except:
+    print("Could not get email")
+  return userName
+
 @app.route("/")
 def landing():
-  return render_template("home.html")
+  return render_template("home.html", email=get_user_email())
 
 @app.route("/about")
 def route_about():
-  return render_template("about.html")
+  return render_template("about.html", email=get_user_email())
 
 @app.route("/courses")
 def route_courses():
-  return render_template("courses.html")
+  return render_template("courses.html", email=get_user_email())
 
 @app.route("/explore")
+@map_login_is_required
 def route_map():
-  return render_template("map.html")
+  return render_template("map.html", email=get_user_email())
 
-@app.route("/clubs")
+@app.route("/clubs", methods=['POST', 'GET'])
 def route_clubs_list():
-  return render_template("clubs.html")
+  if (request.method == "POST"):
+    clubAddData = request.get_json()
+    if (clubAddData["email"] == session["email"]):
+      awsController.add_club(session["email"], session["name"], clubAddData["clubID"])
+  return render_template("clubs.html", email=get_user_email())
 
 @app.route("/clubs/json")
 def route_clubs_data():
   return jsonify(Items=awsController.get_club_items())
 
-@app.route("/service")
+@app.route("/service", methods=['POST', 'GET'])
 def route_service():
-  return render_template("service.html")
+  if (request.method == "POST"):
+    serviceAddData = request.get_json()
+    if (serviceAddData["email"] == session["email"]):
+      awsController.add_user_service(session["email"], session["name"], serviceAddData["serviceID"])
+  return render_template("service.html", email=get_user_email())
+
+@app.route("/service/json")
+def route_service_data():
+  return jsonify(Items=awsController.get_service_items())
 
 @app.route("/help")
 def route_help():
-  return render_template("help.html")
+  return render_template("help.html", email=get_user_email())
 
 @app.route("/events")
 def route_events():
-  return render_template("events.html")
+  return render_template("events.html", email=get_user_email())
 
 @app.route("/events/json")
 def route_events_data():
@@ -105,235 +156,107 @@ def route_events_data():
 
 @app.route("/gallery")
 def route_gallery():
-  return render_template("gallery.html")
+  return render_template("gallery.html", email=get_user_email())
 
 @app.route("/archive")
 def route_archive():
-  return render_template("archive.html")
+  return render_template("archive.html", email=get_user_email())
 
-#@app.route("/login")
-#def route_login():
-#  if checkLoggedIn() != None:
-#    resp = Response("Already logged in")
-#    resp.headers["Location"] = "/management"
-#    return resp, 302
-#  return render_template("login.html", google_client_id=googleClientId)
-'''
-@app.route("/login/google", methods=["POST"])
-def route_login_google():
-  # Process login here
-  gtoken = request.form.get("gtk")
-  if gtoken == None:
-    return "Missing gtk field", 400
+@app.route("/callback")
+def route_callback():
+  flow.fetch_token(authorization_response=request.url)
+  if not session["state"] == request.args["state"]:
+    redirect("/login")
+  credentials = flow.credentials
+  request_session = requests.session()
+  cached_session = cachecontrol.CacheControl(request_session)
+  token_request = google.auth.transport.requests.Request(session=cached_session)
 
-  idinfo = gid_token.verify_oauth2_token(gtoken, grequests.Request(), googleClientId)
+  id_info = id_token.verify_oauth2_token(
+    id_token=credentials.id_token,
+    request=token_request,
+    audience=googleClientId
+  )
+  session["google_id"] = id_info.get("sub")
+  session["email"] = id_info.get("email")
+  session["name"] = id_info.get("name")
+  awsController.check_user(session["email"])
+  oldName = awsController.find_user_name(session["email"])
+  #awsController.rename_user(oldName, session["name"], session["email"])
+  return redirect("/dashboard")
 
-  if idinfo['hd'] != "allenisd.org" and idinfo['hd'] != "student.allenisd.org":
-    return "Only Allen ISD students and staff are authorized to log in", 403
+@app.route("/login")
+def route_login():
+  try:
+    if (session["email"]):
+      return redirect("/dashboard")
+  except:
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+    return redirect(authorization_url)
 
-  userid = idinfo['sub']
-  email = idinfo['email']
-  name = idinfo['name']
+@app.route("/user/json")
+def route_user_data():
+  return jsonify(Items=awsController.get_user_items())
 
-  sqlSetup()
-  cur = db.cursor(prepared=True)
-  cur.execute("SELECT `ID` FROM `users` WHERE `EmailAddress`=%s;", (email,))
-  row = cur.fetchone()
+@app.route("/dashboard")
+@dashboard_login_is_required
+def route_dashboard():
+  return render_template("dashboard.html", email=get_user_email(), name=get_user_name())
 
-  uid = None
+@app.errorhandler(401)
+def access_denied(error):
+  return render_template('401.html', title='401', email=get_user_email()), 401
 
-  if row == None:
-    # account doesn't exist, auto-create one
-    cur.close()
+@app.errorhandler(403)
+def page_forbidden(error):
+  return render_template('403.html', title='403', email=get_user_email()), 403
 
-    cur = db.cursor(prepared=True)
-    cur.execute("INSERT INTO `users` VALUES (null, %s, %s, \"[]\");", (email, name))
-    uid = cur.lastrowid
-    cur.close()
-  else:
-    uid = row[0]
-    cur.close()
+@app.errorhandler(404)
+def page_not_found(error):
+  return render_template('404.html', title='404', email=get_user_email()), 404
 
-  token = binascii.hexlify(secrets.token_bytes(32)).decode('utf-8')
-  exp = math.floor(time.time()) + 3600
+@app.route("/unauthorized")
+def route_unauthorized():
+  return abort(401)
 
-  cur = db.cursor(prepared=True)
-  cur.execute("INSERT INTO `sessions` VALUES (null, %s, %s, %s);", (token, exp, uid))
-  cur.close()
+@app.route("/forbidden")
+def route_forbidden():
+  return abort(403)
 
-  db.commit()
+@app.route("/page-not-found")
+def route_page_not_found():
+  return abort(404)
 
-  resp = Response("Success, sending to landing")
-  resp.headers['Location'] = "/management"
-  resp.set_cookie('session', token, expires=exp, secure=True, httponly=True)
-
-  return resp, 302
+@app.route("/management", methods=['POST', 'GET'])
+@management_login_is_required
+def route_management():
+  if (request.method == "POST"):
+    editData = request.get_json()
+    try:
+      editInfo = editData["Club"]
+      editMembers = editData["Member"]
+      awsController.edit_club_info(editInfo["Club-Name"], editInfo["ID"], editInfo["Description"], editInfo["Leaders"], editInfo["Location"], editInfo["Meeting"], editInfo["Social"], editInfo["Sponsors"], editInfo["Subtype"], editInfo["Type"], editInfo["Website"], editInfo["Add-Owners"], editInfo["Remove-Owners"])
+      awsController.edit_club_member(editMembers["Members-Add"], editMembers["Members-Remove"], editInfo["ID"])
+    except:
+      print("not club data")
+    try:
+      editEvents = editData["Events"]
+      awsController.edit_club_event(editEvents)
+    except:
+      print("not event data")
+    try:
+      editServices = editData["Services"]
+      awsController.edit_club_service(editServices)
+    except:
+      print("not service data")
+  return render_template("management.html", email=get_user_email())
 
 @app.route("/logout")
-def route_logout():
-  resp = Response("Logged out")
-  resp.headers['Location'] = "/"
-  resp.set_cookie('session', '', expires=1, secure=True, httponly=True)
-  return resp, 302
+def logout():
+  session.clear()
+  return redirect("/")
 
-@app.route("/management")
-def route_mgmt_home():
-  user = checkLoggedIn()
-  if user == None:
-    resp = Response("Login is required to view this page")
-    resp.headers["Location"] = "/login"
-    return resp, 302
-
-  clubs = []
-  if len(user.clubs) != 0:
-    # The ID values are derived from the database and are assigned by admins,
-    # so for the time being it is safe to not use prepared statements.
-    query = "SELECT `ID`, `Name` FROM `clubs` WHERE"
-    pos = 0
-    for i in user.clubs:
-      if pos > 0: query = query + " OR"
-      query = query + " `ID`=" + str(i)
-      pos = pos + 1
-
-    query = query + ";"
-
-    cur = db.cursor()
-    cur.execute(query)
-
-    item = cur.fetchone()
-    while item != None:
-      i = dict()
-      i["id"] = item[0]
-      i["name"] = item[1].decode("utf-8")
-      clubs.append(i)
-      item = cur.fetchone()
-
-    cur.close()
-    db.commit()
-  return render_template("mgmt/home.html", clublist=clubs)
-
-def getClub(cid):
-  cur = db.cursor(prepared=True)
-  cur.execute("SELECT `Name`,`ShortName`,`Type`,`Subtype`,`Description`,`Website`,"
-    + "`BannerImage`,`Sponsor`,`Leader`,`Members`,`MeetingTime`,`LocationCampus`,"
-    + "`LocationRoom`,`SocialTwitter`,`SocialGithub`,`SocialDiscord`,`SocialYoutube`,"
-    + "`SocialFacebook`,`SocialInstagram`,`Remind`,`Hidden`,`Verified`"
-    + " FROM `clubs` WHERE `ID`=%s LIMIT 1;", (cid,)
-  )
-
-  i = cur.fetchone()
-  if i == None:
-    cur.close()
-    db.commit()
-    return None
-
-  c = Club(
-    cid,
-    i[0],
-    i[1],
-    i[2],
-    i[3],
-    i[4],
-    i[5],
-    i[6],
-    i[7],
-    i[8],
-    i[9],
-    i[10],
-    i[11],
-    i[12],
-    i[13],
-    i[14],
-    i[15],
-    i[16],
-    i[17],
-    i[18],
-    i[19],
-    (i[20] == 1),
-    (i[21] == 1)
-  )
-
-  cur.close()
-  db.commit()
-
-  return c
-
-@app.route("/management/club/<cid>")
-def route_mgmt_club_landing(cid):
-  cid = int(cid)
-  
-  user = checkLoggedIn()
-  if user == None:
-    resp = Response("Login is required to view this page")
-    resp.headers["Location"] = "/login"
-    return resp, 302
-
-  if cid not in user.clubs:
-    resp = Response("User is not authorized to access this club")
-    resp.headers["Location"] = "/management"
-    return resp, 302
-
-  club = getClub(cid)
-  if club == None:
-    resp = Response("Club does not exist")
-    resp.headers["Location"] = "/management"
-    return resp, 302
-
-  return render_template("mgmt/club-landing.html", club=club)
-
-@app.route("/management/club/<cid>/new-event", methods=['GET','POST'])
-def route_mgmt_club_create_event(cid):
-  cid = int(cid)
-  
-  user = checkLoggedIn()
-  if user == None:
-    resp = Response("Login is required to view this page")
-    resp.headers["Location"] = "/login"
-    return resp, 302
-
-  if cid not in user.clubs:
-    resp = Response("User is not authorized to access this club")
-    resp.headers["Location"] = "/management"
-    return resp, 302
-
-  club = getClub(cid)
-  if club == None:
-    resp = Response("Club does not exist")
-    resp.headers["Location"] = "/management"
-    return resp, 302
-
-  if request.method == "POST":
-    # process update
-    signInCode = binascii.hexlify(secrets.token_bytes(8)).decode('utf-8')
-
-    name = request.form.get("title")
-    day = request.form.get("day")
-    stime = request.form.get("stime")
-    etime = request.form.get("etime")
-    desc = request.form.get("desc")
-    attendees = request.form.get("attendees")
-    
-    # This is probably prone to several different kinds of errors, someone
-    # should improve it
-    sdt = datetime.strptime(day + " " + stime, "%Y-%m-%d %H:%M")
-    st = sdt.replace(tzinfo=timezone(timedelta(hours=timeshift))).timestamp()
-
-    edt = datetime.strptime(day + " " + etime, "%Y-%m-%d %H:%M")
-    et = edt.replace(tzinfo=timezone(timedelta(hours=timeshift))).timestamp()
-
-    cur = db.cursor(prepared=True)
-    cur.execute("INSERT INTO `events` VALUES (NULL, %s, %s, %s, %s, %s, %s, %s);", (
-      name, club.id, st, et, desc, attendees, signInCode
-    ))
-
-    cur.close()
-    db.commit()
-
-    return render_template("mgmt/event-create-success.html", code=signInCode, host=hostprefix, club=club)
-  else:
-    return render_template("mgmt/event-create.html", club=club)
-
-'''
 if __name__ == "__main__":
   app.run(debug=True)
 

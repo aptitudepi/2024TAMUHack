@@ -1,58 +1,72 @@
 <!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% endblock %} - STEAM Life</title>
-<link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/x-icon">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} - STEAM Life</title>
+  <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/x-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='footerPage.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js" crossorigin="anonymous"></script>
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='footerPage.css') }}">
 
-<style>
-body {
-  font-family: 'Montserrat', sans-serif;
-}
-.btn-primary {
-  background:transparent;
-  border:none;
-}
-.loginBtn {
-  background-color:#0d6efd;
-}
-.hcLoginBtn {
-  background-color:#242424 !important;
-}
-.contrastC {
-  user-select:none;
-}
-.contrastCheckbox:checked + .custom-control-label::before {
-  background-color:darkgrey;
-}
-.contrastCheckbox:checked + .custom-control-label::after {
-  background-color:white;
-}
-@media (max-width:991px){
-  .contrastC {
-    margin-left:8px;
-  }
-}
-</style>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
 
-{% block head %}{% endblock %}
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn-primary {
+      background: transparent;
+      border: none;
+    }
+
+    .loginBtn {
+      background-color: #0d6efd;
+    }
+
+    .hcLoginBtn {
+      background-color: #242424 !important;
+    }
+
+    .contrastC {
+      user-select: none;
+    }
+
+    .contrastCheckbox:checked+.custom-control-label::before {
+      background-color: darkgrey;
+    }
+
+    .contrastCheckbox:checked+.custom-control-label::after {
+      background-color: white;
+    }
+
+    @media (max-width:991px) {
+      .contrastC {
+        margin-left: 8px;
+      }
+    }
+  </style>
+
+  {% block head %}{% endblock %}
 
 </head>
+
 <body>
-{% block body %}{% endblock %}
+  {% block body %}{% endblock %}
 </body>
 <script>
   var checked;
@@ -74,12 +88,15 @@ body {
       $(".navbar").css("background-color", "#242424");
       $("img").css("filter", "grayscale(100%)");
       $(".navbar-brand img").css("filter", "brightness(10000%)");
-      $(".dropdown button").hover(function() {
+      $(".dropdown button").hover(function () {
         $(this).css("background-color", "#4B4B4B");
       },
-      function () {
+        function () {
           $(this).css("background-color", "#242424");
         });
+      try {
+        //$(".list-group-item.active").css("background-color","#242424 !important");
+      } catch(error) {}
       try {
         $(".pageLink, #returnToList").css("color", "#4B4B4B");
         $(".pageLink, #returnToList").hover(function () {
@@ -88,11 +105,11 @@ body {
           function () {
             $(this).css("color", "#4B4B4B");
           });
-          $(".search-icon").css("background-color", "#242424");
-          $(".fa-search").css("color", "white");
-          $(".roomToggle").css("background-color", "#242424");
-          clearClubListing(clubListing);
-          updateClubListing();
+        $(".search-icon").css("background-color", "#242424");
+        $(".fa-search").css("color", "white");
+        $(".roomToggle").css("background-color", "#242424");
+        clearClubListing(clubListing);
+        updateClubListing();
       } catch (error) { }
     }
     else {
@@ -100,12 +117,15 @@ body {
       $(".navbar").css("background-color", "#0d6efd");
       $("img").css("filter", "none");
       $(".navbar-brand img").css("filter", "brightness(10000%)");
-      $(".dropdown button").hover(function() {
+      $(".dropdown button").hover(function () {
         $(this).css("background-color", "#0067d6");
       },
-      function() {
-        $(this).css("background-color", "#0d6efd");
-      });
+        function () {
+          $(this).css("background-color", "#0d6efd");
+        });
+      try {
+        //$(".list-group-item.active").css("background-color","#007bff !important");
+      } catch(error) {}
       try {
         $(".pageLink, #returnToList").css("color", "#037dff");
         $(".pageLink, #returnToList").hover(function () {
@@ -114,132 +134,173 @@ body {
           function () {
             $(this).css("color", "#037dff");
           });
-          $(".search-icon").css("background-color", "#0d6efd");
-          $(".fa-search").css("color", "black");
-          clearClubListing(clubListing);
-          updateClubListing();
+        $(".search-icon").css("background-color", "#0d6efd");
+        $(".search-icon").css("color", "white");
+        clearClubListing(clubListing);
+        updateClubListing();
       } catch (error) { }
     }
     //page-specific styling
     try {
       switch (currentPage) {
-      case 1:
-        if (checked) {
-          $(".hc1").css("background-color", "#8B8B8B");
-          $(".hc2").css("background-color", "#6B6A6A");
-        }
-        else {
-          $(".bcgMainIcon").css("filter", "opacity(65%)");
-          $(".hc1").css("background-color", "#1982c4");
-          $(".hc2").css("background-color", "#6a4c93");
-        }
-      case 2:
-        try {
-          clearTimeline();
-          updateTimeline();
-        } catch (error) { }
-        if (checked) {
-          $(".hc1").css("background-color", "#8B8B8B");
-          $(".hc2").css("background-color", "#6B6A6A");
-          $(".bioTitle").css("background-color", "#828282");
-          $(".phase2Dark").css("background-color", "#828282");
-          $(".bioTxt").css("background-color", "#ADADAD");
-          $(".phase2").css("background-color", "#ADADAD");
-        }
-        else {
-          $(".hc1").css("background-color", "#1982c4");
-          $(".hc2").css("background-color", "#8ac926");
-          $(".bioTitle").css("background-color", "#1778b5");
-          $(".phase2Dark").css("background-color", "#59b300");
-          $(".bioTxt").css("background-color", "#1d96e2");
-          $(".phase2").css("background-color", "#73e600");
-        }
-      case 3:
-        if (checked) {
-          c6State = $(".imgC6").css("display");
-          c6MobileState = $(".imgC6Mobile").css("display");
-          legendState = $(".legendC").css("display");
-          legendMobileState = $(".legendCMobile").css("display");
-          $(".imgC6, .imgC6Mobile, .legendC, .legendCMobile").css("display", "none");
-          nav1CColor = $(".nav1C").css("background-color");
-          nav2CColor = $(".nav2C").css("background-color");
-          $(".nav1, .nav2").css("background-color", "#242424");
-          $(".nav1, .nav2").css("color", "white");
-        }
-        else {
-          $(".imgC6").css("display", c6State);
-          $(".imgC6Mobile").css("display", c6MobileState);
-          $(".legendC").css("display", legendState);
-          $(".legendCMobile").css("display", legendMobileState);
-          $(".roomToggle").css("background-color", "#34a1e5");
-          $(".nav1, .nav2").css("background-color", "#0d6efd");
-          $(".nav1C").css("background-color", nav1CColor);
-          $(".nav2C").css("background-color", nav2CColor);
-        }
-      case 4:
-        if (checked) {
-          $("#circle1, #circle2, #circle3, #circle4, #circle5").css("border", "12px solid #242424");
-          $(".science-descriptions, .technology-descriptions, .engineering-descriptions, .art-descriptions, .math-descriptions").css("background-color", "#242424");
-          $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
-        }
-        else {
-          $("#circle1").css("border", "12px solid #63a11b");
-          $("#circle2").css("border", "12px solid #1982c4");
-          $("#circle3").css("border", "12px solid #6a4c93");
-          $("#circle4").css("border", "12px solid #DCA000");
-          $("#circle5").css("border", "12px solid #E22739");
-          $(".science-descriptions").css("background-color", "#63a11b");
-          $(".technology-descriptions").css("background-color", "#1982c4");
-          $(".engineering-descriptions").css("background-color", "#6a4c93");
-          $(".art-descriptions").css("background-color", "#DCA000");
-          $(".math-descriptions").css("background-color", "#E22739");
-          $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
-        }
-      case 5:
-        if (checked) {
-          $(".btn-outline-primary").css("background-color", "#242424");
-          $(".btn-outline-primary").css("color", "white");
-        }
-        else {
-          $(".btn-outline-primary").css("background-color", "#0d6efd");
-        }
-      case 7: //service page
-        if (checked) {
-          $(".btn-outline-primary, .pageBtn a").css("background-color", "#242424");
-          $(".btn-outline-primary, .pageBtn a").css("color", "white");
-          $(".colorGrid").css("display", "none");
-          clearServiceListing(subServiceDisplay);
-          updateServiceListing();
-          showSelectedPage(page);
-        }
-        else {
-          $(".btn-outline-primary, .pageBtn a").css("background-color", "#0d6efd");
-          $(".colorGrid").css("display", "flex");
-          clearServiceListing(subServiceDisplay);
-          updateServiceListing();
-          showSelectedPage(page);
-        }
-      case 10:
-        if (checked) {
-          $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
-          $(".faq-descriptions").css("background-color", "#242424");
-        }
-        else {
-          $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
-          $(".faq-descriptions").css("background-color", "#63a11b");
-        }
-      case 11:
-        if (checked) {
-          $(".loginBtn").addClass("hcLoginBtn");
-        }
-        else {
-          $(".loginBtn").removeClass("hcLoginBtn");
-        }
-    }
-  } catch (error) { }
+        case 1:
+          if (checked) {
+            $(".hc1").css("background-color", "#e0e00d !important");//used to be #8B8B8B
+            $(".hc2").css("background-color", "#e0e00d !important");//used to be #6B6A6A
+          }
+          else {
+            $(".bcgMainIcon").css("filter", "opacity(65%)");
+            $(".hc1").css("background-color", "#1982c4 !important");//used to be #1982c4
+            $(".hc2").css("background-color", "#6a4c93 !important");//used to be #6a4c93
+          }
+        case 2:
+          try {
+            clearTimeline();
+            updateTimeline();
+          } catch (error) { }
+          if (checked) {
+            $(".hc1").css("background-color", "#e0e00d");
+            $(".hc2").css("background-color", "#e0e00d");
+            $(".bioTitle").css("background-color", "#e0e00d");
+            $(".phase2Dark").css("background-color", "#e0e00d");
+            $(".bioTxt").css("background-color", "#e0e00d");
+            $(".phase2").css("background-color", "#e0e00d");
+          }
+          else {
+            $(".hc1").css("background-color", "#1982c4");
+            $(".hc2").css("background-color", "#8ac926");
+            $(".bioTitle").css("background-color", "#1778b5");
+            $(".phase2Dark").css("background-color", "#59b300");
+            $(".bioTxt").css("background-color", "#1d96e2");
+            $(".phase2").css("background-color", "#73e600");
+          }
+        case 3:
+          if (checked) {
+            c6State = $(".imgC6").css("display");
+            c6MobileState = $(".imgC6Mobile").css("display");
+            legendState = $(".legendC").css("display");
+            legendMobileState = $(".legendCMobile").css("display");
+            $(".imgC6, .imgC6Mobile, .legendC, .legendCMobile").css("display", "none");
+            nav1CColor = $(".nav1C").css("background-color");
+            nav2CColor = $(".nav2C").css("background-color");
+            $(".nav1, .nav2, .nav3").css("background-color", "#242424");
+            $(".nav1, .nav2, .nav3").css("color", "white");
+            $(".roomToggle").css("z-index", "99");
+            $(".imgC3, .imgC4").css("z-index", "99");
+          }
+          else {
+            $(".imgC6").css("display", c6State);
+            $(".imgC6Mobile").css("display", c6MobileState);
+            $(".legendC").css("display", legendState);
+            $(".legendCMobile").css("display", legendMobileState);
+            $(".roomToggle").css("background-color", "#34a1e5");
+            $(".nav1, .nav2").css("background-color", "#0d6efd");
+            $(".nav3").css("background-color", "white");
+            $(".nav3").css("color", "black");
+            $(".nav1C").css("background-color", nav1CColor);
+            $(".nav2C").css("background-color", nav2CColor);
+          }
+        case 4:
+          if (checked) {
+            $("#circle1, #circle2, #circle3, #circle4, #circle5").css("border", "12px solid #242424");
+            $(".science-descriptions, .technology-descriptions, .engineering-descriptions, .art-descriptions, .math-descriptions").css("background-color", "#242424");
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
+          }
+          else {
+            $("#circle1").css("border", "12px solid #63a11b");
+            $("#circle2").css("border", "12px solid #1982c4");
+            $("#circle3").css("border", "12px solid #6a4c93");
+            $("#circle4").css("border", "12px solid #DCA000");
+            $("#circle5").css("border", "12px solid #E22739");
+            $(".science-descriptions").css("background-color", "#63a11b");
+            $(".technology-descriptions").css("background-color", "#1982c4");
+            $(".engineering-descriptions").css("background-color", "#6a4c93");
+            $(".art-descriptions").css("background-color", "#DCA000");
+            $(".math-descriptions").css("background-color", "#E22739");
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
+          }
+        case 5:
+          if (checked) {
+            $(".list-group-item.active").css("background-color","#242424");
+            $(".btn-outline-primary, .btn-primary").css("background-color", "#242424");
+            $(".btn-outline-primary, .btn-primary").css("color", "white");
+          }
+          else {
+            $(".list-group-item.active").css("background-color","#007bff");
+            $(".btn-outline-primary, .btn-primary").css("background-color", "#0d6efd");
+          }
+        case 6:
+          if (checked) {
+            $(".list-group-item.active").css("background-color","#242424");
+            $(".list-group-item-action.active").css("background-color","#242424");
+            $(".fc-event-main-frame").css("background-color", "#242424");
+          } else {
+            $(".list-group-item.active").css("background-color","#007bff");
+            $(".list-group-item-action.active").css("background-color","#007bff");
+          }
+        case 7: //service page
+          if (checked) {
+            $(".btn-outline-primary, .pageBtn a").css("background-color", "#242424");
+            $(".btn-outline-primary, .pageBtn a").css("color", "white");
+            $(".colorGrid").css("display", "none");
+            $(".serviceSignUpBtn").css("background-color","#242424");
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
+            showSelectedPage(page);
+          }
+          else {
+            $(".btn-outline-primary, .pageBtn a").css("background-color", "#0d6efd");
+            $(".colorGrid").css("display", "flex");
+            $(".serviceSignUpBtn").css("background-color","#0d6efd");
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
+            showSelectedPage(page);
+          }
+        case 10:
+          if (checked) {
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
+            $(".faq-descriptions").css("background-color", "#242424");
+          }
+          else {
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
+            $(".faq-descriptions").css("background-color", "#63a11b");
+          }
+        case 11:
+          if (checked) {
+            $(".list-group-item").css("border-left","none");
+            $(".list-group-item.active").css("background-color","#242424");
+            $(".loginBtn").addClass("hcLoginBtn");
+          }
+          else {
+            $(".list-group-item.active").css("background-color","#007bff");
+            $(".loginBtn").removeClass("hcLoginBtn");
+          }
+        case 12:
+          if (checked) {
+            $(".visitPage, .addEventBtn, .editEventBtn, .addServiceBtn, .editServiceBtn").css("background-color","#ffc107");
+            $(".btn-warning").css("color", "white");
+            $(".btn-danger").css("background-color","#ffc107");
+            $(".btn-success").css("background-color","#ffc107");
+            $(".clubMNav").css("color", "black");
+          }
+          else {
+            $(".visitPage, .addEventBtn, .editEventBtn, .addServiceBtn, .editServiceBtn").css("background-color","#007bff");
+            $(".btn-warning").css("color", "white");
+            $(".btn-danger").css("background-color","#dc3545");
+            $(".btn-success").css("background-color","#28a745");
+            $(".clubMNav").css("color", "#6289E4");
+            $(".clubMNav.active").css("color", "black");
+            $(".clubMNav").on("click", function() {
+              $(".clubMNav").css("color", "#6289E4");
+              $(".clubMNav.active").css("color", "black");
+            });
+            $(".clubMNav.active").css("color", "black");
+          }
+      }
+    } catch (error) { }
   }
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     //on startup, check high contrast state
     if (localStorage.getItem("checked") == null) {
       localStorage.setItem("checked", "0");
@@ -249,26 +310,56 @@ body {
     else {
       checked = parseInt(localStorage.getItem("checked"));
     }
+    $(".userEmail").css("display", "none");
+    if ($(".userEmail").text() != "") {
+      $("#logInBtn").text("Log Out");
+    } else { $("#dashboardBtn").parent().css("display", "none"); }
     highContrast();
+    /*try {
+    $(".list-group-item").on("click", function() {
+              console.log("here");
+              console.log($(".list-group-item").prop("class"));
+    }, function() {
+      console.log("here2");
+      console.log($(".list-group-item").prop("class"));
+    });
+  } catch(error) { console.log(error); }*/
   });
-  
-  $("#aboutBtn").on("click", function() {
-    window.location.href="/about";
+
+  $("#aboutBtn").on("click", function () {
+    window.location.href = "/about";
   });
-  $("#faqBtn").on("click", function() {
-    window.location.href="/help";
+  $("#faqBtn").on("click", function () {
+    window.location.href = "/help";
   });
-  $("#logInBtn").on("click", function() {
-    window.location.href="/login";
+  $("#logInBtn").on("click", function () {
+    if ($(".userEmail").text() != "") {
+      window.location.href = "/logout";
+    } else {
+      window.location.href = "/login";
+    }
   });
-  $(".contrastCheckbox").on("click", function() {
+  $("#dashboardBtn").on("click", function () {
+    window.location.href = "/dashboard";
+  });
+  $(".contrastCheckbox").on("click", function () {
     //invert the value of checked as type int
     if (checked == 0) { checked = 1; }
     else if (checked == 1) { checked = 0; }
     localStorage.setItem("checked", checked.toString());
     //change page styling every time the toggle is pressed
     highContrast();
+    /*try {
+    $(".list-group-item").on("click", function() {
+              console.log("here3");
+              console.log($(".list-group-item").prop("class"));
+    }, function() {
+      console.log("here4");
+      console.log($(".list-group-item").prop("class"));
+    });
+    } catch(error) { console.log(error); }*/
   });
-  
+
 </script>
+
 </html>

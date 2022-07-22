@@ -1,0 +1,650 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block head %}
+
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .mainTxt {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    color: black;
+  }
+
+  .bcgMainIcon {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transform: scale(2.5);
+    filter: opacity(65%);
+  }
+
+  .carousel-inner {
+    border-radius: 20px;
+  }
+
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .pageLink:hover {
+    text-decoration: none;
+  }
+
+  .body-text {
+    font-family: 'Montserrat';
+    margin: 0;
+    margin-top: 5px;
+    font-size: 24px;
+  }
+
+  @media (max-width:575px) {
+    .ownedClubsC {
+      margin-top:20px;
+    }
+  }
+
+  @media (max-width:768px) {
+    .totalServiceHTxt {
+      font-size:20px;
+      width:100%;
+    }
+  }
+  @media (max-width:991px) {
+    .bcgMainIcon {
+      display: none;
+    }
+
+    .mainTxt {
+      text-align: center;
+    }
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page11"></section>
+<br>
+<div class="container mt-2">
+  <div class="topContainer">
+    <div style="height:6px;"></div>
+    <h1>Dashboard</h1>
+    <hr style="height:2px;">
+    <div style="height:18px;"></div>
+  </div>
+  <div class="container-fluid">
+    <div class="row justify-content-around align-items-center">
+      <div class="col-lg-4 mb-2">
+        <div class="mainTxt">
+          <div>
+            <img class="bcgMainIcon" loading="lazy" src="{{ url_for('static', filename='steam-life-icon.svg') }}"
+              alt="STEAM Life logo" />
+            <span style="font-family: 'Asap'; font-weight: bold; font-size: 5.5vh;">
+              Welcome, {{ name }}!<br>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="carouselExampleIndicators" class="carousel slide col-lg-6" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel1.jpg') }}"
+              alt="STEAM Center picture 1">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel2.jpg') }}"
+              alt="STEAM Center picture 2">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel3.jpg') }}"
+              alt="STEAM Center picture 3">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel4.jpg') }}"
+              alt="STEAM Center picture 4">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel5.jpg') }}"
+              alt="STEAM Center picture 5">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel7.jpg') }}"
+              alt="STEAM Center picture 6">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel8.jpg') }}"
+              alt="STEAM Center picture 7">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100 rounded" src="{{ url_for('static', filename='carousel9.jpg') }}"
+              alt="STEAM Center picture 8">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
+    <h2>My Clubs</h2>
+    <div class="container">
+      <div class="row" style="margin-top:10px;">
+        <div class="col-sm">
+          <h4>Joined Clubs</h4>
+          <h6 class="noJClubTxt">No clubs to display.</h6>
+          <div class="list-group joinedListing"></div>
+        </div>
+        <div class="col-sm ownedClubsC">
+          <h4>Owned Clubs</h4>
+          <h6 class="noOClubTxt">No clubs to display.</h6>
+          <div class="list-group ownedListing"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
+    <h2>My Events</h2>
+    <div class="container">
+      <div class="row" style="margin-top:10px;">
+        <div class="col-6">
+          <h4>Upcoming Events</h4>
+          <h6 class="noEventTxt">No events to display.</h6>
+          <div class="list-group eventsList-Group" id="list-tab" role="tablist"></div>
+        </div>
+        <div class="col-6">
+          <div style="margin-top:40px;"></div>
+          <div class="tab-content eventsTab-Content" id="nav-tabContent"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
+    <h2>My Service</h2>
+    <div class="container">
+      <div class="row" style="margin-top:10px;">
+        <div class="col-12">
+          <h4 class="totalServiceHTxt">Total STEAM Service Hours: <span class="steamService"></span></h4>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <div class="col-6">
+          <h4>Upcoming Service</h4>
+          <h6 class="noServiceTxt">No service to display.</h6>
+          <div class="list-group serviceList-Group" id="list-tab" role="tablist"></div>
+        </div>
+        <div class="col-6">
+          <div style="margin-top:40px;"></div>
+          <div class="tab-content serviceTab-Content" id="nav-tabContent"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
+    <h2>Ask A Question</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <p class="body-text">
+            <a href="https://forms.gle/Y1rxheJaKSFgFoWb8" class="pageLink" target="_blank"
+              alt="Ask a question form link">Question Link</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
+  </div>
+  <div class="userEmail">{{ email }}</div>
+</div>
+{% include "components/footer.html" %}
+
+<script>
+  var userArr;
+  var clubsArr;
+  var eventsArr;
+  var serviceArr;
+  var userClubs = [];
+  var userOClubs = [];
+  var userService = [];
+  var upcomingEvents = [];
+  var upcomingService = [];
+
+  function repositionFooter() {
+    $('.footerC').css("position", "relative");
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset) + $('.footerC').outerHeight();
+    if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+    else { $('.footerC').css("position", "relative"); }
+  }
+  function unwrapClubs(clubList) {
+    var newClubsList = [];
+    if (clubList[0] == "All") {
+      for (var index = 0; index < clubsArr.length; index++) {
+        newClubsList.push(clubsArr[index]["ID"]);
+      }
+      return newClubsList;
+    }
+    return clubList;
+  }
+  function findClubName(clubId) {
+    for (var index = 0; index < clubsArr.length; index++) {
+      if (clubsArr[index]["ID"] == clubId) {
+        return clubsArr[index]["Club-Name"];
+      }
+    }
+    return "";
+  }
+  function findClubDept(clubId) {
+    for (var index = 0; index < clubsArr.length; index++) {
+      if (clubsArr[index]["ID"] == clubId) {
+        return clubsArr[index]["Dept"];
+      }
+    }
+    return "";
+  }
+  function findUserName(userId) {
+    for (var index = 0; index < userArr.length; index++) {
+      if (userArr[index]["ID"] == userId) {
+        return userArr[index]["User-Name"];
+      }
+    }
+    return "";
+  }
+  function getUserData() {
+    var userEmailTxt = "";
+    try {
+      userEmailTxt = document.querySelector(".userEmail").textContent;
+    }
+    catch (error) { }
+    if (userEmailTxt != "") {
+      for (var index = 0; index < userArr.length; index++) {
+        if (userArr[index]["User-Email"] == userEmailTxt) {
+          userClubs = unwrapClubs(userArr[index]["Clubs-Joined"]);
+          if (userClubs[0] == "") { userClubs = []; }
+          userOClubs = unwrapClubs(userArr[index]["Clubs-Owned"]);
+          if (userOClubs[0] == "") { userOClubs = []; }
+          userService = userArr[index]["Service"];
+          $(".steamService").text(userArr[index]["Hour-Total"]);
+          break;
+        }
+      }
+    }
+  }
+  function getClubEntry(clubId, name, dept, own) {
+    var clubEntry = document.createElement("a");
+    clubEntry.classList.add("list-group-item", "list-group-item-action");
+    if (!own) {
+      clubEntry.href = `/clubs#club-${clubId}`;
+    } else {
+      clubEntry.href = `/management#own-${clubId}`;
+    }
+    var clubEntryTxt = document.createTextNode(`${name}`);
+    clubEntry.appendChild(clubEntryTxt);
+    if (!checked) {
+    switch (dept) {
+      case "s":
+      clubEntry.style.borderLeft = "4px solid #8ac926";
+        break;
+      case "t":
+      clubEntry.style.borderLeft = "4px solid #1982c4";
+        break;
+      case "e":
+      clubEntry.style.borderLeft = "4px solid #6a4c93";
+        break;
+      case "a":
+      clubEntry.style.borderLeft = "4px solid #ffca3a";
+        break;
+      case "m":
+      clubEntry.style.borderLeft = "4px solid #ff595e";
+        break;
+      case "steam":
+      clubEntry.style.borderLeft = "4px solid #669999";
+        break;
+    }
+    }
+    return clubEntry;
+  }
+  function updateClubListing(clubs, listing, own) {
+    for (var index = 0; index < clubs.length; index++) {
+      if (own) { $(".noOClubTxt").css("display", "none"); }
+      else { $(".noJClubTxt").css("display", "none"); }
+      var clubId = clubs[index];
+      listing.appendChild(getClubEntry(clubId, findClubName(clubId), findClubDept(clubId), own));
+    }
+  }
+  function getUpcomingEvents() {
+    upcomingEvents = [];
+    if ((userClubs[0] != "All") && (userClubs[0] != null) && (userClubs[0] != "")) {
+      for (var index = 0; index < userClubs.length; index++) {
+        for (var index2 = 0; index2 < eventsArr.length; index2++) {
+          var currentEvent = eventsArr[index2];
+          if (currentEvent["Club"] == userClubs[index]) {
+            var sDateSplit = currentEvent["Start-Date"].split("/");
+            var sTimeSplit = currentEvent["Start-Time"].split(":");
+            const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+            var endDate = startDate;
+            try {
+              var eDateSplit = currentEvent["End-Date"].split("/");
+              var eTimeSplit = currentEvent["End-Time"].split(":");
+              endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+            } catch (error) { }
+            var today = new Date();
+            //make sure only recent events are pushed
+            if (endDate >= today) {
+              upcomingEvents.push(currentEvent);
+            }
+          }
+        }
+      }
+    } else {
+      for (var index2 = 0; index2 < eventsArr.length; index2++) {
+        var currentEvent = eventsArr[index2];
+        var sDateSplit = currentEvent["Start-Date"].split("/");
+        var sTimeSplit = currentEvent["Start-Time"].split(":");
+        const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+        var endDate = startDate;
+        try {
+          var eDateSplit = currentEvent["End-Date"].split("/");
+          var eTimeSplit = currentEvent["End-Time"].split(":");
+          endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+        } catch (error) { }
+        var today = new Date();
+        //make sure only recent events are pushed
+        if (endDate >= today) {
+          upcomingEvents.push(currentEvent);
+        }
+      }
+    }
+  }
+  function getUpcomingService() {
+    upcomingService = [];
+    if ((userService[0] != null) && (userService[0] != "")) {
+      for (var index = 0; index < userService.length; index++) {
+        for (var index2 = 0; index2 < serviceArr.length; index2++) {
+          var currentService = serviceArr[index2];
+          if (currentService["ID"] == userService[index]) {
+            var sDateSplit = currentService["Start-Date"].split("/");
+            var sTimeSplit = currentService["Start-Time"].split(":");
+            const startDate = new Date(parseInt(sDateSplit[2]), parseInt(sDateSplit[0]) - 1, parseInt(sDateSplit[1]), parseInt(sTimeSplit[0]), parseInt(sTimeSplit[1]), 0, 0);
+            var endDate = startDate;
+            try {
+              var eDateSplit = currentService["End-Date"].split("/");
+              var eTimeSplit = currentService["End-Time"].split(":");
+              endDate = new Date(parseInt(eDateSplit[2]), parseInt(eDateSplit[0]) - 1, parseInt(eDateSplit[1]), parseInt(eTimeSplit[0]), parseInt(eTimeSplit[1]), 0, 0);
+            } catch (error) { }
+            var today = new Date();
+            //make sure only recent events are pushed
+            if (endDate >= today) {
+              upcomingService.push(currentService);
+            }
+          }
+        }
+      }
+    }
+  }
+  function createEventEntry(dateRange, eventName, eventId, event) {
+    var eventEntry = document.createElement("a");
+    eventEntry.classList.add("list-group-item", "list-group-item-action");
+    eventEntry.dataset.toggle = "list";
+    if (event) {
+      eventEntry.href = `#list-${eventId}`;
+    } else {
+      eventEntry.href = `#service-${eventId}`;
+    }
+    var eventEntryTxt = document.createTextNode(`${dateRange} ${eventName}`);
+    eventEntry.appendChild(eventEntryTxt);
+    return eventEntry;
+  }
+  function getTimeTextNode(startDate, endDate, startTime, endTime) {
+    var startTimeArr = startTime.split(":");
+    var startHours = parseInt(startTimeArr[0]);
+    const startMinutes = parseInt(startTimeArr[1]);
+    var extraZero = "";
+    if (startMinutes < 10) { extraZero = "0"; }
+    var ampm = "am";
+    if (startHours >= 12) {
+      startHours -= 12;
+      ampm = "pm";
+    }
+    const combStartStr = startHours + ':' + startMinutes + extraZero + ' ' + ampm;
+    var combEndStr = "";
+    extraZero = "";
+    try {
+      var endTimeArr = endTime.split(":");
+      var endHours = parseInt(endTimeArr[0]);
+      const endMinutes = parseInt(endTimeArr[1]);
+      if (endMinutes < 10) { extraZero = "0"; }
+      ampm = "am";
+      if (endHours >= 12) {
+        endHours -= 12;
+        ampm = "pm";
+      }
+      combEndStr = endHours + ':' + endMinutes + extraZero + ' ' + ampm;
+    } catch (error) { }
+    var listItemDateTxt = document.createTextNode(`${startDate} @ ${combStartStr} - ${endDate} @ ${combEndStr}`);
+    if ((startDate == endDate) || (endDate == "")) {
+      if (combEndStr == "") {
+        listItemDateTxt = document.createTextNode(`${startDate} @ ${combStartStr}`);
+      }
+      listItemDateTxt = document.createTextNode(`${startDate} from ${combStartStr} to ${combEndStr}`);
+    }
+    return listItemDateTxt;
+  }
+  function getTimeText(startDate, endDate, startTime, endTime) {
+    var startTimeArr = startTime.split(":");
+    var startHours = parseInt(startTimeArr[0]);
+    const startMinutes = parseInt(startTimeArr[1]);
+    var extraZero = "";
+    if (startMinutes < 10) { extraZero = "0"; }
+    var ampm = "am";
+    if (startHours >= 12) {
+      startHours -= 12;
+      ampm = "pm";
+    }
+    const combStartStr = startHours + ':' + startMinutes + extraZero + ' ' + ampm;
+    var combEndStr = "";
+    extraZero = "";
+    try {
+      var endTimeArr = endTime.split(":");
+      var endHours = parseInt(endTimeArr[0]);
+      const endMinutes = parseInt(endTimeArr[1]);
+      if (endMinutes < 10) { extraZero = "0"; }
+      ampm = "am";
+      if (endHours >= 12) {
+        endHours -= 12;
+        ampm = "pm";
+      }
+      combEndStr = endHours + ':' + endMinutes + extraZero + ' ' + ampm;
+    } catch (error) { }
+    var listItemDateTxt = `${startDate} @ ${combStartStr} - ${endDate} @ ${combEndStr}`;
+    if ((startDate == endDate) || (endDate == "")) {
+      if (combEndStr == "") {
+        listItemDateTxt = `${startDate} @ ${combStartStr}`;
+      }
+      listItemDateTxt = `${startDate} from ${combStartStr} to ${combEndStr}`;
+    }
+    return listItemDateTxt;
+  }
+  function createEventDescription(name, description, startDate, endDate, startTime, endTime, maxAttendees, eventId, club, event) {
+    var eventDescription = document.createElement("div");
+    eventDescription.classList.add("tab-pane", "fade");
+    if (event) {
+      eventDescription.id = `list-${eventId}`;
+    } else {
+      eventDescription.id = `service-${eventId}`;
+    }
+    var eventTitle = document.createElement("h4");
+    var eventTitleTxt = document.createTextNode(`${name}`);
+    eventTitle.appendChild(eventTitleTxt);
+    eventDescription.appendChild(eventTitle);
+    var eventClub = document.createElement("h5");
+    var eventClubTxt = document.createTextNode(`${club}`);
+    eventClub.appendChild(eventClubTxt);
+    eventDescription.appendChild(eventClub);
+    var eventTiming = document.createElement("P");
+    var eventTimingTxt = getTimeTextNode(startDate, endDate, startTime, endTime);
+    eventTiming.appendChild(eventTimingTxt);
+    eventDescription.appendChild(eventTiming);
+    if (maxAttendees != "") {
+      var eventAttend = document.createElement("P");
+      var eventTxtStr = "";
+      if (event) {
+        eventTxtStr = `Max attendees: ${maxAttendees}`;
+      } else {
+        eventTxtStr = `${maxAttendees} Service Hours`;
+      }
+      var eventAttendTxt = document.createTextNode(eventTxtStr);
+      eventAttend.appendChild(eventAttendTxt);
+      eventDescription.appendChild(eventAttend);
+    }
+    var eventDes = document.createElement("P");
+    var eventDesTxt = document.createTextNode(`${description}`);
+    eventDescription.appendChild(eventDes);
+    eventDes.appendChild(eventDesTxt);
+    return eventDescription;
+  }
+  $(document).ready(function () {
+    $(".userEmail").css("display", "none");
+  });
+
+  const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  const fetch3 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  const fetch4 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  Promise.all([fetch1, fetch2, fetch3, fetch4]).then(function (JsonData) {
+    userArr = JsonData[0]["Items"];
+    clubsArr = JsonData[1]["Items"];
+    eventsArr = JsonData[2]["Items"];
+    serviceArr = JsonData[3]["Items"];
+    $(".noJClubTxt").css("display", "block");
+    $(".noOClubTxt").css("display", "block");
+    getUserData();
+    var jClubListing = document.querySelector(".joinedListing");
+    updateClubListing(userClubs, jClubListing, false);
+    var oClubListing = document.querySelector(".ownedListing");
+    updateClubListing(userOClubs, oClubListing, true);
+    getUpcomingEvents();
+    getUpcomingService();
+    repositionFooter();
+    //update upcoming service
+    var serviceListC = document.querySelector(".serviceList-Group");
+    var sdescriptionListC = document.querySelector(".serviceTab-Content");
+    $(".noServiceTxt").css("display", "block");
+    try {
+      for (var index = 0; index < upcomingService.length; index++) {
+        var currentService = upcomingService[index];
+        $(".noServiceTxt").css("display", "none");
+        var dateRange = "";
+        const startDate = currentService["Start-Date"];
+        var cleanedSDate = startDate.split("/");
+        cleanedSDate = cleanedSDate[0] + "/" + cleanedSDate[1] + "/" + cleanedSDate[2][2] + cleanedSDate[2][3];
+        const endDate = currentService["End-Date"];
+        var cleanedEDate = "";
+        if ((startDate == endDate) || (endDate == "")) {
+          dateRange = cleanedSDate;
+        } else {
+          cleanedEDate = endDate.split("/");
+          cleanedEDate = cleanedEDate[0] + "/" + cleanedEDate[1] + "/" + cleanedEDate[2][2] + cleanedEDate[2][3];
+          dateRange = cleanedSDate + " - " + cleanedEDate;
+        }
+        var creators = findClubName(currentService["Club"]) + ", " + findUserName(currentService["User-ID"]);
+        serviceListC.appendChild(createEventEntry(dateRange, currentService["Service-Name"], currentService["ID"], false));
+        sdescriptionListC.appendChild(createEventDescription(currentService["Service-Name"], currentService["Description"], cleanedSDate, cleanedEDate, currentService["Start-Time"], currentService["End-Time"], currentService["Hours"], currentService["ID"], creators, false));
+      }
+      $(".serviceList-Group").children(".list-group-item").on("click", function () {
+        $(".serviceList-Group").children(".list-group-item").removeClass("active");
+        $(".serviceList-Group").children(".list-group-item").css("background-color","white");
+        $(this).addClass("active");
+        $(".serviceTab-Content").children(".tab-pane").removeClass("show");
+        $(".serviceTab-Content").children(".tab-pane").removeClass("active");
+        var thisEventId = $(this).prop("href").split("#service-")[1];
+        $(`#service-${thisEventId}`).addClass("show");
+        $(`#service-${thisEventId}`).addClass("active");
+        if (checked) {
+          $(".list-group-item.active").css("background-color", "#242424");
+        } else {
+          $(".list-group-item.active").css("background-color", "#007bff");
+        }
+        });
+    }
+    catch (error) { }
+    //update upcoming events
+    var eventListC = document.querySelector(".eventsList-Group");
+    var descriptionListC = document.querySelector(".eventsTab-Content");
+    $(".noEventTxt").css("display", "block");
+    try {
+      for (var index = 0; index < upcomingEvents.length; index++) {
+        var currentEvent = upcomingEvents[index];
+        $(".noEventTxt").css("display", "none");
+        var dateRange = "";
+        const startDate = currentEvent["Start-Date"];
+        var cleanedSDate = startDate.split("/");
+        cleanedSDate = cleanedSDate[0] + "/" + cleanedSDate[1] + "/" + cleanedSDate[2][2] + cleanedSDate[2][3];
+        const endDate = currentEvent["End-Date"];
+        var cleanedEDate = "";
+        if ((startDate == endDate) || (endDate == "")) {
+          dateRange = cleanedSDate;
+        } else {
+          cleanedEDate = endDate.split("/");
+          cleanedEDate = cleanedEDate[0] + "/" + cleanedEDate[1] + "/" + cleanedEDate[2][2] + cleanedEDate[2][3];
+          dateRange = cleanedSDate + " - " + cleanedEDate;
+        }
+        eventListC.appendChild(createEventEntry(dateRange, currentEvent["Event-Name"], currentEvent["ID"], true));
+        descriptionListC.appendChild(createEventDescription(currentEvent["Event-Name"], currentEvent["Description"], cleanedSDate, cleanedEDate, currentEvent["Start-Time"], currentEvent["End-Time"], currentEvent["Max-Attendees"], currentEvent["ID"], findClubName(currentEvent["Club"]), true));
+      }
+      $(".eventsList-Group").children(".list-group-item").on("click", function () {
+        $(".eventsList-Group").children(".list-group-item").removeClass("active");
+        $(".eventsList-Group").children(".list-group-item").css("background-color","white");
+        $(this).addClass("active");
+        $(".eventsTab-Content").children(".tab-pane").removeClass("show");
+        $(".eventsTab-Content").children(".tab-pane").removeClass("active");
+        var thisEventId = $(this).prop("href").split("#list-")[1];
+        $(`#list-${thisEventId}`).addClass("show");
+        $(`#list-${thisEventId}`).addClass("active");
+        if (checked) {
+          $(".list-group-item.active").css("background-color", "#242424");
+        } else {
+          $(".list-group-item.active").css("background-color", "#007bff");
+        }
+        });
+    }
+    catch (error) { }
+  });
+</script>
+
+{% endblock %}
