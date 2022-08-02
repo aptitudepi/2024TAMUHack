@@ -214,6 +214,21 @@
       </div>
     </div>
     <div style="margin-top:30px;"></div>
+    <h2>Club Messages</h2>
+    <div class="container">
+      <div class="row" style="margin-top:10px;">
+        <div class="col-6">
+          <h4>Messages</h4>
+          <h6 class="noMessageTxt">No messages to display.</h6>
+          <div class="list-group messagesList-Group" id="list-tab" role="tablist"></div>
+        </div>
+        <div class="col-6">
+          <div style="margin-top:40px;"></div>
+          <div class="tab-content messagesTab-Content" id="nav-tabContent"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px;"></div>
     <h2>Ask A Question</h2>
     <div class="container">
       <div class="row">
@@ -234,6 +249,7 @@
 <script>
   var userArr;
   var clubsArr;
+  var commArr;
   var eventsArr;
   var serviceArr;
   var userClubs = [];
@@ -500,6 +516,18 @@
     }
     return listItemDateTxt;
   }
+  function createAnnouncementEntry(creator, description, eventId) {
+    var eventEntry = document.createElement("a");
+    eventEntry.classList.add("list-group-item", "list-group-item-action");
+    eventEntry.style.whiteSpace = "nowrap";
+    eventEntry.style.overflow = "hidden";
+    eventEntry.style.textOverflow = "ellipsis";
+    eventEntry.dataset.toggle = "list";
+    eventEntry.href = `#anlist-${eventId}`;
+    var eventEntryTxt = document.createTextNode(`${creator}: ${description}`);
+    eventEntry.appendChild(eventEntryTxt);
+    return eventEntry;
+  }
   function createEventDescription(name, description, startDate, endDate, startTime, endTime, maxAttendees, eventId, club, event) {
     var eventDescription = document.createElement("div");
     eventDescription.classList.add("tab-pane", "fade");
@@ -538,19 +566,35 @@
     eventDes.appendChild(eventDesTxt);
     return eventDescription;
   }
+  function createAnDescription(creator, message, eventId) {
+    var eventDescription = document.createElement("div");
+    eventDescription.classList.add("tab-pane", "fade");
+    eventDescription.id = `anlist-${eventId}`;
+    var eventCreator = document.createElement("h4");
+    var eventCreatorTxt = document.createTextNode(`${creator}:`);
+    eventCreator.appendChild(eventCreatorTxt);
+    eventDescription.appendChild(eventCreator);
+    var eventDes = document.createElement("P");
+    var eventDesTxt = document.createTextNode(`${message}`);
+    eventDescription.appendChild(eventDes);
+    eventDes.appendChild(eventDesTxt);
+    return eventDescription;
+  }
   $(document).ready(function () {
     $(".userEmail").css("display", "none");
   });
 
   const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
   const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-  const fetch3 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-  const fetch4 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-  Promise.all([fetch1, fetch2, fetch3, fetch4]).then(function (JsonData) {
+  const fetch3 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  const fetch4 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  const fetch5 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  Promise.all([fetch1, fetch2, fetch3, fetch4, fetch5]).then(function (JsonData) {
     userArr = JsonData[0]["Items"];
     clubsArr = JsonData[1]["Items"];
-    eventsArr = JsonData[2]["Items"];
-    serviceArr = JsonData[3]["Items"];
+    commArr = JsonData[2]["Items"];
+    eventsArr = JsonData[3]["Items"];
+    serviceArr = JsonData[4]["Items"];
     $(".noJClubTxt").css("display", "block");
     $(".noOClubTxt").css("display", "block");
     getUserData();
@@ -636,6 +680,34 @@
         var thisEventId = $(this).prop("href").split("#list-")[1];
         $(`#list-${thisEventId}`).addClass("show");
         $(`#list-${thisEventId}`).addClass("active");
+        if (checked) {
+          $(".list-group-item.active").css("background-color", "#242424");
+        } else {
+          $(".list-group-item.active").css("background-color", "#007bff");
+        }
+        });
+    }
+    catch (error) { }
+    //update messages
+    var messageListC = document.querySelector(".messagesList-Group");
+    var mdescriptionListC = document.querySelector(".messagesTab-Content");
+    $(".noMessageTxt").css("display", "block");
+    try {
+      for (var index = 0; index < commArr.length; index++) {
+        var currentMessage = commArr[index];
+        $(".noMessageTxt").css("display", "none");
+        messageListC.appendChild(createAnnouncementEntry(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
+        mdescriptionListC.appendChild(createAnDescription(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
+      }
+      $(".messagesList-Group").children(".list-group-item").on("click", function () {
+        $(".messagesList-Group").children(".list-group-item").removeClass("active");
+        $(".messagesList-Group").children(".list-group-item").css("background-color","white");
+        $(this).addClass("active");
+        $(".messagesTab-Content").children(".tab-pane").removeClass("show");
+        $(".messagesTab-Content").children(".tab-pane").removeClass("active");
+        var thisEventId = $(this).prop("href").split("#anlist-")[1];
+        $(`#anlist-${thisEventId}`).addClass("show");
+        $(`#anlist-${thisEventId}`).addClass("active");
         if (checked) {
           $(".list-group-item.active").css("background-color", "#242424");
         } else {

@@ -263,6 +263,10 @@
     font-weight: bold;
   }
 
+  .upcomingAnTxt {
+    font-weight: bold;
+  }
+
   @media (max-width:466px) {
     .search {
       min-width: 350px;
@@ -401,10 +405,21 @@
         <h6 class="noEventTxt">No events to display.</h6>
         <div class="row">
           <div class="col-6">
-            <div class="list-group" id="list-tab" role="tablist"></div>
+            <div class="list-group upcomingListGroup" id="list-tab" role="tablist"></div>
           </div>
           <div class="col-6">
-            <div class="tab-content" id="nav-tabContent"></div>
+            <div class="tab-content upcomingTabContent" id="nav-tabContent"></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;"></div>
+        <h3 class="upcomingAnTxt">Announcements</h3>
+        <h6 class="noEventAnTxt">No announcements to display.</h6>
+        <div class="row">
+          <div class="col-6">
+            <div class="list-group anListGroup" id="list-tab" role="tablist"></div>
+          </div>
+          <div class="col-6">
+            <div class="tab-content anTabContent" id="nav-tabContent"></div>
           </div>
         </div>
       </div>
@@ -419,6 +434,7 @@
   var subClubDisplay = document.querySelector(".subClubDisplay");
   var dataArr;
   var eventArr;
+  var commArr;
   var userArr;
   var userClubs;
   var firstCheck = true;
@@ -740,8 +756,10 @@
     }
   }
   function clearEntries(eventListing) {
-    while (eventListing.firstChild) {
+    if (eventListing != null) {
+      while (eventListing.firstChild) {
       eventListing.removeChild(eventListing.firstChild);
+      }
     }
   }
   function returnEvent(eventLink, eventItems) {
@@ -758,6 +776,18 @@
     eventEntry.dataset.toggle = "list";
     eventEntry.href = `#list-${eventId}`;
     var eventEntryTxt = document.createTextNode(`${dateRange} ${eventName}`);
+    eventEntry.appendChild(eventEntryTxt);
+    return eventEntry;
+  }
+  function createAnnouncementEntry(creator, description, eventId) {
+    var eventEntry = document.createElement("a");
+    eventEntry.classList.add("list-group-item", "list-group-item-action");
+    eventEntry.style.whiteSpace = "nowrap";
+    eventEntry.style.overflow = "hidden";
+    eventEntry.style.textOverflow = "ellipsis";
+    eventEntry.dataset.toggle = "list";
+    eventEntry.href = `#anlist-${eventId}`;
+    var eventEntryTxt = document.createTextNode(`${creator}: ${description}`);
     eventEntry.appendChild(eventEntryTxt);
     return eventEntry;
   }
@@ -797,8 +827,10 @@
     return listItemDateTxt;
   }
   function clearDescriptions(desListing) {
-    while (desListing.firstChild) {
-      desListing.removeChild(desListing.firstChild);
+    if (desListing != null) {
+      while (desListing.firstChild) {
+        desListing.removeChild(desListing.firstChild);
+      }
     }
   }
   function createEventDescription(name, description, startDate, endDate, startTime, endTime, maxAttendees, eventId) {
@@ -821,6 +853,20 @@
     }
     var eventDes = document.createElement("P");
     var eventDesTxt = document.createTextNode(`${description}`);
+    eventDescription.appendChild(eventDes);
+    eventDes.appendChild(eventDesTxt);
+    return eventDescription;
+  }
+  function createAnDescription(creator, message, eventId) {
+    var eventDescription = document.createElement("div");
+    eventDescription.classList.add("tab-pane", "fade");
+    eventDescription.id = `anlist-${eventId}`;
+    var eventCreator = document.createElement("h4");
+    var eventCreatorTxt = document.createTextNode(`${creator}:`);
+    eventCreator.appendChild(eventCreatorTxt);
+    eventDescription.appendChild(eventCreator);
+    var eventDes = document.createElement("P");
+    var eventDesTxt = document.createTextNode(`${message}`);
     eventDescription.appendChild(eventDes);
     eventDes.appendChild(eventDesTxt);
     return eventDescription;
@@ -1106,10 +1152,14 @@
       }
     }
     catch (error) { }
-    var eventListC = document.querySelector(".list-group");
-    var descriptionListC = document.querySelector(".tab-content");
+    var eventListC = document.querySelector(".upcomingListGroup");
+    var descriptionListC = document.querySelector(".upcomingTabContent");
+    var anListC = document.querySelector(".anListGroup");
+    var anDescriptionListC = document.querySelector(".anTabContent");
     clearEntries(eventListC);
     clearDescriptions(descriptionListC);
+    clearEntries(anListC);
+    clearDescriptions(anDescriptionListC);
     $(".noEventTxt").css("display", "block");
     try {
       //get all events for the club
@@ -1132,6 +1182,19 @@
           }
           eventListC.appendChild(createEventEntry(dateRange, currentEvent["Event-Name"], currentEvent["ID"]));
           descriptionListC.appendChild(createEventDescription(currentEvent["Event-Name"], currentEvent["Description"], cleanedSDate, cleanedEDate, currentEvent["Start-Time"], currentEvent["End-Time"], currentEvent["Max-Attendees"], currentEvent["ID"]));
+        }
+      }
+    }
+    catch (error) { }
+    $(".noEventAnTxt").css("display", "block");
+    try {
+      //get all events for the club
+      for (var index = 0; index < commArr.length; index++) {
+        var currentAnnouncement = commArr[index];
+        if (currentObj["ID"] == currentAnnouncement["Club-ID"]) {
+          $(".noEventAnTxt").css("display", "none");
+          anListC.appendChild(createAnnouncementEntry(currentAnnouncement["Creator"], currentAnnouncement["Message"], currentAnnouncement["ID"]));
+          anDescriptionListC.appendChild(createAnDescription(currentAnnouncement["Creator"], currentAnnouncement["Message"], currentAnnouncement["ID"]));
         }
       }
     }
@@ -1393,8 +1456,14 @@
         $(".tab-pane").removeClass("show");
         $(".tab-pane").removeClass("active");
         var thisEventId = $(this).prop("href").split("#list-")[1];
-        $(`#list-${thisEventId}`).addClass("show");
-        $(`#list-${thisEventId}`).addClass("active");
+        if (thisEventId == undefined) {
+          thisEventId = $(this).prop("href").split("#anlist-")[1];
+          $(`#anlist-${thisEventId}`).addClass("show");
+          $(`#anlist-${thisEventId}`).addClass("active");
+        } else {
+          $(`#list-${thisEventId}`).addClass("show");
+          $(`#list-${thisEventId}`).addClass("active");
+        } 
         if (checked) {
           $(".list-group-item.active").css("background-color", "#242424");
         } else {
@@ -1414,13 +1483,15 @@
     $(".userEmail").css("display", "none");
     const fetch1 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
     const fetch2 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    const fetch3 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    Promise.all([fetch1, fetch2, fetch3]).then(function (JsonData) {
+    const fetch3 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch4 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    Promise.all([fetch1, fetch2, fetch3, fetch4]).then(function (JsonData) {
       mainArray = [];
       steamArray = [];
       dataArr = JsonData[0]["Items"];
       eventArr = JsonData[1]["Items"];
-      userArr = JsonData[2]["Items"];
+      commArr = JsonData[2]["Items"];
+      userArr = JsonData[3]["Items"];
       numOfClubs = dataArr.length;
       updateClubListing();
       repositionFooter();
@@ -1450,8 +1521,14 @@
       $(".tab-pane").removeClass("show");
       $(".tab-pane").removeClass("active");
       var thisEventId = $(this).prop("href").split("#list-")[1];
-      $(`#list-${thisEventId}`).addClass("show");
-      $(`#list-${thisEventId}`).addClass("active");
+      if (thisEventId == undefined) {
+          thisEventId = $(this).prop("href").split("#anlist-")[1];
+          $(`#anlist-${thisEventId}`).addClass("show");
+          $(`#anlist-${thisEventId}`).addClass("active");
+        } else {
+          $(`#list-${thisEventId}`).addClass("show");
+          $(`#list-${thisEventId}`).addClass("active");
+        } 
       if (checked) {
         $(".list-group-item.active").css("background-color", "#242424");
       } else {

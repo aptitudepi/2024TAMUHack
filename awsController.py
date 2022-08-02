@@ -11,12 +11,21 @@ lastUserID = 0
 global createNewUser
 createNewUser = False
 
+AWS_ACCESS_KEY_ID = 'AKIA4GESKFRBPYXGT4OU'
+AWS_ACCESS_SECRET_KEY = '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'
 
+#establish a connection and get aws key and secret data from boto.config
+conn = boto.dynamodb2.connect_to_region(
+        'us-east-2',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_ACCESS_SECRET_KEY
+    )
 
 calendarTable = Table('STEAM-APP-Calendar', connection=conn)
 clubsTable = Table('STEAM-APP-Clubs', connection=conn)
 serviceTable = Table('STEAM-APP-Service', connection=conn)
 userTable = Table('STEAM-APP-Users', connection=conn)
+commTable = Table('STEAM-APP-Communication', connection=conn)
 
 
 def get_club_items():
@@ -188,6 +197,40 @@ def get_service_items():
             print("none of this type for object")
         try:
             itemDictionary.update({"User-ID" : str(item["User-ID"])})
+        except:
+            print("none of this type for object")
+        itemsList.append(itemDictionary)
+    return itemsList
+def get_comm_items():
+    commItems = commTable.scan()
+    listItems = list(commItems)
+    itemsList = []
+    itemDictionary = {}
+    for item in listItems:
+        itemDictionary = {}
+        #create the item dictionary
+        try:
+            itemDictionary.update({"Club-ID" : item["clubid"]})
+        except:
+            print("none of this type for object")
+        try:
+            itemDictionary.update({"ID" : item["id"]})
+        except:
+            print("none of this type for object")
+        try:
+            itemDictionary.update({"Annoucement" : str(item["Announcement"])})
+        except:
+            print("none of this type for object")
+        try: 
+            itemDictionary.update({"Creator" : item["Creator"]})
+        except:
+            print("none of this type for object")
+        try:
+            itemDictionary.update({"Message" : item["Message"]})
+        except:
+            print("none of this type for object")
+        try:
+            itemDictionary.update({"To-Members" : list(item["To-Members"])})
         except:
             print("none of this type for object")
         itemsList.append(itemDictionary)
