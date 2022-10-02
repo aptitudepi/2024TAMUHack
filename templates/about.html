@@ -215,7 +215,7 @@
 
 {% include "components/nav.html" %}
 <section id="page2"></section>
-<div class="jumbotron" style="background-color:white">
+<div class="jumbotron changeContainer">
   <div class="container-fluid my-container">
     <div class="container mt-2">
       <div class="row justify-content-between">
@@ -252,7 +252,7 @@
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color:white">
+<div class="jumbotron changeContainer">
   <div class="container-fluid my-container">
     <div class="container mt-2">
       <div class="row justify-content-between">
@@ -261,6 +261,17 @@
         </div>
       </div>
       <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3 style="font-size:25px;">Matthew Caldarola</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:17px;">Founder, Web Dev</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Matthew_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Graduating class of 2023, Matthew Caldarola founded the STEAM Center App project, fostered collaboration throughout meetings, and helped program for app and web development. Although really passionate about programming as he knows 16 of these languages, he also plays the trumpet, loves robotics, and enjoys badminton.</div>
+          </div>
+        </div>
         <div class="bioC">
           <div class="bioTitle">
             <h3>Parth Koul</h3>
@@ -407,6 +418,17 @@
         </div>
       </div>
       <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3 style="font-size:25px;">Matthew Caldarola</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:17px;">Founder, App and Web Dev</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Matthew_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Graduating class of 2023, Matthew Caldarola founded the STEAM Center App project, fostered collaboration throughout meetings, and helped program for app and web development. Although really passionate about programming as he knows 16 of these languages, he also plays the trumpet, loves robotics, and enjoys badminton.</div>
+          </div>
+        </div>
         <div class="bioC">
           <div class="bioTitle phase2Dark">
             <h3>Avi Aggarwal</h3>
@@ -631,7 +653,7 @@
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color:white">
+<div class="jumbotron changeContainer">
   <div class="container-fluid my-container">
     <div class="container mt-2">
       <div class="row justify-content-between">
@@ -674,7 +696,7 @@
     </div>
   </div>
 </div>
-<div class="jumbotron" style="background-color:white">
+<div class="jumbotron changeContainer">
   <div class="container-fluid my-container">
     <div class="container mt-2">
       <div class="row justify-content-between">
@@ -724,7 +746,7 @@
     var listItem = document.createElement("div");
     listItem.id = `item${index + 1}`;
     listItem.classList.add("linkItem");
-    if (checked) { listItem.classList.add("hcLinkItem"); }
+    if (colorScheme != 0) { listItem.classList.add("hcLinkItem"); }
     display.appendChild(listItem);
     //creating the name div
     var listItemName = document.createElement("div");
@@ -787,7 +809,7 @@
       else { 
         listItem.style.visibility = "hidden";
         spacer.classList.add("rightItem");
-        if (checked) {
+        if (colorScheme != 0) {
           spacer.classList.add("hcLinkItem");
         } 
       }

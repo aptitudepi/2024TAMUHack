@@ -352,8 +352,9 @@
 <br>
 <div class="container mt-2">
   <div class="topContainer">
+    <div class="topTxt">
     <div style="height:6px;"></div>
-    <h1>Service Opportunities</h1>
+    <h1 class="topTxt">Service Opportunities</h1>
     <hr style="height:2px;">
     <div style="height:18px;"></div>
     <p>There are currently <span class="serviceCount"></span> STEAM-related service opportunities offered at the STEAM
@@ -384,6 +385,7 @@
         <div class="bubble"></div>
         <div class="colorName">Other</div>
       </div>
+    </div>
     </div>
     <br>
     <div class="d-flex searchC">
@@ -520,7 +522,7 @@
     var listItem = document.createElement("div");
     listItem.id = `item${index + 1}`;
     listItem.classList.add("linkItem");
-    if (checked) { listItem.classList.add("hcLinkItem"); }
+    if (colorScheme == 1) { listItem.classList.add("hcLinkItem"); }
     //listItem.link = dataArr[index]["Link"];
     subServiceDisplay.appendChild(listItem);
     //Creating the title div
@@ -565,7 +567,7 @@
     listItemType.style.borderRadius = "20px";
     listItemType.style.height = "20px";
     listItemType.style.width = "20px";
-    if (checked) {
+    if (colorScheme == 1) {
       listItemType.style.display = "none";
     }
     listItemTitle.appendChild(listItemType);
@@ -667,7 +669,7 @@
       listItemSignUpBtn.type = "button";
       listItemSignUpBtn.onclick = clickServiceBtn;
       listItemSignUpBtn.classList.add("btn", "btn-primary", "serviceSignUpBtn");
-      if (checked) {
+      if (colorScheme == 1) {
         listItemSignUpBtn.style.backgroundColor = "#242424";
       }
       listItemSignUpBtn.id = "serviceId" + dataArr[index]["ID"];
@@ -686,7 +688,7 @@
       var listItemLinkA = document.createElement("a");
       listItemLinkA.target = "_blank";
       listItemLinkA.classList.add("linkItemA");
-      if (checked) { listItemLinkA.classList.add("hcA"); }
+      if (colorScheme == 1) { listItemLinkA.classList.add("hcA"); }
       listItemLinkA.href = dataArr[index]["Link"];
       listItemLinkA.alt = "More Info";
       var listItemLinkATxt = document.createTextNode("More Info");
@@ -1016,12 +1018,15 @@
   $(document).ready(function () {
     $(".userEmail").css("display", "none");
     const fetch1 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    const fetch2 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    //const fetch2 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
     const fetch3 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    Promise.all([fetch1, fetch2, fetch3]).then(function (ClubData) {
+    Promise.all([fetch1, fetch3]).then(function (ClubData) {
       clubsArr = ClubData[0]["Items"];
-      userArr = ClubData[1]["Items"];
-      dataArr = sortArray(ClubData[2]["Items"]);
+      try {
+        userArr = JSON.parse({{ userData | tojson | safe }})["Items"];
+      } catch (error) { }
+      //userArr = ClubData[1]["Items"];
+      dataArr = sortArray(ClubData[1]["Items"]);
       numOfServices = dataArr.length;
       updateServiceListing();
       repositionFooter();

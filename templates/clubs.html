@@ -108,11 +108,6 @@
     align-content: center;
   }
 
-  .gridC:hover {
-    background-color: #e6e6e6;
-    cursor: pointer;
-  }
-
   .titleT {
     font-weight: bold;
     font-size: 18px;
@@ -304,10 +299,10 @@
 <div class="container mt-2">
   <div class="topContainer">
     <div style="height:6px;"></div>
-    <h1>Clubs and Organizations</h1>
+    <h1 class="mainTitleTxt">Clubs and Organizations</h1>
     <hr style="height:2px;">
     <div style="height:18px;"></div>
-    <p>There are various clubs and organizations at Allen ISD and more specifically- the STEAM Center. With currently
+    <p class="mainBodyTxt">There are various clubs and organizations at Allen ISD and more specifically- the STEAM Center. With currently
       over
       <span class="clubCount">40</span> <span class="steamTxtToggle">STEAM-related </span>clubs and organizations
       to-date, it can oftentimes be hard to find information
@@ -319,7 +314,7 @@
       in the club list
       to attain more information.
     </p>
-    <p>To add or modify any of the clubs below, please use these links: </p>
+    <p class="mainBodyTxt2">To add or modify any of the clubs below, please use these links: </p>
     <ul class="modClubLinks">
       <li><a class="pageLink" href="https://forms.gle/iPyTLsXRp4KpK89u8" target="_blank" rel="noreferrer noopener"
           alt="Add a club button">Add a Club/ Organization</a></li>
@@ -341,8 +336,9 @@
   </div>
   <div class="container">
     <div class="card main">
+      <div class="surroundingTypeC">
       <div id="club-select">
-        <div class="gridC" style="background-color:white;padding:0px;border-radius:0px;border:none;cursor:default;">
+        <div class="gridC" style="padding:0px;border-radius:0px;border:none;cursor:default;">
           <div class="titleT">Name</div>
           <div class="titleT">Type</div>
         </div>
@@ -350,6 +346,7 @@
         <div class="clubDisplay">
           <ul class="subClubDisplay"></ul>
         </div>
+      </div>
       </div>
       <!--Club display-->
       <div class="card-body body" id="club-body" style="display:none;">
@@ -456,6 +453,43 @@
     if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
     else { $('.footerC').css("position", "relative"); }
   }
+  function sortItems(thisDataArr) {
+    var latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+    for (var index = 0; index < thisDataArr.length; index++) {
+      latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+      for (var index2 = index; index2 < thisDataArr.length; index2++) {
+        var thisStartDateArr = thisDataArr[index2]["Start-Date"].split("/");
+        var thisStartTimeArr = thisDataArr[index2]["Start-Time"].split(":");
+        var thisDate = new Date(thisStartDateArr[2],thisStartDateArr[0],thisStartDateArr[1],thisStartTimeArr[0],thisStartTimeArr[1],0,0);
+        if (thisDate > latestDate) {
+          latestDate = thisDate;
+          var tempItem = thisDataArr[index];
+          thisDataArr[index] = thisDataArr[index2];
+          thisDataArr[index2] = tempItem;
+        }
+      }
+    }
+    return thisDataArr;
+  }
+  function sortItemsComm(thisDataArr) {
+    var latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+    for (var index = 0; index < thisDataArr.length; index++) {
+      latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+      for (var index2 = index; index2 < thisDataArr.length; index2++) {
+        var thisTimeArr = thisDataArr[index2]["Created-At"].split(",");
+        var thisStartDateArr = thisTimeArr[0].split("/");
+        var thisStartTimeArr = thisTimeArr[1].split(":");
+        var thisDate = new Date(thisStartDateArr[2],thisStartDateArr[0],thisStartDateArr[1],thisStartTimeArr[0],thisStartTimeArr[1],0,0);
+        if (thisDate > latestDate) {
+          latestDate = thisDate;
+          var tempItem = thisDataArr[index];
+          thisDataArr[index] = thisDataArr[index2];
+          thisDataArr[index2] = tempItem;
+        }
+      }
+    }
+    return thisDataArr;
+  }
   function checkIfJoinedClub(clubId) {
     var joined = false;
     var userEmailTxt = "";
@@ -512,6 +546,9 @@
     numOfSTEAMClubs = 0;
     for (var index = 0; index < dataArr.length; index++) {
       //this creates a new element
+      if (parseInt(dataArr[index]["ID"]) == 0) {
+        continue;
+      }
       var listItem = document.createElement("LI");
       listItem.id = `item${index + 1}`;
       listItem.classList.add("linkItem");
@@ -549,7 +586,7 @@
         mainArray.push(dataArr[index]["Club-Name"]);
         listItemS.style.borderLeft = "4px solid #cc3300";
       }
-      if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
+      if (colorScheme != 0) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
       listItem.appendChild(listItemS); //this finishes the li with .gridC class div
       //now the .gridC class div has to be added on to
       var listItemSS1 = document.createElement("div");
@@ -905,7 +942,7 @@
     $("#club-notice").css("background-color", "rgba(0,0,0,0.0)");
     $("#club-notice").css("background-image", "none");
     if (currentObj["Banner-Image"]) { $("#club-notice").css("height", "400px"); $("#club-notice").css("background-image", `url("${currentObj["Banner-Image"]}")`); }
-    else if (checked) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
+    else if (colorScheme != 0) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
     else {
       $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`)
       $("#club-notice").css("height", "250px");
@@ -935,7 +972,7 @@
         $("#club-notice").css("background-color", "#cc3300");
       }
     }
-    if (checked) { $("#club-notice").css("background-color", "#8B8B8B"); }
+    if (colorScheme != 0) { $("#club-notice").css("background-color", "#8B8B8B"); }
     //allow users to join the club
     joinDisabled = false;
     $(".joinBtn").removeClass("disabled");
@@ -1191,7 +1228,7 @@
       //get all events for the club
       for (var index = 0; index < commArr.length; index++) {
         var currentAnnouncement = commArr[index];
-        if (currentObj["ID"] == currentAnnouncement["Club-ID"]) {
+        if (currentObj["ID"] == currentAnnouncement["Club-ID"] && currentAnnouncement["Announcement"] == "True" || parseInt(currentAnnouncement["Announcement"]) == 1) {
           $(".noEventAnTxt").css("display", "none");
           anListC.appendChild(createAnnouncementEntry(currentAnnouncement["Creator"], currentAnnouncement["Message"], currentAnnouncement["ID"]));
           anDescriptionListC.appendChild(createAnDescription(currentAnnouncement["Creator"], currentAnnouncement["Message"], currentAnnouncement["ID"]));
@@ -1464,7 +1501,7 @@
           $(`#list-${thisEventId}`).addClass("show");
           $(`#list-${thisEventId}`).addClass("active");
         } 
-        if (checked) {
+        if (colorScheme != 0) {
           $(".list-group-item.active").css("background-color", "#242424");
         } else {
           $(".list-group-item.active").css("background-color", "#007bff");
@@ -1484,14 +1521,19 @@
     const fetch1 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
     const fetch2 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
     const fetch3 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    const fetch4 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-    Promise.all([fetch1, fetch2, fetch3, fetch4]).then(function (JsonData) {
+    //const fetch4 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    Promise.all([fetch1, fetch2, fetch3]).then(function (JsonData) {
       mainArray = [];
       steamArray = [];
       dataArr = JsonData[0]["Items"];
       eventArr = JsonData[1]["Items"];
+      eventArr = sortItems(eventArr);
       commArr = JsonData[2]["Items"];
-      userArr = JsonData[3]["Items"];
+      commArr = sortItemsComm(commArr);
+      try {
+        userArr = JSON.parse({{ userData | tojson | safe }})["Items"];
+      } catch (error) { }
+      //userArr = JsonData[3]["Items"];
       numOfClubs = dataArr.length;
       updateClubListing();
       repositionFooter();
@@ -1529,7 +1571,7 @@
           $(`#list-${thisEventId}`).addClass("show");
           $(`#list-${thisEventId}`).addClass("active");
         } 
-      if (checked) {
+      if (colorScheme != 0) {
         $(".list-group-item.active").css("background-color", "#242424");
       } else {
         $(".list-group-item.active").css("background-color", "#007bff");

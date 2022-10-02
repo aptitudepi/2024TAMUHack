@@ -58,16 +58,17 @@
 
   @media (max-width:575px) {
     .ownedClubsC {
-      margin-top:20px;
+      margin-top: 20px;
     }
   }
 
   @media (max-width:768px) {
     .totalServiceHTxt {
-      font-size:20px;
-      width:100%;
+      font-size: 20px;
+      width: 100%;
     }
   }
+
   @media (max-width:991px) {
     .bcgMainIcon {
       display: none;
@@ -267,6 +268,59 @@
     if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
     else { $('.footerC').css("position", "relative"); }
   }
+  function sortItems(thisDataArr) {
+    var latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+    for (var index = 0; index < thisDataArr.length; index++) {
+      latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+      for (var index2 = index; index2 < thisDataArr.length; index2++) {
+        var thisStartDateArr = thisDataArr[index2]["Start-Date"].split("/");
+        var thisStartTimeArr = thisDataArr[index2]["Start-Time"].split(":");
+        var thisDate = new Date(thisStartDateArr[2],thisStartDateArr[0],thisStartDateArr[1],thisStartTimeArr[0],thisStartTimeArr[1],0,0);
+        if (thisDate > latestDate) {
+          latestDate = thisDate;
+          var tempItem = thisDataArr[index];
+          thisDataArr[index] = thisDataArr[index2];
+          thisDataArr[index2] = tempItem;
+        }
+      }
+    }
+    return thisDataArr;
+  }
+  function sortItemsComm(thisDataArr) {
+    var latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+    for (var index = 0; index < thisDataArr.length; index++) {
+      latestDate = new Date(0, 0, 0, 0, 0, 0, 0);
+      for (var index2 = index; index2 < thisDataArr.length; index2++) {
+        var thisTimeArr = thisDataArr[index2]["Created-At"].split(",");
+        var thisStartDateArr = thisTimeArr[0].split("/");
+        var thisStartTimeArr = thisTimeArr[1].split(":");
+        var thisDate = new Date(thisStartDateArr[2],thisStartDateArr[0],thisStartDateArr[1],thisStartTimeArr[0],thisStartTimeArr[1],0,0);
+        if (thisDate > latestDate) {
+          latestDate = thisDate;
+          var tempItem = thisDataArr[index];
+          thisDataArr[index] = thisDataArr[index2];
+          thisDataArr[index2] = tempItem;
+        }
+      }
+    }
+    return thisDataArr;
+  }
+  function sortByName(thisDataArr) {
+    var firstClubName = "ZZZZZZZ";
+    for (var index = 0; index < thisDataArr.length; index++) {
+      firstClubName = "ZZZZZZZ";
+      for (var index2 = index; index2 < thisDataArr.length; index2++) {
+        var thisClubName = findClubName(thisDataArr[index2]);
+        if (thisClubName < firstClubName) {
+          firstClubName = thisClubName;
+          var tempItem = thisDataArr[index];
+          thisDataArr[index] = thisDataArr[index2];
+          thisDataArr[index2] = tempItem;
+        }
+      }
+    }
+    return thisDataArr;
+  }
   function unwrapClubs(clubList) {
     var newClubsList = [];
     if (clubList[0] == "All") {
@@ -301,6 +355,40 @@
     }
     return "";
   }
+  function checkInArr(arrayData, checkData) {
+    for (var index = 0; index < arrayData.length; index++) {
+      if (arrayData[index] == checkData) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function userInClub(clubId) {
+    var thisUserEmail = $(".userEmail").text();
+    for (var index = 0; index < userArr.length; index++) {
+      if (userArr[index]["User-Email"] == thisUserEmail) {
+        var thisUserData = userArr[index];
+        if (checkInArr(thisUserData["Clubs-Joined"], clubId) || thisUserData["Clubs-Joined"][0] == "All" || clubId == 0) {
+          return true;
+        }
+        if (checkInArr(thisUserData["Clubs-Owned"], clubId) || thisUserData["Clubs-Owned"][0] == "All") {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  function userInSend(sendArr) {
+    var thisUserEmail = $(".userEmail").text();
+    for (var index = 0; index < userArr.length; index++) {
+      if (userArr[index]["User-Email"] == thisUserEmail) {
+        if (checkInArr(sendArr, thisUserEmail)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   function getUserData() {
     var userEmailTxt = "";
     try {
@@ -319,6 +407,8 @@
           break;
         }
       }
+      userClubs = sortByName(userClubs);
+      userOClubs = sortByName(userOClubs);
     }
   }
   function getClubEntry(clubId, name, dept, own) {
@@ -331,27 +421,27 @@
     }
     var clubEntryTxt = document.createTextNode(`${name}`);
     clubEntry.appendChild(clubEntryTxt);
-    if (!checked) {
-    switch (dept) {
-      case "s":
-      clubEntry.style.borderLeft = "4px solid #8ac926";
-        break;
-      case "t":
-      clubEntry.style.borderLeft = "4px solid #1982c4";
-        break;
-      case "e":
-      clubEntry.style.borderLeft = "4px solid #6a4c93";
-        break;
-      case "a":
-      clubEntry.style.borderLeft = "4px solid #ffca3a";
-        break;
-      case "m":
-      clubEntry.style.borderLeft = "4px solid #ff595e";
-        break;
-      case "steam":
-      clubEntry.style.borderLeft = "4px solid #669999";
-        break;
-    }
+    if (colorScheme != 1) {
+      switch (dept) {
+        case "s":
+          clubEntry.style.borderLeft = "4px solid #8ac926";
+          break;
+        case "t":
+          clubEntry.style.borderLeft = "4px solid #1982c4";
+          break;
+        case "e":
+          clubEntry.style.borderLeft = "4px solid #6a4c93";
+          break;
+        case "a":
+          clubEntry.style.borderLeft = "4px solid #ffca3a";
+          break;
+        case "m":
+          clubEntry.style.borderLeft = "4px solid #ff595e";
+          break;
+        case "steam":
+          clubEntry.style.borderLeft = "4px solid #669999";
+          break;
+      }
     }
     return clubEntry;
   }
@@ -360,6 +450,7 @@
       if (own) { $(".noOClubTxt").css("display", "none"); }
       else { $(".noJClubTxt").css("display", "none"); }
       var clubId = clubs[index];
+      if (!own && parseInt(clubId) == 0) { continue; }
       listing.appendChild(getClubEntry(clubId, findClubName(clubId), findClubDept(clubId), own));
     }
   }
@@ -584,17 +675,23 @@
     $(".userEmail").css("display", "none");
   });
 
-  const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+  //const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
   const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
   const fetch3 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
   const fetch4 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
   const fetch5 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
-  Promise.all([fetch1, fetch2, fetch3, fetch4, fetch5]).then(function (JsonData) {
-    userArr = JsonData[0]["Items"];
-    clubsArr = JsonData[1]["Items"];
-    commArr = JsonData[2]["Items"];
-    eventsArr = JsonData[3]["Items"];
-    serviceArr = JsonData[4]["Items"];
+  Promise.all([fetch2, fetch3, fetch4, fetch5]).then(function (JsonData) {
+    //userArr = JsonData[0]["Items"];
+    try {
+        userArr = JSON.parse({{ userData | tojson | safe }})["Items"];
+    } catch (error) { }
+    clubsArr = JsonData[0]["Items"];
+    commArr = JsonData[1]["Items"];
+    commArr = sortItemsComm(commArr);
+    eventsArr = JsonData[2]["Items"];
+    eventsArr = sortItems(eventsArr);
+    serviceArr = JsonData[3]["Items"];
+    serviceArr = sortItems(serviceArr);
     $(".noJClubTxt").css("display", "block");
     $(".noOClubTxt").css("display", "block");
     getUserData();
@@ -632,19 +729,19 @@
       }
       $(".serviceList-Group").children(".list-group-item").on("click", function () {
         $(".serviceList-Group").children(".list-group-item").removeClass("active");
-        $(".serviceList-Group").children(".list-group-item").css("background-color","white");
+        $(".serviceList-Group").children(".list-group-item").css("background-color", "white");
         $(this).addClass("active");
         $(".serviceTab-Content").children(".tab-pane").removeClass("show");
         $(".serviceTab-Content").children(".tab-pane").removeClass("active");
         var thisEventId = $(this).prop("href").split("#service-")[1];
         $(`#service-${thisEventId}`).addClass("show");
         $(`#service-${thisEventId}`).addClass("active");
-        if (checked) {
+        if (colorScheme == 1) {
           $(".list-group-item.active").css("background-color", "#242424");
         } else {
           $(".list-group-item.active").css("background-color", "#007bff");
         }
-        });
+      });
     }
     catch (error) { }
     //update upcoming events
@@ -673,19 +770,19 @@
       }
       $(".eventsList-Group").children(".list-group-item").on("click", function () {
         $(".eventsList-Group").children(".list-group-item").removeClass("active");
-        $(".eventsList-Group").children(".list-group-item").css("background-color","white");
+        $(".eventsList-Group").children(".list-group-item").css("background-color", "white");
         $(this).addClass("active");
         $(".eventsTab-Content").children(".tab-pane").removeClass("show");
         $(".eventsTab-Content").children(".tab-pane").removeClass("active");
         var thisEventId = $(this).prop("href").split("#list-")[1];
         $(`#list-${thisEventId}`).addClass("show");
         $(`#list-${thisEventId}`).addClass("active");
-        if (checked) {
+        if (colorScheme == 1) {
           $(".list-group-item.active").css("background-color", "#242424");
         } else {
           $(".list-group-item.active").css("background-color", "#007bff");
         }
-        });
+      });
     }
     catch (error) { }
     //update messages
@@ -695,26 +792,28 @@
     try {
       for (var index = 0; index < commArr.length; index++) {
         var currentMessage = commArr[index];
-        $(".noMessageTxt").css("display", "none");
-        messageListC.appendChild(createAnnouncementEntry(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
-        mdescriptionListC.appendChild(createAnDescription(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
+        if (userInClub(currentMessage["Club-ID"]) && (currentMessage["Announcement"] == "True" || userInSend(currentMessage["To-Members"]))) {
+          $(".noMessageTxt").css("display", "none");
+          messageListC.appendChild(createAnnouncementEntry(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
+          mdescriptionListC.appendChild(createAnDescription(currentMessage["Creator"], currentMessage["Message"], currentMessage["ID"]));
+        }
       }
       $(".messagesList-Group").children(".list-group-item").on("click", function () {
-        $(".messagesList-Group").children(".list-group-item").removeClass("active");
-        $(".messagesList-Group").children(".list-group-item").css("background-color","white");
-        $(this).addClass("active");
-        $(".messagesTab-Content").children(".tab-pane").removeClass("show");
-        $(".messagesTab-Content").children(".tab-pane").removeClass("active");
-        var thisEventId = $(this).prop("href").split("#anlist-")[1];
-        $(`#anlist-${thisEventId}`).addClass("show");
-        $(`#anlist-${thisEventId}`).addClass("active");
-        if (checked) {
-          $(".list-group-item.active").css("background-color", "#242424");
-        } else {
-          $(".list-group-item.active").css("background-color", "#007bff");
-        }
-        });
-    }
+      $(".messagesList-Group").children(".list-group-item").removeClass("active");
+      $(".messagesList-Group").children(".list-group-item").css("background-color", "white");
+      $(this).addClass("active");
+      $(".messagesTab-Content").children(".tab-pane").removeClass("show");
+      $(".messagesTab-Content").children(".tab-pane").removeClass("active");
+      var thisEventId = $(this).prop("href").split("#anlist-")[1];
+      $(`#anlist-${thisEventId}`).addClass("show");
+      $(`#anlist-${thisEventId}`).addClass("active");
+      if (colorScheme == 1) {
+        $(".list-group-item.active").css("background-color", "#242424");
+      } else {
+        $(".list-group-item.active").css("background-color", "#007bff");
+      }
+    });
+  }
     catch (error) { }
   });
 </script>

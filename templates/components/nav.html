@@ -43,12 +43,21 @@
           </div>
         </ul>
         <ul class="navbar-nav contrastNav">
-          <div class="dropdown contrastC">
+          <div class="dropdown contrastDropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle contrastBtn" data-toggle="dropdown" alt="Explore dropdown"> Light Mode
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item lightModeC" id="scheme0" alt="Light mode" href="#">Light Mode</a>
+              <a class="dropdown-item highContrastC" id="scheme1" alt="High contrast" href="#">High Contrast</a>
+              <a class="dropdown-item darkModeC" id="scheme2" alt="Dark mode" href="#">Dark Mode</a>
+            </div>
+          </div>
+          <!--<div class="dropdown contrastC">
             <div class="custom-control custom-switch">
               <input type="checkbox" class="custom-control-input contrastCheckbox" id="customSwitch1" alt="High contrast button">
               <label class="custom-control-label" for="customSwitch1" style="color:white;">High Contrast</label>
             </div>
-          </div>
+          </div>-->
         </ul>
         <ul class="navbar-nav searchNav">
           <div class="dropdown">

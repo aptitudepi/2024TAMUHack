@@ -26,24 +26,34 @@
             "description":"The process of designing and branding the STEAM Center App website started."
         },
         {
+            "name":"Admin Proposal",
+            "date":"4/20/21",
+            "description":"We held a presentation with Mr. Labue, the principal of the STEAM Center, and some administration members, introducing Phase 1 of our project."
+        },
+        {
             "name":"End of Phase 1",
             "date":"5/1/21",
             "description":"The last meeting, via Zoom, of the school year hammering out all the details in preparation of Phase 2 next year."
         },
         {
-            "name":"Presentation",
-            "date":"4/20/21",
-            "description":"We held a presentation with Mr. Labue, the principal of the STEAM Center, and some administration members, introducing Phase 1 of our project."
+            "name":"Site Going Live",
+            "date":"5/10/21",
+            "description":"The STEAM Life Website went live!"
         },
         {
-            "name":"Site Going Live",
-            "date":"5/9/21",
-            "description":"The STEAM Life Website went live!"
+            "name":"Phase 2 Application",
+            "date":"8/2/21",
+            "description":"New member applications were sent out to students in STEAM Ambassadors and Computer Science Club, and a form was sent to check for returning members."
         },
         {
             "name":"Begin Phase 2",
             "date":"9/9/21",
             "description":"Phase 2 began with our first meeting in the STEAM Center MPR."
+        },
+        {
+            "name":"UI Updates",
+            "date":"10/8/21",
+            "description":"Graphic design team completed initial UI updates to the website and created a mobile UI; the app development programming team started creating the STEAM Life mobile app."
         },
         {
             "name":"STEAM Center Fall Festival",
@@ -59,6 +69,31 @@
             "name":"Meeting With Admin",
             "date":"12/6/21",
             "description":"Another presentation was held about the viability of a STEAM Life App and our progress thus far."
+        },
+        {
+            "name":"Team Engagement",
+            "date":"2/28/22",
+            "description":"Reassessed team engagement with a continuing member and new member application, saw a loss in app development and marketing."
+        },
+        {
+            "name":"Refilling Positions",
+            "date":"3/28/22",
+            "description":"Introduced new marketing and app development programming members to the project to help with development."
+        },
+        {
+            "name":"Backend Confirmation",
+            "date":"5/28/22",
+            "description":"Solidified backend priorities for the programming teams."
+        },
+        {
+            "name":"Summer Tasks",
+            "date":"5/16/22",
+            "description":"Assigned summer tasks to each sub-team."
+        },
+        {
+            "name":"Ready to Release",
+            "date":"7/22/22",
+            "description":"Finalized web and mobile app for initial release, with backend features finished."
         }
     ]
 }

@@ -65,7 +65,7 @@
     } 
     .text{
       font-family: 'Montserrat';
-      color: black;
+      /*color: black;*/
       font-size: 200%;
       width: 250px;
       transition: margin 2s;
@@ -429,7 +429,7 @@ transition: max-height 0.2s ease-out;
 <div class="container-fluid my-container" style="text-align:center;">
 <div class="row justify-content-around align-items-center flexDepts">
     <div class="col-xl-2 col-lg-4 col-md-6 mobile-height">
-        <div class="text">
+        <div class="text subjectBubbleTxt">
           Science
         </div>
         <div class="circleC" id="circle1" style="border:12px solid #63a11b;">
@@ -439,7 +439,7 @@ transition: max-height 0.2s ease-out;
       </div>
     </div>
     <div class = "col-xl-2 col-lg-4 col-md-6 mobile-height">
-        <div class="text mobileShow">
+        <div class="text mobileShow subjectBubbleTxt">
           Technology
         </div>
         <div class="circleC" id="circle2" style="border:12px solid #1982c4;">
@@ -447,12 +447,12 @@ transition: max-height 0.2s ease-out;
             <img class="insideImg" src="{{ url_for('static', filename='circleImg2.png') }}" alt="Technology image">
           </a>
         </div>
-        <div class="text normalShow">
+        <div class="text normalShow subjectBubbleTxt">
           Technology
         </div>
     </div>
     <div class = "col-xl-2 col-lg-4 col-md-6 mobile-height">
-        <div class="text">
+        <div class="text subjectBubbleTxt">
           Engineering
         </div>
         <div class="circleC" id="circle3" style="border:12px solid #6a4c93;">
@@ -462,7 +462,7 @@ transition: max-height 0.2s ease-out;
         </div>
     </div>
     <div class= "col-xl-2 col-lg-4 col-md-6 mobile-height">
-        <div class="text mobileShow">
+        <div class="text mobileShow subjectBubbleTxt">
           Arts
         </div>
         <div class="circleC" id="circle4" style="border:12px solid #DCA000;">
@@ -470,12 +470,12 @@ transition: max-height 0.2s ease-out;
             <img class="insideImg" src="{{ url_for('static', filename='circleImg4.png') }}" alt="Art image">
           </a>
         </div>
-        <div class="text normalShow">
+        <div class="text normalShow subjectBubbleTxt">
           Arts
         </div>
     </div>
     <div class= "col-xl-2 col-lg-4 col-md-6 mobile-height">
-        <div class="text">
+        <div class="text subjectBubbleTxt">
           Mathematics
         </div>
         <div class="circleC" id="circle5" style="border:12px solid #E22739;">

@@ -1,5 +1,13 @@
+/__pycache__
 /node_modules
 /testing.conf
 /boto.config
 /venv
 /STEAMLifeFlaskClientKeys.json
+/Web_App_Client_Secrets.json
+/schema.sql
+/testing.txt
+/example.conf
+/mainV1.py
+/mainV2.py
+/mainV3.py

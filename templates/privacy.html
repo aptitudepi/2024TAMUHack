@@ -1,0 +1,341 @@
+{% extends "layout.html" %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block head %}
+
+<style>
+*/
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .bodyContent {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .card.main {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border: 0;
+  }
+
+  .card.main img.seamless {
+    width: 100%;
+    display: block;
+  }
+
+  .card.main .body .page-top {
+    text-align: center;
+  }
+
+  .card.main .body .page-top img {
+    width: 100px;
+  }
+
+  .card.main .body .search-bar {
+    margin-bottom: 20px;
+  }
+
+  #club-social-icons {
+    font-size: 24pt;
+  }
+
+  #club-notice {
+    height: 400px;
+    width: auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .footer {
+    font-size: 10pt;
+  }
+
+  .modClubLinks {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modClubLinks li a {
+    color: #037dff;
+    text-decoration: none;
+    padding-left: 25px;
+  }
+
+  .modClubLinks li a:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .clubDisplay ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gridC {
+    display: grid;
+    grid-template-columns: 40% 50% 10%;
+    padding: 6px 0px 6px 6px;
+    border-radius: 4px;
+    border-left: 4px solid #cc3300;
+    border-bottom: 0.25px solid #e6e6e6;
+    border-top: 0.25px solid #e6e6e6;
+    border-right: 0.25px solid #e6e6e6;
+    margin-bottom: 8px;
+    align-content: center;
+  }
+
+  .titleT {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .hzLine {
+    height: 1.5px !important;
+    border-width: 0;
+    color: black;
+    background-color: black;
+  }
+
+  .linkItemA {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .linkItemA:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .gridC div a {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .gridC div a:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  #returnToList {
+    color: #037dff;
+  }
+
+  #returnToList:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  /*start of CSS for search bar*/
+  #outputC {
+    position: absolute;
+    z-index: 99;
+    bottom: -20px;
+  }
+
+  .search {
+    position: relative;
+    width: 60%;
+    min-width: 350px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+  }
+
+  .search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+  }
+
+  .search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3585fd;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+  }
+
+  .search-icon:hover {
+    color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .searchResultDepts {
+    display: none;
+  }
+
+  .btn-outline-primary {
+    display: block;
+    width: 260px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .pageLink:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .joinBtn {
+    background-color: #037dff;
+  }
+
+  .joinBtnC {
+    margin-left: 10px;
+  }
+
+  .joinBtnC .joinBtn {
+    padding: 5px;
+  }
+
+  .centerGrid {
+    display: grid;
+    grid-template-columns: 100%;
+    align-content: center;
+  }
+
+  .upcomingTxt {
+    font-weight: bold;
+  }
+
+  .upcomingAnTxt {
+    font-weight: bold;
+  }
+
+  @media (max-width:466px) {
+    .search {
+      min-width: 350px;
+    }
+
+    .search-input {
+      overflow: hidden;
+    }
+
+    .search-input::placeholder {
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width:376px) {
+    .search {
+      min-width: 100%;
+    }
+  }
+
+  /*end of CSS for search bar*/
+  .footerC {
+    font-weight: normal;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page15"></section>
+<br>
+<div class="container mt-2">
+  <div class="topContainer">
+    <div style="height:6px;"></div>
+    <h1 class="mainTitleTxt">Privacy Policy</h1>
+    <hr style="height:2px;">
+    <div style="height:18px;"></div>
+    <h3 style="font-weight:bold;">What Personal Information Do We Collect?</h3>
+    <p class="mainBodyTxt">
+      <ul>
+        <li><span style="font-weight:bold;">Information You Provide.</span> We receive and store information you enter. You can choose not to provide certain information, but then you might not be able to take advantage of some of our features. We use the information that you provide for such purposes as joining clubs, receiving club notifications, creating club events/ services (if you are a club manager), and similar user experience features. In addition we may share your information with Amazon Web Services (AWS) and Google Firebase who provide the database systems that this site uses. We will not provide your information to anyone else.</li>
+        <li><span style="font-weight:bold;">Cookies.</span> Like many websites, we use "cookies". Cookies are small programs that we transfer to your hard drive that allow us to recognize you and allow you to login to the website.</li>
+        <li><span style="font-weight:bold;">Information From Other Sources.</span> We might add or remove you from events, features, clubs, or communications based on the operability of club managers.</li>
+      </ul>
+    </p>
+    <h3 style="font-weight:bold;">How Do We Use Your Information?</h3>
+    <p class="mainBodyTxt">
+      <ul>
+        <li><span style="font-weight:bold;">Customized Notifications/ Opportunities.</span> We use your information to better serve you by sending you notifications (on our mobile and web app) about club events, service opportunities, announcements, direct messages strictly from club managers, etc.</li>
+        <li><span style="font-weight:bold;">Agents.</span> We employ other companies and individuals to perform functions on our behalf. Examples include retrieving database information and maintaining the web and mobile apps. They have access to personal information needed to perform their functions, but may not use it for other purposes.</li>
+        <li><span style="font-weight:bold;">Law Enforcement.</span> If we receive a lawful court order to release account or other personal information then we will comply with the law. We will also release information when necessary to protect the life, safety or property of others.</li>
+      </ul>
+    </p>
+    <h3 style="font-weight:bold;">How Do We Protect the Security of Your Information?</h3>
+    <p class="mainBodyTxt">
+      <ul>
+        <li>We work to protect the security of your information during transmission by using Secure Sockets Layer (SSL) software, which encrypts information you input via HTTPS.</li>
+        <li>We use Amazon Web Services (AWS) DynamoDB (a very secure database system) to store user and club data, with security measures in place to ensure the secure use of aforementioned services.</li>
+        <li>User data from our database is directly fed to our web app, so there is no way for users to easily intercept this information.</li>
+        <li>User data from our database is received by the mobile app from the web app using a url secret code.</li>
+        <li>Only students who are designated by the STEAM App team (or by club sponsors/ officers) are able to view their club management system through a JavaScript authorization.</li>
+        <li>Google sign in uses OAuth authentication for the web app and React Native Expo's “AuthSession” for further security.</li>
+        <li>We limit access to your information on a "need to know" basis.</li>
+        <li>It is important for you to protect against unauthorized access to your password and to your computer. Be sure to sign off when finished using a shared computer.</li>
+      </ul>
+    </p>
+    <h3 style="font-weight:bold;">Children</h3>
+    <p class="mainBodyTxt">
+      We do not sell products or services to children. We may advertise clubs/ organizations, events, service opportunities, and announcements of aforementioned club/ organization happenings 
+      through our web and mobile applications to further student engagement, but it is on the user to decide whether they would like to join these respective clubs/ organizations.
+      We also do not collect information from people under the age of 13 to our knowledge (COPPA, <a target="_blank" href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa">https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa</a>) 
+      and we do not share your information with others (FERPA, <a target="_blank" href="https://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html">https://www2.ed.gov/policy/gen/guid/fpco/ferpa/index.html</a>) unless breaking a policy in our <a target="_blank" href="https://life.allencs.org/terms">Terms and Conditions</a>. 
+      Obscene or content deemed "harmful to minors" will not be published on the website, and if so, it will be taken down immediately (CIPA, <a target="_blank" href="https://www.fcc.gov/consumers/guides/childrens-internet-protection-act">https://www.fcc.gov/consumers/guides/childrens-internet-protection-act</a>).
+    </p>
+    <br>
+  </div>
+</div>
+{% include "components/footer.html" %}
+
+{% endblock %}

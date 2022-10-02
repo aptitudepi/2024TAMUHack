@@ -15,10 +15,10 @@
   <div class="container mt-2">
   <div class="mainContent">
   <div style="height:6px;"></div>
-  <h1 style="user-select:text;">Navigation Map</h1>
+  <h1 class="navigationMainTxt" style="user-select:text;">Navigation Map</h1>
   <hr style="height:2px;">
   <div style="height:18px;"></div>
-  <p style="user-select:text;">The STEAM Center is a quite a large building, but do you ever feel as though you get lost in it? Here to help is the interactive map provided below. This map can be accessed using any device (mobile or laptop), and has the ability to zoom in so that you can navigate the STEAM Center easier in case you get lost. Below the interactive map is a list of room numbers in addition to the teachers and clubs/ organizations associated with them, so that you always know where to find your classes.</p>
+  <p class="navigationDesTxt" style="user-select:text;">The STEAM Center is a quite a large building, but do you ever feel as though you get lost in it? Here to help is the interactive map provided below. This map can be accessed using any device (mobile or laptop), and has the ability to zoom in so that you can navigate the STEAM Center easier in case you get lost. Below the interactive map is a list of room numbers in addition to the teachers and clubs/ organizations associated with them, so that you always know where to find your classes.</p>
   <br>
     <nav aria-label="..." style="margin-top:9px;" id="floorNavMobile">
       <ul class="pagination justify-content-center">
@@ -683,7 +683,7 @@ $(".imgC4").on('click', function(event) { //zoom out
             break;
         }
       }
-      if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
+      if (colorScheme != 0) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
       listItem.appendChild(listItemS); //this finishes the li with .gridC class div
       //now the .gridC class div has to be added on to
       var listItemSS1 = document.createElement("div");
@@ -739,7 +739,7 @@ $(".imgC4").on('click', function(event) { //zoom out
             break;
         }
       }
-      if (checked) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
+      if (colorScheme != 0) { listItemS.style.borderLeft = "4px solid #8B8B8B"; }
       listItem.appendChild(listItemS); //this finishes the li with .gridC class div
       //now the .gridC class div has to be added on to
       var listItemSS1 = document.createElement("div");
@@ -784,7 +784,7 @@ $(".imgC4").on('click', function(event) { //zoom out
     var index = parseInt(clubID.replace( /^\D+/g, ''))-1;
     var currentObj = roomListArr[index];
     if (currentObj.banner_image) {$("#club-notice").css("background-image", `url("${currentObj.banner_image}")`)}
-    else if (checked) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
+    else if (colorScheme != 0) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
     else { $("#club-notice").css("background-image", `url("/static/STEAM-icon-04.svg")`) }
     var tempStrInsert = "";
       if (currentObj.course) { tempStrInsert=currentObj.course; }
