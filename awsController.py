@@ -11,7 +11,15 @@ lastUserID = 0
 global createNewUser
 createNewUser = False
 
+AWS_ACCESS_KEY_ID = 'AKIA4GESKFRBIPBJVRNF'
+AWS_ACCESS_SECRET_KEY = '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'
 
+#establish a connection and get aws key and secret data from boto.config
+conn = boto.dynamodb2.connect_to_region(
+        'us-east-2',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_ACCESS_SECRET_KEY
+    )
 
 calendarTable = Table('STEAM-APP-Calendar', connection=conn)
 clubsTable = Table('STEAM-APP-Clubs', connection=conn)

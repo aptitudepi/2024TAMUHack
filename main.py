@@ -20,7 +20,18 @@ import pytz
 #Note - this is the main.py file that I am using as of 9/26/22
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
+app.secret_key = "newlysecretSFAS471!!"
+#Session(app)
 
+#just for now
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+#on the production server
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_DISCOVERY_URL = (
+    "https://accounts.google.com/.well-known/openid-configuration"
+)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
