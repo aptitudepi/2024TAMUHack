@@ -19,21 +19,7 @@ import pytz
 
 #Note - this is the main.py file that I am using as of 9/26/22
 
-app = Flask(__name__, static_url_path="/static", static_folder="static")
-app.secret_key = "newlysecretSFAS471!!"
-#Session(app)
 
-#just for now
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
-#on the production server
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
-GOOGLE_DISCOVERY_URL = (
-    "https://accounts.google.com/.well-known/openid-configuration"
-)
-
-client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 #app.config.from_envvar('CONFIG')
 #timeshift = app.config.get("TIMEZONE_SHIFT")
@@ -106,11 +92,12 @@ def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
 def get_user_email():
-  userEmail = ""
+  userEmail = "Other-User"
   try: 
     userEmail = session["email"]
   except:
     print("Could not get email")
+  print(userEmail)
   return userEmail
 def get_user_name():
   userName = ""
@@ -292,6 +279,7 @@ def route_user_data():
         logDetails += session["email"]
       except:
         print("error occurred when logging")
+      #awsController.add_log(28, "lkjsfd", "Data-Warning", "asdf", "asf")
       awsController.add_log(next_log_id(), get_user_email(), "Data-Warning", logTime, logDetails)
       return jsonify(Items=awsController.get_user_items())
   except:

@@ -469,7 +469,7 @@
       colorScheme = parseInt(localStorage.getItem("colorScheme"));
     }
     $(".userEmail").css("display", "none");
-    if ($(".userEmail").text() != "") {
+    if ($(".userEmail").text() != "Other-User") {
       $("#logInBtn").text("Log Out");
     } else { $("#dashboardBtn").parent().css("display", "none"); }
     var contrastChildren = document.querySelector(".contrastDropdown").querySelector(".dropdown-menu").getElementsByClassName("dropdown-item");
@@ -492,7 +492,7 @@
     window.location.href = "/help";
   });
   $("#logInBtn").on("click", function () {
-    if ($(".userEmail").text() != "") {
+    if ($(".userEmail").text() != "Other-User") {
       window.location.href = "/logout";
     } else {
       window.location.href = "/login";
