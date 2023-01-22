@@ -13,6 +13,14 @@ createNewUser = False
 
 
 
+calendarTable = Table('STEAM-APP-Calendar', connection=conn)
+clubsTable = Table('STEAM-APP-Clubs', connection=conn)
+serviceTable = Table('STEAM-APP-Service', connection=conn)
+userTable = Table('STEAM-APP-Users', connection=conn)
+commTable = Table('STEAM-APP-Communication', connection=conn)
+dayTable = Table('STEAM-APP-Day', connection=conn)
+logTable = Table('STEAM-APP-Log', connection=conn)
+
 def get_club_items():
     clubItems = clubsTable.scan()
     listItems = list(clubItems)
