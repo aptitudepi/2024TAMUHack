@@ -331,10 +331,10 @@ def add_user_service(email, name, serviceId):
         userServicesArr.pop(0)
     userAccount["Service"] = userServicesArr
     userAccount.partial_save()
-def remove_user_service(email, name, clubId):
+def remove_user_service(email, name, serviceId):
     userAccount = userTable.get_item(name=name, email=email)
     userServiceArr = list(userAccount["Service"])
-    userServiceArr.remove(clubId)
+    userServiceArr.remove(serviceId)
     if (len(userServiceArr) == 0):
         userServiceArr = [""]
     elif (userServiceArr[0] == ""):

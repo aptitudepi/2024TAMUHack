@@ -472,18 +472,31 @@
   function changeJoinTxt(serviceId) {
     $(`#serviceId${serviceId}`).text("Signed Up");
     $(`#serviceId${serviceId}`).addClass("disabled");
+    if ($(`#serviceRId${serviceId}`).hasClass("d-none")) {
+      $(`#serviceRId${serviceId}`).removeClass("d-none");
+    }
   }
-  function joinService(serviceId) {
+  function changeJoinTxtBack(serviceId) {
+    $(`#serviceId${serviceId}`).text("Sign Up");
+    if ($(`#serviceId${serviceId}`).hasClass("disabled")) {
+      $(`#serviceId${serviceId}`).removeClass("disabled");
+    }
+    $(`#serviceRId${serviceId}`).addClass("d-none");
+  }
+  function joinService(serviceId, joinStatus=true) {
     try {
       var userEmailTxt = $(".userEmail").text();
-      var dataToSend = { "email": userEmailTxt, "serviceID": serviceId };
+      var dataToSend = { "email": userEmailTxt, "serviceID": serviceId, "join": joinStatus };
       $.ajax({
         type: "POST",
         url: "/service",
         data: JSON.stringify(dataToSend),
         contentType: "application/json",
         dataType: 'json'
-      }).always(function () { changeJoinTxt(serviceId) });
+      }).always(function () { 
+        if (joinStatus) { changeJoinTxt(serviceId); } 
+        else { changeJoinTxtBack(serviceId); }
+      });
     }
     catch (error) { }
   }
@@ -512,10 +525,28 @@
     return false;
 
   }
-  function clickServiceBtn() {
-    if (!this.classList.contains("disabled")) {
-      joinService(this.id.replace("serviceId", ""));
+  function clickServiceBtn(joinElementId, removeElementId) {
+    var joinElement = document.getElementById(joinElementId);
+    if (!joinElement.classList.contains("disabled")) {
+      var removeElement = document.getElementById(removeElementId);
+      if (removeElement.classList.contains("disabled")) {
+        removeElement.classList.remove("disabled");
+      }
+      joinService(joinElement.id.replace("serviceId", ""));
     }
+  }
+  function clickRemoveServiceBtn(joinElementId, removeElementId) {
+    try {
+      var removeElement = document.getElementById(removeElementId);
+      if (!removeElement.classList.contains("d-none")) {
+      var joinElement = document.getElementById(joinElementId);
+      if (joinElement.classList.contains("disabled")) {
+        joinElement.classList.remove("disabled");
+      }
+      joinService(removeElement.id.replace("serviceRId", ""), false);
+      removeElement.classList.add("d-none");
+    }
+    } catch (error) {  }
   }
   function updateServiceInListing(index) {
     //this creates a new list item element
@@ -663,24 +694,45 @@
     listItem.appendChild(listItemDescription);
     } catch(error) {}
     //Creating the sign up button div
-    if (spotsAvailable(dataArr[index]["ID"]) && $(".userEmail").text() != "") {
+    console.log("user email: "+$(".userEmail").text());
+    if (spotsAvailable(dataArr[index]["ID"]) && ($(".userEmail").text() != "" && $(".userEmail").text() != "Other-User")) {
       var listItemSignUp = document.createElement("div");
       var listItemSignUpBtn = document.createElement("button");
       listItemSignUpBtn.type = "button";
-      listItemSignUpBtn.onclick = clickServiceBtn;
       listItemSignUpBtn.classList.add("btn", "btn-primary", "serviceSignUpBtn");
+      listItemSignUpBtn.style.marginRight = "4px";
       if (colorScheme == 1) {
         listItemSignUpBtn.style.backgroundColor = "#242424";
       }
       listItemSignUpBtn.id = "serviceId" + dataArr[index]["ID"];
+
+      var listItemRSignUpBtn = document.createElement("button");
+      listItemRSignUpBtn.type = "button";
+      listItemRSignUpBtn.classList.add("btn", "btn-primary", "serviceSignUpBtn");
+      if (colorScheme == 1) {
+        listItemRSignUpBtn.style.backgroundColor = "#242424";
+      }
+      listItemRSignUpBtn.id = "serviceRId" + dataArr[index]["ID"];
+
       var listItemSignUpBtnTxt = document.createTextNode("Sign Up");
+      listItemRSignUpBtn.classList.add("d-none");
       if (checkIfSignedUp(dataArr[index]["ID"])) {
         listItemSignUpBtn.classList.add("disabled");
+        if (listItemRSignUpBtn.classList.contains("d-none")) {
+          listItemRSignUpBtn.classList.remove("d-none");
+        }
         listItemSignUpBtnTxt = document.createTextNode("Signed Up");
       }
+      var listItemRSignUpBtnTxt = document.createTextNode("Remove");
       listItemSignUpBtn.appendChild(listItemSignUpBtnTxt);
       listItemSignUp.appendChild(listItemSignUpBtn);
+
+      listItemRSignUpBtn.appendChild(listItemRSignUpBtnTxt);
+      listItemSignUp.appendChild(listItemRSignUpBtn);
       listItem.appendChild(listItemSignUp);
+
+      listItemSignUpBtn.onclick = function() { clickServiceBtn(listItemSignUpBtn.id, listItemRSignUpBtn.id) };
+      listItemRSignUpBtn.onclick = function() { clickRemoveServiceBtn(listItemSignUpBtn.id, listItemRSignUpBtn.id) };
     }
     //Creating the more info link div
     if (dataArr[index]["Link"] != " " && dataArr[index]["Link"] != "") {

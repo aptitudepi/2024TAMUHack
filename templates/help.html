@@ -449,14 +449,7 @@ transition: max-height 0.2s ease-out;
   <div class="row justify-content-start align-items-end">
     <div class="col-lg-1 col-md-0"></div>
     <div class="col-lg-10 col-md-12 course-background">
-      <ul class="subtitle-text">
-        <li>
-          <button type="button" class="course-class" id="Calendar Update" style="width: 100%" alt="FAQ dropdown">How Often Is The Calendar Updated?</button>
-          <div class="content faq-descriptions">
-            <p style="color: white; font-size: 18px; text-align:justify;">The calendar is updated once a club submits us a new event to be added, usually one to two weeks before the start of the event.</p>
-          </div>
-        </li>
-      </ul>
+      <ul class="subtitle-text"></ul>
     </div>
     <div class="col-lg-1 col-md-0"></div>
   </div>
@@ -479,12 +472,55 @@ transition: max-height 0.2s ease-out;
 {% include "components/footer.html" %}
 
 <script>
-var array = ["AP Probability & Statistics","AP Physics I","AP Physics II","AP Physics C","Earth & Space Science","Aquatic Science","Environmental Systems","AP Environmental Science","Scientific Research & Design","AC/DC Electronics","Computer Maintenance","Computer Science I","Computer Science II","Computer Science III","Robotics I","Robotics II","Principles of Applied Engineering","Engineering Design & Presentation I","Engineering Design & Presentation II","Engineering Design & Problem Solving","Interior Design I","Interior Design II","Practicum in Interior Design","Architectural Design I","Architectural Design II","Graphic Design & Illustration I","Graphic Design & Illustration II","Graphic Design & Illustration II Lab","Practicum in Graphic Design & Illustration"];
-var scienceArr = ["Earth & Space Science","Aquatic Science","Environmental Systems","AP Environmental Science","Scientific Research & Design","AP Physics I","AP Physics II","AP Physics C"];
-var techArr = ["AC/DC Electronics","Computer Maintenance","Computer Science I","Computer Science II","Computer Science III"];
-var engineerArr = ["Robotics I","Robotics II","Principles of Applied Engineering","Engineering Design & Presentation I","Engineering Design & Presentation II","Engineering Design & Problem Solving","Interior Design I","Interior Design II","Practicum in Interior Design","Architectural Design I","Architectural Design II"];
-var artArr = ["Graphic Design & Illustration I","Graphic Design & Illustration II","Graphic Design & Illustration II Lab","Practicum in Graphic Design & Illustration","Interior Design I","Interior Design II","Practicum in Interior Design","Architectural Design I","Architectural Design II"];
-var mathArr = ["AP Probability & Statistics","AP Physics I","AP Physics II","AP Physics C"];
+var dataArr = [];
+var questionArr = [];
+var answerArr = [];
+
+function generateQuestionItems() {
+  for (var index = 0; index < questionArr.length; index++) {
+    generateQuestionItem(index);
+  }
+}
+function generateQuestionItem(questionItemId) {
+  var questionsC = document.querySelector(".subtitle-text");
+  var questionLi = document.createElement("LI");
+  questionLi.id = "question"+questionItemId;
+
+  var questionButton = document.createElement("button");
+  questionButton.type = "button";
+  questionButton.classList.add("course-class");
+  questionButton.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+      content.style.paddingTop = "0px";
+      //content.style.paddingBottom = "0px";
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.style.paddingTop = "6px";
+      //content.style.paddingBottom = "48px";
+    }
+  });
+  questionButton.style.width = "100%";
+  questionButtonTxt = document.createTextNode(questionArr[questionItemId]);
+  questionButton.appendChild(questionButtonTxt);
+  questionLi.appendChild(questionButton);
+
+  var answerDiv = document.createElement("div");
+  answerDiv.classList.add("content");
+  answerDiv.classList.add("faq-descriptions");
+  var answerP = document.createElement("p");
+  answerP.style.color = "white";
+  answerP.style.fontSize = "18px";
+  answerP.style.textAlign = "justify";
+  var answerPTxt = document.createTextNode(answerArr[questionItemId]);
+  answerP.appendChild(answerPTxt);
+  answerDiv.appendChild(answerP);
+  questionLi.appendChild(answerDiv);
+  questionsC.appendChild(questionLi);
+}
+
 var maxResults = 5; //This is the maximum number of results that will pop up in the keyword search. Set to any valid number.
 var obj = {};
 var tempString = "";
@@ -556,147 +592,6 @@ function appendDiv(temp, txtOptDiv, resultCounter) {
   styleP(pElement);
   txtOptDiv.appendChild(aElement); //this appends the new element to the content div
   pElement.appendChild(a2ElemC);
-  //this takes care of appending all of the departments that the course belongs to
-  for (var i=0; i<scienceArr.length; i++) {
-    var tempValue17 = scienceArr[i];
-  if (tempValue17 == temp) {
-      if (counter == 0) {
-        var aElement2 = document.createElement("A");
-        var txt2 = document.createTextNode("Science");
-        aElement2.appendChild(txt2);
-        aElement2.href="#science";
-        aElement2.onmouseover=function() {hoverStyleA2(aElement2)};
-        aElement2.onmouseout=function() {styleA2(aElement2)};
-        styleA2(aElement2);
-        a2ElemC.appendChild(aElement2);
-        pTxt.classList.add("scienceI");
-      }
-      else if (counter == 1) {
-        var aElement3 = document.createElement("A");
-        var txt3 = document.createTextNode("Science");
-        aElement3.appendChild(txt3);
-        aElement3.href="#science";
-        aElement3.onmouseover=function() {hoverStyleA2(aElement3)};
-        aElement3.onmouseout=function() {styleA2(aElement3)};
-        styleA2(aElement3);
-        a2ElemC.appendChild(aElement3);
-      }
-      counter++;
-      break;
-  }
-  }
-  for (var i=0; i<techArr.length; i++) {
-    var tempValue18 = techArr[i];
-  if (tempValue18 == temp) {
-      if (counter == 0) {
-        var aElement2 = document.createElement("A");
-        var txt2 = document.createTextNode("Technology");
-        aElement2.appendChild(txt2);
-        aElement2.href="#technology";
-        aElement2.onmouseover=function() {hoverStyleA2(aElement2)};
-        aElement2.onmouseout=function() {styleA2(aElement2)};
-        styleA2(aElement2);
-        a2ElemC.appendChild(aElement2);
-        pTxt.classList.add("technologyI");
-      }
-      else if (counter == 1) {
-        var aElement3 = document.createElement("A");
-        var txt3 = document.createTextNode("Technology");
-        aElement3.appendChild(txt3);
-        aElement3.href="#technology";
-        aElement3.onmouseover=function() {hoverStyleA2(aElement3)};
-        aElement3.onmouseout=function() {styleA2(aElement3)};
-        styleA2(aElement3);
-        a2ElemC.appendChild(aElement3);
-      }
-      counter++;
-      break;
-  }
-  }
-    for (var i=0; i<engineerArr.length; i++) {
-    var tempValue19 = engineerArr[i];
-  if (tempValue19 == temp) {
-      if (counter == 0) {
-        var aElement2 = document.createElement("A");
-        var txt2 = document.createTextNode("Engineering");
-        aElement2.appendChild(txt2);
-        aElement2.href="#engineering";
-        aElement2.onmouseover=function() {hoverStyleA2(aElement2)};
-        aElement2.onmouseout=function() {styleA2(aElement2)};
-        styleA2(aElement2);
-        a2ElemC.appendChild(aElement2);
-        pTxt.classList.add("engineeringI");
-      }
-      else if (counter == 1) {
-        var aElement3 = document.createElement("A");
-        var txt3 = document.createTextNode("Engineering");
-        aElement3.appendChild(txt3);
-        aElement3.href="#engineering";
-        aElement3.onmouseover=function() {hoverStyleA2(aElement3)};
-        aElement3.onmouseout=function() {styleA2(aElement3)};
-        styleA2(aElement3);
-        a2ElemC.appendChild(aElement3);
-      }
-      counter++;
-      break;
-  }
-  }
-  for (var i=0; i<artArr.length; i++) {
-    var tempValue21 = artArr[i];
-  if (tempValue21 == temp) {
-      if (counter == 0) {
-        var aElement2 = document.createElement("A");
-        var txt2 = document.createTextNode("Art");
-        aElement2.appendChild(txt2);
-        aElement2.href="#art";
-        aElement2.onmouseover=function() {hoverStyleA2(aElement2)};
-        aElement2.onmouseout=function() {styleA2(aElement2)};
-        styleA2(aElement2);
-        a2ElemC.appendChild(aElement2);
-        pTxt.classList.add("artI");
-      }
-      else if (counter == 1) {
-        var aElement3 = document.createElement("A");
-        var txt3 = document.createTextNode("Art");
-        aElement3.appendChild(txt3);
-        aElement3.href="#art";
-        aElement3.onmouseover=function() {hoverStyleA2(aElement3)};
-        aElement3.onmouseout=function() {styleA2(aElement3)};
-        styleA2(aElement3);
-        a2ElemC.appendChild(aElement3);
-      }
-      counter++;
-      break;
-  }
-  }
-    for (var i=0; i<mathArr.length; i++) {
-    var tempValue20 = mathArr[i];
-  if (tempValue20 == temp) {
-      if (counter == 0) {
-        var aElement2 = document.createElement("A");
-        var txt2 = document.createTextNode("Math");
-        aElement2.appendChild(txt2);
-        aElement2.href="#math";
-        aElement2.onmouseover=function() {hoverStyleA2(aElement2)};
-        aElement2.onmouseout=function() {styleA2(aElement2)};
-        styleA2(aElement2);
-        a2ElemC.appendChild(aElement2);
-        pTxt.classList.add("mathI");
-      }
-      else if (counter == 1) {
-        var aElement3 = document.createElement("A");
-        var txt3 = document.createTextNode("Math");
-        aElement3.appendChild(txt3);
-        aElement3.href="#math";
-        aElement3.onmouseover=function() {hoverStyleA2(aElement3)};
-        aElement3.onmouseout=function() {styleA2(aElement3)};
-        styleA2(aElement3);
-        a2ElemC.appendChild(aElement3);
-      }
-      counter++;
-      break;
-  }
-  }
   //aElement.href=link;
   try {
     var prevElem = document.getElementById(`ids${resultCounter-1}`);
@@ -733,9 +628,9 @@ function searchResults() {
     $("#outputC").css("display", "none");
   }
   clearDiv(txtOptDiv); //this is used to make sure that the search results are cleared after each use
-  for (var index=0; index<array.length; index++) {
-    temp = array[index];
-    tempL = (array[index].toLowerCase()).replace(/[\/\\]/g,' ');
+  for (var index=0; index<questionArr.length; index++) {
+    temp = questionArr[index];
+    tempL = (questionArr[index].toLowerCase()).replace(/[\/\\]/g,' ');
     if ((tempL == txtIptL) || (txtIptL == "acdc electronics" && tempL == "ac dc electronics")) { //eliminate all other results on a perfect match
       cont2 = false;
       appendDiv(temp, txtOptDiv, 5); //temp here is used to assign a link to the correct search result
@@ -743,9 +638,9 @@ function searchResults() {
     }
   }
   if (cont2) { //if a perfect match was not already found
-  for (var index=0; index<array.length; index++) { //this searches the entire list
+  for (var index=0; index<questionArr.length; index++) { //this searches the entire list
     cont=true;
-    var temp = array[index];
+    var temp = questionArr[index];
     var tempL = (temp.toLowerCase()).replace(/[\/\\]/g,' ');
     var count = 0;
     for (var i=0; i<tempL.length; i++) { //this searches each character inside of string for each element of the array
@@ -773,8 +668,8 @@ function searchResults() {
   //this is used to make sure that the search results appear in the highest order first
   var resultCounter = 0;
   for (var index=highestCount; index>0; index--) {
-    for (var index2=0; index2<array.length; index2++) {
-      var temp3 = array[index2];
+    for (var index2=0; index2<questionArr.length; index2++) {
+      var temp3 = questionArr[index2];
       var temp4 = obj[temp3];
       if (resultCounter == maxResults) {
         cont3=false;
@@ -793,6 +688,15 @@ function searchResults() {
   }
 }
 $(document).ready(function() {
+  const fetch1 = fetch('/static/faq.json', { mode: 'cors' }).then(function (resp) { return resp.json(); })
+  .then(function(data) { 
+    dataArr = data["faq"];
+    for (var index = 0; index < dataArr.length; index++) {
+      questionArr.push(dataArr[index]["question"]);
+      answerArr.push(dataArr[index]["answer"]);
+    }
+    generateQuestionItems();
+  });
 $("body").on('click', function(event) {
   if ($(event.target).attr('class') != "search-field") {
     $("#outputC").css("display", "none");
@@ -818,8 +722,9 @@ $(".circleC").on('mouseout', function() {
   $(this).css("transform", "scale(1.0)");
 });
 //this pulls up the course information and scrolls to the section where its dept's courses list is
-$("#outputC").on('click', ".searchResult", function() {
-  var elem4ID = $(this).attr('class').split(/\s+/)[1].replace("I", "");
+$("#outputC").on('click', ".searchResultParent", function() {
+  var elem4IDNumber = parseInt($(this).attr('id').replace("ids", "")) - 1;
+  var elem4ID = `question${elem4IDNumber}`;
   var curElement = document.getElementById(`${elem4ID}`);
   window.scrollTo(0, curElement.offsetTop);
   //this gets the element of the current selected course name
@@ -833,25 +738,6 @@ $("#outputC").on('click', ".searchResult", function() {
     content.style.maxHeight = content.scrollHeight + "px";
   }
 });
-
-var coll = document.getElementsByClassName("course-class");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-      content.style.paddingTop = "0px";
-      //content.style.paddingBottom = "0px";
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-      content.style.paddingTop = "6px";
-      //content.style.paddingBottom = "48px";
-    }
-  });
-}
 });
 </script>
 

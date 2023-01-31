@@ -168,7 +168,10 @@ def route_service():
   if (request.method == "POST"):
     serviceAddData = request.get_json()
     if (serviceAddData["email"] == session["email"]):
-      awsController.add_user_service(session["email"], get_other_user_name(), serviceAddData["serviceID"])
+      if (serviceAddData["join"] == True):
+        awsController.add_user_service(session["email"], get_other_user_name(), serviceAddData["serviceID"])
+      else:
+        awsController.remove_user_service(session["email"], get_other_user_name(), serviceAddData["serviceID"])
   return render_template("service.html", email=get_user_email(), userData=get_users_data())
 
 @app.route("/service/json")
