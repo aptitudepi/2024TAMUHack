@@ -667,6 +667,11 @@
         <div class="subTimelineDisplay3 subTimelineD">
           <div class="linkItem" style="display:none"></div>
         </div>
+        <h2 class="title-text timelineT">Phase 3</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay4 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -725,6 +730,7 @@
   var subTimelineDisplay = document.querySelector(".subTimelineDisplay");
   var subTimelineDisplay2 = document.querySelector(".subTimelineDisplay2");
   var subTimelineDisplay3 = document.querySelector(".subTimelineDisplay3");
+  var subTimelineDisplay4 = document.querySelector(".subTimelineDisplay4");
   var dataArr;
   var scrollID = "";
   var eventListing = document.querySelector(".timelineDisplay");
@@ -851,7 +857,9 @@
     const startPoint2 = dateToNum("3/15/21");
     var startCount2 = 0;
     const startPoint3 = dateToNum("9/9/21");
-    //don't need a counter to calculate the 3rd endpoint since this will always be dataArr.length
+    var startCount3 = 0;
+    const startPoint4 = dateToNum("9/26/22");
+    //don't need a counter to calculate the 4th endpoint since this will always be dataArr.length
     for (var index=0; index < dataArr.length; index++) {
       var tempVal = dateToNum(`${dataArr[index].date}`);
       //console.log(startPoint);
@@ -861,9 +869,13 @@
       else if (tempVal >= startPoint2 && tempVal < startPoint3) {
         startCount2++;
       }
+      else if (tempVal >= startPoint3 && tempVal < startPoint4) {
+        startCount3++;
+      }
     }
     endPoints[0] = startCount;
     endPoints[1] = startCount + startCount2;
+    endPoints[2] = startCount + startCount2 + startCount3;
   }
   function updateTimeline() {
     findEndPoints();
@@ -872,7 +884,9 @@
     //this adds the information for the phase 1 sub-timeline
     updateSubTimeline(subTimelineDisplay2, endPoints[0], endPoints[1]);
     //this adds the information for the phase 2 sub-timeline
-    updateSubTimeline(subTimelineDisplay3, endPoints[1], dataArr.length);
+    updateSubTimeline(subTimelineDisplay3, endPoints[1], endPoints[2]);
+    //this adds the information for the phase 3 sub-timeline
+    updateSubTimeline(subTimelineDisplay4, endPoints[2], dataArr.length);
   }
   function clearTimeline() {
       while (subTimelineDisplay.firstChild) {
@@ -883,6 +897,9 @@
       }
       while (subTimelineDisplay3.firstChild) {
         subTimelineDisplay3.removeChild(subTimelineDisplay3.firstChild);
+      }
+      while (subTimelineDisplay4.firstChild) {
+        subTimelineDisplay4.removeChild(subTimelineDisplay4.firstChild);
       }
     }
   function repositionFooter() {

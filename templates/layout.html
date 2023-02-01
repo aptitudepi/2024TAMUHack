@@ -58,6 +58,10 @@
     .contrastCheckbox:checked+.custom-control-label::after {
       background-color: white;
     }
+    
+    .listBody a:hover {
+      color:#0d95fd;
+    }
 
     @media (max-width:991px) {
       .contrastC {
@@ -92,7 +96,15 @@
     currentPage = parseInt($("section").first().attr("id").split("page").pop());
     //non-page-specific styling
     if (colorScheme == 1) {
+      $(".fc-header-toolbar").css("background-color", "white");
+      $(".fc-toolbar-title").css("color", "black");
+      $(".fc-toolbar-title").css("padding-left", "6px");
       $(".dropdown button").css("background-color", "#242424");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "black");
+      }, function() {
+        $(this).css("color", "white");
+      });
       $(".navbar").css("background-color", "#242424");
       $("img").css("filter", "grayscale(100%)");
       $("html body").css("background-color", "white");
@@ -126,7 +138,15 @@
       } catch (error) { }
     }
     else if (colorScheme == 2) {
+      $(".fc-header-toolbar").css("background-color", "#242424");
+      $(".fc-toolbar-title").css("color", "white");
+      $(".fc-toolbar-title").css("padding-left", "6px");
       $(".navbar").css("background-color", "#242424");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "#0d95fd");
+      }, function() {
+        $(this).css("color", "white");
+      });
       $("img").css("filter", "none");
       $("html body").css("background-color", "#141414");
       $(".dropdown button").css("background-color", "#242424");
@@ -156,6 +176,14 @@
       } catch (error) { }
     }
     else {
+      $(".fc-header-toolbar").css("background-color", "white");
+      $(".fc-toolbar-title").css("color", "black");
+      $(".fc-toolbar-title").css("padding-left", "6px");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "#0d95fd");
+      }, function() {
+        $(this).css("color", "white");
+      });
       $(".dropdown button").css("background-color", "#0d6efd");
       $(".navbar").css("background-color", "#0d6efd");
       $("img").css("filter", "none");

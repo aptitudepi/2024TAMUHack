@@ -94,6 +94,41 @@
             "name":"Ready to Release",
             "date":"7/22/22",
             "description":"Finalized web and mobile app for initial release, with backend features finished."
+        },
+        {
+            "name":"Begin Phase 3",
+            "date":"9/26/22",
+            "description":"Phase 3 began by meeting with our new development team in the STEAM Center MPR and first semester sub-team leaders were appointed."
+        },
+        {
+            "name":"Issue Tracker",
+            "date":"10/5/22",
+            "description":"An Issue Tracker was created to monitor bugs reported by web and mobile app user feedback."
+        },
+        {
+            "name":"Publishing Licenses",
+            "date":"10/10/22",
+            "description":"Licenses to publish to the Apple App Store and Google Play store were fully set up by administrators."
+        },
+        {
+            "name":"Bug Fixes",
+            "date":"10/12/22",
+            "description":"Received more user feedback from web and mobile app users and implemented fixes for any issues found."
+        },
+        {
+            "name":"District Approval",
+            "date":"1/6/23",
+            "description":"Met with the Head of District Communications for Allen ISD and received full approval for the release of our web and mobile applications."
+        },
+        {
+            "name":"Marketing Prep",
+            "date":"1/16/23",
+            "description":"Marketing prepared for our upcoming release by creating digital and physical content to promote STEAM Life."
+        },
+        {
+            "name":"Official Release",
+            "date":"1/30/23",
+            "description":"Released our web and mobile applications!"
         }
     ]
 }
