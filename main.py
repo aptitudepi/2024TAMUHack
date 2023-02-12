@@ -97,7 +97,6 @@ def get_user_email():
     userEmail = session["email"]
   except:
     print("Could not get email")
-  print(userEmail)
   return userEmail
 def get_user_name():
   userName = ""
@@ -325,6 +324,8 @@ def route_management():
     editData = request.get_json()
     try:
       editInfo = editData["Club"]
+      print("add owners: ",editInfo["Add-Owners"])
+      print("remove owners: ",editInfo["Remove-Owners"])
       editMembers = editData["Member"]
       awsController.edit_club_info(editInfo["Club-Name"], editInfo["ID"], editInfo["Description"], editInfo["Leaders"], editInfo["Location"], editInfo["Meeting"], editInfo["Social"], editInfo["Sponsors"], editInfo["Subtype"], editInfo["Type"], editInfo["Website"], editInfo["Add-Owners"], editInfo["Remove-Owners"])
       awsController.edit_club_member(editMembers["Members-Add"], editMembers["Members-Remove"], editInfo["ID"])

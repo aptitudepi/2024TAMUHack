@@ -628,7 +628,7 @@
   function foundClub(joinedArr, clubId) {
     for (var index = 0; index < joinedArr.length; index++) {
       var club = joinedArr[index];
-      if (club == clubId) {
+      if (club == clubId || club == "All") {
         return true;
       }
     }
@@ -797,6 +797,8 @@
       tempArr.push(findUserName(tempCurrentMArr[index]));
       memberRArr.push(tempArr);
     }
+    console.log("members add: "+memberAArr);
+    console.log("members remove: "+memberRArr);
     var jsonMemberReturn = { "Members-Add": memberAArr, "Members-Remove": memberRArr };
     return jsonMemberReturn;
   }

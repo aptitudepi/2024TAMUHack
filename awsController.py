@@ -293,12 +293,13 @@ def add_club(email, name, clubId):
     userClubsArr.append(clubId)
     if (userClubsArr[0] == ""):
         userClubsArr.pop(0)
+    print("user clubs: ", userClubsArr)
     userAccount["Clubs-Joined"] = userClubsArr
     userAccount.partial_save()
 def add_club_owner(email, name, clubId):
     userAccount = userTable.get_item(name=name, email=email)
     userClubsArr = list(userAccount["Clubs-Owned"])
-    userClubsArr.append(clubId)
+    userClubsArr.append(str(clubId))
     if (userClubsArr[0] == ""):
         userClubsArr.pop(0)
     userAccount["Clubs-Owned"] = userClubsArr
@@ -347,7 +348,9 @@ def find_last_id():
     listItems = list(userItems)
     for item in listItems:
         try:
-            lastUserID = item["ID"]
+            thisID = item["ID"]
+            if (thisID > lastUserID):
+                lastUserID = thisID
         except:
             print("minor error")
 def find_next_id():
@@ -425,8 +428,8 @@ def edit_club_info(cName, clubId, description, leaders, location, meeting, socia
     clubAccount.partial_save()
     if (addOwners != [""]):
         for ownerItems in addOwners:
-            check_user(ownerItems[0])
-            add_club_owner(ownerItems[0], find_user_name(ownerItems[0]), clubId)
+            if (check_user(ownerItems[0], True)):
+                add_club_owner(ownerItems[0], find_user_name(ownerItems[0]), clubId)
     if (removeOwners != [""]):
         for ownerItems in removeOwners:
             if (check_user(ownerItems[0], True)):
