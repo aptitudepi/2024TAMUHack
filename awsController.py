@@ -40,6 +40,10 @@ def get_club_items():
         except:
             print("none of this type for object")
         try:
+            itemDictionary.update({"Banner-Image" : item["Image"]})
+        except:
+            print("none of this type for object")
+        try:
             itemDictionary.update({"Dept" : item["Department"]})
         except:
             print("none of this type for object")

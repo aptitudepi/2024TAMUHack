@@ -941,7 +941,7 @@
     currentClubID = currentObj["ID"];
     $("#club-notice").css("background-color", "rgba(0,0,0,0.0)");
     $("#club-notice").css("background-image", "none");
-    if (currentObj["Banner-Image"]) { $("#club-notice").css("height", "400px"); $("#club-notice").css("background-image", `url("${currentObj["Banner-Image"]}")`); }
+    if (currentObj["Banner-Image"] && currentObj["Banner-Image"] != "") { $("#club-notice").css("height", "400px"); $("#club-notice").css("background-image", `url("${currentObj["Banner-Image"]}")`); }
     else if (colorScheme != 0) { $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`) }
     else {
       $("#club-notice").css("background-image", `url("/static/iconblack-01.svg")`)
