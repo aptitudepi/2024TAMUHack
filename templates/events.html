@@ -202,7 +202,8 @@
           eEndDate = eEndDateArr[0] + "/" + eEndDateArr[1] + "/" + eEndDateArr[2][2] + eEndDateArr[2][3];
           var eventTime = getTimeText(eStartDate, eEndDate, currentEvent["Start-Time"], currentEvent["End-Time"]);
           $(".eventTiming").text(`${eventTime}`);
-          $(".eventAttend").text(`Max attendees: ${currentEvent["Max-Attendees"]}`);
+          if (currentEvent["Max-Attendees"] == 0) { $(".eventAttend").css("display","none"); }
+          else { $(".eventAttend").css("display","block");$(".eventAttend").text(`Max attendees: ${currentEvent["Max-Attendees"]}`); }
           $(".eventDescription").text(`${currentEvent["Description"]}`);
         }
       }
