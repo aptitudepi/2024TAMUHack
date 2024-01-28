@@ -1,0 +1,243 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block head %}
+<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+<style>
+      body {
+        width: 100%;
+        font-family: 'Montserrat', sans-serif;
+      }
+      html, body{
+        scroll-behavior: smooth;
+        overflow-x:hidden;
+        max-width:100%;
+      }
+      .title-text{
+        font-family: 'Asap';
+        font-weight: bold; 
+        font-size: 4vh;
+        line-height: 40px;
+      }
+      .body-text{
+        margin-top: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2vh;
+      }
+    .semi-rounded{ border-radius: 50px; }
+    .rounded { border-radius:5% !important; }
+    .rounded-circle { max-width:700px !important; }
+    .title-text { font-size:36px !important; }
+    .body-text { font-size:20px !important; }
+    .contentSpacer { height: 20vh; }
+    .mobileTxt { display:none; }
+    .pageLink {
+      color:#037dff;
+      font-weight:bold;
+      text-decoration:none;
+    }
+    .pageLink:hover {
+      color:#004a99;
+      text-decoration:underline;
+    }
+    .specialPageLink {
+      color:white !important;
+    }
+    .specialPageLink:hover {
+      color:white !important;
+    }
+    .navbar {
+      position: relative;
+      display: flex;
+      /*flex-wrap: wrap;*/
+      align-items: center;
+      /*justify-content: space-between;*/
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+    }
+    .bcgMainIcon {
+      position:absolute;
+      left:0px;
+      bottom:0px;
+      z-index:-1;
+      width:100%;
+      height:100%;
+      transform: scale(11.0);
+      filter: opacity(65%);
+    }
+    .mainTxt {
+      display:grid;
+      grid-template-columns:auto;
+      align-items:center;
+      color:black;
+    }
+    .hc1 {
+      background-color: #1982c4;
+    }
+    .hc2 {
+      background-color: #6a4c93;
+    }
+    @media (min-width: 992px) {
+      .navbar-expand-lg {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+      }
+    }
+    @media (max-width:1300px) {
+      .contentSpacer {
+        height: 10vh;
+      }
+    }
+    @media (max-width:991px) {
+      .contentSpacer {
+        height: 10vh;
+      }
+      .mobileTxt { display:block; }
+      .normalTxt { display:none; }
+    }
+    .centerAlign {
+      margin-right:auto;
+      margin-left:auto;
+
+    }
+    .audioC {
+      display:none;
+    }
+    .vendorId, .deviceName, .deviceManName {
+      display:none;
+    }
+  </style>
+
+{% endblock %}
+
+{% block body %}
+
+<section id="page1"></section>
+<div class="centerAlign">
+  <button type="button" class="btn btn-outline-primary connectBtn">Connect</button>
+</div>
+<div class="audioC">
+<div class="container mt-2">
+  <h1 style="text-align:center;">Voice Verifier</h1>
+  <br>
+  <button type="button" class="btn btn-outline-success audioStartBtn">Start Recording Audio</button>
+  <button type="button" class="btn btn-outline-danger audioStopBtn">Stop Recording Audio</button>
+  <a class="downloadLink">Download Audio</a>
+<div class="centerAlign">
+  <button type="button" class="btn btn-outline-primary">Verify</button>
+</div>
+</div>
+</div>
+<script src="https://markjivko.com/dist/recorder.js"></script>
+<script>
+/*//URL = window.URL || window.webkitURL;
+var globalStream;
+var rec;
+var input;
+//AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext = new AudioContext;
+var streamSetup = { audio : true, video : false }*/
+//var dataC = [];
+//var recorder;
+
+/*if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  console.log("getUserMedia supported.");
+  navigator.mediaDevices.getUserMedia({audio: true}).then((stream) => {
+    recorder = new MediaRecorder(stream);
+  }).catch((err) => {
+      console.error(`The following getUserMedia error occurred: ${err}`);
+    });
+} else {
+  console.log("getUserMedia not supported on your browser!");
+}
+
+recorder.ondataavailable = (e) => {
+  dataC.push(e.data);
+};*/
+
+$(document).ready(function () {
+  var myRecorder = {
+    objects: {
+        context: null,
+        stream: null,
+        recorder: null
+    },
+    init: function () {
+        if (null === myRecorder.objects.context) {
+            myRecorder.objects.context = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    },
+    start: function () {
+        var options = { audio: true, video: false };
+        navigator.mediaDevices
+            .getUserMedia(options)
+            .then(function (stream) {
+                myRecorder.objects.stream = stream;
+                myRecorder.objects.recorder = new Recorder(
+                    myRecorder.objects.context.createMediaStreamSource(stream),
+                    { numChannels: 1 }
+                );
+                myRecorder.objects.recorder.record();
+            })
+            .catch(function (err) {});
+    },
+    stop: function () {
+        if (null !== myRecorder.objects.stream) {
+            myRecorder.objects.stream.getAudioTracks()[0].stop();
+        }
+        if (null !== myRecorder.objects.recorder) {
+            myRecorder.objects.recorder.stop();
+                myRecorder.objects.recorder.exportWAV(function (blob) {
+                    var url = (window.URL || window.webkitURL).createObjectURL(blob);
+                    var downloadObject = $(".downloadLink").attr("href", url).attr("download", "captured.wav");
+                });
+        }
+    }
+  };
+
+      $(".audioStartBtn").on('click', function() {
+        myRecorder.init();
+        $(this).attr("data-recording", "true");
+        myRecorder.start();
+      });
+
+      $(".audioStopBtn").on('click', function() {
+        $(this).attr("data-recording", "");
+        myRecorder.stop();
+      });
+  });
+
+function getDeviceInfo() {
+  vendorId = $(".vendorId").text();
+  deviceName = $(".deviceName").text();
+  deviceManName = $(".deviceManName").text();
+  return [vendorId, deviceName, deviceManName];
+}
+
+async function connectAuthDevice(){
+  deviceMatch = getDeviceInfo();
+  navigator.usb.requestDevice({ filters: [{ vendorId: deviceMatch[0] }] }).then((device) => {
+    if (device.productName == deviceMatch[1] && device.manufacturerName == deviceMatch[2]) {
+      // successful connection of the valid physical authentication device by the user to begin voice recognition
+      $(".audioC").css("display", "block");
+      return true;
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+$(".connectBtn").on('click', async function() {
+  await connectAuthDevice();
+});
+
+</script>
+
+<div class="vendorId">{{ vendorId }}</div>
+<div class="deviceName">{{ deviceName }}</div>
+<div class="deviceManName">{{ deviceManName }}</div>
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "user" : "1",
+            "pass" : "a",
+            "vendorId" : "0x10C4",
+            "deviceName" : "CP2102 USB to UART Bridge Controller",
+            "deviceManName" : "Silicon Labs"
+        },
+        {
+            "user" : "2",
+            "pass" : "abcdefghij",
+            "vendorId" : "0x10C4",
+            "deviceName" : "CP2102 USB to UART Bridge Controller",
+            "deviceManName" : "Silicon Labs"
+        }
+    ]
+}
