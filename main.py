@@ -16,6 +16,23 @@ import cachecontrol
 import pathlib
 import string
 import pytz
+import nemo.collections.asr as nemo_asr
+from contextlib import redirect_stdout
+
+
+embedding = speaker.get_embedding("captured1.wav")
+speaker.verify_speakers("captured1.wav", "captured2.wav")
+with open('out.txt', 'w') as f:
+    with redirect_stdout(f):
+        speaker = nemo_asr.models.EncDecSpeakerLabelModel.from_pretrained("nvidia/speakerverification_en_titanet_large")
+
+file = open('out.txt', "r")
+
+same = False
+
+for line in file:
+    if re.search("from the same speaker", line):
+        same = True
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = "littlekey"
@@ -124,7 +141,21 @@ def initial_login():
       return abort(401)
     print("did not work, entered:")
     print(loginInfo)
-  return render_template("initial_login.html",  vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2], pageNumber=page)
+  #return render_template("initial_login.html", sameVal=same)
+
+#@app.route("/voice")
+#@voice_login_is_required
+#def voice():
+  #print("voice")
+  #device_data = ["", "", ""]
+  #if (is_banned_ip(request.remote_addr)):
+  #  return redirect("/unauthorized")
+  #else:
+  #  device_data = get_user_device_data()
+  #print("here2")
+  #return render_template("test.html")
+  #return render_template("voice.html", vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2])
+  return render_template("initial_login.html",  vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2], pageNumber=page, sameVal = same)
 
 @app.route("/help")
 def route_help():
