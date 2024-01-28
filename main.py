@@ -22,6 +22,7 @@ app.secret_key = "littlekey"
 
 verifyCount = 0
 lastIpIndex = 0
+page = 0
 
 #make sure user is logged in for certain pages
 def voice_login_is_required(function):
@@ -104,6 +105,8 @@ def get_now():
 @app.route("/", methods=['POST', 'GET'])
 def initial_login():
   global verifyCount
+  global page
+  device_data = get_user_device_data()
   if (is_banned_ip(request.remote_addr)):
     return redirect("/unauthorized")
   if (request.method == "POST"):
@@ -113,28 +116,15 @@ def initial_login():
     if ("User" in session and "Pass" in session):
       if (session["User"] == loginInfo["User"] and session["Pass"] == loginInfo["Pass"]):
         print("here")
-        return redirect("/voice")
+        page = 1
     if (verifyCount == 3):
       print("ip")
       print(request.remote_addr)
       add_banned_ip(request.remote_addr)
-      return redirect("/unauthorized")
+      return abort(401)
     print("did not work, entered:")
     print(loginInfo)
-  return render_template("initial_login.html")
-
-@app.route("/voice")
-@voice_login_is_required
-def voice():
-  print("voice")
-  device_data = ["", "", ""]
-  if (is_banned_ip(request.remote_addr)):
-    return redirect("/unauthorized")
-  else:
-    device_data = get_user_device_data()
-  print("here2")
-  return render_template("test.html")
-  #return render_template("voice.html", vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2])
+  return render_template("initial_login.html",  vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2], pageNumber=page)
 
 @app.route("/help")
 def route_help():
