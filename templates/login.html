@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block head %}
+<script src="https://apis.google.com/js/platform.js?onload=loadCallback" async defer></script>
+<meta name="google-signin-client_id" content="{{ google_client_id }}">
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page11"></section>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-3"></div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="card mt-5">
+        <div class="card-body">
+
+          <div id="landing-page">
+            <noscript>WARNING: You need Javascript enabled in order to use this page.</noscript>
+            <h3 class="text-center">Log In</h3>
+            <p>Logging in with your Allen ISD account enables you to manage events for any clubs you represent.</p>
+            <p>To continue, please indicate below if you are a student or an AISD employee.</p>
+            <a class="btn btn-block btn-primary loginBtn" href="#" id="saStudent">I am a Student</a>
+            <a class="btn btn-block btn-primary btn-outline loginBtn" href="#" id="saStaff">I am a teacher / staff member</a>
+          </div>
+
+          <div id="signin-page" style="display: none;">
+            <div class="center mt-3"><h3>Login as <span id="atype"></span></h3>
+            <p>Please click button below and sign in using your district-issued Google account.</p>
+            <div id="signin-area"></div>
+            <p id="name"></p>
+            <p id="error"></p>
+            <form action="/login/google" method="POST">
+              <input type="hidden" name="gtk" id="gtk-out" value="">
+              <button type="submit" id="submit" style="display: none;">
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <div class="userEmail">{{ email }}</div>
+      <script>
+      var hd = "student.allenisd.org";
+      var urlparams = new URLSearchParams(window.location.search);
+      function showPage(p) {
+        document.querySelector("#landing-page").style.display = "none";
+        document.querySelector("#signin-page").style.display = "none";
+        document.querySelector("#" + p + "-page").style.display = "block";
+      }
+
+      function loadButton() {
+        gapi.load('auth2', function(){
+          auth2 = gapi.auth2.init({
+            client_id: '{{ google_client_id }}',
+            cookie_policy: 'single_host_origin',
+            fetch_basic_profile: true,
+            hosted_domain: hd
+          });
+          gapi.signin2.render('signin-area', {
+            onSuccess: 'onSignIn',
+            onFailure: 'onFailure'
+          });
+        });
+
+      }
+
+      function loadCallback(){
+        showPage("landing");
+        document.querySelector("#saStudent").addEventListener("click", function(){
+          showPage("signin");
+          hd = "student.allenisd.org";
+          document.querySelector("#atype").innerText = "Student";
+          loadButton();
+        });
+        document.querySelector("#saStaff").addEventListener("click", function(){
+          showPage("signin");
+          hd = "allenisd.org";
+          document.querySelector("#atype").innerText = "Teacher";
+          loadButton();
+        });
+      }
+
+      var fun = null;
+      function onSignIn(user) {
+        console.info("Signed in");
+        console.info(user);
+        fun = user;
+        var id_token = user.getAuthResponse().id_token;
+        document.querySelector("#name").innerText = "Thanks, we're logging you in now";
+        document.querySelector("#gtk-out").value = id_token;
+        document.querySelector("#submit").click();
+      }
+      function onFailure(error) {
+        console.error(error);
+        document.querySelector("#error").innerText = "Google Sign In failed! Please try again.";
+      }
+      </script>
+
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-3"></div>
+  </div>
+</div>
+
+{% endblock %}

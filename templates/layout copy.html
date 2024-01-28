@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} - STEAM Life</title>
+  <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/x-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet"
+    crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='footerPage.css') }}">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn-primary {
+      background: transparent;
+      border: none;
+    }
+
+    .loginBtn {
+      background-color: #0d6efd;
+    }
+
+    .hcLoginBtn {
+      background-color: #242424 !important;
+    }
+
+    .contrastC {
+      user-select: none;
+    }
+
+    .contrastCheckbox:checked+.custom-control-label::before {
+      background-color: darkgrey;
+    }
+
+    .contrastCheckbox:checked+.custom-control-label::after {
+      background-color: white;
+    }
+    
+    .listBody a:hover {
+      color:#0d95fd;
+    }
+
+    @media (max-width:991px) {
+      .contrastC {
+        margin-left: 8px;
+      }
+    }
+  </style>
+
+  {% block head %}{% endblock %}
+
+</head>
+
+<body>
+  {% block body %}{% endblock %}
+</body>
+<script>
+  var colorScheme;
+  var c6State = "";
+  var c6MobileState = "";
+  var legendState = "";
+  var legendMobileState = "";
+  var nav1CColor = "";
+  var nav2CColor = "";
+  var currentPage = 0;
+  function removeActive(childrenListing) {
+    for (var index = 0; index < childrenListing.length; index++) {
+      childrenListing[index].classList.remove("active");
+    }
+  }
+  function highContrast() {
+    //this returns the current page starting at index 0
+    currentPage = parseInt($("section").first().attr("id").split("page").pop());
+    //non-page-specific styling
+    if (colorScheme == 1) {
+      $(".fc-header-toolbar").css("background-color", "white");
+      $(".fc-toolbar-title").css("color", "black");
+      $(".fc-toolbar-title").css("padding-left", "6px");
+      $(".dropdown button").css("background-color", "#242424");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "black");
+      }, function() {
+        $(this).css("color", "white");
+      });
+      $(".navbar").css("background-color", "#242424");
+      $("img").css("filter", "grayscale(100%)");
+      $("html body").css("background-color", "white");
+      $(".navbar-brand img").css("filter", "brightness(10000%)");
+      $(".dropdown button").hover(function () {
+        $(this).css("background-color", "#4B4B4B");
+      },
+        function () {
+          $(this).css("background-color", "#242424");
+        });
+      try {
+        //$(".list-group-item.active").css("background-color","#242424 !important");
+      } catch (error) { }
+      try {
+        $(".pageLink, #returnToList").css("color", "#4B4B4B");
+        $(".pageLink, #returnToList").hover(function () {
+          $(this).css("color", "black");
+        },
+          function () {
+            $(this).css("color", "#4B4B4B");
+          });
+        $(".search-icon").css("background-color", "#242424");
+        $(".fa-search").css("color", "white");
+        $(".roomToggle").css("background-color", "#242424");
+        clearClubListing(clubListing);
+        updateClubListing();
+      } catch (error) { }
+      try {
+        $(".topTxt").css("color", "black");
+        $(".subServiceDisplay").css("background-color", "white");
+      } catch (error) { }
+    }
+    else if (colorScheme == 2) {
+      $(".fc-header-toolbar").css("background-color", "#242424");
+      $(".fc-toolbar-title").css("color", "white");
+      $(".fc-toolbar-title").css("padding-left", "6px");
+      $(".navbar").css("background-color", "#242424");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "#0d95fd");
+      }, function() {
+        $(this).css("color", "white");
+      });
+      $("img").css("filter", "none");
+      $("html body").css("background-color", "#141414");
+      $(".dropdown button").css("background-color", "#242424");
+      //$("#navCollapse").children(".navbar-nav").children(".dropdown").children("button").css("background-color", "#242424");
+      $(".dropdown button").hover(function () {
+        $(this).css("background-color", "#4B4B4B");
+      },
+        function () {
+          $(this).css("background-color", "#242424");
+        });
+      try {
+        $(".pageLink, #returnToList").css("color", "#037dff");
+        $(".pageLink, #returnToList").hover(function () {
+          $(this).css("color", "#004a99");
+        },
+          function () {
+            $(this).css("color", "#037dff");
+          });
+        $(".search-icon").css("background-color", "#0d6efd");
+        $(".search-icon").css("color", "white");
+        clearClubListing(clubListing);
+        updateClubListing();
+      } catch (error) { }
+      try {
+        $(".topTxt").css("color", "white");
+        $(".subServiceDisplay").css("background-color", "#141414");
+      } catch (error) { }
+    }
+    else {
+      $(".fc-header-toolbar").css("background-color", "white");
+      $(".fc-toolbar-title").css("color", "black");
+      $(".fc-toolbar-title").css("padding-left", "6px");
+      $(".listBody a").hover(function() {
+        $(this).css("color", "#0d95fd");
+      }, function() {
+        $(this).css("color", "white");
+      });
+      $(".dropdown button").css("background-color", "#0d6efd");
+      $(".navbar").css("background-color", "#0d6efd");
+      $("img").css("filter", "none");
+      $("html body").css("background-color", "white");
+      $(".navbar-brand img").css("filter", "brightness(10000%)");
+      $(".dropdown button").hover(function () {
+        $(this).css("background-color", "#0067d6");
+      },
+        function () {
+          $(this).css("background-color", "#0d6efd");
+        });
+      try {
+        //$(".list-group-item.active").css("background-color","#007bff !important");
+      } catch (error) { }
+      try {
+        $(".pageLink, #returnToList").css("color", "#037dff");
+        $(".pageLink, #returnToList").hover(function () {
+          $(this).css("color", "#004a99");
+        },
+          function () {
+            $(this).css("color", "#037dff");
+          });
+        $(".search-icon").css("background-color", "#0d6efd");
+        $(".search-icon").css("color", "white");
+        clearClubListing(clubListing);
+        updateClubListing();
+      } catch (error) { }
+      try {
+        $(".topTxt").css("color", "black");
+        $(".subServiceDisplay").css("background-color", "white");
+      } catch (error) { }
+    }
+    //page-specific styling
+    try {
+      switch (currentPage) {
+        case 1:
+          if (colorScheme == 1) {
+            $(".hc1").css("background-color", "#e0e00d");//used to be #8B8B8B
+            $(".hc2").css("background-color", "#e0e00d");//used to be #6B6A6A
+          }
+          else {
+            $(".bcgMainIcon").css("filter", "opacity(65%)");
+            $(".hc1").css("background-color", "#1982c4");//used to be #1982c4
+            $(".hc2").css("background-color", "#6a4c93");//used to be #6a4c93
+          }
+          if (colorScheme == 2) {
+            $(".alternateDiv").css("color", "white");
+            $(".mainTxt").css("color", "white");
+          } else {
+            $(".alternateDiv").css("color", "black");
+            $(".mainTxt").css("color", "black");
+          }
+          break;
+        case 2:
+          console.log("coming here too");
+          try {
+            clearTimeline();
+            updateTimeline();
+          } catch (error) { }
+          if (colorScheme == 1) {
+            $(".hc1").css("background-color", "#e0e00d");
+            $(".hc2").css("background-color", "#e0e00d");
+            $(".bioTitle").css("background-color", "#e0e00d");
+            $(".phase2Dark").css("background-color", "#e0e00d");
+            $(".bioTxt").css("background-color", "#e0e00d");
+            $(".phase2").css("background-color", "#e0e00d");
+          }
+          else {
+            $(".hc1").css("background-color", "#1982c4");
+            $(".hc2").css("background-color", "#8ac926");
+            $(".bioTitle").css("background-color", "#1778b5");
+            $(".phase2Dark").css("background-color", "#59b300");
+            $(".bioTxt").css("background-color", "#1d96e2");
+            $(".phase2").css("background-color", "#73e600");
+          }
+          if (colorScheme == 2) {
+            $(".changeContainer").css("background-color", "#141414");
+            $(".changeContainer").css("color", "white");
+            $(".subTimelineD").css("color", "black");
+          } else {
+            $(".changeContainer").css("background-color", "white");
+            $(".changeContainer").css("color", "black");
+          }
+          break;
+        case 3:
+          if (colorScheme == 1) {
+            c6State = $(".imgC6").css("display");
+            c6MobileState = $(".imgC6Mobile").css("display");
+            legendState = $(".legendC").css("display");
+            legendMobileState = $(".legendCMobile").css("display");
+            $(".imgC6, .imgC6Mobile, .legendC, .legendCMobile").css("display", "none");
+            nav1CColor = $(".nav1C").css("background-color");
+            nav2CColor = $(".nav2C").css("background-color");
+            $(".nav1, .nav2, .nav3").css("background-color", "#242424");
+            $(".nav1, .nav2, .nav3").css("color", "white");
+            $(".roomToggle").css("z-index", "99");
+            $(".imgC3, .imgC4").css("z-index", "99");
+          }
+          else {
+            $(".imgC6").css("display", c6State);
+            $(".imgC6Mobile").css("display", c6MobileState);
+            $(".legendC").css("display", legendState);
+            $(".legendCMobile").css("display", legendMobileState);
+            $(".roomToggle").css("background-color", "#34a1e5");
+            $(".nav1, .nav2").css("background-color", "#0d6efd");
+            $(".nav3").css("background-color", "white");
+            $(".nav3").css("color", "black");
+            $(".nav1C").css("background-color", nav1CColor);
+            $(".nav2C").css("background-color", nav2CColor);
+          }
+          if (colorScheme == 2) {
+            $(".navigationMainTxt").css("color", "white");
+            $(".navigationDesTxt").css("color", "white");
+          } else {
+            $(".navigationMainTxt").css("color", "black");
+            $(".navigationDesTxt").css("color", "black");
+          }
+          break;
+        case 4:
+          if (colorScheme == 1) {
+            $("#circle1, #circle2, #circle3, #circle4, #circle5").css("border", "12px solid #242424");
+            $(".science-descriptions, .technology-descriptions, .engineering-descriptions, .art-descriptions, .math-descriptions").css("background-color", "#242424");
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
+          }
+          else {
+            $("#circle1").css("border", "12px solid #63a11b");
+            $("#circle2").css("border", "12px solid #1982c4");
+            $("#circle3").css("border", "12px solid #6a4c93");
+            $("#circle4").css("border", "12px solid #DCA000");
+            $("#circle5").css("border", "12px solid #E22739");
+            $(".science-descriptions").css("background-color", "#63a11b");
+            $(".technology-descriptions").css("background-color", "#1982c4");
+            $(".engineering-descriptions").css("background-color", "#6a4c93");
+            $(".art-descriptions").css("background-color", "#DCA000");
+            $(".math-descriptions").css("background-color", "#E22739");
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
+          }
+          if (colorScheme == 2) {
+            $(".subjectBubbleTxt").css("color", "white");
+            $(".title-textCourse").css("color", "white");
+          } else {
+            $(".subjectBubbleTxt").css("color", "black");
+            $(".title-textCourse").css("color", "black");
+          }
+          break;
+        case 5:
+          if (colorScheme == 1) {
+            $(".list-group-item.active").css("background-color", "#242424");
+            $(".btn-outline-primary, .btn-primary").css("background-color", "#242424");
+            $(".btn-outline-primary, .btn-primary").css("color", "white");
+          }
+          else {
+            $(".list-group-item.active").css("background-color", "#007bff");
+            $(".btn-outline-primary, .btn-primary").css("background-color", "#0d6efd");
+          }
+          if (colorScheme == 2) {
+            $(".titleT").css("color", "white");
+            $(".mainTitleTxt").css("color", "white");
+            $(".mainBodyTxt").css("color", "white");
+            $(".mainBodyTxt2").css("color", "white");
+            $(".hzLine").css("color", "white");
+            $(".hzLine").css("background-color", "white");
+            $(".surroundingTypeC").css("background-color", "#141414");
+            $(".dropdown button").css("background-color", "#242424");
+          } else {
+            $(".titleT").css("color", "black");
+            $(".mainTitleTxt").css("color", "black");
+            $(".mainBodyTxt").css("color", "black");
+            $(".mainBodyTxt2").css("color", "black");
+            $(".hzLine").css("color", "black");
+            $(".hzLine").css("background-color", "black");
+            $(".surroundingTypeC").css("background-color", "white");
+          }
+          $(".clubDisplay").css("background-color", "white");
+          break;
+        case 6:
+          if (colorScheme == 1) {
+            $(".list-group-item.active").css("background-color", "#242424");
+            $(".list-group-item-action.active").css("background-color", "#242424");
+            $(".fc-event-main-frame").css("background-color", "#242424");
+          } else {
+            $(".list-group-item.active").css("background-color", "#007bff");
+            $(".list-group-item-action.active").css("background-color", "#007bff");
+          }
+          if (colorScheme == 2) {
+            $(".allBodyC").css("color", "white");
+            $("#calendarContainer").css("color", "black");
+            $("#calendarContainer").css("background-color", "white");
+          } else {
+            $(".allBodyC").css("color", "black");
+          }
+          break;
+        case 7: //service page
+          if (colorScheme == 1) {
+            $(".btn-outline-primary, .pageBtn a").css("background-color", "#242424");
+            $(".btn-outline-primary, .pageBtn a").css("color", "white");
+            $(".colorGrid").css("display", "none");
+            $(".serviceSignUpBtn").css("background-color", "#242424");
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
+            showSelectedPage(page);
+          }
+          else {
+            $(".btn-outline-primary, .pageBtn a").css("background-color", "#0d6efd");
+            $(".colorGrid").css("display", "flex");
+            $(".serviceSignUpBtn").css("background-color", "#0d6efd");
+            clearServiceListing(subServiceDisplay);
+            updateServiceListing();
+            showSelectedPage(page);
+          }
+          if (colorScheme == 2) {
+            $(".topTxt").css("color", "white");
+            $(".linkItem").css("color", "black");
+            $(".subServiceDisplay").css("background-color", "#141414");
+          } else {
+            $(".topTxt").css("color", "black");
+            $(".subServiceDisplay").css("background-color", "white");
+          }
+          break;
+        case 10:
+          if (colorScheme == 1) {
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.85)");
+            $(".faq-descriptions").css("background-color", "#242424");
+          }
+          else {
+            $(".title-textC").css("background-color", "rgba(0,0,0,0.65)");
+            $(".faq-descriptions").css("background-color", "#63a11b");
+          }
+          if (colorScheme == 2) {
+            $(".title-textCourse").css("color", "white");
+          } else {
+            $(".title-textCourse").css("color", "black");
+          }
+          break;
+        case 11:
+          if (colorScheme == 1) {
+            $(".list-group-item").css("border-left", "none");
+            $(".list-group-item.active").css("background-color", "#242424");
+            $(".loginBtn").addClass("hcLoginBtn");
+          }
+          else {
+            $(".list-group-item.active").css("background-color", "#007bff");
+            $(".loginBtn").removeClass("hcLoginBtn");
+          }
+          if (colorScheme == 2) {
+            $("html body").css("color", "white");
+            $(".mainTxt").css("color", "white");
+          } else {
+            $("html body").css("color", "black");
+            $(".mainTxt").css("color", "black");
+          }
+          break;
+        case 12:
+          if (colorScheme == 1) {
+            $(".visitPage, .addEventBtn, .editEventBtn, .addServiceBtn, .editServiceBtn").css("background-color", "#ffc107");
+            $(".btn-warning").css("color", "white");
+            $(".btn-danger").css("background-color", "#ffc107");
+            $(".btn-success").css("background-color", "#ffc107");
+            $(".clubMNav").css("color", "black");
+          }
+          else {
+            $(".visitPage, .addEventBtn, .editEventBtn, .addServiceBtn, .editServiceBtn").css("background-color", "#007bff");
+            $(".btn-warning").css("color", "white");
+            $(".btn-danger").css("background-color", "#dc3545");
+            $(".btn-success").css("background-color", "#28a745");
+            $(".clubMNav").css("color", "#6289E4");
+            $(".clubMNav.active").css("color", "black");
+            $(".clubMNav").on("click", function () {
+              $(".clubMNav").css("color", "#6289E4");
+              $(".clubMNav.active").css("color", "black");
+            });
+            $(".clubMNav.active").css("color", "black");
+          }
+          $("html body").css("color", "black");
+          $(".clubTypeC").children("button").on("click", function () {
+            var contrastChildren = document.querySelector(".clubTypeC").querySelector(".dropdown-menu").getElementsByClassName("dropdown-item");
+            var activeClubElem = document.querySelector(".clubTypeC").querySelector(".dropdown-menu").querySelector(".dropdown-item.active");
+            removeActive(contrastChildren);
+            activeClubElem.classList.add("active");
+            $(".dropdown-item").css("background-color", "white");
+            if (colorScheme != 0) { $(".dropdown-item.active").css("background-color", "#242424"); }
+            else { $(".dropdown-item.active").css("background-color", "#0d6efd"); }
+          });
+          $(".campusDropdownC").children("button").on("click", function () {
+            var contrastChildren = document.querySelector(".campusDropdownC").querySelector(".dropdown-menu").getElementsByClassName("dropdown-item");
+            var activeCampusElem = document.querySelector(".campusDropdownC").querySelector(".dropdown-menu").querySelector(".dropdown-item.active");
+            removeActive(contrastChildren);
+            activeCampusElem.classList.add("active");
+            $(".dropdown-item").css("background-color", "white");
+            if (colorScheme != 0) { $(".dropdown-item.active").css("background-color", "#242424"); }
+            else { $(".dropdown-item.active").css("background-color", "#0d6efd"); }
+          });
+          if (colorScheme == 2) {
+            $("html body").css("color", "white");
+          } else if (colorScheme == 0) {
+          }
+          break;
+        case 15:
+          if (colorScheme == 2) {
+            $("h1").css("color", "#d9d9d9");
+            $("h3").css("color", "#d9d9d9");
+            $("li").css("color", "#d9d9d9");
+            $(".mainBodyTxt").css("color", "#d9d9d9");
+          }
+          else {
+            $("h1").css("color", "black");
+            $("h3").css("color", "black");
+            $("li").css("color", "black");
+            $(".mainBodyTxt").css("color", "black");
+          }
+          break;
+        case 16:
+          if (colorScheme == 2) {
+            $("h1").css("color", "#d9d9d9");
+            $("h3").css("color", "#d9d9d9");
+            $("h4").css("color", "#d9d9d9");
+            $("li").css("color", "#d9d9d9");
+            $(".mainBodyTxt").css("color", "#d9d9d9");
+          }
+          else {
+            $("h1").css("color", "black");
+            $("h3").css("color", "black");
+            $("h4").css("color", "black");
+            $("li").css("color", "black");
+            $(".mainBodyTxt").css("color", "black");
+          }
+          break;
+        default:
+          break;
+      }
+    } catch (error) { }
+  }
+
+  $(document).ready(function () {
+    //on startup, check high contrast state
+    if (localStorage.getItem("colorScheme") == null) {
+      localStorage.setItem("colorScheme", "0");
+      colorScheme = 0;
+    }
+    else {
+      colorScheme = parseInt(localStorage.getItem("colorScheme"));
+    }
+    $(".userEmail").css("display", "none");
+    if ($(".userEmail").text() != "Other-User") {
+      $("#logInBtn").text("Log Out");
+    } else { $("#dashboardBtn").parent().css("display", "none"); }
+    var contrastChildren = document.querySelector(".contrastDropdown").querySelector(".dropdown-menu").getElementsByClassName("dropdown-item");
+    removeActive(contrastChildren);
+    $(`#scheme${colorScheme}`).addClass("active");
+    $(".dropdown-item").css("background-color", "white");
+    if (colorScheme != 0) { $(".dropdown-item.active").css("background-color", "#242424"); }
+    else { $(".dropdown-item.active").css("background-color", "#0d6efd"); }
+    $(".contrastBtn").text(`${$(`#scheme${colorScheme}`).text()}`);
+    $('.lightModeC').on("click", function (event) { event.preventDefault(); });
+    $('.highContrastC').on("click", function (event) { event.preventDefault(); });
+    $('.darkModeC').on("click", function (event) { event.preventDefault(); });
+    highContrast();
+  });
+
+  $("#aboutBtn").on("click", function () {
+    window.location.href = "/about";
+  });
+  $("#faqBtn").on("click", function () {
+    window.location.href = "/help";
+  });
+  $("#logInBtn").on("click", function () {
+    if ($(".userEmail").text() != "Other-User") {
+      window.location.href = "/logout";
+    } else {
+      window.location.href = "/login";
+    }
+  });
+  $("#dashboardBtn").on("click", function () {
+    window.location.href = "/dashboard";
+  });
+  $(".contrastDropdown").children(".dropdown-menu").children(".dropdown-item").on("click", function () {
+    var contrastChildren = document.querySelector(".contrastDropdown").querySelector(".dropdown-menu").getElementsByClassName("dropdown-item");
+    removeActive(contrastChildren);
+    $(this).addClass("active");
+    $(".contrastBtn").text(`${$(this).text()}`);
+    colorScheme = parseInt($(this).prop("id").split("scheme")[1]);
+    $(".dropdown-item").css("background-color", "white");
+    if (colorScheme != 0) { $(".dropdown-item.active").css("background-color", "#242424"); }
+    else { $(".dropdown-item.active").css("background-color", "#0d6efd"); }
+    localStorage.setItem("colorScheme", colorScheme.toString());
+    highContrast();
+  });
+
+</script>
+
+</html>

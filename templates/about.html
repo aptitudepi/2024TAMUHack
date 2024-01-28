@@ -1,0 +1,975 @@
+{% extends "layout.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block head %}
+<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+<style>
+  body {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+  }
+  html,body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  .title-text {
+    font-family: 'Asap';
+    font-weight: bold;
+    line-height: 40px;
+    width:100%;
+    text-align:center;
+  }
+  .timelineT {
+    margin-top:14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .underlineT {
+    height:2px;
+    width:200px;
+    margin-right:auto;
+    margin-left:auto;
+  }
+  .body-text {
+    margin-top: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size:18px;
+    text-align:center;
+  }
+  .semi-rounded {
+    border-radius: 50px;
+  }
+  .rounded {
+    border-radius: 5% !important;
+  }
+  .rounded-circle {
+    max-width: 700px !important;
+  }
+  .contentSpacer {
+    height: 20vh;
+  }
+  .mobileTxt {
+    display: none;
+  }
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .pageLink:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+  .pageLink2 {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .pageLink2:hover {
+    color: #f2f0f0;
+    text-decoration: underline;
+  }
+  .navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  .bcgMainIcon {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transform: scale(11.0);
+    filter: opacity(65%);
+  }
+  .mainTxt {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    color: black;
+  }
+  .subTimelineD {
+    display: grid;
+    grid-template-columns: 300px 10px 300px;
+    justify-content: center;
+    align-content: start;
+    width: 100%;
+  }
+  .linkItem {
+    user-select: none;
+    background-color: #eeeeee;
+    border-radius: 16px;
+    padding: 8px;
+    width: 300px;
+    margin: 6px 6px 6px 0px;
+  }
+  .rightItem {
+    background-color:#cde1fe;
+  }
+  .linkItem:hover {
+    background-color:#b4d1fd;
+  }
+  .hcLinkItem {
+    background-color:#eeeeee !important;
+  }
+  .hcLinkItem:hover {
+    background-color:#eeeeee !important;
+  }
+  .subTimelineDisplay div:nth-child(4) {
+    margin: 6px 0px;
+  }
+  .biosC {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    width:100%;
+    justify-content:space-around;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .bioC {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width:260px;
+    margin:14px;
+  }
+  .bioTitle {
+    background-color:#1778b5;
+    color:white;
+  }
+  .bioTitle h3 {
+    padding:2px 8px;
+    margin:0;
+  }
+  .bioTitle h5 {
+    padding:2px 8px;
+    margin:0;
+  }
+  .picChange {
+    width:100%;
+    position:relative;
+    overflow:hidden;
+  }
+  .coverImg {
+    width:100%;
+    margin-right:auto;
+    margin-left:auto;
+  }
+  .bioTxt {
+    position:absolute;
+    top:0;
+    opacity:0;
+    background-color:#1d96e2;
+    color:white;
+    padding:14px;
+    height:278px;
+    font-size:14px;
+    font-family: 'Montserrat', sans-serif;
+    transition:opacity 1s ease 0.25s;
+  }
+  .bioTxt:hover {
+    cursor:pointer;
+    opacity:1;
+  }
+  .underlineB {
+    height:2px;
+    width:210px;
+    margin:0px 0px 0px 4px;
+  }
+  .phase2 {
+    background-color:#73e600;
+  }
+  .phase2Dark {
+    background-color:#59b300;
+  }
+  @media (min-width: 992px) {
+    .navbar-expand-lg {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+  @media (max-width:1300px) {
+    .contentSpacer {
+      height: 10vh;
+    }
+  }
+  @media (max-width:991px) {
+    .contentSpacer {
+      height: 10vh;
+    }
+    .mobileTxt {
+      display: block;
+    }
+    .normalTxt {
+      display: none;
+    }
+    .logoCol {
+      width:30%;
+    }
+  }
+  @media (max-width:767px) {
+    .logoCol {
+      width:100%;
+    }
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+<section id="page2"></section>
+<div class="jumbotron changeContainer">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">About Us</h1>
+          <p class="body-text">STEAM Life is a student-led project dedicated to 
+            promoting the Allen ISD STEAM Center. Established in 2020, the project 
+            started under the STEAM Ambassadors but has since expanded into Computer 
+            Science and Graphic Design. Here you can find up to date information about 
+            the STEAM Center gathered by students, for students.</p>
+        </div>
+        <div class="col-lg-4 col-md-auto logoCol">
+          <img src="{{ url_for('static', filename='steam-life-full.svg') }}" loading="lazy" style="width:100%"
+            alt="STEAM Life logo">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron hc1" style="background-color:#1982c4">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+          <h1 class="title-text" style="color:white;">Mission Statement</h1>
+          <p class="body-text" style="color:white;">We started STEAM Life because we realized how 
+            difficult it could be to find STEAM-specific information in our community, especially 
+            for current and prospective students. That's why our project began with the goal to 
+            streamline information and updates about the STEAM Center. Since then, we have been 
+            Allen ISD approved, and we currently are working on an app version of STEAM Life with 
+            more personalized features. Going forward we will keep promoting the STEAM Center and 
+            dedicate ourselves to serving the community. Feel free to reach out to us if you have 
+            any suggestions for improvement.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron changeContainer">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">Phase 1 Members</h1>
+        </div>
+      </div>
+      <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3 style="font-size:25px;">Matthew Caldarola</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:17px;">Founder, Web Dev</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Matthew_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Graduating class of 2023, Matthew Caldarola founded the STEAM Center App project, fostered collaboration throughout meetings, and helped program for app and web development. Although really passionate about programming as he knows 16 of these languages, he also plays the trumpet, loves robotics, and enjoys badminton.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Parth Koul</h3>
+            <hr class="underlineB">
+            <h5>Project Management</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Parth_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Parth Koul was a member of the STEAM App Project during Phase 1, where he worked to establish the website and basic site functionality with our first few pages. Part of the Class of 2021, he was also a member of NHS and a Commended Scholar at the 2021 Senior Awards.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3 style="font-size:27px;">Vaishnavi Susarla</h3>
+            <hr class="underlineB">
+            <h5>Project Management</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Vaishnavi_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Worked on ideas for how to promote the STEAM Life project and the development of new ideas for the application in phase two. She is also experienced in Swift, Python, SQL, Unity, and Blender. Vaishnavi will be studying Computer Science at the University of Texas at Austin. Apart from Computer Science, she enjoys drawing portraits and performing Bharatanatyam.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Aryan Bhuta</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Aryan_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Aryan is part of the Class of 2023. When not overseeing and contributing to the development of the STEAM Life project, he enjoys reading, wikipedia-binging, playing Minecraft, chocolate, riding his bicycle, and spinning in office chairs. He can be contacted for any professional inquiries, classical literature recommendations, or philosophical digressions.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Susie Lee</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Susie_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Class of 2022, Susie has been a part of STEAM Life since the beginning. Her contributions include the project's logos, branding, and — quite obviously — the design. She will be attending MICA for graphic design, with a specialization in Ui/Ux design. When not scrolling through Adobe Fonts she is writing, video editing, or anything else with a laptop.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Angela Suresh</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Angela_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Graduating in the class of 2022, Angela has contributed to the STEAM Life project in terms of the website design and the app design. While graphic design may be her passion, she also likes to play with technology and electronics in her spare time. She will be attending UT Austin for Electrical and Computer Engineering.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Avi Aggarwal</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Avi is a marketer and legal officer for the STEAM App Project. His work includes researching and implementing legal requirements, ensuring the language between our app and district websites is consistent. He also serves as the head of marketing for Envision and participates in the Vulcan Initiative.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Neha Rajganesh</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Neha_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Class of 2022, Neha is a marketer and App Design Manager for the STEAM App Project. Her work consisted of developing marketing materials and overseeing the timely and quality development of the mobile application developed over Phase 2. Outside of the STEAM App Project, she is a member of Key Club and NHS.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Mahita Velaga</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Mahita_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Class of 2022, Mahita is a part of the AHS robotics team, and also a student council officer. She enjoys art, music, and playing video games in her free time. She also enjoys learning about and collecting various houseplants- she currently has 30+ in her room! Her favorite subject is Biology, and she hopes to pursue biomedical engineering and medicine.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Ricky Das</h3>
+            <hr class="underlineB">
+            <h5>Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Ricky_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Updates to the website UI, creating backend systems, and designing web pages are among the contributions Ricky has made. Ricky is knowledgeable in JavaScript, Swift, SQL, and C#. He also has experience with React Native, Unity, and UI/UX design. He is attending Texas A&M University as of Fall 2022 for Computer Science. He enjoys playing tennis and cooking.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Tariq Mahamid</h3>
+            <hr class="underlineB">
+            <h5>Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Tariq_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Class of 2022, Tariq enjoys playing tennis and programming. He also enjoys teaching and helping students (along with their peers) understand subjects that they either strugle with or would like to get better at.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3>Chris Morgan</h3>
+            <hr class="underlineB">
+            <h5>Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Chris_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Currently a freshman in college, Chris Morgan is a programmer who worked on Phase 1 of the STEAM Life Project during his senior year of high school, where he was instrumental in establishing databases and other backend code. In addition, he fielded several questions from the Phase 2 team as they worked to make changes to the backend later on.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle">
+            <h3 style="font-size:24px;">Akshay Vemulapalli</h3>
+            <hr class="underlineB">
+            <h5>Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt">Akshay Vemulapalli, part of the Class of 2023, is a programmer with the STEAM App Project. Continuing through Phase 1 and 2 of the STEAM App Project, he helped design the website from its early stages to full-fledged site for student engagement. He also is the Treasurer of Key Club and a Math Honor Society officer.</div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron hc2" style="background-color:#8ac926">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text" style="color:white;">Phase 2 Members</h1>
+        </div>
+      </div>
+      <div class="biosC">
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3 style="font-size:25px;">Matthew Caldarola</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:17px;">Founder, App and Web Dev</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Matthew_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Graduating class of 2023, Matthew Caldarola founded the STEAM Center App project, fostered collaboration throughout meetings, and helped program for app and web development. Although really passionate about programming as he knows 16 of these languages, he also plays the trumpet, loves robotics, and enjoys badminton.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Avi Aggarwal</h3>
+            <hr class="underlineB">
+            <h5>Legal Officer</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Avi is a marketer and legal officer for the STEAM App Project. His work includes researching and implementing legal requirements, ensuring the language between our app and district websites is consistent. He also serves as the head of marketing for Envision and participates in the Vulcan Initiative.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Aryan Bhuta</h3>
+            <hr class="underlineB">
+            <h5>Web Design Manager</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Aryan_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Aryan is part of the Class of 2023. When not overseeing and contributing to the development of the STEAM Life project, he enjoys reading, wikipedia-binging, playing Minecraft, chocolate, riding his bicycle, and spinning in office chairs. He can be contacted for any professional inquiries, classical literature recommendations, or philosophical digressions.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Frank (Li) Fan</h3>
+            <hr class="underlineB">
+            <h5>Production Manager</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Frank_Fan_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Graduating the class of 2022, Frank will be attending UIUC for sustainable design. He enjoys a good challenge, especially in cs. Hobbies include coding, music production, and a good book.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Neha Rajganesh</h3>
+            <hr class="underlineB">
+            <h5>App Design Manager</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Neha_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Class of 2022, Neha is a marketer and App Design Manager for the STEAM App Project. Her work consisted of developing marketing materials and overseeing the timely and quality development of the mobile application developed over Phase 2. Outside of the STEAM App Project, she is a member of Key Club and NHS.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Susie Lee</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Susie_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Class of 2022, Susie has been a part of STEAM Life since the beginning. Her contributions include the project's logos, branding, and — quite obviously — the design. She will be attending MICA for graphic design, with a specialization in Ui/Ux design. When not scrolling through Adobe Fonts she is writing, video editing, or anything else with a laptop.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Kevin Sun</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Kevin Sun is a member of the Class of 2023 and a graphic designer with the STEAM App Project. He worked on several items, including visual layouts for web and app pages and art assets. He also contributed to the creation of marketing materials by providing feedback and revisions to the posters designed as part of the mid-year marketing material push.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Angela Suresh</h3>
+            <hr class="underlineB">
+            <h5>Graphic Design</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Angela_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Graduating in the class of 2022, Angela has contributed to the STEAM Life project in terms of the website design and the app design. While graphic design may be her passion, she also likes to play with technology and electronics in her spare time. She will be attending UT Austin for Electrical and Computer Engineering.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Byoung Lee</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Byoung Lee is a marketer with Phase 2 of the STEAM App Project and a member of the Class of 2023. His work included marketing materials and outreach to the Student Council, which he is also a member of, in the role of Special Representative.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Hazaifa Sundal</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Hazaifa_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Class of 2023, Hazaifa was in charge of marketing for phase 2. He helped with ideas for future development, networking, and general advertising. When he's not looking for ways to spread knowledge of the STEAM App, he plays video games, manages his UI design business, and spreads awareness of leukemia for his club: the AHS Leukemia and Lymphoma Society.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3 style="font-size:27px;">Vaishnavi Susarla</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Vaishnavi_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Worked on ideas for how to promote the STEAM Life project and the development of new ideas for the application in phase two. She is also experienced in Swift, Python, SQL, Unity, and Blender. Vaishnavi will be studying Computer Science at the University of Texas at Austin. Apart from Computer Science, she enjoys drawing portraits and performing Bharatanatyam.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Mahita Velaga</h3>
+            <hr class="underlineB">
+            <h5>Marketing</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Mahita_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Class of 2022, Mahita is a part of the AHS robotics team, and also a student council officer. She enjoys art, music, and playing video games in her free time. She also enjoys learning about and collecting various houseplants- she currently has 30+ in her room! Her favorite subject is Biology, and she hopes to pursue biomedical engineering and medicine.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Ricky Das</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:18px;">App & Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Ricky_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Updates to the website UI, creating backend systems, and designing web pages are among the contributions Ricky has made. Ricky is knowledgeable in JavaScript, Swift, SQL, and C#. He also has experience with React Native, Unity, and UI/UX design. He is attending Texas A&M University as of Fall 2022 for Computer Science. He enjoys playing tennis and cooking.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Sahil Sheth</h3>
+            <hr class="underlineB">
+            <h5 style="font-size:18px;">App & Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Sahil_Bio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Part of the Class of 2022, Sahil has been a part of the STEAM LIFE APP project during Phase 2. He was responsible for creating the gallery and archive pages on the website, as well as starting the mobile application. Some of his hobbies include producing music and messing around with technology. Sahil will be attending The University of Texas At Dallas for Computer Science.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3 style="font-size:24px;">Cooper Christenson</h3>
+            <hr class="underlineB">
+            <h5>App Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Cooper Christenson, Class of 2023, is an app developer for the STEAM App project. He worked on the implementation of pages, user interface, and the backend functionality of the application and its proper integration with the databases the STEAM App Project set up.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Veda Kutagula</h3>
+            <hr class="underlineB">
+            <h5>App Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Part of the Class of 2023, Veda Kutagula is an app developer with the STEAM Life Project. He helped create the pages for the mobile web application for the project and integrated it with the website. Outside of the STEAM App Project, Veda participates in the Allen ISD Orchestra, where she plays the viola.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Frank Rong</h3>
+            <hr class="underlineB">
+            <h5>App Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='BioPics/Frank_Bio.jpg') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Frank Rong, part of the Class of 2022, is an app developer for the STEAM App Project. He worked on the implementation of pages, user interface, and the backend functionality of the application and its proper integration with the databases the STEAM App Project set up. Outside of the STEAM App Project, he is part of the Math Honor Society and a cook at Ramen Hakata.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Saket Upperla</h3>
+            <hr class="underlineB">
+            <h5>App Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Class of 2023, Saket is an app developer for the STEAM Life Project. He helped create the pages for the mobile application for the project. Outside of the STEAM App, he participates in the coding challenge: EarthxHack, plays tennis, is part of the AHS Orchestra, and volunteers at BigBrainers as a chess curriculum lead.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3 style="font-size:24px;">Akshay Vemulapalli</h3>
+            <hr class="underlineB">
+            <h5>App Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Akshay Vemulapalli, part of the Class of 2023, is a programmer with the STEAM App Project. Continuing through Phase 1 and 2 of the STEAM App Project, he helped design the website from its early stages to full-fledged site for student engagement. He also is the Treasurer of Key Club and a Math Honor Society officer.</div>
+          </div>
+        </div>
+        <div class="bioC">
+          <div class="bioTitle phase2Dark">
+            <h3>Akshar Koul</h3>
+            <hr class="underlineB">
+            <h5>Web Development</h5>
+          </div>
+          <div class="picChange">
+            <div class="cover"><img src="{{ url_for('static', filename='exampleBio.png') }}" class="coverImg" loading="lazy" alt="bio image"></img></div>
+            <div class="bioTxt phase2">Part of the Class of 2023, Akshar Koul is an app developer with the STEAM Life Project. He helped create the pages for the mobile web application for the project and integrate it with the website. Outside of the STEAM App Project, Akshar is part of Eagle Robotics and Allen Eagles Soccer.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron changeContainer">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+        <div class="col-lg-4 col-md-8">
+          <h1 class="title-text">Timeline</h1>
+        </div>
+      </div>
+      <br>
+      <div class="timelineDisplay">
+        <h2 class="title-text timelineT">Early Stages</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+        <h2 class="title-text timelineT">Phase 1</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay2 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+        <h2 class="title-text timelineT">Phase 2</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay3 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+        <h2 class="title-text timelineT">Phase 3</h2>
+        <hr class="underlineT">
+        <div class="subTimelineDisplay4 subTimelineD">
+          <div class="linkItem" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron hc1" style="background-color:#1982c4">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+          <h1 class="title-text" style="color:white;">Mobile App</h1>
+          <p class="body-text" style="color:white;">The STEAM Life mobile app is a way for students to 
+            personalize their school experience. Here you can receive tailored notifications, service hour 
+            opportunities, news about ongoing projects, and more! Our students are always up to something 
+            innovative and exciting, and through the app you can learn all about it. Keep track of your 
+            activities and never miss an event or update with the STEAM Life mobile app, now available 
+            on Android and Apple devices.</p>
+            <p class="body-text" style="width:100%;text-align:center;"><a href="https://apps.apple.com/us/app/steam-life/id1666082126" class="pageLink2" target="_blank" alt="Apple install link">Apple App Store
+              </a></p>
+            <p class="body-text" style="width:100%;text-align:center;"><a href="https://play.google.com/store/apps/details?id=org.life.allencsmobile" class="pageLink2" target="_blank" alt="Android install link">Google Play Store
+              </a></p>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron changeContainer">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+          <h1 class="title-text">Feedback</h1>
+          <p class="body-text">If you have any critiques or suggestions to improve the experience of the 
+            site or app, feel free to do so at the link below. Feedback is the number one way to 
+            improve and we are always eager to hear from our users.</p>
+          <p class="body-text" style="width:100%;text-align:center;"><a href="https://forms.gle/mbDhwNqLvpznhbKH8" class="pageLink" target="_blank" alt="Feedback form link">Feedback
+              Link</a></p>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron hc2" style="background-color:#8ac926;margin-bottom:0px;">
+  <div class="container-fluid my-container">
+    <div class="container mt-2">
+      <div class="row justify-content-between">
+          <h1 class="title-text" style="color:white;">Join Us!</h1>
+          <p class="body-text" style="color:white;">If you are interested in being a part of this 
+            student-led initiative, you can apply here at the link below. We take applications 
+            twice a school year from date-date, and have four teams: marketing, graphic design, 
+            programming, and project management. Members gain service hours and valuable real-life 
+            experience in their selected field, along with skills such as public speaking and 
+            collaboration. We would love to have you; join now!
+          </p>
+          <p class="body-text" style="width:100%;text-align:center;"><a href="https://forms.gle/3H6h9v4SVd8yGeMe9" class="pageLink"
+              target="_blank" alt="Application form link">Application Link</a></p>
+          <p class="body-text" style="width:100%;text-align:center;"><a href="https://forms.gle/XhnqyW43DFwjotpE7" class="pageLink" target="_blank" alt="App tester form link">App Tester
+              Link</a></p>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="userEmail">{{ email }}</div>
+<script>
+  var pageWidth = $(document).width();
+  var subTimelineDisplay = document.querySelector(".subTimelineDisplay");
+  var subTimelineDisplay2 = document.querySelector(".subTimelineDisplay2");
+  var subTimelineDisplay3 = document.querySelector(".subTimelineDisplay3");
+  var subTimelineDisplay4 = document.querySelector(".subTimelineDisplay4");
+  var dataArr;
+  var scrollID = "";
+  var eventListing = document.querySelector(".timelineDisplay");
+  var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var endPoints = [];
+  function eventInTimeline(index, display, bitFlag, start, end) {
+    //this creates a new list item element
+    var listItem = document.createElement("div");
+    listItem.id = `item${index + 1}`;
+    listItem.classList.add("linkItem");
+    if (colorScheme != 0) { listItem.classList.add("hcLinkItem"); }
+    display.appendChild(listItem);
+    //creating the name div
+    var listItemName = document.createElement("div");
+    listItemName.style.fontSize = "18px";
+    listItemName.style.fontWeight = "bold";
+    var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+    listItemName.appendChild(listItemNameTxt);
+    listItem.appendChild(listItemName);
+    //creating the date div
+    var listItemDate = document.createElement("div");
+    var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+    listItemDate.appendChild(listItemDateTxt);
+    listItem.appendChild(listItemDate);
+    //creating the description div
+    var listItemDescription = document.createElement("div");
+    var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+    listItemDescription.appendChild(listItemDescriptionTxt);
+    listItem.appendChild(listItemDescription);
+    //creating the timeline divider
+    var divider = document.createElement("div");
+    divider.style.backgroundColor = "#737373";
+    divider.style.width = "100%;";
+    if (start) { divider.style.borderRadius = "16px 16px 0px 0px"; }
+    else if (end) { divider.style.borderRadius = "0px 0px 16px 16px"; }
+    display.appendChild(divider);
+    //creating a spacer for the correct grid layout
+    var spacer = document.createElement("div");
+    spacer.classList.add("linkItem");
+    {
+      //creating the name div
+      var listItemName = document.createElement("div");
+      listItemName.style.fontSize = "18px";
+      listItemName.style.fontWeight = "bold";
+      var listItemNameTxt = document.createTextNode(`${dataArr[index].name}`);
+      listItemName.appendChild(listItemNameTxt);
+      spacer.appendChild(listItemName);
+      //creating the date div
+      var listItemDate = document.createElement("div");
+      var listItemDateTxt = document.createTextNode(`${dataArr[index].date}`);
+      listItemDate.appendChild(listItemDateTxt);
+      spacer.appendChild(listItemDate);
+      //creating the description div
+      var listItemDescription = document.createElement("div");
+      var listItemDescriptionTxt = document.createTextNode(`${dataArr[index].description}`);
+      listItemDescription.appendChild(listItemDescriptionTxt);
+      spacer.appendChild(listItemDescription);
+    }
+    display.appendChild(spacer);
+    listItem.style.gridColumn = "1 / 2";
+    divider.style.gridColumn = "2 / 3";
+    spacer.style.gridColumn = "3 / 4";
+    if (pageWidth < 650) { //for small screens
+      spacer.remove();
+      $(".subTimelineD").css("grid-template-columns", "auto 10px");
+      $(".subTimelineD").css("justify-content", "end");
+      listItem.style.width="100%";
+    }
+    else { //for normal conditions
+      if (bitFlag) { spacer.style.visibility = "hidden"; }
+      else { 
+        listItem.style.visibility = "hidden";
+        spacer.classList.add("rightItem");
+        if (colorScheme != 0) {
+          spacer.classList.add("hcLinkItem");
+        } 
+      }
+    }
+  }
+  function updateSubTimeline(display, startPoint, endPoint) {
+    var bitFlag = true;
+    var start;
+    var end;
+    for (var index = startPoint; index < endPoint; index++) {
+      if ( index == startPoint ) {start = true}
+      else {start=false;}
+      if ( index == (endPoint-1) ) {end=true;}
+      else {end=false;}
+      eventInTimeline(index, display, bitFlag, start, end);
+      bitFlag = !bitFlag;
+    }
+  }
+  function leapYear(year) {
+    if (parseInt(year) % 4 == 0) { return true; }
+    return false;
+  }
+  function leapChange(year) { //updates the days in a month array depending on leap year status
+    if (leapYear(year)) { daysInMonths[1] = 29; }
+    else { daysInMonths[1] = 28; }
+  }
+  //returns the number of days that have passed since 1/1/21
+  function dateToNum(date) {
+    var dateNum = 0;
+    var splitDate = date.split('/');
+    const today = new Date();
+    //var currentYear = parseInt(today.getFullYear().toString()[2] + today.getFullYear().toString()[3]);
+    //if (parseInt(splitDate[2]) >= currentYear) {
+      leapChange(splitDate[2]);
+      //this adds the days from the months that have passed
+      for (var i = 0; i < parseInt(splitDate[0]) - 1; i++) { dateNum += daysInMonths[i]; }
+      //this adds the days from the first day of the month
+      dateNum += parseInt(splitDate[1]);
+      //this adds the days from the years that have passed since 2021
+      for (var i = 19; i < parseInt(splitDate[2]); i++) {
+        if (leapYear(i)) { dateNum += 366; }
+        else { dateNum += 365; }
+      }
+    //}
+    return dateNum;
+  }
+  function findEndPoints() {
+    const startPoint = dateToNum("11/5/20");
+    var startCount = 0;
+    const startPoint2 = dateToNum("3/15/21");
+    var startCount2 = 0;
+    const startPoint3 = dateToNum("9/9/21");
+    var startCount3 = 0;
+    const startPoint4 = dateToNum("9/26/22");
+    //don't need a counter to calculate the 4th endpoint since this will always be dataArr.length
+    for (var index=0; index < dataArr.length; index++) {
+      var tempVal = dateToNum(`${dataArr[index].date}`);
+      //console.log(startPoint);
+      if (tempVal >= startPoint && tempVal < startPoint2) {
+        startCount++;
+      }
+      else if (tempVal >= startPoint2 && tempVal < startPoint3) {
+        startCount2++;
+      }
+      else if (tempVal >= startPoint3 && tempVal < startPoint4) {
+        startCount3++;
+      }
+    }
+    endPoints[0] = startCount;
+    endPoints[1] = startCount + startCount2;
+    endPoints[2] = startCount + startCount2 + startCount3;
+  }
+  function updateTimeline() {
+    findEndPoints();
+    //this adds the information for the early stages sub-timeline
+    updateSubTimeline(subTimelineDisplay, 0, endPoints[0]);
+    //this adds the information for the phase 1 sub-timeline
+    updateSubTimeline(subTimelineDisplay2, endPoints[0], endPoints[1]);
+    //this adds the information for the phase 2 sub-timeline
+    updateSubTimeline(subTimelineDisplay3, endPoints[1], endPoints[2]);
+    //this adds the information for the phase 3 sub-timeline
+    updateSubTimeline(subTimelineDisplay4, endPoints[2], dataArr.length);
+  }
+  function clearTimeline() {
+      while (subTimelineDisplay.firstChild) {
+        subTimelineDisplay.removeChild(subTimelineDisplay.firstChild);
+      }
+      while (subTimelineDisplay2.firstChild) {
+        subTimelineDisplay2.removeChild(subTimelineDisplay2.firstChild);
+      }
+      while (subTimelineDisplay3.firstChild) {
+        subTimelineDisplay3.removeChild(subTimelineDisplay3.firstChild);
+      }
+      while (subTimelineDisplay4.firstChild) {
+        subTimelineDisplay4.removeChild(subTimelineDisplay4.firstChild);
+      }
+    }
+  function repositionFooter() {
+    $('.footerC').css("position", "relative");
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset) + $('.footerC').outerHeight();
+    if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+    else { $('.footerC').css("position", "relative"); }
+  }
+  function sortArray(array) {
+    const date = new Date();
+    var today = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString()[2] + date.getFullYear().toString()[3]}`;
+    var todayNum = dateToNum(today);
+    var lowestVal;
+    var sortedArray = [];
+    for (var index = 0; index < array.length; index++) {
+      lowestVal = 100000000000;
+      for (var index2 = index; index2 < array.length; index2++) {
+        var currentVal = dateToNum(array[index2].date);
+        if (currentVal < lowestVal) {
+          lowestVal = currentVal;
+          var oldObj = sortedArray[index];
+          //this places the earliest date first
+          sortedArray[index] = array[index2];
+          array[index2] = oldObj;
+        }
+        else if (currentVal == lowestVal) {
+          var tempObj = sortedArray[index];
+          //reverse the two objects if they are not alphabetically sorted when same date
+          if (array[index2].name < tempObj.name) {
+            sortedArray[index + 1] = tempObj;
+            sortedArray[index] = array[index2];
+            array[index2] = tempObj;
+          }
+        }
+      }
+    }
+    return sortedArray;
+  }
+  function fixBioStyling() {
+    /*var coverImg = document.querySelector('.coverImg');
+    var bioTxt = document.querySelector('.bioTxt');
+    var currentIHeight = coverImg.offsetHeight;
+    bioTxt.style.height = `${currentIHeight}px`;*/
+  }
+  fetch('/static/timeline.json', { mode: 'cors' }).then(function (resp) {
+    return resp.json();
+  }).then(function (data) {
+    dataArr = sortArray(data.timeline);
+    updateTimeline();
+    repositionFooter();
+    fixBioStyling();
+  });
+</script>
+{% include "components/footer.html" %}
+
+{% endblock %}

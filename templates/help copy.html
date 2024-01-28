@@ -1,0 +1,744 @@
+{% extends "layout.html" %}
+
+{% block title %}Help{% endblock %}
+
+{% block head %}
+  <style>
+    /*NOTE- These are the STEAM colors that we are using:
+      (Green)- Science: #8ac926
+      (Blue)- Technology: #1982c4
+      (Purple)- Engineering: #6a4c93
+      (Orange)- Art: #ffca3a
+      (Red)- Math: #ff595e
+    */
+    body {
+        width: 100%;
+    }
+    html, body{
+      scroll-behavior: smooth;
+      overflow-x:hidden;
+      max-width:100%;
+    }
+    .body-text{
+      font-family: 'Montserrat';
+      margin:0;
+      margin-top:5px;
+      font-size: 24px;
+    }
+    .semi-rounded{
+      border-radius: 50px;
+    }
+    .rounded-corner{
+      border-radius:20px;
+    }
+    .background-image{
+      background-image: url("{{ url_for('static', filename='RealCoursesPic.jpg') }}");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      width: 100%;
+      height: 50vh;
+      position: relative;
+    }
+    .title-text{
+      z-index: 1;
+      text-align: center;
+      color: white;
+      /*padding-top: 7%;*/
+      font-family: 'Asap';
+      font-weight: bold;
+      /*font-size: 500%;*/
+      font-size:11vmin;
+      line-height: 1.1;
+    }
+    .title-textC {
+      height:100%;
+      background-color:rgba(0,0,0,0.65);
+    }
+    .subtitle-text{
+      z-index: 2;
+      text-align: center;
+      color: white;
+      font-family: 'Asap';
+      font-size: 250%;
+      list-style-type:none;
+      margin:0;
+      padding:0;
+    } 
+    .text{
+      font-family: 'Montserrat';
+      color: black;
+      font-size: 200%;
+      width: 250px;
+      transition: margin 2s;
+      transition: font-size 1.5s;
+    }
+    .title-textCourse{
+      font-family: 'Asap';
+      font-weight: bold; 
+      font-size: 36px !important; /*used to be 4vh*/
+      /*color: black;*/
+      text-align:center;
+    }
+    .subtitle-textCourse{
+      font-family: 'Montserrat';
+      font-size: 2vh;
+      color: black;
+    }
+    .course-class{
+      margin-top: 10px;
+      font-size: 20px !important; /*used to be 2vh*/
+      color: black;
+      border-color: transparent;
+    }
+    .active, .course-class:hover{
+      background-color: #ccc;
+    }
+    .course-class:focus{
+    outline: none;
+  }
+  #mainImg {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+  .circleC{
+      position:relative;
+      width:250px;/*used to be 250px by 250px*/
+      height:250px;
+      border-radius:50%;
+      overflow:hidden;
+      transition: transform 2s;
+  }
+  .insideImg {
+      position:absolute;
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+      width:auto;
+      height:100%;
+  }
+  #outputC {
+    position:absolute;
+    z-index:99;
+    bottom:-160px;
+    left:0px;
+    width:100%;
+    border-bottom-right-radius:5%;
+    border-bottom-left-radius:5%;
+  }
+  a:link {
+    text-decoration: none;
+}
+.navbar {
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+    position: relative;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    align-items: center;
+    /*justify-content: space-between;*/
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  .bg-primary {
+    background-color: #0d6efd!important;
+  }
+  .navbar>.oldContainer {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  @media (min-width: 576px) {
+    .oldContainer {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .oldContainer {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 992px) {
+    .oldContainer {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .oldContainer {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .oldContainer {
+      max-width: 1320px;
+    }
+  }
+  .oldContainer {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @media (min-width: 992px) {
+    .navbar-expand-lg {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+  #search {
+    font-family: 'Montserrat', sans-serif;
+    font-size:19px;
+  }
+  .search {
+    position:relative;
+    width: 60%;
+    min-width:400px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+.searchC {
+  display: flex;
+  justify-content: center;
+}
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+}
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    /*background-color: transparent;*/
+}
+.search-icon {
+  height: 34px;
+  width: 34px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #3585fd;
+  font-size: 10px;
+  bottom: 30px;
+  position: relative;
+  border-radius: 5px
+}
+  .search-icon:hover {
+      color: #fff !important;
+      cursor:pointer;
+      text-decoration:none;
+  }
+@media (max-width:406px){
+.search {
+  min-width:300px;
+}
+.search-input {
+  overflow:hidden;
+}
+.search-input::placeholder {
+  text-overflow:ellipsis;
+}
+}
+@media (max-width:300px){
+.search {
+  min-width:200px;
+}
+}
+  .searchResultDepts {
+    display:none;
+  }
+  .active, .course-class:hover {
+    background-color: #ccc;
+  }
+  .content {
+padding: 0 18px;
+background-color: white;
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.2s ease-out;
+}
+.faq-descriptions{
+    background-color: #63a11b;
+  }
+    .text{
+    font-weight: bold;
+  }
+  .course-background {
+    background-color:#eee;
+    border-radius:16px;
+  }
+  .mobileShow {
+    display:none;
+  }
+  .flexDepts {
+    margin-top:76px;
+  }
+  .footerC {
+    font-family: 'Montserrat', sans-serif;
+  }
+  @media (max-height: 820px){
+  .title-text{
+    font-size:11vmin;
+  }
+}
+@media (max-width: 575px){
+  .title-textC{
+    padding-top:15vw;
+  }
+}
+@media (max-height: 550px){
+  .title-textC{
+    font-size:11vmin;
+    padding-top:10vh;
+  }
+}
+@media (max-width: 992px){
+  .circleC{
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .text {
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .searchResultDepts {
+    display:none;
+  }
+  .flexDepts {
+    margin-left:-1.75vmax !important;
+  }
+  .mobileShow { display:block; }
+  .normalShow { display:none; }
+  .search { width: 90%; }
+  .searchResult {
+    padding:14px 0px 14px 0px;
+  }
+}
+@media (max-width: 768px) {
+  .mobile-height {
+    height: 400px;
+  }
+  .flexDepts {
+    margin-left:-1.75vmax !important;
+  }
+  .flexDepts > div {
+    margin-top:16px;
+    padding:0;
+    height:auto;
+  }
+  /*.flexDepts > div:first-child {
+    margin-top:18px;
+  }*/
+}
+@media (max-width: 1200px) {
+  .flexDepts {
+    margin-left:3vmax;
+  }
+  .mobileShow { display:block; }
+  .normalShow { display:none; }
+}
+@media (min-width: 1200px) {
+  .course-class {
+    font-size:20px;
+  }
+  .subtitle-textCourse {
+    font-size:24px;
+  }
+  .title-textCourse {
+    font-size:36px !important;
+  }
+  .my-container {
+    width:90%;
+  }
+  .flexDepts {
+    display:grid !important;
+    grid-template-columns:20% 20% 20% 20% 20% !important;
+    justify-content:center;
+  }
+  .circleC {
+    margin-right:auto;
+    margin-left:auto;
+    width:15vmax;
+    height:15vmax;
+    max-width:250px;
+    max-height:250px;
+  }
+  .text {
+    width: 15vmax;
+    max-width:250px;
+  }
+}
+@media (min-width: 1600px) {
+  .flexDepts {
+    margin-left:0.5vmax;
+  }
+}
+@media (min-width: 1735px) {
+  .flexDepts {
+    margin-left:1vmax;
+  }
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page10"></section>
+<div class="row">
+  <div class = "col-lg-12">
+    <div class="background-image">
+      <div class="title-textC jumbotron">
+      <div class="title-text">
+        STEAM CENTER <br>APP HELP
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" style="text-align:center;">
+<div style="margin-top: 4vmax"></div>
+<div class="d-flex px-5 searchC">
+  <div class="search"> 
+    <div class="search-field">
+    <input type="text" id="search" class="search-input" placeholder="Search for a question..." onkeyup="searchResults()" alt="Search for a question"> 
+    <a class="search-icon"> <i class="fa fa-search"></i> </a> 
+    </div>
+    <div class="outputCC">
+    <div id="outputC"> &nbsp;
+    </div>
+    </div>
+  </div>
+</div>
+<div style="margin-top: 6vmax"></div>
+
+<div class="container-fluid my-container" style="text-align:center;" id="science">
+  <div class="row justify-content-around align-items-end">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <div class="title-textCourse">
+          FAQs
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+  </div>
+  <div class="row justify-content-start align-items-end">
+    <div class="col-lg-1 col-md-0"></div>
+    <div class="col-lg-10 col-md-12 course-background">
+      <ul class="subtitle-text"></ul>
+    </div>
+    <div class="col-lg-1 col-md-0"></div>
+  </div>
+  <div style="margin-top: 2vmax"></div>
+  <div class="row justify-content-around align-items-end">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <div class="title-textCourse">
+        Ask A Question
+      </div>
+      <p class="body-text"><a href="https://forms.gle/Y1rxheJaKSFgFoWb8" class="pageLink" target="_blank" alt="Ask a question form link">Question
+        Link</a></p>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+</div>
+<div class="userEmail">{{ email }}</div>
+<div style="margin-top: 4vmax"></div>
+</div>
+{% include "components/footer.html" %}
+
+<script>
+var dataArr = [];
+var questionArr = [];
+var answerArr = [];
+
+function generateQuestionItems() {
+  for (var index = 0; index < questionArr.length; index++) {
+    generateQuestionItem(index);
+  }
+}
+function generateQuestionItem(questionItemId) {
+  var questionsC = document.querySelector(".subtitle-text");
+  var questionLi = document.createElement("LI");
+  questionLi.id = "question"+questionItemId;
+
+  var questionButton = document.createElement("button");
+  questionButton.type = "button";
+  questionButton.classList.add("course-class");
+  questionButton.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+      content.style.paddingTop = "0px";
+      //content.style.paddingBottom = "0px";
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.style.paddingTop = "6px";
+      //content.style.paddingBottom = "48px";
+    }
+  });
+  questionButton.style.width = "100%";
+  questionButtonTxt = document.createTextNode(questionArr[questionItemId]);
+  questionButton.appendChild(questionButtonTxt);
+  questionLi.appendChild(questionButton);
+
+  var answerDiv = document.createElement("div");
+  answerDiv.classList.add("content");
+  answerDiv.classList.add("faq-descriptions");
+  var answerP = document.createElement("p");
+  answerP.style.color = "white";
+  answerP.style.fontSize = "18px";
+  answerP.style.textAlign = "justify";
+  var answerPTxt = document.createTextNode(answerArr[questionItemId]);
+  answerP.appendChild(answerPTxt);
+  answerDiv.appendChild(answerP);
+  questionLi.appendChild(answerDiv);
+  questionsC.appendChild(questionLi);
+}
+
+var maxResults = 5; //This is the maximum number of results that will pop up in the keyword search. Set to any valid number.
+var obj = {};
+var tempString = "";
+var selectedDept = ""; //this is to help open the correct info for searching
+var selectedCourse = "";
+
+function stylePS(psElement) {
+  psElement.style.marginBottom = "0px";
+}
+function styleA2(a2Element) {//This is used to style the sub-anchor tags tags, change for better results
+  a2Element.style.marginRight="6px";
+  a2Element.style.fontSize = "14px";
+  a2Element.style.color="white";
+  a2Element.style.textDecoration= "underline";
+}
+function hoverStyleA2(a2Element) {//This is used to style the sub-anchor tags, change for better results
+  a2Element.style.color="#bfbfbf";
+  a2Element.style.textDecoration= "none";
+}
+function hoverStyleP(pElement) {
+//This is used to change the color of search results background when hovered over
+  pElement.style.backgroundColor = "#0248b1";
+}
+function styleP(pElement) {//This is used to style each of the search results, change for better results
+  pElement.style.width = "100%";
+  pElement.style.height = "auto";
+  pElement.style.color = "white";
+  pElement.style.backgroundColor = "#3585fd";
+  pElement.style.fontSize = "15px";
+  pElement.style.padding = "0.5vmin";
+  pElement.style.marginLeft = "0vmin";
+  //pElement.style.textAlign = "center";
+}
+function styleA(aElement) {//This is used to style the anchor tags, change for better results
+  aElement.style.color="white";
+  aElement.style.textDecoration= "none";
+}
+function hoverStyleA(aElement) {
+  aElement.style.cursor="pointer";
+  aElement.style.color="white";
+  aElement.style.textDecoration= "none";
+}
+function appendDiv(temp, txtOptDiv, resultCounter) {
+  var viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 50}px`);
+  if (viewportWidth < 992) {
+    $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 75}px`);
+  }
+  selectedCourse = temp;
+  var pElement = document.createElement("div");
+  pElement.id = `ids${resultCounter}`;
+  pElement.classList.add("searchResultParent");
+  var pTxt = document.createElement("P"); //this creates a new <p> element
+  pTxt.classList.add("searchResult");
+  var aElement = document.createElement("A"); //this creates a new <a> element
+  var txt = document.createTextNode(temp); //this puts the search result into a text field
+  var a2ElemC = document.createElement("div");
+  a2ElemC.classList.add("searchResultDepts");
+  var link = "#";
+  var counter = 0;
+  stylePS(pTxt);
+  aElement.onmouseover=function() {styleA(aElement);};
+  aElement.onmouseout=function() {hoverStyleA(aElement);};
+  aElement.appendChild(pElement);
+  pElement.appendChild(pTxt);
+  pTxt.appendChild(txt); //this places the text inside of the new element
+  pElement.onmouseover=function() {hoverStyleP(pElement)};
+  pElement.onmouseout=function() {styleP(pElement)};
+  styleP(pElement);
+  txtOptDiv.appendChild(aElement); //this appends the new element to the content div
+  pElement.appendChild(a2ElemC);
+  //aElement.href=link;
+  try {
+    var prevElem = document.getElementById(`ids${resultCounter-1}`);
+    prevElem.style.borderBottomLeftRadius = "0px";
+    prevElem.style.borderBottomRightRadius = "0px";
+  } 
+  catch(err){
+    if (resultCounter == 5 || resultCounter == 0) {
+      $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 5}px`);
+      if (viewportWidth < 992) {
+        $("#outputC").css("bottom",`-${$("#outputC").outerHeight() + 6}px`);
+      }
+    }
+  }
+  pElement.style.borderBottomLeftRadius = "25px";
+  pElement.style.borderBottomRightRadius = "25px";
+}
+function clearDiv(txtOptDiv) {
+  while(txtOptDiv.firstChild) {
+    txtOptDiv.removeChild(txtOptDiv.firstChild);
+  }
+}
+function searchResults() {
+  obj = {};
+  var highestCount = -1;
+  var cont = true;
+  var cont2 = true;
+  var cont3 = true;
+  var txtIpt = document.getElementById("search").value;
+  var txtIptL = (txtIpt.toLowerCase()).replace(/[\/\\]/g,'');
+  var txtOptDiv = document.getElementById("outputC");
+  $("#outputC").css("display", "block");
+  if (txtIptL == "" || txtIptL == " ") {
+    $("#outputC").css("display", "none");
+  }
+  clearDiv(txtOptDiv); //this is used to make sure that the search results are cleared after each use
+  for (var index=0; index<questionArr.length; index++) {
+    temp = questionArr[index];
+    tempL = (questionArr[index].toLowerCase()).replace(/[\/\\]/g,' ');
+    if ((tempL == txtIptL) || (txtIptL == "acdc electronics" && tempL == "ac dc electronics")) { //eliminate all other results on a perfect match
+      cont2 = false;
+      appendDiv(temp, txtOptDiv, 5); //temp here is used to assign a link to the correct search result
+      break;
+    }
+  }
+  if (cont2) { //if a perfect match was not already found
+  for (var index=0; index<questionArr.length; index++) { //this searches the entire list
+    cont=true;
+    var temp = questionArr[index];
+    var tempL = (temp.toLowerCase()).replace(/[\/\\]/g,' ');
+    var count = 0;
+    for (var i=0; i<tempL.length; i++) { //this searches each character inside of string for each element of the array
+      for(var i2=0; i2<txtIptL.length; i2++) { //this searches each character inside of the input string separately
+        if (tempL[i] == txtIptL[i2]) {
+          cont=false;
+          count++;
+          break;
+        }
+      }
+    }
+    if (count > highestCount) {
+      highestCount = count; //this updates the highest counted number (most accurate search result)
+    }
+    //this checks to see if the first word of the career is similar to the first part of the first word that the user types in the search
+    var checkerIndx = tempL.indexOf(txtIptL);
+    if (checkerIndx != -1) {
+      //success! in this case, it found the user input lowercase string to be part of the lowercase array results
+    highestCount+=40; //a really high value so that it takes priority
+    count = highestCount;
+    }
+    obj[temp] = count; //this updates the count for each item
+  }
+  var objectLength = Object.keys("obj").length; //this returns the object's length, not needed right now
+  //this is used to make sure that the search results appear in the highest order first
+  var resultCounter = 0;
+  for (var index=highestCount; index>0; index--) {
+    for (var index2=0; index2<questionArr.length; index2++) {
+      var temp3 = questionArr[index2];
+      var temp4 = obj[temp3];
+      if (resultCounter == maxResults) {
+        cont3=false;
+        break;
+      }
+      if (temp4 == index) {
+        //alert("Search result found!");
+        resultCounter++;
+        appendDiv(temp3, txtOptDiv, resultCounter); //this takes care of updating the search results
+      }
+    }
+    if (!cont3) { //same thing as cont3 == false
+      break;
+    }
+  }
+  }
+}
+$(document).ready(function() {
+  const fetch1 = fetch('/static/faq.json', { mode: 'cors' }).then(function (resp) { return resp.json(); })
+  .then(function(data) { 
+    dataArr = data["faq"];
+    for (var index = 0; index < dataArr.length; index++) {
+      questionArr.push(dataArr[index]["question"]);
+      answerArr.push(dataArr[index]["answer"]);
+    }
+    generateQuestionItems();
+  });
+$("body").on('click', function(event) {
+  if ($(event.target).attr('class') != "search-field") {
+    $("#outputC").css("display", "none");
+  }
+  else {
+  $("#outputC").css("display", "block");
+  }
+});
+$(".circleC").on('mouseover', function() {
+  $(".text").css("transition", "margin 2s, font-size 1.5s");
+  $(".circleC").css("transition", "transform 2s");
+  var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  if (vw > 1199 && ($(this).attr('id')=="circle2" || $(this).attr('id')=="circle4")) { $(this).next("div").css("padding-top", "30px");$(this).next("div").css("font-size", "40px"); }
+  else { $(this).prev("div").css("margin-bottom", "30px");$(this).prev("div").css("font-size", "40px"); }
+  $(this).css("transform", "scale(1.25)");
+});
+$(".circleC").on('mouseout', function() {
+  $(".text").css("transition", "margin 2s, font-size 1.5s");
+  $(".circleC").css("transition", "transform 1s");
+  var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  if (vw > 1199 && ($(this).attr('id')=="circle2" || $(this).attr('id')=="circle4")) { $(this).next("div").css("padding-top", "0px");$(this).next("div").css("font-size", "32px"); }
+  else { $(this).prev("div").css("margin-bottom", "0px");$(this).prev("div").css("font-size", "32px"); }
+  $(this).css("transform", "scale(1.0)");
+});
+//this pulls up the course information and scrolls to the section where its dept's courses list is
+$("#outputC").on('click', ".searchResultParent", function() {
+  var elem4IDNumber = parseInt($(this).attr('id').replace("ids", "")) - 1;
+  var elem4ID = `question${elem4IDNumber}`;
+  var curElement = document.getElementById(`${elem4ID}`);
+  window.scrollTo(0, curElement.offsetTop);
+  //this gets the element of the current selected course name
+  var courseElem = document.getElementById(`${$(this).text()}`); 
+  courseElem.classList.toggle("active");
+  var content = courseElem.nextElementSibling;
+  if (content.style.maxHeight){
+    content.style.maxHeight = null;
+  }
+  else {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+});
+});
+</script>
+
+{% endblock %}

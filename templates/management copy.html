@@ -1,0 +1,2040 @@
+{% extends "layout.html" %}
+
+{% block title %}Management{% endblock %}
+
+{% block head %}
+
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .eventsC {
+    display: none;
+  }
+
+  .serviceC {
+    display: none;
+  }
+
+  .commsC {
+    display: none;
+  }
+
+  .visitPage,
+  .addEventBtn,
+  .editEventBtn,
+  .addServiceBtn,
+  .editServiceBtn,
+  .addCommBtn,
+  .editCommBtn {
+    background-color: #3585fd;
+  }
+
+  .addEventBtn,
+  .addServiceBtn,
+  .addCommBtn {
+    font-weight: bold;
+  }
+
+  .mobileRow {
+    display: none;
+  }
+
+  .mobileRow div .row {
+    margin-top: 6px;
+  }
+
+  .eventCards {
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content:center;
+  }
+  
+  .card {
+    min-width:300px;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page12"></section>
+<br>
+<div class="container mt-2">
+  <div class="topContainer">
+    <div style="height:6px;"></div>
+    <h1>Management</h1>
+    <hr style="height:2px;">
+  </div>
+  <div style="margin-top:20px;"></div>
+  <h2 class="clubNameTxt"></h2>
+  <div style="margin-top:20px;"></div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link clubMNav active" id="clubNav1" href="#">General Info</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link clubMNav" id="clubNav2" href="#">Events</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link clubMNav" id="clubNav3" href="#">Service</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link clubMNav" id="clubNav4" href="#">Communication</a>
+    </li>
+  </ul>
+  <div class="container generalInfoC">
+    <div style="margin-top:20px;"></div>
+    <h4>Club Page</h4>
+    <div style="margin-top:10px;"></div>
+    <div class="container">
+      <div class="row localRow">
+        <div class="col-sm visitPageC"><a class="btn btn-primary visitPage" role="button">Visit Page</a></div>
+        <div class="col-sm editPageC"><button type="button" class="btn btn-warning editPage">Edit Page</button></div>
+        <div class="col-sm cancelPageC"><button type="button" class="btn btn-danger cancelEdits disabled">Cancel
+            Edits</button>
+        </div>
+        <div class="col-sm applyPageC"><button type="button" class="btn btn-success applyEdits disabled">Apply
+            Edits</button></div>
+      </div>
+      <div class="row mobileRow">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 visitPageC"><a class="btn btn-primary visitPage" role="button">Visit Page</a></div>
+            <div class="col-6 editPageC"><button type="button" class="btn btn-warning editPage">Edit Page</button></div>
+          </div>
+          <div class="row">
+            <div class="col-6 cancelPageC"><button type="button" class="btn btn-danger cancelEdits disabled">Cancel
+                Edits</button>
+            </div>
+            <div class="col-6 applyPageC"><button type="button" class="btn btn-success applyEdits disabled">Apply
+                Edits</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;"></div>
+    <h5>Type/ Subtype</h5>
+    <div class="container">
+      <div class="row overallTypeC">
+        <div class="col-sm typeCol">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm typeTxtC">Type: </div>
+              <div class="col-sm typeInputC">
+                <div class="dropdown clubTypeC">
+                  <button class="btn btn-secondary dropdown-toggle clubType disabled" type="button"
+                    id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Type
+                  </button>
+                  <div class="dropdown-menu typeDropdowns" aria-labelledby="dropdownMenuButton1">
+                    <a class="dropdown-item" href="" id="type1">Academic</a>
+                    <a class="dropdown-item" href="" id="type2">Community Service Club</a>
+                    <a class="dropdown-item" href="" id="type3">Religious Organization</a>
+                    <a class="dropdown-item" href="" id="type4">Social Club</a>
+                    <a class="dropdown-item" href="" id="type5">Athletic Team</a>
+                    <a class="dropdown-item" href="" id="type6">Misc.</a>
+                    <a class="dropdown-item" href="" id="type7">School Organization</a>
+                    <a class="dropdown-item" href="" id="type8">Extracurricular</a>
+                    <a class="dropdown-item" href="" id="type9">Communication</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm subtypeCol">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm subtypeTxtC">Subtype: </div>
+              <div class="col-sm subtypeInputC">
+                <div class="input-group input-group-sm mb-3">
+                  <input type="text" class="form-control subtype" readonly aria-label="Small"
+                    placeholder="(Optional) Specific club type" aria-describedby="inputGroup-sizing-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5>Description</h5>
+    <div class="form-group">
+      <textarea class="form-control description" readonly placeholder="Type club description here."
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <h5>Leadership</h5>
+    <div class="form-group">
+      <textarea class="form-control leadership" readonly placeholder="Type leader emails here."
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <h5>Sponsor</h5>
+    <div class="form-group">
+      <textarea class="form-control sponsor" readonly placeholder="Type sponsor emails here."
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <h5>Meeting</h5>
+    <div class="form-group">
+      <textarea class="form-control meeting" readonly placeholder="Type meeting time here."
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <h5>Location</h5>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm campusC">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">Campus: </div>
+              <div class="col-sm">
+                <div class="dropdown campusDropdownC">
+                  <button class="btn btn-secondary dropdown-toggle clubCampus disabled" type="button"
+                    id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Campus
+                  </button>
+                  <div class="dropdown-menu campusDropdowns" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" href="" id="campus1">AHS</a>
+                    <a class="dropdown-item" href="" id="campus2">STEAM</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm locationC">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">Location/ Room: </div>
+              <div class="col-sm">
+                <div class="input-group input-group-sm mb-3">
+                  <input type="text" class="form-control location" readonly aria-label="Small"
+                    placeholder="Type meeting room or location at campus here." aria-describedby="inputGroup-sizing-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5>Social Media</h5>
+    <div class="container">
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Discord</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Discord" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Discord server." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Facebook</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Facebook" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Facebook group." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">GitHub</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Github" readonly aria-label="Default"
+            placeholder="(Optional) Link to join GitHub organization." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Instagram</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Instagram" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Instagram group." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Remind</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Remind" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Remind class." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Snapchat</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Snapchat" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Snapchat group." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Twitter</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Twitter" readonly aria-label="Default"
+            placeholder="(Optional) Link to join Twitter group." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">YouTube</span>
+          </div>
+          <input type="text" class="form-control socialInput" id="Youtube" readonly aria-label="Default"
+            placeholder="(Optional) Link to join YouTube channel." aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+    </div>
+    <h5>Website</h5>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">External Club Website</span>
+      </div>
+      <input type="text" class="form-control website" readonly aria-label="Default"
+        placeholder="(Optional) Link to your external club website." aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div style="margin-top:20px;"></div>
+    <h4>Members</h4>
+    <div class="form-group">
+      <textarea class="form-control members" readonly placeholder="Edit current members (by email) here."
+        id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="container eventsC">
+    <div style="margin-top:20px;"></div>
+    <h4>Events&nbsp;&nbsp;&nbsp;<span><button type="button" class="btn btn-primary addEventBtn"><i
+            class="fa-solid fa-plus"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-primary editEventBtn"><i
+            class="fa-solid fa-pen-to-square"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-success approveEventBtn disabled"><i
+            class="fa-solid fa-check"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-danger cancelEventBtn disabled"><i class="fa-solid fa-xmark"></i></button></span></h4>
+    <div style="margin-top:10px;"></div>
+    <div class="card-group eventCards"></div>
+  </div>
+  <div class="container serviceC">
+    <div style="margin-top:20px;"></div>
+    <h4>Service&nbsp;&nbsp;&nbsp;<span><button type="button" class="btn btn-primary addServiceBtn"><i
+            class="fa-solid fa-plus"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-primary editServiceBtn"><i
+            class="fa-solid fa-pen-to-square"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-success approveServiceBtn disabled"><i
+            class="fa-solid fa-check"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-danger cancelServiceBtn disabled"><i class="fa-solid fa-xmark"></i></button></span></h4>
+    <div style="margin-top:10px;"></div>
+    <div class="card-group serviceCards"></div>
+  </div>
+  <div class="container commsC">
+    <div style="margin-top:20px;"></div>
+    <h4>Communication&nbsp;&nbsp;&nbsp;<span><button type="button" class="btn btn-primary addCommBtn"><i
+            class="fa-solid fa-plus"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-primary editCommBtn"><i
+            class="fa-solid fa-pen-to-square"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-success approveCommBtn disabled"><i
+            class="fa-solid fa-check"></i></button></span>&nbsp;&nbsp;<span><button type="button"
+          class="btn btn-danger cancelCommBtn disabled"><i class="fa-solid fa-xmark"></i></button></span></h4>
+    <div style="margin-top:10px;"></div>
+    <div class="card-group commCards"></div>
+  </div>
+  <div class="userEmail">{{ email }}</div>
+</div>
+{% include "components/footer.html" %}
+
+<script>
+  var userArr;
+  var clubsArr;
+  var eventsArr;
+  var serviceArr;
+  var commsArr;
+  var managePage = 1;
+  var clubData;
+  var addNewEvent = false;
+  var oldEventsData = [];
+  var nextEventId = 0;
+  var firstEventId = true;
+  var addNewService = false;
+  var oldServicesData = [];
+  var nextServiceId = 0;
+  var firstServiceId = true;
+  var oldCommsData = [];
+  var nextCommId = 0;
+  var firstCommId = true;
+  var addNewComm = false;
+  //get viewport dimensions
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+  function repositionFooter() {
+    $('.footerC').css("position", "relative");
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset) + $('.footerC').outerHeight();
+    if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+    else { $('.footerC').css("position", "relative"); }
+  }
+  function unwrapClubs(clubList) {
+    var newClubsList = [];
+    if (clubList[0] == "All") {
+      for (var index = 0; index < clubsArr.length; index++) {
+        newClubsList.push(clubsArr[index]["ID"]);
+      }
+      return newClubsList;
+    }
+    return clubList;
+  }
+  function findClubName(clubId) {
+    for (var index = 0; index < clubsArr.length; index++) {
+      if (clubsArr[index]["ID"] == clubId) {
+        return clubsArr[index]["Club-Name"];
+      }
+    }
+    return "";
+  }
+  function findUserName(userEmail) {
+    for (var index = 0; index < userArr.length; index++) {
+      if (userArr[index]["User-Email"] == userEmail) {
+        return userArr[index]["User-Name"];
+      }
+    }
+    return "";
+  }
+  function findIdOfUser(userEmail) {
+    for (var index = 0; index < userArr.length; index++) {
+      if (userArr[index]["User-Email"] == userEmail) {
+        return userArr[index]["ID"];
+      }
+    }
+    return "";
+  }
+  function certifyUser(clubId) {
+    var userEmailTxt = "";
+    try {
+      userEmailTxt = document.querySelector(".userEmail").textContent;
+    }
+    catch (error) { }
+    if (userEmailTxt != "") {
+      for (var index = 0; index < userArr.length; index++) {
+        var thisUser = userArr[index];
+        if (thisUser["User-Email"] == userEmailTxt) {
+          var thisUserOwn = thisUser["Clubs-Owned"];
+          if (thisUserOwn[0] == "All") {
+            return true;
+          } else {
+            for (index2 = 0; index2 < thisUserOwn.length; index2++) {
+              if (thisUserOwn[index2] == clubId) {
+                return true;
+              }
+            }
+            window.location.assign("/forbidden");
+            return false;
+          }
+        }
+      }
+    }
+  }
+  function clubRemoveActive(editClass) {
+    $(`${editClass}`).removeClass("active");
+  }
+  function clubContentHide() {
+    $(".generalInfoC").css("display", "none");
+    $(".eventsC").css("display", "none");
+    $(".serviceC").css("display", "none");
+    $(".commsC").css("display", "none");
+  }
+  $(".clubMNav").on("click", function () {
+    clubRemoveActive(".clubMNav");
+    $(this).addClass("active");
+    var managePage = parseInt($(this).prop("id").replace("clubNav", ""));
+    clubContentHide();
+    switch (managePage) {
+      case 1:
+        $(".generalInfoC").css("display", "block");
+        break;
+      case 2:
+        $(".eventsC").css("display", "block");
+        break;
+      case 3:
+        $(".serviceC").css("display", "block");
+        break;
+      case 4:
+        $(".commsC").css("display", "block");
+        break;
+      default:
+        $(".generalInfoC").css("display", "block");
+        break;
+    }
+  });
+  function toggleDisabled() {
+    //toggle disable buttons and dropdowns
+    $(".editPage").toggleClass("disabled");
+    $(".cancelEdits").toggleClass("disabled");
+    $(".applyEdits").toggleClass("disabled");
+    $(".clubType").toggleClass("disabled");
+    $(".clubCampus").toggleClass("disabled");
+    //toggle disable text and input fields
+    $(".input-group").children(".form-control").prop("readonly", !$(".input-group").children(".form-control").prop("readonly"));
+    $(".form-group").children(".form-control").prop("readonly", !$(".form-group").children(".form-control").prop("readonly"));
+  }
+  function returnSocialElem(socialName) {
+    var socialArr = document.getElementsByClassName("socialInput");
+    for (var index = 0; index < socialArr.length; index++) {
+      if (socialArr[index].id == socialName) {
+        return socialArr[index];
+      }
+    }
+    return "";
+  }
+  function returnClubType(type) {
+    type = parseInt(type);
+    var clubTypeStr = "";
+    switch (type) {
+      case 1:
+        clubTypeStr = "Academic";
+        break;
+      case 2:
+        clubTypeStr = "Community Service Club";
+        break;
+      case 3:
+        clubTypeStr = "Religious Organization";
+        break;
+      case 4:
+        clubTypeStr = "Social Club";
+        break;
+      case 5:
+        clubTypeStr = "Athletic Team";
+        break;
+      case 6:
+        clubTypeStr = "Misc.";
+        break;
+      case 7:
+        clubTypeStr = "School Organization";
+        break;
+      case 8:
+        clubTypeStr = "Extracurricular";
+        break;
+      case 9:
+        clubTypeStr = "Communication";
+        break;
+    }
+    return clubTypeStr;
+  }
+  function returnClubTypeID(typeName) {
+    var type = 1;
+    switch (typeName) {
+      case "Academic":
+        type = 1;
+        break;
+      case "Community Service Club":
+        type = 2;
+        break;
+      case "Religious Organization":
+        type = 3;
+        break;
+      case "Social Club":
+        type = 4;
+        break;
+      case "Athletic Team":
+        type = 5;
+        break;
+      case "Misc.":
+        type = 6;
+        break;
+      case "School Organization":
+        type = 7;
+        break;
+      case "Extracurricular":
+        type = 8;
+        break;
+      case "Communication":
+        type = 9;
+        break;
+    }
+    return type;
+  }
+  function returnCampusID(campusName) {
+    var campusID = 2;
+    switch (campusName) {
+      case "AHS":
+        campusID = 1;
+        break;
+      case "STEAM":
+        campusID = 2;
+        break;
+    }
+    return campusID;
+  }
+  $(".typeDropdowns a").on("click", function () {
+    clubRemoveActive(".typeDropdowns a");
+    $(this).addClass("active");
+    $(".clubType").text($(this).text());
+  });
+  $(".campusDropdowns a").on("click", function () {
+    clubRemoveActive(".campusDropdowns a");
+    $(this).addClass("active");
+    $(".clubCampus").text($(this).text());
+  });
+  function populateGeneralInfo(clubId, type, subtype, description, leadership, sponsor, meeting, campus, location, website, socials) {
+    $(".visitPage").prop("href", `/clubs#club-${clubId}`);
+    $(".clubType").text(returnClubType(type));
+    clubRemoveActive(".typeDropdowns li a");
+    $(`#type${type}`).addClass("active");
+    $(".typeDropdowns li a").prop("href", `#own-${clubId}`);
+    $(".subtype").prop("value", subtype);
+    $(".description").prop("value", description);
+    $(".leadership").prop("value", leadership);
+    $(".sponsor").prop("value", sponsor);
+    $(".meeting").prop("value", meeting);
+    $(".clubCampus").text(campus);
+    clubRemoveActive(".campusDropdowns li a");
+    $(`#campus${returnCampusID(campus)}`).addClass("active");
+    $(".campusDropdowns li a").prop("href", `#own-${clubId}`);
+    $(".location").prop("value", location);
+    $(".website").prop("value", website);
+    var socialsSet = socials;
+    for (var index2 = 0; index2 < socialsSet.length; index2++) {
+      var socialInputField = returnSocialElem(socialsSet[index2][1]);
+      socialInputField.value = socialsSet[index2][0];
+    }
+  }
+  function populateMemberInfo(members) {
+    var memberStr = "";
+    for (var index = 0; index < members.length; index++) {
+      memberStr += members[index];
+      if (index + 1 != members.length) {
+        memberStr += ",";
+      }
+    }
+    $(".members").prop("value", memberStr);
+  }
+  function foundClub(joinedArr, clubId) {
+    for (var index = 0; index < joinedArr.length; index++) {
+      var club = joinedArr[index];
+      if (club == clubId || club == "All") {
+        return true;
+      }
+    }
+    return false;
+  }
+  function getOriginalMembers(clubId, property) {
+    var members = [];
+    for (var index = 0; index < userArr.length; index++) {
+      var clubsJoined = userArr[index][`${property}`];
+      if (foundClub(clubsJoined, clubId)) {
+        members.push(userArr[index]["User-Email"]);
+      }
+    }
+    return members;
+  }
+  function foundClubModified(joinedArr, clubId) {
+    for (var index = 0; index < joinedArr.length; index++) {
+      var club = joinedArr[index];
+      if (club == clubId || club == "All") {
+        return true;
+      }
+    }
+    return false;
+  }
+  function getOriginalSendTo(notifId, clubId) {
+    var members = [];
+    for (var index = 0; index < userArr.length; index++) {
+      var clubsJoined = userArr[index]["Clubs-Joined"];
+      var clubsOwned = userArr[index]["Clubs-Owned"];
+      if (foundClubModified(clubsJoined, clubId) || foundClubModified(clubsOwned, clubId)) {
+        members.push(userArr[index]["User-Email"]);
+      }
+    }
+    return members;
+  }
+  function loadClubData(clubId) {
+    var clubMName = findClubName(clubId);
+    if (clubMName == "") {
+      window.location.assign("/page-not-found");
+      return;
+    }
+    $(".clubNameTxt").text(`${clubMName} Management`);
+    $(".clubMNav").prop("href", `#own-${clubId}`);
+    var certified = certifyUser(clubId);
+    if (certified) {
+      for (var index = 0; index < clubsArr.length; index++) {
+        if (clubsArr[index]["ID"] == clubId) {
+          clubData = clubsArr[index];
+        }
+      }
+      //populate the page with current club data
+      populateGeneralInfo(clubId, clubData["Type"], clubData["Subtype"], clubData["Description"], clubData["Leader"], clubData["Sponsor"], clubData["Meeting"], clubData["Location"][0], clubData["Location"][1], clubData["Website"], clubData["Social"]);
+      var memberArr = getOriginalMembers(clubId, "Clubs-Joined");
+      populateMemberInfo(memberArr);
+
+    }
+  }
+  function getArrayOfNames(dataArr) {
+    nameArr = [];
+    for (var index = 0; index < dataArr.length; index++) {
+      nameArr.push(dataArr[index]["Event-Name"]);
+    }
+    return nameArr;
+  }
+  function getArrayOfNamesService(dataArr) {
+    nameArr = [];
+    for (var index = 0; index < dataArr.length; index++) {
+      nameArr.push(dataArr[index]["Service-Name"]);
+    }
+    return nameArr;
+  }
+  function getNewClubData() {
+    const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch3 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch4 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch5 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    Promise.all([fetch1, fetch2, fetch3, fetch4, fetch5]).then(function (JsonData) {
+      userArr = JsonData[0]["Items"];
+      clubsArr = JsonData[1]["Items"];
+      eventsArr = JsonData[2]["Items"];
+      commsArr = JsonData[3]["Items"];
+      serviceArr = JsonData[4]["Items"];
+      loadClubData(clubData["ID"]);
+    });
+  }
+  function returnNewClubInfo() {
+    var regex = /(\r\n|\r|\n)/g;
+    var spaceRegex = /\s/g;
+    var description = $(".description").prop("value").replace(regex, "");
+    var leaders = $(".leadership").prop("value").replace(spaceRegex, "").replace(regex, "").toLowerCase();
+    var locationArr = [$(".clubCampus").text(), $(".location").prop("value")];
+    var meeting = $(".meeting").prop("value").replace(regex, "");
+    var socialArr = [];
+    var socialSet = document.getElementsByClassName("socialInput");
+    for (var index2 = 0; index2 < socialSet.length; index2++) {
+      socialArr.push([socialSet[index2].value, socialSet[index2].id]);
+    }
+    var sponsors = $(".sponsor").prop("value").replace(spaceRegex, "").replace(regex, "").toLowerCase();
+    var subtype = $(".subtype").prop("value");
+    var type = returnClubTypeID($(".clubType").text());
+    var website = $(".website").prop("value");
+
+    var originalOwners = getOriginalMembers(clubData["ID"], "Clubs-Owned");
+    var currentOwners;
+    if (sponsors == "" && leaders != "") { currentOwners = leaders; }
+    else if (leaders == "" && sponsors != "") { currentOwners = sponsors; }
+    else { currentOwners = leaders + "," + sponsors; }
+    var currentOwnersArr = [];
+    var tempCurrentOArr = [];
+    var ownerAArr = [];
+    var ownerRArr = [];
+    try {
+      currentOwnersArr = currentOwners.split(",");
+      tempCurrentOArr = originalOwners;
+    } catch (error) { }
+    for (var index = 0; index < currentOwnersArr.length; index++) {
+      if (!foundClub(originalOwners, currentOwnersArr[index])) {
+        var tempArr = [];
+        tempArr.push(currentOwnersArr[index]);
+        tempArr.push(findUserName(currentOwnersArr[index]));
+        ownerAArr.push(tempArr);
+        tempCurrentOArr.splice(tempCurrentOArr.indexOf(currentOwnersArr[index]), 1);
+      } else {
+        tempCurrentOArr.splice(tempCurrentOArr.indexOf(currentOwnersArr[index]), 1);
+      }
+    }
+    for (var index = 0; index < tempCurrentOArr.length; index++) {
+      var tempArr = [];
+      tempArr.push(tempCurrentOArr[index]);
+      tempArr.push(findUserName(tempCurrentOArr[index]));
+      ownerRArr.push(tempArr);
+    }
+    var jsonClubReturn = { "Club-Name": clubData["Club-Name"], "ID": clubData["ID"], "Description": description, "Leaders": leaders, "Location": locationArr, "Meeting": meeting, "Social": socialArr, "Sponsors": sponsors, "Subtype": subtype, "Type": type, "Website": website, "Add-Owners": ownerAArr, "Remove-Owners": ownerRArr };
+    return jsonClubReturn;
+  }
+  function returnNewMemberInfo() {
+    var regex = /(\r\n|\r|\n)/g;
+    var spaceRegex = /\s/g;
+    var originalMembers = getOriginalMembers(clubData["ID"], "Clubs-Joined");
+    var currentMembers = $(".members").prop("value").replace(spaceRegex, "").replace(regex, "").toLowerCase();
+    var currentMembersArr = [];
+    var tempCurrentMArr = [];
+    var memberAArr = [];
+    var memberRArr = [];
+    try {
+      currentMembersArr = currentMembers.split(",");
+      tempCurrentMArr = originalMembers;
+    } catch (error) { }
+    if (currentMembersArr.length != 0 && currentMembersArr[0] != "") {
+      for (var index = 0; index < currentMembersArr.length; index++) {
+        if (!foundClub(originalMembers, currentMembersArr[index])) {
+          var tempArr = [];
+          tempArr.push(currentMembersArr[index]);
+          tempArr.push(findUserName(currentMembersArr[index]));
+          memberAArr.push(tempArr);
+          tempCurrentMArr.splice(tempCurrentMArr.indexOf(currentMembersArr[index]), 1);
+        } else {
+          tempCurrentMArr.splice(tempCurrentMArr.indexOf(currentMembersArr[index]), 1);
+        }
+      }
+    }
+    for (var index = 0; index < tempCurrentMArr.length; index++) {
+      var tempArr = [];
+      tempArr.push(tempCurrentMArr[index]);
+      tempArr.push(findUserName(tempCurrentMArr[index]));
+      memberRArr.push(tempArr);
+    }
+    console.log("members add: "+memberAArr);
+    console.log("members remove: "+memberRArr);
+    var jsonMemberReturn = { "Members-Add": memberAArr, "Members-Remove": memberRArr };
+    return jsonMemberReturn;
+  }
+  function updateGeneralInfo(newClubData, newMemberData) {
+    var dataToSend = { "Club": newClubData, "Member": newMemberData };
+    $.ajax({
+      type: "POST",
+      url: "/management",
+      data: JSON.stringify(dataToSend),
+      contentType: "application/json",
+      dataType: 'json'
+    }).always(function () { getNewClubData(); });
+  }
+  $(".editPage").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      toggleDisabled();
+    }
+  });
+  $(".cancelEdits").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      populateGeneralInfo(clubData["ID"], clubData["Type"], clubData["Subtype"], clubData["Description"], clubData["Leader"], clubData["Sponsor"], clubData["Meeting"], clubData["Location"][0], clubData["Location"][1], clubData["Website"], clubData["Social"]);
+      var memberArr = getOriginalMembers(clubData["ID"], "Clubs-Joined");
+      populateMemberInfo(memberArr);
+      toggleDisabled();
+    }
+  });
+  $(".applyEdits").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      updateGeneralInfo(returnNewClubInfo(), returnNewMemberInfo());
+      toggleDisabled();
+    }
+  });
+  //events section
+  function checkIfEditable(testVar) {
+    if (testVar == null || testVar == "null" || testVar == NaN || testVar == "NaN" || testVar == undefined || testVar == "undefined") {
+      return false;
+    }
+    return true;
+  }
+  function createEventCard(name, eventId, maxAttend, startDate, startTime, endDate, endTime, description, disable = true) {
+    var cardC = document.createElement("div");
+    cardC.classList.add("card");
+    cardC.id = "event" + eventId;
+    var cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    cardC.appendChild(cardBody);
+    //create the title input field
+    var eventTitleC = document.createElement("div");
+    eventTitleC.classList.add("input-group", "input-group-lg");
+    cardBody.appendChild(eventTitleC);
+    var eventTitleInput = document.createElement("input");
+    eventTitleInput.classList.add("form-control", "eventTitle");
+    eventTitleInput.type = "text";
+    eventTitleInput.placeholder = "Type event name here.";
+    eventTitleInput.readOnly = disable;
+    eventTitleInput.value = name;
+    eventTitleC.appendChild(eventTitleInput);
+    //create the start date/time field
+    var eventSDateC = document.createElement("div");
+    eventSDateC.classList.add("input-group");
+    eventSDateC.id = `datetimepicker${eventId}-1Event`;
+    cardBody.appendChild(eventSDateC);
+    var eventSDatePrepend = document.createElement("div");
+    eventSDatePrepend.classList.add("input-group-prepend");
+    eventSDateC.appendChild(eventSDatePrepend);
+    var eventSDatePrependSpan = document.createElement("span");
+    eventSDatePrependSpan.classList.add("input-group-text");
+    eventSDatePrepend.appendChild(eventSDatePrependSpan);
+    var eventSDatePrependSpanTxt = document.createTextNode("Event Start");
+    eventSDatePrependSpan.appendChild(eventSDatePrependSpanTxt);
+    var eventSDateInput = document.createElement("input");
+    eventSDateInput.id = `datetimepicker${eventId}-1EventInput`;
+    eventSDateInput.classList.add("form-control", "eventSDate");
+    eventSDateInput.type = "text";
+    eventSDateInput.placeholder = "Type start date/time here in the format MM/DD/YYYY HH:MM AM/PM.";
+    eventSDateInput.readOnly = disable;
+    var newStartTime = "";
+    if (checkIfEditable(startTime)) {
+      var startTimeArr = startTime.split(":");
+      var startTimeHours = parseInt(startTimeArr[0]);
+      var ampm = "AM";
+
+      if (startTimeHours > 12) {
+        startTimeHours -= 12;
+        ampm = "PM";
+      }
+      newStartTime = startTimeHours.toString() + ":" + startTimeArr[1] + " " + ampm;
+    }
+    var startTimingStr = startDate + " " + newStartTime;
+    eventSDateInput.value = startTimingStr;
+    eventSDateC.appendChild(eventSDateInput);
+    var eventSDateInputSpan = document.createElement("span");
+    eventSDateInputSpan.classList.add("input-group-text");
+    eventSDateInputSpan.id = `datetimepicker${eventId}-1EventSpan`;
+    eventSDateC.appendChild(eventSDateInputSpan);
+    var eventSDateInputGlyphSpan = document.createElement("span");
+    eventSDateInputGlyphSpan.classList.add("fa-solid", "fa-calendar");
+    eventSDateInputSpan.appendChild(eventSDateInputGlyphSpan);
+    //create the end date/time field
+    var eventEDateC = document.createElement("div");
+    eventEDateC.classList.add("input-group");
+    eventEDateC.id = `datetimepicker${eventId}-2Event`;
+    cardBody.appendChild(eventEDateC);
+    var eventEDatePrepend = document.createElement("div");
+    eventEDatePrepend.classList.add("input-group-prepend");
+    eventEDateC.appendChild(eventEDatePrepend);
+    var eventEDatePrependSpan = document.createElement("span");
+    eventEDatePrependSpan.classList.add("input-group-text");
+    eventEDatePrepend.appendChild(eventEDatePrependSpan);
+    var eventEDatePrependSpanTxt = document.createTextNode("Event End");
+    eventEDatePrependSpan.appendChild(eventEDatePrependSpanTxt);
+    var eventEDateInput = document.createElement("input");
+    eventEDateInput.id = `datetimepicker${eventId}-2EventInput`;
+    eventEDateInput.classList.add("form-control", "eventEDate");
+    eventEDateInput.type = "text";
+    eventEDateInput.placeholder = "Type start date/time here in the format MM/DD/YYYY HH:MM AM/PM.";
+    eventEDateInput.readOnly = disable;
+    var newEndTime = "";
+    if (checkIfEditable(endTime)) {
+      var endTimeArr = endTime.split(":");
+      var endTimeHours = parseInt(endTimeArr[0]);
+      var ampm = "AM";
+
+      if (endTimeHours > 12) {
+        endTimeHours -= 12;
+        ampm = "PM";
+      }
+      newEndTime = endTimeHours.toString() + ":" + endTimeArr[1] + " " + ampm;
+    }
+    var endTimingStr = endDate + " " + newEndTime;
+    eventEDateInput.value = endTimingStr;
+    eventEDateC.appendChild(eventEDateInput);
+    var eventEDateInputSpan = document.createElement("span");
+    eventEDateInputSpan.classList.add("input-group-text");
+    eventEDateInputSpan.id = `datetimepicker${eventId}-2EventSpan`;
+    eventEDateC.appendChild(eventEDateInputSpan);
+    var eventEDateInputGlyphSpan = document.createElement("span");
+    eventEDateInputGlyphSpan.classList.add("fa-solid", "fa-calendar");
+    eventEDateInputSpan.appendChild(eventEDateInputGlyphSpan);
+    //create the max attend input field
+    var eventAttendC = document.createElement("div");
+    eventAttendC.classList.add("input-group");
+    cardBody.appendChild(eventAttendC);
+    var eventAttendPrepend = document.createElement("div");
+    eventAttendPrepend.classList.add("input-group-prepend");
+    eventAttendC.appendChild(eventAttendPrepend);
+    var eventAttendPrependSpan = document.createElement("span");
+    eventAttendPrependSpan.classList.add("input-group-text");
+    eventAttendPrepend.appendChild(eventAttendPrependSpan);
+    var eventAttendPrependSpanTxt = document.createTextNode("Max Attendees");
+    eventAttendPrependSpan.appendChild(eventAttendPrependSpanTxt);
+    var eventAttendInput = document.createElement("input");
+    eventAttendInput.classList.add("form-control", "eventMaxAttend");
+    eventAttendInput.type = "text";
+    eventAttendInput.placeholder = "Type max attendance here.";
+    eventAttendInput.readOnly = disable;
+    eventAttendInput.value = maxAttend;
+    eventAttendC.appendChild(eventAttendInput);
+    //create the description textarea
+    var eventDesC = document.createElement("div");
+    eventDesC.classList.add("form-group");
+    cardBody.appendChild(eventDesC);
+    var eventDesInput = document.createElement("textarea");
+    eventDesInput.classList.add("form-control", "eventDescription");
+    eventDesInput.rows = "2";
+    eventDesInput.value = description;
+    eventDesInput.readOnly = disable;
+    eventDesC.appendChild(eventDesInput);
+    return cardC;
+  }
+  function createCommCard(clubId, notifId, message, announcement, sendTo, disable = true) {
+    var cardC = document.createElement("div");
+    cardC.classList.add("card");
+    cardC.id = "notif" + notifId;
+    var cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    cardC.appendChild(cardBody);
+    //create the message textarea
+    var notifMessageC = document.createElement("div");
+    notifMessageC.classList.add("form-group");
+    cardBody.appendChild(notifMessageC);
+    var notifMessageCInput = document.createElement("textarea");
+    notifMessageCInput.classList.add("form-control", "commMessage");
+    notifMessageCInput.rows = "2";
+    notifMessageCInput.value = message;
+    notifMessageCInput.readOnly = disable;
+    notifMessageC.appendChild(notifMessageCInput);
+    //create the announcement toggle dropdown
+    var notifAnC = document.createElement("div");
+    notifAnC.classList.add("dropdown");
+    notifAnC.style.marginTop = "10px";
+    notifAnC.style.marginBottom = "18px";
+    cardBody.appendChild(notifAnC);
+    var notifAnCButton = document.createElement("button");
+    notifAnCButton.classList.add("btn", "btn-secondary", "dropdown-toggle", "commAn");
+    notifAnCButton.type = "button";
+    notifAnCButton.id = `notifDrop-${notifId}`;
+    notifAnCButton.dataset.toggle = "dropdown";
+    notifAnCButton.disabled = disable;
+    notifAnC.appendChild(notifAnCButton);
+    var notifAnCButtonTxtStr = "DM";
+    if (announcement == "True") {
+      notifAnCButtonTxtStr = "Announcement"
+    }
+    var notifAnCButtonTxt = document.createTextNode(`${notifAnCButtonTxtStr}`);
+    notifAnCButton.appendChild(notifAnCButtonTxt);
+    var notifAnCDropdownMenu = document.createElement("div");
+    notifAnCDropdownMenu.classList.add("dropdown-menu", "commAnDropdown");
+    notifAnCDropdownMenu.id = `commAnDropdowns-${notifId}`;
+    notifAnC.appendChild(notifAnCDropdownMenu);
+    var notifAnCDropdownItem1 = document.createElement("a");
+    notifAnCDropdownItem1.classList.add("dropdown-item", `messagetype-1-${notifId}`);
+    notifAnCDropdownItem1.href = "";
+    notifAnCDropdownItem1.id = `messagetype-1-${notifId}`;
+    notifAnCDropdownMenu.appendChild(notifAnCDropdownItem1);
+    var notifAnCDropdownItemTxt = document.createTextNode("Announcement");
+    notifAnCDropdownItem1.appendChild(notifAnCDropdownItemTxt);
+    var notifAnCDropdownItem2 = document.createElement("a");
+    notifAnCDropdownItem2.classList.add("dropdown-item", `messagetype-2-${notifId}`);
+    notifAnCDropdownItem2.href = "";
+    notifAnCDropdownItem2.id = `messagetype-2-${notifId}`;
+    notifAnCDropdownMenu.appendChild(notifAnCDropdownItem2);
+    var notifAnCDropdownItem2Txt = document.createTextNode("DM");
+    notifAnCDropdownItem2.appendChild(notifAnCDropdownItem2Txt);
+    if (notifAnCButtonTxtStr == "DM") {
+      notifAnCDropdownItem2.classList.add("active");
+    } else { notifAnCDropdownItem1.classList.add("active"); }
+    //create the send-to textarea
+    var notifSendToPeopleC = document.createElement("div");
+    notifSendToPeopleC.classList.add("form-group");
+    cardBody.appendChild(notifSendToPeopleC);
+    var notifSendToPeopleCInput = document.createElement("textarea");
+    notifSendToPeopleCInput.classList.add("form-control", "commSignUpPeople");
+    notifSendToPeopleCInput.rows = "2";
+    var sendToPeople = "";
+    if (announcement == "True") {
+      try {
+        var originalSendTo = getOriginalSendTo(notifId.toString(), clubData["ID"].toString());
+        for (var index = 0; index < originalSendTo.length; index++) {
+          var person = originalSendTo[index];
+          sendToPeople += person;
+          if ((index + 1) < originalSendTo.length) {
+            sendToPeople += ",";
+          }
+        }
+      } catch (error) { }
+    } else {
+      for (var index = 0; index < sendTo.length; index++) {
+        var person = sendTo[index];
+        sendToPeople += person;
+        if ((index + 1) < sendTo.length) {
+          sendToPeople += ",";
+        }
+      }
+    }
+    notifSendToPeopleCInput.value = sendToPeople;
+    notifSendToPeopleCInput.readOnly = disable;
+    notifSendToPeopleC.appendChild(notifSendToPeopleCInput);
+    return cardC;
+  }
+  function getClubEvents(clubId, dataArr) {
+    var events = [];
+    for (var index = 0; index < dataArr.length; index++) {
+      var eventClub = dataArr[index]["Club"];
+      if (eventClub == clubId) {
+        events.push(dataArr[index]);
+      }
+    }
+    return events;
+  }
+  function getClubNotifs(clubId, dataArr) {
+    var notifications = [];
+    for (var index = 0; index < dataArr.length; index++) {
+      var notifClub = dataArr[index]["Club-ID"];
+      if (notifClub == clubId) {
+        notifications.push(dataArr[index]);
+      }
+    }
+    return notifications;
+  }
+  function generateEventCards() {
+    var clubEvents = getClubEvents(clubData["ID"], eventsArr);
+    var eventCardC = document.querySelector(".eventCards");
+    for (var index = 0; index < clubEvents.length; index++) {
+      var clubEvent = clubEvents[index];
+      var newEventCard = createEventCard(clubEvent["Event-Name"], clubEvent["ID"], clubEvent["Max-Attendees"], clubEvent["Start-Date"], clubEvent["Start-Time"], clubEvent["End-Date"], clubEvent["End-Time"], clubEvent["Description"]);
+      eventCardC.appendChild(newEventCard);
+      $(`#datetimepicker${clubEvent["ID"]}-1Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-1Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-1EventInput`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-1Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-1EventSpan`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-1Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-1EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubEvent["ID"]}-1Event`));
+      $(`#datetimepicker${clubEvent["ID"]}-2Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-2Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-2EventInput`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-2Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-2EventSpan`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-2Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-2EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubEvent["ID"]}-2Event`));
+    }
+  }
+  function generateNotifCards() {
+    var clubNotifs = getClubNotifs(clubData["ID"], commsArr);
+    var notifCardC = document.querySelector(".commCards");
+    for (var index = 0; index < clubNotifs.length; index++) {
+      var clubNotif = clubNotifs[index];
+      var newNotifCard = createCommCard(clubNotif["Club-ID"], clubNotif["ID"], clubNotif["Message"], clubNotif["Announcement"], clubNotif["To-Members"]);
+      notifCardC.appendChild(newNotifCard);
+    }
+  }
+  function onlyNumber(testStr) {
+    number = true;
+    if (testStr != NaN && testStr != undefined) {
+      for (var index = 0; index < testStr.length; index++) {
+        if (parseInt(testStr[index]) == NaN) {
+          number = false;
+        }
+      }
+    } else { number = false; }
+    return number;
+  }
+  function returnNewEventData(eventId) {
+    var eventCard = document.querySelector(`#event${eventId}`);
+    var name = eventCard.querySelector(".eventTitle").value;
+    var description = eventCard.querySelector(".eventDescription").value;
+    var endTiming = eventCard.querySelector(".eventEDate").value.split(" ");
+    var endDate = endTiming[0];
+    var endDateArr = endDate.split("/");
+    var cleanedMonth = parseInt(endDateArr[0]).toString();
+    var cleanedDay = parseInt(endDateArr[1]).toString();
+    var cleanedYear = parseInt(endDateArr[2]).toString();
+    endDate = cleanedMonth + "/" + cleanedDay + "/" + cleanedYear;
+    if (!onlyNumber(cleanedMonth) || !onlyNumber(cleanedDay) || !onlyNumber(cleanedYear)) {
+      alert("Event end date typed incorrectly, use MM/DD/YYYY");
+      endDate = "";
+    }
+    var endTimeStr = endTiming[1];
+    var endTimeStrArr = endTimeStr.split(":");
+    var endTimeHour = parseInt(endTimeStrArr[0]);
+    if (endTiming[2] == "PM") {
+      endTimeHour += 12;
+    }
+    var endTime = endTimeHour.toString() + ":" + endTimeStrArr[1];
+    if (!onlyNumber(endTimeHour) || !onlyNumber(endTimeStrArr[1])) {
+      alert("Event end time typed incorrectly, use HH:MM AM/PM");
+      endTime = "";
+    }
+    var maxAttend = eventCard.querySelector(".eventMaxAttend").value;
+    if (maxAttend == "" || !parseInt(maxAttend)) {
+      maxAttend = "0";
+    }
+    var startTiming = eventCard.querySelector(".eventSDate").value.split(" ");
+    var startDate = startTiming[0];
+    var startDateArr = startDate.split("/");
+    cleanedMonth = parseInt(startDateArr[0]).toString();
+    cleanedDay = parseInt(startDateArr[1]).toString();
+    cleanedYear = parseInt(startDateArr[2]).toString();
+    startDate = cleanedMonth + "/" + cleanedDay + "/" + cleanedYear;
+    if (!onlyNumber(cleanedMonth) || !onlyNumber(cleanedDay) || !onlyNumber(cleanedYear)) {
+      alert("Event start date typed incorrectly, use MM/DD/YYYY");
+      startDate = "";
+    }
+    var startTimeStr = startTiming[1];
+    var startTimeStrArr = startTimeStr.split(":");
+    var startTimeHour = parseInt(startTimeStrArr[0]);
+    if (startTiming[2] == "PM") {
+      startTimeHour += 12;
+    }
+    var startTime = startTimeHour.toString() + ":" + startTimeStrArr[1];
+    if (!onlyNumber(startTimeHour) || !onlyNumber(startTimeStrArr[1])) {
+      alert("Event start time typed incorrectly, use HH:MM AM/PM");
+      startTime = "";
+    }
+    var jsonEventReturn = { "Event-Name": name, "ID": eventId, "Club": clubData["ID"], "Description": description, "End-Date": endDate, "End-Time": endTime, "Max-Attendees": maxAttend, "Start-Date": startDate, "Start-Time": startTime };
+    return jsonEventReturn;
+  }
+  function returnNewEventsData() {
+    var clubEvents = document.querySelector(".eventCards").children;
+    var newEventDataArr = [];
+    for (var index = 0; index < clubEvents.length; index++) {
+      var clubEvent = clubEvents[index];
+      var newEventData = returnNewEventData(clubEvent.id.replace("event", ""));
+      newEventDataArr.push(newEventData);
+    }
+    return newEventDataArr;
+  }
+  function returnNewNotifData(notifId, createStartTime=false) {
+    var notifCard = document.querySelector(`#notif${notifId}`);
+    var message = notifCard.querySelector(".commMessage").value;
+    var notifCardDropdown = notifCard.querySelector(".card-body").querySelector(".dropdown").querySelector(".dropdown-menu");
+    var announcement = "False";
+    if (notifCardDropdown.querySelector(`.messagetype-1-${notifId}`).classList.contains("active")) {
+      announcement = "True";
+    }
+    var userEmail = $(".userEmail").text();
+    var userId = findIdOfUser(userEmail);
+    //sign up people json info
+    var regex = /(\r\n|\r|\n)/g;
+    var spaceRegex = /\s/g;
+    var sendToPeople = notifCard.querySelector(".commSignUpPeople").value;
+    var currentMembers = sendToPeople.replace(spaceRegex, "").replace(regex, "").toLowerCase();
+    var currentMembersArr = [];
+    try {
+      currentMembersArr = currentMembers.split(",");
+    } catch (error) { }
+    var todayDateFormatted = "n/a";
+    if (createStartTime) {
+      var today = new Date();
+      var extraZero = "";
+      if (parseInt(today.getMinutes()) < 10) {
+        extraZero = "0";
+      }
+      todayDateFormatted = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()},${today.getHours()}:${extraZero}${today.getMinutes()}`;
+    }
+    var deleteStr = message.split("-DELETE");
+    var deleteThis = false;
+    if (deleteStr.length != 1) { deleteThis = true; }
+    var jsonNotifReturn = { "Announcement": announcement, "Club-ID": clubData["ID"], "Creator": findUserName(userEmail), "Created-At": todayDateFormatted, "ID": notifId, "Message": message, "To-Members": currentMembersArr, "Delete": deleteThis };
+    return jsonNotifReturn;
+  }
+  function returnNewCommsData(newCard=false) {
+    var clubNotifs = document.querySelector(".commCards").children;
+    var newNotifDataArr = [];
+    for (var index = 0; index < clubNotifs.length; index++) {
+      var clubNotif = clubNotifs[index];
+      var newNotifData = returnNewNotifData(clubNotif.id.replace("notif", ""));
+      console.log("index check: ");
+      console.log(index == 0);
+      console.log(newCard)
+      if (index == 0 && newCard) {
+        newNotifData = returnNewNotifData(clubNotif.id.replace("notif", ""), true);
+        console.log("newNotifData: "+JSON.stringify(newNotifData));
+      }
+      console.log("notifData: "+JSON.stringify(newNotifData));
+      newNotifDataArr.push(newNotifData);
+    }
+    console.log("new comms data: "+JSON.stringify(newNotifDataArr));
+    return newNotifDataArr;
+  }
+  function deleteEvents(selector) {
+    var eventCardC = document.querySelector(selector);
+    while (eventCardC.firstChild) {
+      eventCardC.removeChild(eventCardC.firstChild);
+    }
+  }
+  function recreateNotifCards(oldData) {
+    deleteEvents(".commCards");
+    var notifCardC = document.querySelector(".commCards");
+    for (var index = 0; index < oldData.length; index++) {
+      var clubNotif = oldData[index];
+      var oldNotifCard = createCommCard(clubNotif["Club-ID"], clubNotif["ID"], clubNotif["Message"], clubNotif["Announcement"], clubNotif["To-Members"]);
+      notifCardC.appendChild(oldNotifCard);
+    }
+  }
+  function recreateEventCards(oldData) {
+    deleteEvents(".eventCards");
+    var eventCardC = document.querySelector(".eventCards");
+    for (var index = 0; index < oldData.length; index++) {
+      var clubEvent = oldData[index];
+      var oldEventCard = createEventCard(clubEvent["Event-Name"], clubEvent["ID"], clubEvent["Max-Attendees"], clubEvent["Start-Date"], clubEvent["Start-Time"], clubEvent["End-Date"], clubEvent["End-Time"], clubEvent["Description"]);
+      eventCardC.appendChild(oldEventCard);
+      $(`#datetimepicker${clubEvent["ID"]}-1Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-1Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-1EventInput`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-1Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-1EventSpan`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-1Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-1EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubEvent["ID"]}-1Event`));
+      $(`#datetimepicker${clubEvent["ID"]}-2Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-2Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubEvent["ID"]}-2EventInput`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-2Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-2EventSpan`).prop("data-td-target", `#datetimepicker${clubEvent["ID"]}-2Event`);
+      $(`#datetimepicker${clubEvent["ID"]}-2EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubEvent["ID"]}-2Event`));
+    }
+  }
+  function toggleBDisabled() {
+    //toggle disable buttons and dropdowns
+    $(".addEventBtn").toggleClass("disabled");
+    $(".editEventBtn").toggleClass("disabled");
+    $(".approveEventBtn").toggleClass("disabled");
+    $(".cancelEventBtn").toggleClass("disabled");
+  }
+  function toggleEFDisabled() {
+    toggleBDisabled();
+    $(".eventCards").children(".card").children(".card-body").children(".input-group").children(".form-control").prop("readonly", true);
+    $(".eventCards").children(".card").children(".card-body").children(".form-group").children(".form-control").prop("readonly", true);
+  }
+  function toggleEDisabled(editBtn = false) {
+    toggleBDisabled();
+    //toggle input fields
+    if (editBtn) {
+      $(".input-group").children(".form-control").prop("readonly", false);
+      $(".form-group").children(".form-control").prop("readonly", false);
+    } else {
+      $(".input-group").children(".form-control").prop("readonly", !$(".input-group").children(".form-control").prop("readonly"));
+      $(".form-group").children(".form-control").prop("readonly", !$(".form-group").children(".form-control").prop("readonly"));
+    }
+  }
+  function getNextId(dataArr) {
+    if (firstEventId) {
+      nextEventId = 0;
+      for (var index = 0; index < dataArr.length; index++) {
+        if (parseInt(dataArr[index]["ID"]) > nextEventId) {
+          nextEventId = parseInt(dataArr[index]["ID"]);
+        }
+      }
+      firstEventId = false;
+    }
+    nextEventId++;
+    return nextEventId;
+  }
+  function getOldEventName(eventId) {
+    oldName = "";
+    for (var index = 0; index < oldEventsData.length; index++) {
+      oldEvent = oldEventsData[index];
+      if (oldEvent["ID"] == eventId) {
+        oldName = oldEvent["Event-Name"];
+      }
+    }
+    return oldName;
+  }
+  function updateEvents(newEventData) {
+    var oldEventNames = getArrayOfNames(oldEventsData);
+    for (var index = 0; index < newEventData.length; index++) {
+      var thisEvent = newEventData[index];
+      if (!foundClub(oldEventNames, thisEvent["Event-Name"])) {
+        newEventData[index]["Change-Name"] = thisEvent["Event-Name"];
+        newEventData[index]["Event-Name"] = getOldEventName(thisEvent["ID"]);
+      } else { newEventData[index]["Change-Name"] = "" }
+    }
+    var dataToSend = { "Events": newEventData };
+    $.ajax({
+      type: "POST",
+      url: "/management",
+      data: JSON.stringify(dataToSend),
+      contentType: "application/json",
+      dataType: 'json'
+    }).always(function () { getNewClubData(); });
+  }
+  $(".addEventBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldEventsData = returnNewEventsData();
+      var eventCardC = document.querySelector(".eventCards");
+      var nextEventIds = getNextId(eventsArr);
+      var newEventCard = createEventCard("", nextEventIds, "", "0/00/0000", "00:00", "0/00/0000", "00:00", "", false);
+      eventCardC.prepend(newEventCard);
+      $(`#datetimepicker${nextEventIds}-1Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${nextEventIds}-1Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${nextEventIds}-1EventInput`).prop("data-td-target", `#datetimepicker${nextEventIds}-1Event`);
+      $(`#datetimepicker${nextEventIds}-1EventSpan`).prop("data-td-target", `#datetimepicker${nextEventIds}-1Event`);
+      $(`#datetimepicker${nextEventIds}-1EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${nextEventIds}-1Event`));
+      $(`#datetimepicker${nextEventIds}-2Event`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${nextEventIds}-2Event`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${nextEventIds}-2EventInput`).prop("data-td-target", `#datetimepicker${nextEventIds}-2Event`);
+      $(`#datetimepicker${nextEventIds}-2EventSpan`).prop("data-td-target", `#datetimepicker${nextEventIds}-2Event`);
+      $(`#datetimepicker${nextEventIds}-2EventSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${nextEventIds}-2Event`));
+      addNewEvent = true;
+      toggleBDisabled();
+    }
+  });
+  $(".editEventBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldEventsData = returnNewEventsData();
+      toggleEDisabled(true);
+    }
+  });
+  $(".approveEventBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      updateEvents(returnNewEventsData());
+      if (addNewEvent) {
+        toggleEFDisabled();
+        addNewEvent = false;
+      } else { toggleEDisabled(); }
+    }
+  });
+  $(".cancelEventBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      if (addNewEvent) {
+        var eventCardC = document.querySelector(".eventCards");
+        var eventCardCChildren = eventCardC.children;
+        eventCardC.removeChild(eventCardCChildren[0]); //remove the first element
+        addNewEvent = false;
+      } else {
+        recreateEventCards(oldEventsData);
+      }
+      toggleBDisabled();
+    }
+  });
+  //service section
+  function createServiceCard(name, serviceId, hours, startDate, startTime, endDate, endTime, description, link, type, signUps, disable = true) {
+    var cardC = document.createElement("div");
+    cardC.classList.add("card");
+    cardC.id = "service" + serviceId;
+    var cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    cardC.appendChild(cardBody);
+    //create the title input field
+    var eventTitleC = document.createElement("div");
+    eventTitleC.classList.add("input-group", "input-group-lg");
+    cardBody.appendChild(eventTitleC);
+    var eventTitleInput = document.createElement("input");
+    eventTitleInput.classList.add("form-control", "serviceTitle");
+    eventTitleInput.type = "text";
+    eventTitleInput.placeholder = "Type service name here.";
+    eventTitleInput.readOnly = disable;
+    eventTitleInput.value = name;
+    eventTitleC.appendChild(eventTitleInput);
+    //create the start date/time field
+    var eventSDateC = document.createElement("div");
+    eventSDateC.classList.add("input-group");
+    eventSDateC.id = `datetimepicker${serviceId}-1Service`;
+    cardBody.appendChild(eventSDateC);
+    var eventSDatePrepend = document.createElement("div");
+    eventSDatePrepend.classList.add("input-group-prepend");
+    eventSDateC.appendChild(eventSDatePrepend);
+    var eventSDatePrependSpan = document.createElement("span");
+    eventSDatePrependSpan.classList.add("input-group-text");
+    eventSDatePrepend.appendChild(eventSDatePrependSpan);
+    var eventSDatePrependSpanTxt = document.createTextNode("Service Start");
+    eventSDatePrependSpan.appendChild(eventSDatePrependSpanTxt);
+    var eventSDateInput = document.createElement("input");
+    eventSDateInput.id = `datetimepicker${serviceId}-1ServiceInput`;
+    eventSDateInput.classList.add("form-control", "serviceSDate");
+    eventSDateInput.type = "text";
+    eventSDateInput.placeholder = "Type start date/time here in the format MM/DD/YYYY HH:MM AM/PM.";
+    eventSDateInput.readOnly = disable;
+    var newStartTime = "";
+    if (checkIfEditable(startTime)) {
+      var startTimeArr = startTime.split(":");
+      var startTimeHours = parseInt(startTimeArr[0]);
+      var ampm = "AM";
+
+      if (startTimeHours > 12) {
+        startTimeHours -= 12;
+        ampm = "PM";
+      }
+      newStartTime = startTimeHours.toString() + ":" + startTimeArr[1] + " " + ampm;
+    }
+    var startTimingStr = startDate + " " + newStartTime;
+    eventSDateInput.value = startTimingStr;
+    eventSDateC.appendChild(eventSDateInput);
+    var eventSDateInputSpan = document.createElement("span");
+    eventSDateInputSpan.classList.add("input-group-text");
+    eventSDateInputSpan.id = `datetimepicker${serviceId}-1ServiceSpan`;
+    eventSDateC.appendChild(eventSDateInputSpan);
+    var eventSDateInputGlyphSpan = document.createElement("span");
+    eventSDateInputGlyphSpan.classList.add("fa-solid", "fa-calendar");
+    eventSDateInputSpan.appendChild(eventSDateInputGlyphSpan);
+    //create the end date/time field
+    var eventEDateC = document.createElement("div");
+    eventEDateC.classList.add("input-group");
+    eventEDateC.id = `datetimepicker${serviceId}-2Service`;
+    cardBody.appendChild(eventEDateC);
+    var eventEDatePrepend = document.createElement("div");
+    eventEDatePrepend.classList.add("input-group-prepend");
+    eventEDateC.appendChild(eventEDatePrepend);
+    var eventEDatePrependSpan = document.createElement("span");
+    eventEDatePrependSpan.classList.add("input-group-text");
+    eventEDatePrepend.appendChild(eventEDatePrependSpan);
+    var eventEDatePrependSpanTxt = document.createTextNode("Service End");
+    eventEDatePrependSpan.appendChild(eventEDatePrependSpanTxt);
+    var eventEDateInput = document.createElement("input");
+    eventEDateInput.id = `datetimepicker${serviceId}-2ServiceInput`;
+    eventEDateInput.classList.add("form-control", "serviceEDate");
+    eventEDateInput.type = "text";
+    eventEDateInput.placeholder = "Type start date/time here in the format MM/DD/YYYY HH:MM AM/PM.";
+    eventEDateInput.readOnly = disable;
+    var newEndTime = "";
+    if (checkIfEditable(endTime)) {
+      var endTimeArr = endTime.split(":");
+      var endTimeHours = parseInt(endTimeArr[0]);
+      var ampm = "AM";
+
+      if (endTimeHours > 12) {
+        endTimeHours -= 12;
+        ampm = "PM";
+      }
+      newEndTime = endTimeHours.toString() + ":" + endTimeArr[1] + " " + ampm;
+    }
+    var endTimingStr = endDate + " " + newEndTime;
+    eventEDateInput.value = endTimingStr;
+    eventEDateC.appendChild(eventEDateInput);
+    var eventEDateInputSpan = document.createElement("span");
+    eventEDateInputSpan.classList.add("input-group-text");
+    eventEDateInputSpan.id = `datetimepicker${serviceId}-2ServiceSpan`;
+    eventEDateC.appendChild(eventEDateInputSpan);
+    var eventEDateInputGlyphSpan = document.createElement("span");
+    eventEDateInputGlyphSpan.classList.add("fa-solid", "fa-calendar");
+    eventEDateInputSpan.appendChild(eventEDateInputGlyphSpan);
+    //create the type input field
+    var eventTypeC = document.createElement("div");
+    eventTypeC.classList.add("input-group");
+    cardBody.appendChild(eventTypeC);
+    var eventTypePrepend = document.createElement("div");
+    eventTypePrepend.classList.add("input-group-prepend");
+    eventTypeC.appendChild(eventTypePrepend);
+    var eventTypePrependSpan = document.createElement("span");
+    eventTypePrependSpan.classList.add("input-group-text");
+    eventTypePrepend.appendChild(eventTypePrependSpan);
+    var eventTypePrependSpanTxt = document.createTextNode("Type");
+    eventTypePrependSpan.appendChild(eventTypePrependSpanTxt);
+    var eventTypeInput = document.createElement("input");
+    eventTypeInput.classList.add("form-control", "serviceType");
+    eventTypeInput.type = "text";
+    eventTypeInput.placeholder = "Type of service, either s,t,e,a, or m.";
+    eventTypeInput.readOnly = disable;
+    eventTypeInput.value = type;
+    eventTypeC.appendChild(eventTypeInput);
+    //create the signups input field
+    var eventSignUpsC = document.createElement("div");
+    eventSignUpsC.classList.add("input-group");
+    cardBody.appendChild(eventSignUpsC);
+    var eventSignUpsPrepend = document.createElement("div");
+    eventSignUpsPrepend.classList.add("input-group-prepend");
+    eventSignUpsC.appendChild(eventSignUpsPrepend);
+    var eventSignUpsPrependSpan = document.createElement("span");
+    eventSignUpsPrependSpan.classList.add("input-group-text");
+    eventSignUpsPrepend.appendChild(eventSignUpsPrependSpan);
+    var eventSignUpsPrependSpanTxt = document.createTextNode("Max Sign Ups");
+    eventSignUpsPrependSpan.appendChild(eventSignUpsPrependSpanTxt);
+    var eventSignUpsInput = document.createElement("input");
+    eventSignUpsInput.classList.add("form-control", "serviceSignUps");
+    eventSignUpsInput.type = "text";
+    eventSignUpsInput.placeholder = "Type the max number of signups here.";
+    eventSignUpsInput.readOnly = disable;
+    eventSignUpsInput.value = signUps;
+    eventSignUpsC.appendChild(eventSignUpsInput);
+    //create the hours input field
+    var eventAttendC = document.createElement("div");
+    eventAttendC.classList.add("input-group");
+    cardBody.appendChild(eventAttendC);
+    var eventAttendPrepend = document.createElement("div");
+    eventAttendPrepend.classList.add("input-group-prepend");
+    eventAttendC.appendChild(eventAttendPrepend);
+    var eventAttendPrependSpan = document.createElement("span");
+    eventAttendPrependSpan.classList.add("input-group-text");
+    eventAttendPrepend.appendChild(eventAttendPrependSpan);
+    var eventAttendPrependSpanTxt = document.createTextNode("Hours Available");
+    eventAttendPrependSpan.appendChild(eventAttendPrependSpanTxt);
+    var eventAttendInput = document.createElement("input");
+    eventAttendInput.classList.add("form-control", "serviceHours");
+    eventAttendInput.type = "text";
+    eventAttendInput.placeholder = "Type hours available here.";
+    eventAttendInput.readOnly = disable;
+    eventAttendInput.value = hours;
+    eventAttendC.appendChild(eventAttendInput);
+    //create the description textarea
+    var eventDesC = document.createElement("div");
+    eventDesC.classList.add("form-group");
+    cardBody.appendChild(eventDesC);
+    var eventDesInput = document.createElement("textarea");
+    eventDesInput.classList.add("form-control", "serviceDescription");
+    eventDesInput.rows = "2";
+    eventDesInput.value = description;
+    eventDesInput.readOnly = disable;
+    eventDesC.appendChild(eventDesInput);
+    //create the link input field
+    var eventLinkC = document.createElement("div");
+    eventLinkC.classList.add("input-group");
+    cardBody.appendChild(eventLinkC);
+    var eventLinkPrepend = document.createElement("div");
+    eventLinkPrepend.classList.add("input-group-prepend");
+    eventLinkC.appendChild(eventLinkPrepend);
+    var eventLinkPrependSpan = document.createElement("span");
+    eventLinkPrependSpan.classList.add("input-group-text");
+    eventLinkPrepend.appendChild(eventLinkPrependSpan);
+    var eventLinkPrependSpanTxt = document.createTextNode("External Link");
+    eventLinkPrependSpan.appendChild(eventLinkPrependSpanTxt);
+    var eventLinkInput = document.createElement("input");
+    eventLinkInput.classList.add("form-control", "serviceLink");
+    eventLinkInput.type = "text";
+    eventLinkInput.placeholder = "Type (optional) link for more info here.";
+    eventLinkInput.readOnly = disable;
+    eventLinkInput.value = link;
+    eventLinkC.appendChild(eventLinkInput);
+    //create the sign ups textarea
+    var eventSignUpsPeopleC = document.createElement("div");
+    eventSignUpsPeopleC.classList.add("form-group");
+    cardBody.appendChild(eventSignUpsPeopleC);
+    var eventSignUpsPeopleInput = document.createElement("textarea");
+    eventSignUpsPeopleInput.classList.add("form-control", "serviceSignUpPeople");
+    eventSignUpsPeopleInput.rows = "2";
+    var signUpPeople = "";
+    try {
+      var originalSignedUp = getOriginalMembers(serviceId.toString(), "Service");
+      for (var index = 0; index < originalSignedUp.length; index++) {
+        var person = originalSignedUp[index];
+        signUpPeople += person;
+        if ((index + 1) < originalSignedUp.length) {
+          signUpPeople += ",";
+        }
+      }
+    } catch (error) { }
+    eventSignUpsPeopleInput.value = signUpPeople;
+    eventSignUpsPeopleInput.readOnly = disable;
+    eventSignUpsPeopleC.appendChild(eventSignUpsPeopleInput);
+    return cardC;
+  }
+  function generateServiceCards() {
+    var clubServices = getClubEvents(clubData["ID"], serviceArr);
+    var serviceCardC = document.querySelector(".serviceCards");
+    for (var index = 0; index < clubServices.length; index++) {
+      var clubService = clubServices[index];
+      var newServiceCard = createServiceCard(clubService["Service-Name"], clubService["ID"], clubService["Hours"], clubService["Start-Date"], clubService["Start-Time"], clubService["End-Date"], clubService["End-Time"], clubService["Description"], clubService["Link"], clubService["Type"], clubService["Sign-Ups"]);
+      serviceCardC.appendChild(newServiceCard);
+      $(`#datetimepicker${clubService["ID"]}-1Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-1Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-1ServiceInput`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-1Service`);
+      $(`#datetimepicker${clubService["ID"]}-1ServiceSpan`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-1Service`);
+      $(`#datetimepicker${clubService["ID"]}-1ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubService["ID"]}-1Service`));
+      $(`#datetimepicker${clubService["ID"]}-2Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-2Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-2ServiceInput`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-2Service`);
+      $(`#datetimepicker${clubService["ID"]}-2ServiceSpan`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-2Service`);
+      $(`#datetimepicker${clubService["ID"]}-2ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubService["ID"]}-2Service`));
+    }
+  }
+  function returnNewServiceData(serviceId) {
+    var serviceCard = document.querySelector(`#service${serviceId}`);
+    var name = serviceCard.querySelector(".serviceTitle").value;
+    if (name == "") {
+      name = " ";
+    }
+    var description = serviceCard.querySelector(".serviceDescription").value;
+    if (description == "") {
+      description = " ";
+    }
+    var endTiming = serviceCard.querySelector(".serviceEDate").value.split(" ");
+    var endDate = endTiming[0];
+    var endDateArr = endDate.split("/");
+    var cleanedMonth = parseInt(endDateArr[0]).toString();
+    var cleanedDay = parseInt(endDateArr[1]).toString();
+    var cleanedYear = parseInt(endDateArr[2]).toString();
+    endDate = cleanedMonth + "/" + cleanedDay + "/" + cleanedYear;
+    if (!onlyNumber(cleanedMonth) || !onlyNumber(cleanedDay) || !onlyNumber(cleanedYear)) {
+      alert("Event end date typed incorrectly, use MM/DD/YYYY");
+      endDate = "";
+    }
+    var endTimeStr = endTiming[1];
+    var endTimeStrArr = endTimeStr.split(":");
+    var endTimeHour = parseInt(endTimeStrArr[0]);
+    if (endTiming[2] == "PM") {
+      endTimeHour += 12;
+    }
+    var endTime = endTimeHour.toString() + ":" + endTimeStrArr[1];
+    if (!onlyNumber(endTimeHour) || !onlyNumber(endTimeStrArr[1])) {
+      alert("Event end time typed incorrectly, use HH:MM AM/PM");
+      endTime = "";
+    }
+    var hours = serviceCard.querySelector(".serviceHours").value;
+    if (hours == "" || !parseInt(hours)) {
+      hours = "0";
+    }
+    var signUps = serviceCard.querySelector(".serviceSignUps").value;
+    if (signUps == "" || !parseInt(signUps)) {
+      signUps = "0";
+    }
+    var startTiming = serviceCard.querySelector(".serviceSDate").value.split(" ");
+    var startDate = startTiming[0];
+    var startDateArr = startDate.split("/");
+    cleanedMonth = parseInt(startDateArr[0]).toString();
+    cleanedDay = parseInt(startDateArr[1]).toString();
+    cleanedYear = parseInt(startDateArr[2]).toString();
+    startDate = cleanedMonth + "/" + cleanedDay + "/" + cleanedYear;
+    if (!onlyNumber(cleanedMonth) || !onlyNumber(cleanedDay) || !onlyNumber(cleanedYear)) {
+      alert("Event start date typed incorrectly, use MM/DD/YYYY");
+      startDate = "";
+    }
+    var startTimeStr = startTiming[1];
+    var startTimeStrArr = startTimeStr.split(":");
+    var startTimeHour = parseInt(startTimeStrArr[0]);
+    if (startTiming[2] == "PM") {
+      startTimeHour += 12;
+    }
+    var startTime = startTimeHour.toString() + ":" + startTimeStrArr[1];
+    if (!onlyNumber(startTimeHour) || !onlyNumber(startTimeStrArr[1])) {
+      alert("Event start time typed incorrectly, use HH:MM AM/PM");
+      startTime = "";
+    }
+    var link = serviceCard.querySelector(".serviceLink").value;
+    if (link == "") {
+      link = " ";
+    }
+    var type = serviceCard.querySelector(".serviceType").value;
+    if (type == "") {
+      type = "steam";
+    }
+    var userEmail = $(".userEmail").text();
+    var userId = findIdOfUser(userEmail);
+    //sign up people json info
+    var regex = /(\r\n|\r|\n)/g;
+    var spaceRegex = /\s/g;
+    var originalMembers = getOriginalMembers(serviceId.toString(), "Service");
+    var signUpPeople = serviceCard.querySelector(".serviceSignUpPeople").value;
+    var currentMembers = signUpPeople.replace(spaceRegex, "").replace(regex, "").toLowerCase();
+    var currentMembersArr = [];
+    var tempCurrentMArr = [];
+    var memberAArr = [];
+    var memberRArr = [];
+    try {
+      currentMembersArr = currentMembers.split(",");
+      tempCurrentMArr = originalMembers;
+    } catch (error) { }
+    if (currentMembersArr.length != 0 && currentMembersArr[0] != "") {
+      for (var index = 0; index < currentMembersArr.length; index++) {
+        if (!foundClub(originalMembers, currentMembersArr[index])) {
+          var tempArr = [];
+          tempArr.push(currentMembersArr[index]);
+          tempArr.push(findUserName(currentMembersArr[index]));
+          memberAArr.push(tempArr);
+          tempCurrentMArr.splice(tempCurrentMArr.indexOf(currentMembersArr[index]), 1);
+        } else {
+          tempCurrentMArr.splice(tempCurrentMArr.indexOf(currentMembersArr[index]), 1);
+        }
+      }
+    }
+    for (var index = 0; index < tempCurrentMArr.length; index++) {
+      var tempArr = [];
+      tempArr.push(tempCurrentMArr[index]);
+      tempArr.push(findUserName(tempCurrentMArr[index]));
+      memberRArr.push(tempArr);
+    }
+    var jsonMemberReturn = { "Members-Add": memberAArr, "Members-Remove": memberRArr };
+    var jsonEventReturn = { "Service-Name": name, "ID": serviceId, "Club": clubData["ID"], "Description": description, "End-Date": endDate, "End-Time": endTime, "Hours": hours, "Link": link, "Start-Date": startDate, "Start-Time": startTime, "Sign-Ups": signUps, "Sign-Up-People": jsonMemberReturn, "Type": type, "User-ID": userId };
+    return jsonEventReturn;
+  }
+  function returnNewServicesData() {
+    var serviceEvents = document.querySelector(".serviceCards").children;
+    var newServiceDataArr = [];
+    for (var index = 0; index < serviceEvents.length; index++) {
+      var clubService = serviceEvents[index];
+      var newServiceData = returnNewServiceData(clubService.id.replace("service", ""));
+      newServiceDataArr.push(newServiceData);
+    }
+    return newServiceDataArr;
+  }
+  function recreateServiceCards(oldData) {
+    deleteEvents(".serviceCards");
+    var serviceCardC = document.querySelector(".serviceCards");
+    for (var index = 0; index < oldData.length; index++) {
+      var clubService = oldData[index];
+      var oldServiceCard = createServiceCard(clubService["Service-Name"], clubService["ID"], clubService["Hours"], clubService["Start-Date"], clubService["Start-Time"], clubService["Event-Date"], clubService["Event-Time"], clubService["Description"], clubService["Link"], clubService["Type"], clubService["Sign-Ups"]);
+      serviceCardC.appendChild(oldServiceCard);
+      $(`#datetimepicker${clubService["ID"]}-1Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-1Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-1ServiceInput`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-1Service`);
+      $(`#datetimepicker${clubService["ID"]}-1ServiceSpan`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-1Service`);
+      $(`#datetimepicker${clubService["ID"]}-1ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubService["ID"]}-1Service`));
+      $(`#datetimepicker${clubService["ID"]}-2Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-2Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${clubService["ID"]}-2ServiceInput`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-2Service`);
+      $(`#datetimepicker${clubService["ID"]}-2ServiceSpan`).prop("data-td-target", `#datetimepicker${clubService["ID"]}-2Service`);
+      $(`#datetimepicker${clubService["ID"]}-2ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${clubService["ID"]}-2Service`));
+    }
+  }
+  function toggleBServiceDisabled() {
+    //toggle disable buttons and dropdowns
+    $(".addServiceBtn").toggleClass("disabled");
+    $(".editServiceBtn").toggleClass("disabled");
+    $(".approveServiceBtn").toggleClass("disabled");
+    $(".cancelServiceBtn").toggleClass("disabled");
+  }
+  function toggleEFServiceDisabled() {
+    toggleBServiceDisabled();
+    $(".serviceCards").children(".card").children(".card-body").children(".input-group").children(".form-control").prop("readonly", true);
+    $(".serviceCards").children(".card").children(".card-body").children(".form-group").children(".form-control").prop("readonly", true);
+  }
+  function toggleEServiceDisabled(editBtn = false) {
+    toggleBServiceDisabled();
+    //toggle input fields
+    if (editBtn) {
+      $(".input-group").children(".form-control").prop("readonly", false);
+      $(".form-group").children(".form-control").prop("readonly", false);
+    } else {
+      $(".input-group").children(".form-control").prop("readonly", !$(".input-group").children(".form-control").prop("readonly"));
+      $(".form-group").children(".form-control").prop("readonly", !$(".form-group").children(".form-control").prop("readonly"));
+    }
+  }
+  function getNextServiceId(dataArr) {
+    if (firstServiceId) {
+      nextServiceId = 0;
+      for (var index = 0; index < dataArr.length; index++) {
+        if (parseInt(dataArr[index]["ID"]) > nextServiceId) {
+          nextServiceId = parseInt(dataArr[index]["ID"]);
+        }
+      }
+      firstServiceId = false;
+    }
+    nextServiceId++;
+    return nextServiceId;
+  }
+  function getOldServiceName(serviceId) {
+    oldName = "";
+    for (var index = 0; index < oldServicesData.length; index++) {
+      var oldService = oldServicesData[index];
+      if (oldService["ID"] == serviceId) {
+        oldName = oldService["Service-Name"];
+      }
+    }
+    return oldName;
+  }
+  function updateServices(newServiceData) {
+    var oldServiceNames = getArrayOfNamesService(oldServicesData);
+    for (var index = 0; index < newServiceData.length; index++) {
+      var thisService = newServiceData[index];
+      if (!foundClub(oldServiceNames, thisService["Service-Name"])) {
+        newServiceData[index]["Change-Name"] = thisService["Service-Name"];
+        newServiceData[index]["Service-Name"] = getOldServiceName(thisService["ID"]);
+      } else { newServiceData[index]["Change-Name"] = "" }
+    }
+    var dataToSend = { "Services": newServiceData };
+    $.ajax({
+      type: "POST",
+      url: "/management",
+      data: JSON.stringify(dataToSend),
+      contentType: "application/json",
+      dataType: 'json'
+    }).always(function () { getNewClubData(); });
+  }
+  $(".addServiceBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldServicesData = returnNewServicesData();
+      var serviceCardC = document.querySelector(".serviceCards");
+      var nextServiceIds = getNextServiceId(serviceArr);
+      var newServiceCard = createServiceCard("", nextServiceIds, "", "0/00/0000", "00:00", "0/00/0000", "00:00", "", "", "", "", false);
+      serviceCardC.prepend(newServiceCard);
+      $(`#datetimepicker${nextServiceIds}-1Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${nextServiceIds}-1Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${nextServiceIds}-1ServiceInput`).prop("data-td-target", `#datetimepicker${nextServiceIds}-1Service`);
+      $(`#datetimepicker${nextServiceIds}-1ServiceSpan`).prop("data-td-target", `#datetimepicker${nextServiceIds}-1Service`);
+      $(`#datetimepicker${nextServiceIds}-1ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${nextServiceIds}-1Service`));
+      $(`#datetimepicker${nextServiceIds}-2Service`).prop("data-td-target-input", "nearest");
+      $(`#datetimepicker${nextServiceIds}-2Service`).prop("data-td-target-toggle", "nearest");
+      $(`#datetimepicker${nextServiceIds}-2ServiceInput`).prop("data-td-target", `#datetimepicker${nextServiceIds}-2Service`);
+      $(`#datetimepicker${nextServiceIds}-2ServiceSpan`).prop("data-td-target", `#datetimepicker${nextServiceIds}-2Service`);
+      $(`#datetimepicker${nextServiceIds}-2ServiceSpan`).prop("data-td-toggle", `datetimepicker`);
+      new tempusDominus.TempusDominus(document.getElementById(`datetimepicker${nextServiceIds}-2Service`));
+      addNewService = true;
+      toggleBServiceDisabled();
+    }
+  });
+  $(".editServiceBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldServicesData = returnNewServicesData();
+      toggleEServiceDisabled(true);
+    }
+  });
+  $(".approveServiceBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      updateServices(returnNewServicesData());
+      if (addNewService) {
+        toggleEFServiceDisabled();
+        addNewService = false;
+      } else { toggleEServiceDisabled(); }
+    }
+  });
+  $(".cancelServiceBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      if (addNewService) {
+        var serviceCardC = document.querySelector(".serviceCards");
+        var serviceCardCChildren = serviceCardC.children;
+        serviceCardC.removeChild(serviceCardCChildren[0]); //remove the first element
+        addNewService = false;
+      } else {
+        recreateServiceCards(oldServicesData);
+      }
+      toggleBServiceDisabled();
+    }
+  });
+  //overflow communication section
+  function toggleBCommDisabled() {
+    $(".addCommBtn").toggleClass("disabled");
+    $(".editCommBtn").toggleClass("disabled");
+    $(".approveCommBtn").toggleClass("disabled");
+    $(".cancelCommBtn").toggleClass("disabled");
+  }
+  function toggleEFCommDisabled() {
+    toggleBCommDisabled();
+    $(".commCards").children(".card").children(".card-body").children(".input-group").children(".form-control").prop("readonly", true);
+    $(".commCards").children(".card").children(".card-body").children(".form-group").children(".form-control").prop("readonly", true);
+    $(".commCards").children(".card").children(".card-body").children(".dropdown").children(".commAn").prop("disabled", true);
+  }
+  function toggleECommDisabled(editBtn = false) {
+    toggleBCommDisabled();
+    if (editBtn) {
+      $(".input-group").children(".form-control").prop("readonly", false);
+      $(".form-group").children(".form-control").prop("readonly", false);
+      $(".commCards").children(".card").children(".card-body").children(".dropdown").children(".commAn").prop("disabled", false);
+    } else {
+      $(".input-group").children(".form-control").prop("readonly", !$(".input-group").children(".form-control").prop("readonly"));
+      $(".form-group").children(".form-control").prop("readonly", !$(".form-group").children(".form-control").prop("readonly"));
+      $(".commCards").children(".card").children(".card-body").children(".dropdown").children(".commAn").prop("disabled", !$(".commCards").children(".card").children(".card-body").children(".dropdown").children(".commAn").prop("disabled"));
+    }
+  }
+  function getNextNotifId(dataArr) {
+    if (firstCommId) {
+      nextCommId = 0;
+      for (var index = 0; index < dataArr.length; index++) {
+        if (parseInt(dataArr[index]["ID"]) > nextCommId) {
+          nextCommId = parseInt(dataArr[index]["ID"]);
+        }
+      }
+      firstCommId = false;
+    }
+    nextCommId++;
+    return nextCommId;
+  }
+  function updateComms(newCommsData) {
+    var dataToSend = { "Communication": newCommsData };
+    $.ajax({
+      type: "POST",
+      url: "/management",
+      data: JSON.stringify(dataToSend),
+      contentType: "application/json",
+      dataType: 'json'
+    }).always(function () { getNewClubData(); });
+  }
+  $(".addCommBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldCommsData = returnNewCommsData();
+      var commCardC = document.querySelector(".commCards");
+      var nextNotifIds = getNextNotifId(commsArr);
+      var newNotifCard = createCommCard(clubData["ID"], nextNotifIds, "", "True", "", false);
+      commCardC.prepend(newNotifCard);
+      $(".commAnDropdown a").prop("href", `#own-${clubData["ID"]}`);
+      $(".commAnDropdown").children("a").on("click", function () {
+        var notifId = $(this).prop("id").split("messagetype-1-");
+        if (notifId.length == 1) {
+          notifId = $(this).prop("id").split("messagetype-2-");
+        }
+        notifId = notifId[1];
+        $(`#commAnDropdowns-${notifId}`).children("a").removeClass("active");
+        $(this).addClass("active");
+        $(`#notifDrop-${notifId}`).text($(this).text());
+      });
+      addNewComm = true;
+      toggleBCommDisabled();
+    }
+  });
+  $(".editCommBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      oldCommsData = returnNewCommsData();
+      toggleECommDisabled(true);
+      $(".commAnDropdown a").prop("href", `#own-${clubData["ID"]}`);
+      $(".commAnDropdown").children("a").on("click", function () {
+        var notifId = $(this).prop("id").split("messagetype-1-");
+        if (notifId.length == 1) {
+          notifId = $(this).prop("id").split("messagetype-2-");
+        }
+        notifId = notifId[1];
+        $(`#commAnDropdowns-${notifId}`).children("a").removeClass("active");
+        $(this).addClass("active");
+        $(`#notifDrop-${notifId}`).text($(this).text());
+      });
+    }
+  });
+  $(".approveCommBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      if (addNewComm) {
+        updateComms(returnNewCommsData(true));
+        toggleEFCommDisabled();
+        addNewComm = false;
+      } else { 
+        updateComms(returnNewCommsData());
+        toggleECommDisabled(); 
+      }
+    }
+  });
+  $(".cancelCommBtn").on("click", function () {
+    if (!$(this).hasClass("disabled")) {
+      if (addNewComm) {
+        var commCardC = document.querySelector(".commCards");
+        var commCardCChildren = commCardC.children;
+        commCardC.removeChild(commCardCChildren[0]);
+        addNewComm = false;
+      } else {
+        recreateNotifCards(oldCommsData);
+      }
+      toggleBCommDisabled();
+    }
+  });
+
+  $(document).ready(function () {
+    $(".userEmail").css("display", "none");
+    //const fetch1 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch2 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch3 = fetch('/events/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch4 = fetch('/comm/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch5 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    Promise.all([fetch2, fetch3, fetch4, fetch5]).then(function (JsonData) {
+      //userArr = JsonData[0]["Items"];
+      try {
+        userArr = JSON.parse({{ userData | tojson | safe }})["Items"];
+      } catch (error) { }
+      clubsArr = JsonData[0]["Items"];
+      eventsArr = JsonData[1]["Items"];
+      commsArr = JsonData[2]["Items"];
+      serviceArr = JsonData[3]["Items"];
+      var currentClubID = window.location.hash.replace("#own-", "");
+      loadClubData(currentClubID);
+      generateEventCards();
+      generateServiceCards();
+      generateNotifCards();
+      if (vw <= 768) {
+        $(".typeCol").removeClass("col-sm");
+        $(".typeCol").addClass("row");
+        $(".subtypeCol").css("margin-top", "10px");
+        $(".subtypeCol").removeClass("col-sm");
+        $(".subtypeCol").addClass("row");
+        $(".campusC").removeClass("col-sm");
+        $(".campusC").addClass("row");
+        $(".locationC").css("margin-top", "10px");
+        $(".locationC").removeClass("col-sm");
+        $(".locationC").addClass("row");
+      }
+      if (vw < 576) {
+        $(".localRow").css("display", "none");
+        $(".mobileRow").css("display", "block");
+      }
+      $(".typeDropdowns a").prop("href", `#own-${clubData["ID"]}`);
+      $(".campusDropdowns a").prop("href", `#own-${clubData["ID"]}`);
+      repositionFooter();
+    });
+    window.addEventListener('hashchange', function () {
+      var currentClubID = window.location.hash.replace("#club-", "");
+      loadClubData(currentClubID);
+      repositionFooter();
+    });
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,1099 @@
+{% extends "layout.html" %}
+
+{% block title %}Service{% endblock %}
+
+{% block head %}
+
+<style>
+  /*NOTE- These are the STEAM colors that we are using for the org bcgs:
+(Green)- Science: #8ac926
+(Blue)- Technology: #1982c4
+(Purple)- Engineering: #6a4c93
+(Orange)- Art: #ffca3a
+(Red)- Math: #ff595e2
+*/
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .bodyContent {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .card.main {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border: 0;
+  }
+
+  .card.main img.seamless {
+    width: 100%;
+    display: block;
+  }
+
+  .card.main .body .page-top {
+    text-align: center;
+  }
+
+  .card.main .body .page-top img {
+    width: 100px;
+  }
+
+  .card.main .body .search-bar {
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    font-size: 10pt;
+  }
+
+  .gridC {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 6px 0px 6px 6px;
+    border-radius: 4px;
+    border-left: 4px solid #cc3300;
+    border-bottom: 0.25px solid #e6e6e6;
+    border-top: 0.25px solid #e6e6e6;
+    border-right: 0.25px solid #e6e6e6;
+    margin-bottom: 8px;
+  }
+
+  .gridC:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+  }
+
+  .titleT {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .hzLine {
+    height: 1.5px !important;
+    border-width: 0;
+    color: black;
+    background-color: black;
+  }
+
+  .linkItemA {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .linkItemA:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .hcA {
+    color: #4B4B4B;
+    text-decoration: none;
+  }
+
+  .hcA:hover {
+    cursor: pointer;
+    color: black;
+    text-decoration: underline;
+  }
+
+  .gridC div a {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .gridC div a:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  #returnToList {
+    color: #037dff;
+  }
+
+  #returnToList:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  /*start of CSS for search bar*/
+  #outputC {
+    position: absolute;
+    z-index: 99;
+    bottom: -20px;
+  }
+
+  .search {
+    position: relative;
+    width: 60%;
+    min-width: 350px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+  }
+
+  .search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+  }
+
+  .search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3585fd;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+  }
+
+  .search-icon:hover {
+    color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .searchResultDepts {
+    display: none;
+  }
+
+  .btn-outline-primary {
+    display: block;
+    width: 260px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .subServiceDisplay {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .linkItem {
+    user-select: none;
+    background-color: #eeeeee;
+    border-radius: 16px;
+    padding: 8px;
+    width: 300px;
+    margin: 6px;
+  }
+
+  .linkItem:hover {
+    cursor: pointer;
+    background-color: #cde1fe;
+  }
+
+  .hcLinkItem {
+    background-color: #eeeeee;
+  }
+
+  .hcLinkItem:hover {
+    background-color: #eeeeee;
+  }
+
+  .subServiceDisplay div:nth-child(4) {
+    margin: 6px 0px;
+  }
+
+  .colorGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .colorC {
+    display: grid;
+    grid-template-columns: 26px auto;
+    align-content: center;
+    margin: 0px 6px;
+  }
+
+  .bubble {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #669999;
+  }
+
+  .pageBtns {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .pageBtn {
+    color: white !important;
+    font-size: 18px;
+  }
+
+  .paginationC {
+    margin-top: 34px;
+  }
+
+  .pageBtn:active {
+    background-color: #0d6efd !important;
+    color: white !important;
+    text-decoration: none !important;
+  }
+
+  .pageBtn:hover {
+    color: white;
+    text-decoration: none !important;
+  }
+
+  .smallerDate {
+    font-size: 15px;
+  }
+
+  @media (max-width:768px) {
+    .paginationC {
+      display: none;
+    }
+  }
+
+  @media (max-width:466px) {
+    .search {
+      min-width: 350px;
+    }
+
+    .search-input {
+      overflow: hidden;
+    }
+
+    .search-input::placeholder {
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width:376px) {
+    .search {
+      min-width: 100%;
+    }
+  }
+
+  /*end of CSS for search bar*/
+  .footerC {
+    font-weight: normal;
+  }
+
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .pageLink:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .serviceSignUpBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #3585fd;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page7"></section>
+<br>
+<div class="container mt-2">
+  <div class="topContainer">
+    <div class="topTxt">
+    <div style="height:6px;"></div>
+    <h1 class="topTxt">Service Opportunities</h1>
+    <hr style="height:2px;">
+    <div style="height:18px;"></div>
+    <p>There are currently <span class="serviceCount"></span> STEAM-related service opportunities offered at the STEAM
+      Center and the clubs that inhabit it. Please use the search bar below or scroll/ click on the service hour
+      opportunities for more information.</p>
+    <div class="colorGrid">
+      <div class="colorC">
+        <div class="bubble" style="background-color:#8ac926;"></div>
+        <div class="colorName">Science</div>
+      </div>
+      <div class="colorC">
+        <div class="bubble" style="background-color:#1982c4;"></div>
+        <div class="colorName">Technology</div>
+      </div>
+      <div class="colorC">
+        <div class="bubble" style="background-color:#b4a7d6;"></div>
+        <div class="colorName">Engineering</div>
+      </div>
+      <div class="colorC">
+        <div class="bubble" style="background-color:#f6b26b;"></div>
+        <div class="colorName">Arts</div>
+      </div>
+      <div class="colorC">
+        <div class="bubble" style="background-color:#e06666;"></div>
+        <div class="colorName">Mathematics</div>
+      </div>
+      <div class="colorC">
+        <div class="bubble"></div>
+        <div class="colorName">Other</div>
+      </div>
+    </div>
+    </div>
+    <br>
+    <div class="d-flex searchC">
+      <div class="search">
+        <input type="text" id="search" class="search-input" placeholder="Search for opportunities..."
+          onkeyup="searchResults()" alt="Search for opportunities">
+        <a class="search-icon" style="text-decoration:none;color:white;"> <i class="fa fa-search"></i> </a>
+        <div id="outputC">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card main">
+      <div id="club-select">
+        <div class="seviceDisplay">
+          <div class="subServiceDisplay">
+            <div class="linkItem" style="display:none"></div>
+          </div>
+        </div>
+        <div class="pageBtns">
+          <div><button type="button" class="btn btn-outline-primary pageBtn previousBtn"
+              alt="Previous list button">Previous</button></div>
+          <div>
+            <nav>
+              <ul class="pagination paginationC">
+                <li class="page-item pageBtn pageLink" id="page1" alt="Page 1 button"><a class="page-link">1</a></li>
+                <li class="page-item pageBtn pageLink" id="page2" alt="Page 2 button"><a class="page-link">2</a></li>
+                <li class="page-item pageBtn pageLink" id="page3" alt="Page 3 button"><a class="page-link">3</a></li>
+                <li class="page-item pageBtn pageLink" id="page4" alt="Page 4 button"><a class="page-link">4</a></li>
+                <li class="page-item pageBtn pageLink" id="page5" alt="Page 5 button"><a class="page-link">5</a></li>
+              </ul>
+          </div>
+          </nav>
+          <div><button type="button" class="btn btn-outline-primary pageBtn nextBtn"
+              alt="Next list button">Next</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="userEmail">{{ email }}</div>
+</div>
+{% include "components/footer.html" %}
+
+<script>
+  var subServiceDisplay = document.querySelector(".subServiceDisplay");
+  var dataArr;
+  var clubsArr;
+  var userArr;
+  var scrollID = "";
+  var numOfServices;
+  var serviceListing = document.querySelector(".serviceDisplay");
+  var serviceNames = [];
+  var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var page = 0;
+  var numOfPages = 0;
+  function showSelectedPage(page) {
+    for (var index = 0; index < 5; index++) {
+      $(`#page${index + 1}`).removeClass("active");
+      $(`#page${index + 1}`).css("color", "black");
+    }
+    $(`#page${page + 1}`).addClass("active");
+    $(`#page${page + 1}`).css("color", "white");
+  }
+  function checkList(dataItems, serviceId) {
+    for (var index = 0; index < dataItems.length; index++) {
+      if (dataItems[index] == serviceId) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function checkIfSignedUp(serviceId) {
+    var userEmail = $(".userEmail").text();
+    for (var index = 0; index < userArr.length; index++) {
+      var userData = userArr[index];
+      if (userData["User-Email"] == userEmail) {
+        var userService = userData["Service"];
+        return checkList(userService, serviceId);
+      }
+    }
+    return false;
+  }
+  function changeJoinTxt(serviceId) {
+    $(`#serviceId${serviceId}`).text("Signed Up");
+    $(`#serviceId${serviceId}`).addClass("disabled");
+    if ($(`#serviceRId${serviceId}`).hasClass("d-none")) {
+      $(`#serviceRId${serviceId}`).removeClass("d-none");
+    }
+  }
+  function changeJoinTxtBack(serviceId) {
+    $(`#serviceId${serviceId}`).text("Sign Up");
+    if ($(`#serviceId${serviceId}`).hasClass("disabled")) {
+      $(`#serviceId${serviceId}`).removeClass("disabled");
+    }
+    $(`#serviceRId${serviceId}`).addClass("d-none");
+  }
+  function joinService(serviceId, joinStatus=true) {
+    try {
+      var userEmailTxt = $(".userEmail").text();
+      var dataToSend = { "email": userEmailTxt, "serviceID": serviceId, "join": joinStatus };
+      $.ajax({
+        type: "POST",
+        url: "/service",
+        data: JSON.stringify(dataToSend),
+        contentType: "application/json",
+        dataType: 'json'
+      }).always(function () { 
+        if (joinStatus) { changeJoinTxt(serviceId); } 
+        else { changeJoinTxtBack(serviceId); }
+      });
+    }
+    catch (error) { }
+  }
+  function returnSignUps(serviceId) {
+    var signUps = 0;
+    for (var index = 0; index < dataArr.length; index++) {
+      var service = dataArr[index];
+      if (service["ID"] == serviceId) {
+        signUps = parseInt(service["Sign-Ups"]);
+      }
+    }
+    return signUps;
+  }
+  function spotsAvailable(serviceId) {
+    var takenSpots = 0;
+    for (var index = 0; index < userArr.length; index++) {
+      var userData = userArr[index]["Service"];
+      if (checkList(userData, serviceId)) {
+        takenSpots++;
+      }
+    }
+    $(`#${serviceId}`).children("")
+    if (takenSpots < returnSignUps(serviceId)) {
+      return true;
+    }
+    return false;
+
+  }
+  function clickServiceBtn(joinElementId, removeElementId) {
+    var joinElement = document.getElementById(joinElementId);
+    if (!joinElement.classList.contains("disabled")) {
+      var removeElement = document.getElementById(removeElementId);
+      if (removeElement.classList.contains("disabled")) {
+        removeElement.classList.remove("disabled");
+      }
+      joinService(joinElement.id.replace("serviceId", ""));
+    }
+  }
+  function clickRemoveServiceBtn(joinElementId, removeElementId) {
+    try {
+      var removeElement = document.getElementById(removeElementId);
+      if (!removeElement.classList.contains("d-none")) {
+      var joinElement = document.getElementById(joinElementId);
+      if (joinElement.classList.contains("disabled")) {
+        joinElement.classList.remove("disabled");
+      }
+      joinService(removeElement.id.replace("serviceRId", ""), false);
+      removeElement.classList.add("d-none");
+    }
+    } catch (error) {  }
+  }
+  function updateServiceInListing(index) {
+    //this creates a new list item element
+    var listItem = document.createElement("div");
+    listItem.id = `item${index + 1}`;
+    listItem.classList.add("linkItem");
+    if (colorScheme == 1) { listItem.classList.add("hcLinkItem"); }
+    //listItem.link = dataArr[index]["Link"];
+    subServiceDisplay.appendChild(listItem);
+    //Creating the title div
+    var listItemTitle = document.createElement("div");
+    listItemTitle.style.display = "grid";
+    listItemTitle.style.gridTemplateColumns = "265px 20px";
+    listItem.appendChild(listItemTitle);
+    serviceNames[index] = dataArr[index]["Service-Name"];
+    //creating the name div
+    var listItemName = document.createElement("div");
+    listItemName.style.fontSize = "18px";
+    listItemName.style.fontWeight = "bold";
+    var listItemNameTxt = document.createTextNode(`${dataArr[index]["Service-Name"]}`);
+    listItemName.appendChild(listItemNameTxt);
+    listItemTitle.appendChild(listItemName);
+    //creating the type bubble div
+    var listItemType = document.createElement("div");
+    var typeColor = "#669999";
+    try {
+    switch (dataArr[index]["Type"]) {
+      case "s":
+        typeColor = "#8ac926";
+        break;
+      case "t":
+        typeColor = "#1982c4";
+        break;
+      case "e":
+        typeColor = "#b4a7d6";
+        break;
+      case "a":
+        typeColor = "#f6b26b";
+        break;
+      case "m":
+        typeColor = "#e06666";
+        break;
+      default:
+        typeColor = "#669999";
+        break;
+    }
+    } catch(error) {}
+    listItemType.style.backgroundColor = typeColor;
+    listItemType.style.borderRadius = "20px";
+    listItemType.style.height = "20px";
+    listItemType.style.width = "20px";
+    if (colorScheme == 1) {
+      listItemType.style.display = "none";
+    }
+    listItemTitle.appendChild(listItemType);
+    //Creating the creator div
+    var listItemCreator = document.createElement("div");
+    var clubCreator = "";
+    for (var index4 = 0; index4 < clubsArr.length; index4++) {
+      if (clubsArr[index4]["ID"] == dataArr[index]["Club"]) {
+        clubCreator = clubsArr[index4]["Club-Name"];
+      }
+    }
+    var userCreator = "";
+    for (var index5 = 0; index5 < userArr.length; index5++) {
+      if (userArr[index5]["ID"] == dataArr[index]["User-ID"]) {
+        userCreator = userArr[index5]["User-Name"];
+      }
+    }
+    var listItemCreatorTxt = document.createTextNode(`${clubCreator}, ${userCreator}`);
+    listItemCreator.appendChild(listItemCreatorTxt);
+    listItem.appendChild(listItemCreator);
+    //Creating the date(s) / time(s) div
+    var listItemDate = document.createElement("div");
+    var combStartStr = "";
+    var combEndStr = "";
+    try { 
+    const startTime = dataArr[index]["Start-Time"].split(":");
+    var startHours = parseInt(startTime[0]);
+    const startMinutes = parseInt(startTime[1]);
+    var extraZero = "";
+    if (startMinutes < 10) { extraZero = "0"; }
+    var ampm = "am";
+    if (startHours >= 12) {
+      startHours -= 12;
+      ampm = "pm";
+    }
+    combStartStr = startHours + ':' + startMinutes + extraZero + ' ' + ampm;
+    extraZero = "";
+    try {
+      const endTime = dataArr[index]["End-Time"].split(":");
+      var endHours = parseInt(endTime[0]);
+      const endMinutes = parseInt(endTime[1]);
+      if (endMinutes < 10) { extraZero = "0"; }
+      ampm = "am";
+      if (endHours >= 12) {
+        endHours -= 12;
+        ampm = "pm";
+      }
+      combEndStr = endHours + ':' + endMinutes + extraZero + ' ' + ampm;
+    } catch (error) {  }
+    } catch(error) {}
+    //clean up the start and end dates
+    var dateRange = "";
+    try {
+    const startDate = dataArr[index]["Start-Date"];
+    var cleanedSDate = startDate.split("/");
+    cleanedSDate = cleanedSDate[0] + "/" + cleanedSDate[1] + "/" + cleanedSDate[2][2] + cleanedSDate[2][3];
+    const endDate = dataArr[index]["End-Date"];
+    var cleanedEDate = "";
+    if ((startDate != endDate) && (endDate != "")) {
+      cleanedEDate = endDate.split("/");
+      cleanedEDate = cleanedEDate[0] + "/" + cleanedEDate[1] + "/" + cleanedEDate[2][2] + cleanedEDate[2][3];
+    }
+    var listItemDateTxt = document.createTextNode(`${cleanedSDate} @ ${combStartStr} - ${cleanedEDate} @ ${combEndStr}`);
+    if ((startDate == endDate) || (endDate == "")) {
+      if (combEndStr == "") {
+        listItemDateTxt = document.createTextNode(`${cleanedSDate} @ ${combStartStr}`);
+      }
+      listItemDateTxt = document.createTextNode(`${cleanedSDate} from ${combStartStr} - ${combEndStr}`);
+    }
+    listItemDate.appendChild(listItemDateTxt);
+    } catch(error) { var listItemDateTxt = document.createTextNode("Not set");listItemDate.appendChild(listItemDateTxt); }
+    listItemDate.classList.add("smallerDate");
+    listItem.appendChild(listItemDate);
+    //Creating the max sign ups div
+    var listItemMaxSignUps = document.createElement("div");
+    try {
+    var listItemMaxSignUpsTxt = document.createTextNode(`${dataArr[index]["Sign-Ups"]} Max Sign Ups`);
+    listItemMaxSignUps.appendChild(listItemMaxSignUpsTxt);
+    listItem.appendChild(listItemMaxSignUps);
+    } catch(error) {}
+    //Creating the hours div
+    var listItemHours = document.createElement("div");
+    try {
+    var listItemHoursTxt = document.createTextNode(`${dataArr[index]["Hours"]} Service Hours`);
+    listItemHours.appendChild(listItemHoursTxt);
+    listItem.appendChild(listItemHours);
+    } catch(error) {}
+    //Creating the description div
+    var listItemDescription = document.createElement("div");
+    try {
+    var listItemDescriptionTxt = document.createTextNode(`${dataArr[index]["Description"]}`);
+    listItemDescription.appendChild(listItemDescriptionTxt);
+    listItem.appendChild(listItemDescription);
+    } catch(error) {}
+    //Creating the sign up button div
+    console.log("user email: "+$(".userEmail").text());
+    if (spotsAvailable(dataArr[index]["ID"]) && ($(".userEmail").text() != "" && $(".userEmail").text() != "Other-User")) {
+      var listItemSignUp = document.createElement("div");
+      var listItemSignUpBtn = document.createElement("button");
+      listItemSignUpBtn.type = "button";
+      listItemSignUpBtn.classList.add("btn", "btn-primary", "serviceSignUpBtn");
+      listItemSignUpBtn.style.marginRight = "4px";
+      if (colorScheme == 1) {
+        listItemSignUpBtn.style.backgroundColor = "#242424";
+      }
+      listItemSignUpBtn.id = "serviceId" + dataArr[index]["ID"];
+
+      var listItemRSignUpBtn = document.createElement("button");
+      listItemRSignUpBtn.type = "button";
+      listItemRSignUpBtn.classList.add("btn", "btn-primary", "serviceSignUpBtn");
+      if (colorScheme == 1) {
+        listItemRSignUpBtn.style.backgroundColor = "#242424";
+      }
+      listItemRSignUpBtn.id = "serviceRId" + dataArr[index]["ID"];
+
+      var listItemSignUpBtnTxt = document.createTextNode("Sign Up");
+      listItemRSignUpBtn.classList.add("d-none");
+      if (checkIfSignedUp(dataArr[index]["ID"])) {
+        listItemSignUpBtn.classList.add("disabled");
+        if (listItemRSignUpBtn.classList.contains("d-none")) {
+          listItemRSignUpBtn.classList.remove("d-none");
+        }
+        listItemSignUpBtnTxt = document.createTextNode("Signed Up");
+      }
+      var listItemRSignUpBtnTxt = document.createTextNode("Remove");
+      listItemSignUpBtn.appendChild(listItemSignUpBtnTxt);
+      listItemSignUp.appendChild(listItemSignUpBtn);
+
+      listItemRSignUpBtn.appendChild(listItemRSignUpBtnTxt);
+      listItemSignUp.appendChild(listItemRSignUpBtn);
+      listItem.appendChild(listItemSignUp);
+
+      listItemSignUpBtn.onclick = function() { clickServiceBtn(listItemSignUpBtn.id, listItemRSignUpBtn.id) };
+      listItemRSignUpBtn.onclick = function() { clickRemoveServiceBtn(listItemSignUpBtn.id, listItemRSignUpBtn.id) };
+    }
+    //Creating the more info link div
+    if (dataArr[index]["Link"] != " " && dataArr[index]["Link"] != "") {
+      var listItemLink = document.createElement("div");
+      var listItemLinkA = document.createElement("a");
+      listItemLinkA.target = "_blank";
+      listItemLinkA.classList.add("linkItemA");
+      if (colorScheme == 1) { listItemLinkA.classList.add("hcA"); }
+      listItemLinkA.href = dataArr[index]["Link"];
+      listItemLinkA.alt = "More Info";
+      var listItemLinkATxt = document.createTextNode("More Info");
+      listItemLinkA.appendChild(listItemLinkATxt);
+      listItemLink.appendChild(listItemLinkA);
+      listItem.appendChild(listItemLink);
+    }
+  }
+  function updateServiceListing() {
+    var endPoint = (page + 1) * 6;
+    if (endPoint > dataArr.length) { endPoint = dataArr.length; }
+    for (var index = (page * 6); index < endPoint; index++) {
+      updateServiceInListing(index);
+    }
+  }
+  function clearServiceListing(serviceListing) {
+    while (serviceListing.firstChild) {
+      serviceListing.removeChild(serviceListing.firstChild);
+    }
+  }
+  function repositionFooter() {
+    $('.footerC').css("position", "relative");
+    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    var elementOffset = $('.footerC').offset().top;
+    var distance = (elementOffset) + $('.footerC').outerHeight();
+    if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+    else { $('.footerC').css("position", "relative"); }
+  }
+  function leapYear(year) {
+    if (parseInt(year) % 4 == 0) { return true; }
+    return false;
+  }
+  function leapChange(year) { //updates the days in a month array depending on leap year status
+    if (leapYear(year)) { daysInMonths[1] = 29; }
+    else { daysInMonths[1] = 28; }
+  }
+  //returns the number of days that have passed since 1/1/21
+  function dateToNum(date) {
+    var dateNum = 0;
+    var splitDate = date.split('/');
+    const today = new Date();
+    var currentYear = parseInt(today.getFullYear().toString()[2] + today.getFullYear().toString()[3]);
+    if (parseInt(splitDate[2]) >= currentYear) {
+      leapChange(splitDate[2]);
+      //this adds the days from the months that have passed
+      for (var i = 0; i < parseInt(splitDate[0]) - 1; i++) { dateNum += daysInMonths[i]; }
+      //this adds the days from the first day of the month
+      dateNum += parseInt(splitDate[1]);
+      //this adds the days from the years that have passed since 2021
+      for (var i = 21; i < parseInt(splitDate[2]); i++) {
+        if (leapYear(i)) { dateNum += 366; }
+        else { dateNum += 365; }
+      }
+    }
+    return dateNum;
+  }
+  function sortArray(array) {
+    const date = new Date();
+    var today = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString()[2] + date.getFullYear().toString()[3]}`;
+    var todayNum = dateToNum(today);
+    var lowestVal;
+    var sortedArray = [];
+    for (var index = 0; index < array.length; index++) {
+      lowestVal = 100000000000;
+      for (var index2 = index; index2 < array.length; index2++) {
+        var currentVal = todayNum;
+        try {
+          currentVal = dateToNum(array[index2]["Start-Date"]);
+        } catch(error) { }
+        if (currentVal == 0) {
+          currentVal = todayNum;
+        }
+        if (currentVal < todayNum) { //this only renders upcoming service opportunities
+          array.splice(index2, 1);
+          index2--;
+        }
+        else {
+          if (currentVal < lowestVal) {
+            lowestVal = currentVal;
+            var oldObj = sortedArray[index];
+            //this places the earliest date first
+            sortedArray[index] = array[index2];
+            array[index2] = oldObj;
+          }
+          else if (currentVal == lowestVal) {
+            var tempObj = sortedArray[index];
+            //reverse the two objects if they are not alphabetically sorted when same date
+            if (array[index2]["Service-Name"] < tempObj["Service-Name"]) {
+              sortedArray[index + 1] = tempObj;
+              sortedArray[index] = array[index2];
+              array[index2] = tempObj;
+            }
+          }
+        }
+      }
+    }
+    return sortedArray;
+  }
+  function updateBtns() {
+    $(".previousBtn").removeClass("disabled");
+    $(".nextBtn").removeClass("disabled");
+    if (page == 0) { $(".previousBtn").addClass("disabled"); }
+    if (page + 1 == numOfPages) { $(".nextBtn").addClass("disabled"); }
+  }
+  /*$(".subServiceDisplay").on('click', '.linkItem', function () {
+    var thisServiceLink = this.link;
+    window.open(thisServiceLink, "_blank");
+  });*/
+  $(".previousBtn").on('click', function () {
+    if (page != 0) {
+      page -= 1;
+      clearServiceListing(subServiceDisplay);
+      updateServiceListing();
+      showSelectedPage(page);
+    }
+    updateBtns();
+  });
+  $(".nextBtn").on('click', function () {
+    if ((page + 1) * 6 < dataArr.length) {
+      page += 1;
+      clearServiceListing(subServiceDisplay);
+      updateServiceListing();
+      showSelectedPage(page);
+    }
+    updateBtns();
+  });
+  $(".pagination li").on('click', function () {
+    page = parseInt($(this).attr("id")[4]) - 1;
+    //$(".pagination li").removeClass("active");
+    //$(this).addClass("active");
+    clearServiceListing(subServiceDisplay);
+    updateServiceListing();
+    updateBtns();
+    showSelectedPage(page);
+  });
+  /*start of JavaScript for the search bar*/
+  var array = [];
+  var maxResults = 1000000000000; //This is the maximum number of results that will pop up in the keyword search. Set to any valid number.
+  var obj = {};
+  var tempString = "";
+  var selectedDept = ""; //this is to help open the correct info for searching
+  var selectedCourse = "";
+  var stopOffset2 = false;
+
+  function stylePS(psElement) {
+    psElement.style.marginBottom = "0px";
+  }
+  function hoverStyleP(pElement) {
+    //This is used to change the color of search results background when hovered over
+    pElement.style.backgroundColor = "#0248b1";
+  }
+  function styleP(pElement) {//This is used to style each of the search results, change for better results
+    pElement.style.width = "200px";
+    pElement.style.height = "auto";
+    pElement.style.color = "white";
+    pElement.style.backgroundColor = "#3585fd";
+    pElement.style.fontSize = "15px";
+    pElement.style.padding = "0.5vmin";
+    pElement.style.margin = "0vmin";
+    //pElement.style.textAlign = "center";
+  }
+  function styleA(aElement) {//This is used to style the anchor tags, change for better results
+    aElement.style.color = "white";
+    aElement.style.textDecoration = "none";
+    aElement.style.cursor = "pointer";
+  }
+  function appendDiv(temp, txtOptDiv) {
+    if (stopOffset2) { $("#outputC").css("bottom", `-${$("#outputC").outerHeight() + 25}px`); }
+    else { $("#outputC").css("bottom", `-${$("#outputC").outerHeight() + 50}px`); }
+    selectedCourse = temp;
+    var pElement = document.createElement("div");
+    var pTxt = document.createElement("P"); //this creates a new <p> element
+    pTxt.classList.add("searchResult");
+    var aElement = document.createElement("A"); //this creates a new <a> element
+    aElement.style.textDecoration = "none";
+    var txt = document.createTextNode(temp); //this puts the search result into a text field
+    //var link = "#";
+    var counter = 0;
+    stylePS(pTxt);
+    styleA(aElement);
+    aElement.appendChild(pElement);
+    pElement.appendChild(pTxt);
+    pTxt.appendChild(txt); //this places the text inside of the new element
+    pElement.onmouseover = function () { hoverStyleP(pElement) };
+    pElement.onmouseout = function () { styleP(pElement) };
+    styleP(pElement);
+    txtOptDiv.appendChild(aElement); //this appends the new element to the content div
+    //aElement.href=link;
+  }
+  function clearDiv(txtOptDiv) {
+    while (txtOptDiv.firstChild) {
+      txtOptDiv.removeChild(txtOptDiv.firstChild);
+    }
+  }
+  function searchResults() {
+    array = serviceNames;
+    $("#outputC").css("bottom", `-${$("#outputC").outerHeight() + 50}px`);
+    obj = {};
+    var highestCount = -1;
+    stopOffset2 = false;
+    var cont = true;
+    var cont2 = true;
+    var cont3 = true;
+    var txtIpt = document.getElementById("search").value;
+    var txtIptL = (txtIpt.toLowerCase()).replace(/[\/\\]/g, '');
+    var txtOptDiv = document.getElementById("outputC");
+    if (txtIptL == "" || txtIptL == " ") {
+      clearServiceListing(subServiceDisplay);
+      updateServiceListing();
+    }
+    else {
+      clearServiceListing(subServiceDisplay);
+    }
+    clearDiv(txtOptDiv); //this is used to make sure that the search results are cleared after each use
+    //need to make sure that this activates even when nothing is currently in the search box
+    repositionFooter();
+    if (!txtIptL[1]) {
+      $("#outputC").css("bottom", `-${$("#outputC").outerHeight() + 25}px`);
+      stopOffset2 = true;
+    }
+    for (var index = 0; index < array.length; index++) {
+      temp = array[index];
+      tempL = (array[index].toLowerCase()).replace(/[\/\\]/g, ' ');
+      if ((tempL == txtIptL) || (txtIptL == "acdc electronics" && tempL == "ac dc electronics")) { //eliminate all other results on a perfect match
+        //$("#outputC").css("bottom",`-${$("#outputC").outerHeight()+25}px`);
+        stopOffset2 = true;
+        cont2 = false;
+        //appendDiv(temp, txtOptDiv); //temp here is used to assign a link to the correct search result
+        var foundIndex;
+        for (var index17 = 0; index17 < array.length; index17++) {
+          if (array[index17] == temp) {
+            foundIndex = index17;
+            break;
+          }
+        }
+        updateServiceInListing(foundIndex);
+        break;
+      }
+    }
+    if (cont2) { //if a perfect match was not already found
+      for (var index = 0; index < array.length; index++) { //this searches the entire list
+        cont = true;
+        var temp = array[index];
+        var tempL = (temp.toLowerCase()).replace(/[\/\\]/g, ' ');
+        var count = 0;
+        for (var i = 0; i < tempL.length; i++) { //this searches each character inside of string for each element of the array
+          for (var i2 = 0; i2 < txtIptL.length; i2++) { //this searches each character inside of the input string separately
+            if (tempL[i] == txtIptL[i2]) {
+              cont = false;
+              count++;
+              break;
+            }
+          }
+        }
+        if (count > highestCount) {
+          highestCount = count; //this updates the highest counted number (most accurate search result)
+        }
+        //this checks to see if the first word of the career is similar to the first part of the first word that the user types in the search
+        var checkerIndx = tempL.indexOf(txtIptL);
+        if (checkerIndx != -1) {
+          //success! in this case, it found the user input lowercase string to be part of the lowercase array results
+          highestCount += 40; //a really high value so that it takes priority
+          count = highestCount;
+        }
+        obj[temp] = count; //this updates the count for each item
+      }
+      var objectLength = Object.keys("obj").length; //this returns the object's length, not needed right now
+      //this is used to make sure that the search results appear in the highest order first
+      var resultCounter = 0;
+      for (var index = highestCount; index > 0; index--) {
+        for (var index2 = 0; index2 < array.length; index2++) {
+          var temp3 = array[index2];
+          var temp4 = obj[temp3];
+          if (resultCounter == maxResults) {
+            cont3 = false;
+            break;
+          }
+          if (temp4 == index) {
+            resultCounter++;
+            //appendDiv(temp3, txtOptDiv); //this takes care of updating the search results
+            var foundIndex;
+            for (var index17 = 0; index17 < array.length; index17++) {
+              if (array[index17] == temp3) {
+                foundIndex = index17;
+                break;
+              }
+            }
+            updateServiceInListing(foundIndex);
+          }
+        }
+        if (!cont3) { //same thing as cont3 == false
+          break;
+        }
+      }
+    }
+    if (txtIptL == "" || txtIptL == " ") {
+      clearServiceListing(subServiceDisplay);
+      updateServiceListing();
+      $('.footerC').css("position", "relative");
+    }
+    else {
+      $('.footerC').css("position", "relative");
+      //this is used to fix the footer positioning
+      var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      var elementOffset = $('.footerC').offset().top;
+      var distance = (elementOffset) + $('.footerC').outerHeight();
+      if ((vh - distance) >= 0) { $('.footerC').css("position", "absolute"); $('.footerC').css("bottom", "0px"); }
+      else { $('.footerC').css("position", "relative"); }
+    }
+  }
+  //this pulls up the course information and scrolls to the section where its dept's courses list is
+  $("#outputC").on('click', ".searchResult", function () {
+    var searchResTxt = $(this).text();
+    var elem4ID = $(`.subServiceDisplay div:contains(${searchResTxt})`).attr("id");
+    var curElement = document.getElementById(`${elem4ID}`);
+    //this scrolls to the actual search result
+    window.scrollTo(0, curElement.offsetTop);
+    //this takes care of opening the information of the service automatically
+    var thisServiceID = elem4ID
+  });
+  $(".search-icon").on('click', function () { }, function () {
+    var txtOptDiv = document.getElementById("outputC");
+    clearDiv(txtOptDiv);
+  });
+  $(document).ready(function () {
+    $(".userEmail").css("display", "none");
+    const fetch1 = fetch('/clubs/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    //const fetch2 = fetch('/user/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    const fetch3 = fetch('/service/json', { mode: 'cors' }).then(function (resp) { return resp.json(); });
+    Promise.all([fetch1, fetch3]).then(function (ClubData) {
+      clubsArr = ClubData[0]["Items"];
+      try {
+        userArr = JSON.parse({{ userData | tojson | safe }})["Items"];
+      } catch (error) { }
+      //userArr = ClubData[1]["Items"];
+      dataArr = sortArray(ClubData[1]["Items"]);
+      numOfServices = dataArr.length;
+      updateServiceListing();
+      repositionFooter();
+      showSelectedPage(page);
+      $(".serviceCount").text(`${numOfServices}`);
+      numOfPages = Math.ceil(dataArr.length / 6);
+      if (numOfPages == 1) { $(".pageBtns").css("display", "none"); }
+      for (var counter = 5 - numOfPages; counter > 0; counter--) {
+        $(".pagination li:last-child").remove();
+      }
+      $(".pagination li:first-child").addClass("active");
+      $(".previousBtn").addClass("disabled");
+    });
+  });
+/*End of JavaScript for the search bar*/
+</script>
+
+{% endblock %}

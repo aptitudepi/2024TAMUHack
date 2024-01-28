@@ -100,16 +100,21 @@
     .centerAlign {
       margin-right:auto;
       margin-left:auto;
-
+    }
+    .firstPage {
+      display:block;
+    }
+    .connectBtn {
+      margin-top:16px;
     }
     .audioC {
-      display:none;
+      display:block;
     }
     .vendorId, .deviceName, .deviceManName {
       display:none;
     }
     .voicePage {
-      display:none;
+      display:block;
     }
     .success {
         text-align:center;
@@ -140,8 +145,8 @@
 </div>
 </div>
 
-<div class="voicePage">
-<div class="centerAlign">
+<div class="voicePage centerAlign">
+  <div class="container mt-2 firstPage">
   <button type="button" class="btn btn-outline-primary connectBtn">Connect</button>
 </div>
 <div class="audioC">
@@ -150,15 +155,17 @@
   <br>
   <button type="button" class="btn btn-outline-success audioStartBtn">Start Recording Audio</button>
   <button type="button" class="btn btn-outline-danger audioStopBtn">Stop Recording Audio</button>
-  <a class="downloadLink">Download Audio</a>
+  <!--<a class="downloadLink">Download Audio</a>-->
 <div class="centerAlign">
-  <button type="button" class="btn btn-outline-primary">Verify</button>
+  <button type="button" class="btn btn-outline-primary vVerify">Verify</button>
 </div>
 </div>
 </div>
 </div>
 <script src="https://markjivko.com/dist/recorder.js"></script>
 <script>
+verifyStatus = false;
+
 $(document).ready(function () {
   var myRecorder = {
     objects: {
@@ -192,8 +199,8 @@ $(document).ready(function () {
         if (null !== myRecorder.objects.recorder) {
             myRecorder.objects.recorder.stop();
                 myRecorder.objects.recorder.exportWAV(function (blob) {
-                    var url = (window.URL || window.webkitURL).createObjectURL(blob);
-                    var downloadObject = $(".downloadLink").attr("href", url).attr("download", "captured.wav");
+                    //var url = (window.URL || window.webkitURL).createObjectURL(blob);
+                    //var downloadObject = $(".downloadLink").attr("href", url).attr("download", "captured.wav");
                 });
         }
     }
@@ -208,6 +215,18 @@ $(document).ready(function () {
       $(".audioStopBtn").on('click', function() {
         $(this).attr("data-recording", "");
         myRecorder.stop();
+      });
+
+      $(".vVerify").on('click', function() {
+        if (!verifyStatus) {
+          alert("You have two attempts left to verify.");
+        }
+        if (verifyStatus) {
+          $(".firstPage").css("display", "none");
+          $(".voicePage").css("display", "none");
+          $(".success").css("display", "block");
+        }
+        verifyStatus = !verifyStatus;
       });
   });
 
@@ -253,15 +272,15 @@ $(".connectBtn").on('click', async function() {
   }
 
   $(".verifyBtn").on('click', function(){
+    $(".firstPage").css("display", "block");
+    $(".voicePage").css("display", "block");
+    $(".success").css("display", "none");
     verifyInformation();
   });
 
   function verifyInformation() {
     enteredData = returnEnteredData();
     var dataToSend = { "User" : enteredData[0], "Pass" : enteredData[1]};
-    $(".firstPage").css("display", "none");
-    $(".voicePage").css("display", "block");
-    $(".success").css("display", "none");
     $.ajax({
       type: "POST",
       url: "/",

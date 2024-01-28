@@ -1,0 +1,402 @@
+{% extends "layout.html" %}
+
+{% block title %}Terms and Conditions{% endblock %}
+
+{% block head %}
+
+<style>
+*/
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .bodyContent {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .card.main {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border: 0;
+  }
+
+  .card.main img.seamless {
+    width: 100%;
+    display: block;
+  }
+
+  .card.main .body .page-top {
+    text-align: center;
+  }
+
+  .card.main .body .page-top img {
+    width: 100px;
+  }
+
+  .card.main .body .search-bar {
+    margin-bottom: 20px;
+  }
+
+  #club-social-icons {
+    font-size: 24pt;
+  }
+
+  #club-notice {
+    height: 400px;
+    width: auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .footer {
+    font-size: 10pt;
+  }
+
+  .modClubLinks {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modClubLinks li a {
+    color: #037dff;
+    text-decoration: none;
+    padding-left: 25px;
+  }
+
+  .modClubLinks li a:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .clubDisplay ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gridC {
+    display: grid;
+    grid-template-columns: 40% 50% 10%;
+    padding: 6px 0px 6px 6px;
+    border-radius: 4px;
+    border-left: 4px solid #cc3300;
+    border-bottom: 0.25px solid #e6e6e6;
+    border-top: 0.25px solid #e6e6e6;
+    border-right: 0.25px solid #e6e6e6;
+    margin-bottom: 8px;
+    align-content: center;
+  }
+
+  .titleT {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .hzLine {
+    height: 1.5px !important;
+    border-width: 0;
+    color: black;
+    background-color: black;
+  }
+
+  .linkItemA {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .linkItemA:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .gridC div a {
+    color: #037dff;
+    text-decoration: none;
+  }
+
+  .gridC div a:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  #returnToList {
+    color: #037dff;
+  }
+
+  #returnToList:hover {
+    cursor: pointer;
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  /*start of CSS for search bar*/
+  #outputC {
+    position: absolute;
+    z-index: 99;
+    bottom: -20px;
+  }
+
+  .search {
+    position: relative;
+    width: 60%;
+    min-width: 350px;
+    margin-bottom: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+  }
+
+  .search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #3585fd;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+  }
+
+  .search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #3585fd;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+  }
+
+  .search-icon:hover {
+    color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .searchResultDepts {
+    display: none;
+  }
+
+  .btn-outline-primary {
+    display: block;
+    width: 260px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .pageLink {
+    color: #037dff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .pageLink:hover {
+    color: #004a99;
+    text-decoration: underline;
+  }
+
+  .joinBtn {
+    background-color: #037dff;
+  }
+
+  .joinBtnC {
+    margin-left: 10px;
+  }
+
+  .joinBtnC .joinBtn {
+    padding: 5px;
+  }
+
+  .centerGrid {
+    display: grid;
+    grid-template-columns: 100%;
+    align-content: center;
+  }
+
+  .upcomingTxt {
+    font-weight: bold;
+  }
+
+  .upcomingAnTxt {
+    font-weight: bold;
+  }
+
+  @media (max-width:466px) {
+    .search {
+      min-width: 350px;
+    }
+
+    .search-input {
+      overflow: hidden;
+    }
+
+    .search-input::placeholder {
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width:376px) {
+    .search {
+      min-width: 100%;
+    }
+  }
+
+  /*end of CSS for search bar*/
+  .footerC {
+    font-weight: normal;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "components/nav.html" %}
+
+<section id="page16"></section>
+<br>
+<div class="container mt-2">
+  <div class="topContainer">
+    <div style="height:6px;"></div>
+    <h1 class="mainTitleTxt">Terms and Conditions</h1>
+    <hr style="height:2px;">
+    <div style="height:18px;"></div>
+    <p class="mainBodyTxt">
+      These General Terms of Use apply to all: (i) clubs/ organizations that sign up to use the STEAM Life “Services”, including but not limited to administrators who access the Services on their behalf; (ii) non-School visitors, users, and others, including students, teachers, and their parents or guardians, who use the Services; and (iii) third-party providers of software, applications or tools (each a "Developer" and collectively with the individuals referenced in (ii) above and Schools, the "Users" or "you").
+    </p>
+    <p class="mainBodyTxt">
+      By utilizing our Services, you are held to agree to the following conditions and not stray from them, otherwise consequences (described in the “Our Rights” section) may be enforced.
+    </p>
+    <h3 style="font-weight:bold;">SECTION 1. WHAT IS STEAM LIFE?</h3>
+    <p class="mainBodyTxt">
+      STEAM Life is a fully student-led, student-created web and mobile application designed for the Allen ISD STEAM Center to tackle the problem of engagement at the STEAM Center. Providing widespread access to the Allen ISD student body concerning student club/ organization events, service opportunities, announcements, and more, the STEAM Life Services are used to further connect students to what is happening at the STEAM Center. Please read over the below terms very carefully, as we would not like to revoke or report your account for suspicious or inappropriate activity.
+    </p>
+    <h4 style="font-weight:bold;">I) STEAM LIFE SERVICES</h4>
+    <p class="mainBodyTxt">
+      STEAM Life is intended to be used by Allen ISD students and faculty through web and mobile formats. To view the STEAM Life website, Allen ISD students must and can only use the link: <a target="_blank" href="https://life.allencs.org">https://life.allencs.org</a> and to view the STEAM Life mobile application, Allen ISD students must and can only download it from the Google Play Store or Apple App Store. Beyond this, there are no acceptable ways to view or interact with STEAM Life Services, and doing so will result in immediate reporting of the activity and user account, as this is considered to be hacking or interfering with our capabilities. The only exception to utilizing STEAM Life Services beyond the aforementioned website url and mobile application download is to that of and only to that of the organizations: STEAM Ambassadors and STEAM Life, as they will be editing, updating, and testing STEAM Life Services.
+    </p>
+    <h4 style="font-weight:bold;">II) USER CONTROL OF SERVICES</h4>
+    <p class="mainBodyTxt">
+      By signing up for a STEAM Life user account by logging in through Google, you are responsible for the information sent to you (whether this be by means of Direct Messaging from club managers if you have joined a club, the sending of an Announcement from club managers, receiving events, etc.), and you are also responsible for the information you send to others (such as updating club pages, adding/ updating events, etc.). You, as the user, at any time may contact the STEAM Life organization using the email provided at the bottom of this policy, to request the deletion of your user data, however if we have any reason to believe that you have engaged in suspicious activity, we will manage your data under total control and cooperate with Allen ISD officials (and local law enforcement if necessary) depending on the severity of the infraction. Please review our rights in the following sections.
+    </p>
+    <h4 style="font-weight:bold;">III) RESTRICTED USES</h4>
+    <p class="mainBodyTxt">
+      Under any circumstance unless committed by a member directly on the programming team of the STEAM Life Initiative, only the titled teams “Web Development Programming”, “App Development Programming”, and “Backend Development Programming”, may go against the next listed conditions in this paragraph as long as they have consulted with their technology manager, program manager, and operations manager first. Listed below are the restricted uses of STEAM Life Services that can be punished as decided by the STEAM Life organization covered in the “Our Rights” section:
+      <ul>
+        <li>Hacking into STEAM Life Services, or attempting to manipulate, change, edit, or view content related to STEAM Life Services beyond that shown by the UI displayed when navigating the STEAM Life website or mobile app. Any tools utilized to view code used by the website or mobile app to operate beyond that of the service “GitHub”, including but not limited to “Dev Tools”.</li>
+        <li>Attempting to damage the website or mobile app in any way, shape, or form.</li>
+        <li>Creating more than two user accounts per person or otherwise attempting to create multiple STEAM Life user accounts for the purposes of breaking our backend systems.</li>
+        <li>Taking possession or logging into someone else's STEAM Life user account for any reason whatsoever.</li>
+        <li>Posting or transmitting inappropriate or other harmful content to other users.</li>
+        <li>Not abiding by the Allen ISD <a target="_blank" href="https://www.allenisd.org/cms/lib/TX01001197/Centricity/Domain/3249/AHS%20Academic%20Honor%20Code2018.pdf">Academic Honor Code</a> or the Allen ISD <a target="_blank" href="https://www.allenisd.org/cms/lib/TX01001197/Centricity/Domain/86/21-22_Handbook_for_Website_A_link_fixes.pdf">Student Handbook</a> in any way, shape, or form.</li>
+      </ul>
+    </p>
+    <h4 style="font-weight:bold;">IV) USER CONTRIBUTIONS</h4>
+    <p class="mainBodyTxt">
+      If you are a registered club manager, and only if you are a registered club manager in STEAM Life Services are you able to edit club page information, create events, create service opportunities, send announcements, send direct messages, and assign service hours to other club users. A club manager is any user who has a club show under the “Owned Clubs” section of their dashboard page, and they are only allowed to perform the aforementioned actions for this club only. If any user tries to make themselves a club manager beyond the means designed by the STEAM Life organization or improperly sends information on a club manager's behalf, they will be subject to disciplinary action as described in the “Our Rights” section.
+    </p>
+    <h4 style="font-weight:bold;">V) OUR RIGHTS</h4>
+    <p class="mainBodyTxt">
+      As the STEAM Life organization and owner of all STEAM Life Services, the STEAM Life organization and only the STEAM Life organization is able to perform any of the below actions for any purpose whatsoever:
+      <ul>
+        <li>Add, delete, and modify user data.</li>
+        <li>Add, delete, and modify club data.</li>
+        <li>Add, delete, and update features to STEAM Life Services.</li>
+        <li>Monitor user and club activity on STEAM Life Services.</li>
+        <li>Refer the actions of users on the platform to Allen ISD administrators if needed.</li>
+        <li>Use backend services mentioned in the section “Third-Party Services” to store and transmit user and club data to STEAM Life Services.</li>
+      </ul>
+    </p>
+    <h3 style="font-weight:bold;">SECTION 2. DATA, PRIVACY, AND OTHER LEGAL TERMS</h3>
+    <h4 style="font-weight:bold;">I) DATA</h4>
+    <p class="mainBodyTxt">
+      STEAM Life Services may collect any data deemed necessary to improve features and user experience of the website and mobile application, but we try to store the least amount of data as possible for efficiency and less intrusion. At this point in time, STEAM Life Services collects the following data:
+      <ul>
+        <li>Events - Event name, unique id, club id, description, start date, start time, end date, end time, and max attendees.</li>
+        <li>Clubs - Club name, club id, department (Science, Technology, Engineering, Art, or Math), description, officers (student leader), meeting location, meeting time(s), social networks, sponsor, type (ex: social club), subtype (ex: digital art), and club external website.</li>
+        <li>Communication - Club id, unique id, announcement/DM boolean, creation time/date, sender, message, and members whom it is specifically sent to.</li>
+        <li>A/B Days - School day and type (either “A” or “B”).</li>
+        <li>Service - Service name, unique id, club id, description, start date, start time, end date, end time, hours offered, maximum sign-ups, external link, type (either S,T,E,A,M or other), and creator user id.</li>
+        <li>Users - User name, email, joined clubs, owned clubs, service hour total, user id, and service opportunities.</li>
+      </ul>
+    </p>
+    <h4 style="font-weight:bold;">II) PRIVACY AND SECURITY</h4>
+    <p class="mainBodyTxt">
+      Data security is one of our utmost priorities as the STEAM Life organization, and to make your user data more secure, we use the following data security practices for our database:
+      <ul>
+        <li>Store user and club data using AWS DynamoDB (a very secure AWS database service).</li>
+        <li>Have a defined administrator user with specific privileges in AWS IAM (Identity and Access Management) to ensure no unauthorized user is able to access our database.</li>
+        <li>Enable MFA (Multi-Factor Authentication) when signing in to our AWS database to further prevent unauthorized users from signing in.</li>
+      </ul>
+      We use the following data security practices for our website:
+      <ul>
+        <li>User data from our database is directly fed to our web app, so there is no way for users to easily intercept this information.</li>
+        <li>The navigation map page can only be viewed by signed-in users.</li>
+        <li>Only students who are designated by the STEAM App team (or by club sponsors/ officers) are able to view their club management system.</li>
+        <li>Google sign in uses OAuth authentication for further security.</li>
+        <li>Only specific users are allowed to be set as “Admin” for STEAM Life Services.</li>
+      </ul>
+      We use the following data security practices for our mobile application:
+      <ul>
+        <li>User data from our database is securely transferred from our website to our mobile application.</li>
+        <li>All other data from our database is sent to our mobile application from our website through secure data files.</li>
+        <li>Google sign in on the mobile app uses the React Native Expo “AuthSession” library, a secure web-browser-based authenticator.</li>
+      </ul>
+    </p>
+    <h4 style="font-weight:bold;">III) THIRD-PARTY SERVICES</h4>
+    <p class="mainBodyTxt">
+      While all of our code is internally developed for our website and mobile application, we use AWS DynamoDB to store user and club data, Google Firebase for backend mobile app features, Google Cloud to authenticate users in our STEAM Life website and mobile application, Expo to build our app releases, the Google Play Store and Apple App Store to release our mobile application, and GitHub to store our data globally. Please note that while we do not need to share user or club data with all of these third-party services and we oftentimes do not share it with all of these third-party services, we have the right to share this data at our sole discretion. Please note that we do not sell your data to these third parties, nor profit off of your collected information.
+    </p>
+    <h4 style="font-weight:bold;">IV) INDEMNITY</h4>
+    <p class="mainBodyTxt">
+      You agree to not hold STEAM Life Services or the STEAM Life organization for any damages or lawsuits of any kind by using our Services.
+    </p>
+    <h4 style="font-weight:bold;">V) SERVABILITY AND WAIVER</h4>
+    <p class="mainBodyTxt">
+      If any one of these prior terms is removed for any reason whatsoever, it only applies to the term or section removed, thus the entire rest of the terms and conditions document stays in effect unless otherwise stated. Once again, by using these Services you agree to abide by the set terms or risk action being taken on your account for any means.
+    </p>
+    <h4 style="font-weight:bold;">VI) HOW TO CONTACT US</h4>
+    <p class="mainBodyTxt">
+      Have any questions concerning our Terms of Conditions or Privacy Policy? Please contact us at the email: <a href="mailto:steam-life@student.allenisd.org">steam-life@student.allenisd.org</a> or <a href="mailto:david.benyaakov@allenisd.org">david.benyaakov@allenisd.org</a> and we will reach out to you at our earliest convenience.
+    </p>
+    <br>
+  </div>
+</div>
+{% include "components/footer.html" %}
+
+{% endblock %}

@@ -16,11 +16,10 @@ import cachecontrol
 import pathlib
 import string
 import pytz
-import nemo.collections.asr as nemo_asr
-from contextlib import redirect_stdout
+#import nemo.collections.asr as nemo_asr
+#from contextlib import redirect_stdout
 
-
-embedding = speaker.get_embedding("captured1.wav")
+'''embedding = speaker.get_embedding("captured1.wav")
 speaker.verify_speakers("captured1.wav", "captured2.wav")
 with open('out.txt', 'w') as f:
     with redirect_stdout(f):
@@ -33,7 +32,7 @@ same = False
 for line in file:
     if re.search("from the same speaker", line):
         same = True
-
+'''
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = "littlekey"
 
@@ -132,7 +131,6 @@ def initial_login():
     print(verifyCount)
     if ("User" in session and "Pass" in session):
       if (session["User"] == loginInfo["User"] and session["Pass"] == loginInfo["Pass"]):
-        print("here")
         page = 1
     if (verifyCount == 3):
       print("ip")
@@ -141,40 +139,7 @@ def initial_login():
       return abort(401)
     print("did not work, entered:")
     print(loginInfo)
-  #return render_template("initial_login.html", sameVal=same)
-
-#@app.route("/voice")
-#@voice_login_is_required
-#def voice():
-  #print("voice")
-  #device_data = ["", "", ""]
-  #if (is_banned_ip(request.remote_addr)):
-  #  return redirect("/unauthorized")
-  #else:
-  #  device_data = get_user_device_data()
-  #print("here2")
-  #return render_template("test.html")
-  #return render_template("voice.html", vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2])
-  return render_template("initial_login.html",  vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2], pageNumber=page, sameVal = same)
-
-@app.route("/help")
-def route_help():
-  if (is_banned_ip(request.remote_addr)):
-    return redirect("/unauthorized")
-  return render_template("help.html")
-
-@app.route("/privacy-policy")
-def route_privacy():
-  return render_template("privacy.html")
-
-@app.route("/terms")
-def route_terms():
-  return render_template("terms.html")
-
-@app.route("/dashboard")
-@dashboard_login_is_required
-def route_dashboard():
-  return render_template("dashboard.html")
+  return render_template("initial_login.html",  vendorId=device_data[0], deviceName=device_data[1], deviceManName=device_data[2], pageNumber=page)
 
 @app.errorhandler(401)
 def access_denied(error):
@@ -199,97 +164,6 @@ def route_forbidden():
 @app.route("/page-not-found")
 def route_page_not_found():
   return abort(404)
-
-@app.route("/management", methods=['POST', 'GET'])
-@management_login_is_required
-def route_management():
-  if (request.method == "POST"):
-    editData = request.get_json()
-    try:
-      editInfo = editData["Club"]
-      print("add owners: ",editInfo["Add-Owners"])
-      print("remove owners: ",editInfo["Remove-Owners"])
-      editMembers = editData["Member"]
-      logDetails = ""
-      logTime = ""
-      try:
-        logTime = get_now()
-      except:
-        print("could not get time")
-      try:
-        logDetails = "Editing club page, user: "
-        logDetails += session["email"]
-        logDetails += ", edited data: "
-        logDetails += json.dumps(editInfo)
-      except:
-        print("error occurred when logging")
-      logDetails = ""
-      logTime = ""
-      try:
-        logTime = get_now()
-      except:
-        print("could not get time")
-      try:
-        logDetails = "Possibly editing club members, user: "
-        logDetails += session["email"]
-        logDetails += ", edited data: "
-        logDetails += json.dumps(editMembers)
-      except:
-        print("error occurred when logging")
-    except:
-      print("not club data")
-    try:
-      editEvents = editData["Events"]
-      logDetails = ""
-      logTime = ""
-      try:
-        logTime = get_now()
-      except:
-        print("could not get time")
-      try:
-        logDetails = "Editing or adding club event, user: "
-        logDetails += session["email"]
-        logDetails += ", edited data: "
-        logDetails += json.dumps(editEvents)
-      except:
-        print("error occurred when logging")
-    except:
-      print("not event data")
-    try:
-      editServices = editData["Services"]
-      logDetails = ""
-      logTime = ""
-      try:
-        logTime = get_now()
-      except:
-        print("could not get time")
-      try:
-        logDetails = "Editing or adding club service, user: "
-        logDetails += session["email"]
-        logDetails += ", edited data: "
-        logDetails += json.dumps(editServices)
-      except:
-        print("error occurred when logging")
-    except:
-      print("not service data")
-    try:
-      editComms = editData["Communication"]
-      logDetails = ""
-      logTime = ""
-      try:
-        logTime = get_now()
-      except:
-        print("could not get time")
-      try:
-        logDetails = "Sending or editing club message, user: "
-        logDetails += session["email"]
-        logDetails += ", edited data: "
-        logDetails += json.dumps(editComms)
-      except:
-        print("error occurred when logging")
-    except:
-      print("not service data")
-  return render_template("management.html")
 
 if __name__ == "__main__":
   app.run(threaded=True)
