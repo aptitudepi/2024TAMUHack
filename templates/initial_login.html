@@ -111,6 +111,11 @@
     .voicePage {
       display:none;
     }
+    .success {
+        text-align:center;
+        font-size:24px;
+        display:none;
+    }
   </style>
 
 {% endblock %}
@@ -118,7 +123,8 @@
 {% block body %}
 
 <section id="page1"></section>
-<div class="container mt-2">
+<h1 class="success">Success</h1>
+<div class="container mt-2 firstPage">
   <h1 style="text-align:center;">Auth Verifier</h1>
   <br>
   <div class="input-group mb-3">
@@ -130,7 +136,7 @@
   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 </div>
 <div class="centerAlign">
-  <button type="button" class="btn btn-outline-primary">Verify</button>
+  <button type="button" class="btn btn-outline-primary verifyBtn">Verify</button>
 </div>
 </div>
 
@@ -205,6 +211,10 @@ $(document).ready(function () {
       });
   });
 
+function getPageNumber() {
+  return $(".pageNum").text();
+}
+
 function getDeviceInfo() {
   vendorId = $(".vendorId").text();
   deviceName = $(".deviceName").text();
@@ -231,6 +241,7 @@ $(".connectBtn").on('click', async function() {
 
 </script>
 
+<div class="pageNum">{{ page }}</div>
 <div class="vendorId">{{ vendorId }}</div>
 <div class="deviceName">{{ deviceName }}</div>
 <div class="deviceManName">{{ deviceManName }}</div>
@@ -241,13 +252,16 @@ $(".connectBtn").on('click', async function() {
     return [formFields[0].value.trim().replace(/(\r\n|\n|\r)/gm, ""), formFields[1].value.trim().replace(/(\r\n|\n|\r)/gm, "")];
   }
 
-  $(".btn").on('click', function(){
+  $(".verifyBtn").on('click', function(){
     verifyInformation();
   });
 
   function verifyInformation() {
     enteredData = returnEnteredData();
     var dataToSend = { "User" : enteredData[0], "Pass" : enteredData[1]};
+    $(".firstPage").css("display", "none");
+    $(".voicePage").css("display", "block");
+    $(".success").css("display", "none");
     $.ajax({
       type: "POST",
       url: "/",
