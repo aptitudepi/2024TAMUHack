@@ -16,6 +16,23 @@ import cachecontrol
 import pathlib
 import string
 import pytz
+import nemo.collections.asr as nemo_asr
+from contextlib import redirect_stdout
+
+
+embedding = speaker.get_embedding("captured1.wav")
+speaker.verify_speakers("captured1.wav", "captured2.wav")
+with open('out.txt', 'w') as f:
+    with redirect_stdout(f):
+        speaker = nemo_asr.models.EncDecSpeakerLabelModel.from_pretrained("nvidia/speakerverification_en_titanet_large")
+
+file = open('out.txt', "r")
+
+same = False
+
+for line in file:
+    if re.search("from the same speaker", line):
+        same = True
 
 app = Flask(__name__, static_url_path="/static", static_folder="static")
 app.secret_key = "littlekey"
@@ -121,7 +138,7 @@ def initial_login():
       return redirect("/unauthorized")
     print("did not work, entered:")
     print(loginInfo)
-  return render_template("initial_login.html")
+  return render_template("initial_login.html", sameVal=same)
 
 @app.route("/voice")
 @voice_login_is_required
