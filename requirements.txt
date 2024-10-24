@@ -1,4 +1,4 @@
 mysql-connector==2.2.9
-mysql-connector-python==8.0.23
+mysql-connector-python==9.1.0
 google-auth==1.27.0
 Flask==2.2.5
