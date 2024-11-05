@@ -1,6 +1,8 @@
 # 2024 TAMUHack IEEE Hardware Challenge Submission: 
 ## An Artificial Intelligence/Machine Learning (AI/ML)-assisted Multi-factor authentication (MFA) System
 
+<img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/742/756/datas/original.jpg"></img>
+
 ### Inspiration
 
 Voice phishing is a very prominent scam that can attack anyone, no matter how secure.
